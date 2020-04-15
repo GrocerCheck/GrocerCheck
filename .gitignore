@@ -1,3 +1,7 @@
+
+grocercheck/grocercheck/settings.py
+
+
 # Prerequisites
 *.d
 
@@ -30,3 +34,4 @@
 *.exe
 *.out
 *.app
+grocercheck/grocercheck/settings.py
