@@ -4,25 +4,26 @@
     <style>
        /* Set the size of the div element that contains the map */
       #map {
-        height: 400px;  /* The height is 400 pixels */
+        height: 800px;  /* The height is 400 pixels */
         width: 100%;  /* The width is the width of the web page */
        }
     </style>
   </head>
   <body>
-    <h3>My Google Maps Demo</h3>
+    <h3>GrocerCheck: Live Grocery Store Popularity</h3>
     <!--The div element for the map -->
     <div id="map"></div>
+    
     <script>
 // Initialize and add the map
 function initMap() {
   // The location of Uluru
-  var uluru = {lat: -25.344, lng: 131.036};
+  var hamber = {lat: 49.2399, lng: -123.1251};
   // The map, centered at Uluru
   var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: uluru});
+      document.getElementById('map'), {zoom: 12, center: hamber});
   // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: uluru, map: map});
+  var marker = new google.maps.Marker({position: hamber, map: map});
 }
     </script>
     <!--Load the API from the specified URL
@@ -31,7 +32,8 @@ function initMap() {
     * The callback parameter executes the initMap() function
     -->
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADykbksLqjte4N_XG3rLeXckHWSLe7oiI&callback=initMap">
+         
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqwU_hVg2OJ3zB7FOORGzGIdsWnXdXT-w&callback=initMap">
     </script>
   </body>
 </html>
