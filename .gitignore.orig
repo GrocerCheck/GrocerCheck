@@ -1,0 +1,41 @@
+<<<<<<< HEAD
+
+grocercheck/grocercheck/settings.py
+
+=======
+mozillatutorial/settings.py
+>>>>>>> 450551207a1826034c6878d27c28be22e40643b5
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+grocercheck/grocercheck/settings.py
