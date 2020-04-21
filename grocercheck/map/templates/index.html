@@ -30,15 +30,18 @@ function initMap() {
 
   // The location of Uluru
 
-	var stores = {{stores|safe}}
-	
+	var name = {{name|safe}}
+	var busyness = {{busyness|safe}}
 	var lat = {{lat|safe}}
-	var lon = {{lon|safe}}
+	var lng = {{lng|safe}}
+	var address = {{address|safe}}
+	var hours = {{hours|safe}}
+	var placeID = {{placeID|safe}}
 	
 	var positions = []
 	
-	for(let x = 0;x<stores.length;x++){
-		positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lon[x])})
+	for(let x = 0;x<lat.length;x++){
+		positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lng[x])})
 	}
 
 

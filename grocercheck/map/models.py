@@ -9,12 +9,12 @@ class Store(models.Model):
     name = models.CharField(max_length=100)
     busyness = models.IntegerField()
     lat = models.CharField(max_length=10)
-    lon = models.CharField(max_length=10)
+    lng = models.CharField(max_length=10)
     address = models.CharField(max_length=100)
     hours = models.CharField(max_length=10)
     placeID = models.CharField(max_length=100)
 
-        
+     
     def __str__(self):
         return self.name
 
