@@ -17,18 +17,18 @@ def index(request):
     context['hours'] = []
     context['placeID'] = []
 
-    for i in range(1,100000):
-        try:
-            s = Store.objects.get(id=i)
-            context['name'].append(s.name)
-            context['busyness'].append(s.busyness)
-            context['lat'].append(s.lat)
-            context['lng'].append(s.lng)
-            context['address'].append(s.address)
-            context['hours'].append(s.hours)
-            context['placeID'].append(s.placeID)
-        except:
-            break
+    for i in range(1,Store.objects.count()+1):
+        
+        s = Store.objects.get(id=i)
+        context['name'].append(s.name)
+        context['busyness'].append(s.busyness)
+        context['lat'].append(s.lat)
+        context['lng'].append(s.lng)
+        context['address'].append(s.address)
+        context['hours'].append(s.hours)
+        context['placeID'].append(s.placeID)
+        
+            
 
     finalcontext = {}
     finalcontext['name'] = json.dumps(context['name'])
