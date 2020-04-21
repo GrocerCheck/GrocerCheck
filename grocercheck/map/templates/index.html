@@ -11,19 +11,47 @@
   </head>
   <body>
     <h3>GrocerCheck: Live Grocery Store Popularity</h3>
+
+    <h6> hihi {{ testnum }} </h6>
+
     <!--The div element for the map -->
     <div id="map"></div>
     
     <script>
 // Initialize and add the map
 function initMap() {
-  // The location of Uluru
-  var hamber = {lat: 49.2399, lng: -123.1251};
+
+ var hamber = {lat: 49.2399, lng: -123.1251};
   // The map, centered at Uluru
   var map = new google.maps.Map(
       document.getElementById('map'), {zoom: 12, center: hamber});
-  // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: hamber, map: map});
+
+
+
+  // The location of Uluru
+
+	var stores = {{stores|safe}}
+	
+	var lat = {{lat|safe}}
+	var lon = {{lon|safe}}
+	
+	var positions = []
+	
+	for(let x = 0;x<stores.length;x++){
+		positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lon[x])})
+	}
+
+
+
+     var marker = new google.maps.Marker({position: hamber, map: map});
+
+	var markers = [] 
+	
+	var image = "/Users/andyliang/GrocerCheck/grocercheck/map/templates/marker.png"
+
+	for(let x = 0; x<positions.length;x++){
+		markers.push(new google.maps.Marker({position:positions[x],map: map,icon:image,label:{color:'blue',text:stores[x]}}))
+	}
 }
     </script>
     <!--Load the API from the specified URL
