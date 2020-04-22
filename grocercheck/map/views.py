@@ -17,9 +17,7 @@ def index(request):
     context['hours'] = []
     context['placeID'] = []
 
-    for i in range(1,Store.objects.count()+1):
-        
-        s = Store.objects.get(id=i)
+    for s in Store.objects.all():        
         context['name'].append(s.name)
         context['busyness'].append(s.busyness)
         context['lat'].append(s.lat)
@@ -38,6 +36,7 @@ def index(request):
     finalcontext['address'] = json.dumps(context['address'])
     finalcontext['hours'] = json.dumps(context['hours'])
     finalcontext['placeID'] = json.dumps(context['placeID'])
+    finalcontext['size'] = json.dumps([Store.objects.count()])
 
     
 

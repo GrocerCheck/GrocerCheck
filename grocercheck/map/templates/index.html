@@ -12,7 +12,7 @@
   <body>
     <h3>GrocerCheck: Live Grocery Store Popularity</h3>
 
-    <h6> hihi {{ testnum }} </h6>
+    <h6> hihi {{ size  }} </h6>
 
     <!--The div element for the map -->
     <div id="map"></div>
@@ -46,14 +46,12 @@ function initMap() {
 
 
 
-     var marker = new google.maps.Marker({position: hamber, map: map});
-
+     
 	var markers = [] 
 	
-	var image = "/Users/andyliang/GrocerCheck/grocercheck/map/templates/marker.png"
-
+	
 	for(let x = 0; x<positions.length;x++){
-		markers.push(new google.maps.Marker({position:positions[x],map: map,icon:image,label:{color:'blue',text:stores[x]}}))
+		markers.push(new google.maps.Marker({position:positions[x],map: map,label:{color:'blue'}}))
 	}
 }
     </script>
