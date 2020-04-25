@@ -34,4 +34,4 @@ grocercheck/map/templates/config.js
 *.exe
 *.out
 *.app
-grocercheck/grocercheck/settings.py
+

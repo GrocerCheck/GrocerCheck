@@ -10,20 +10,57 @@
     </style>
   </head>
   <body>
-    <h3>GrocerCheck: Live Grocery Store Popularity</h3>
+	  {% load static %}
+
+	  	  <h1>
+
+							
+			<img src="{% static "images/GrocerCheckLogo.png" %}" width="100" height="100">
+
+		GrocerCheck: Live Grocery Store Popularity
+		  </h1>
+
+    <h6> hihi {{ size  }} </h6>
+
     <!--The div element for the map -->
     <div id="map"></div>
     
     <script>
 // Initialize and add the map
 function initMap() {
-  // The location of Uluru
-  var hamber = {lat: 49.2399, lng: -123.1251};
+
+ var hamber = {lat: 49.2399, lng: -123.1251};
   // The map, centered at Uluru
   var map = new google.maps.Map(
       document.getElementById('map'), {zoom: 12, center: hamber});
-  // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: hamber, map: map});
+
+
+
+  // The location of Uluru
+
+	var name = {{name|safe}}
+	var busyness = {{busyness|safe}}
+	var lat = {{lat|safe}}
+	var lng = {{lng|safe}}
+	var address = {{address|safe}}
+	var hours = {{hours|safe}}
+	var placeID = {{placeID|safe}}
+	
+	var positions = []
+	
+	for(let x = 0;x<lat.length;x++){
+		positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lng[x])})
+	}
+
+
+
+     
+	var markers = [] 
+	
+	
+	for(let x = 0; x<positions.length;x++){
+		markers.push(new google.maps.Marker({position:positions[x],map: map,label:{color:'blue'}}))
+	}
 }
     </script>
     <!--Load the API from the specified URL
