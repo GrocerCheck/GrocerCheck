@@ -10,32 +10,23 @@ import json
 def index(request):
     context = {}
     context['name'] = []
-    context['busyness'] = []
     context['lat'] = []
     context['lng'] = []
-    context['address'] = []
-    context['hours'] = []
-    context['placeID'] = []
+    context['place_id'] = []
 
     for s in Store.objects.all():        
         context['name'].append(s.name)
-        context['busyness'].append(s.busyness)
         context['lat'].append(s.lat)
         context['lng'].append(s.lng)
-        context['address'].append(s.address)
-        context['hours'].append(s.hours)
-        context['placeID'].append(s.placeID)
+        context['place_id'].append(s.place_id)
         
             
 
     finalcontext = {}
     finalcontext['name'] = json.dumps(context['name'])
-    finalcontext['busyness'] = json.dumps(context['busyness'])
     finalcontext['lat'] = json.dumps(context['lat'])
     finalcontext['lng'] = json.dumps(context['lng'])
-    finalcontext['address'] = json.dumps(context['address'])
-    finalcontext['hours'] = json.dumps(context['hours'])
-    finalcontext['placeID'] = json.dumps(context['placeID'])
+    finalcontext['place_id'] = json.dumps(context['place_id'])
     finalcontext['size'] = json.dumps([Store.objects.count()])
 
     
