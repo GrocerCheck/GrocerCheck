@@ -20,7 +20,7 @@
 		GrocerCheck: Live Grocery Store Popularity
 		  </h1>
 
-    <h6> hihi {{ size  }} </h6>
+    <h6> hihi {{ size }} </h6>
 
     <!--The div element for the map -->
     <div id="map"></div>
@@ -39,12 +39,9 @@ function initMap() {
   // The location of Uluru
 
 	var name = {{name|safe}}
-	var busyness = {{busyness|safe}}
 	var lat = {{lat|safe}}
 	var lng = {{lng|safe}}
-	var address = {{address|safe}}
-	var hours = {{hours|safe}}
-	var placeID = {{placeID|safe}}
+	var place_id = {{place_id|safe}}
 	
 	var positions = []
 	
@@ -52,15 +49,38 @@ function initMap() {
 		positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lng[x])})
 	}
 
+	function buildInfoWindowString(name,x){
+		return '<div id="content">' + 
+			'<h1 id="title"> '+name[x]+' </h1>' + 
+			'<div id="body"'+
+			'<p> sample address </p>'+
+			'</div>'+
+			'</div>';
+	}
 
+	var green = "{% static 'images/greenmarker.png' %}"
+	var yellow = "{% static 'images/yellowmarker.png' %}"
+	var red = "{% static 'images/redmarker.png' %}"
 
-     
+    	 
 	var markers = [] 
-	
+	var infowindows = []
+
+	for(let x = 0; x<name.length;x++){
+		infowindows.push(new google.maps.InfoWindow({content:buildInfoWindowString(name,x)}))
+
+	}
+
 	
 	for(let x = 0; x<positions.length;x++){
-		markers.push(new google.maps.Marker({position:positions[x],map: map,label:{color:'blue'}}))
+		markers.push(new google.maps.Marker({icon:{url:green,scaledSize:new google.maps.Size(20,20)},clickable:true,position:positions[x],map: map,label:{color:'blue'}}))
+		markers[x].addListener('click', function() { infowindows[x].open(map,markers[x])})
+
 	}
+
+
+	
+
 }
     </script>
     <!--Load the API from the specified URL

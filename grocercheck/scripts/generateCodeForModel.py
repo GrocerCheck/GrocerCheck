@@ -6,4 +6,4 @@ for day in days:
             i = '0'+str(i)
         else:
             i = str(i)
-        print(day+i+' = models.IntegerField(default=0)')
+        print(day+i+' = models.IntegerField(null=True)')
