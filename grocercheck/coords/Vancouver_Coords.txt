@@ -1,0 +1,69 @@
+49.265041, -123.242372, ubc, 2000
+49.268451, -123.198563, wpga, 1500
+49.267351, -123.164781, kits west 1500
+49.264032, -123.138692, south granville, 1500
+49.261527, -123.114874, broadway city hall, 1500
+49.250524, -123.185343, dunbar, 1500
+49.234595, -123.162112, kerrisdale, 2000
+49.251304, -123.153005, arbutus ridge, 1000
+49.217001, -123.128699, marpole-oakridge community center, 2000
+49.232753, -123.118251, oakridge, 1500
+49.240231, -123.090482, fraser and 33rd, 1500
+49.220489, -123.090849, sunset, 1500
+49.230720, -123.048497, killarney and east kingsway, 2000
+49.251481, -123.076429, kensington, 1500
+49.252141, -123.047897, renfrew-collingwood, 1500
+49.269827, -123.069679. commercial, 1500
+49.290517, -123.137652, west end, 1000
+49.287056, -123.117901, waterfront area, 1000
+49.280540, -123.138124, sunset beach, 1000
+49.276605, -123.125169, yaletown, 700
+49.280405, -123.099624, chinatown, 1000
+49.282190, -123.047272, pne area, 2000
+49.261915, -123.044824, renfrew, 1500
+49.226593, -122.999567, metrotown
+49.249451, -123.015504, burnaby hospital
+49.240613, -122.969500, shadbolt
+49.266499, -123.003289, lougheed and willingdon
+49.270487, -122.944436, sfu
+49.251701, -122.896557, lougheed town center
+49.211776, -122.959846, edmonds
+49.215009, -122.924860, new west
+49.198286, -123.143897, outlet, 500
+49.185888, -123.124096, aberdeen/bridgeport west, 1500
+49.162769, -123.131931, brighouse, 1500
+49.155807, -123.158808, richmond northwest
+49.148178, -123.114310, #4 francis
+49.138507, -123.163376, steveston
+49.140906, -123.103290, richmond southeast
+49.188975, -123.079186, ikea richmond
+49.156614, -123.064647, driving ranges on #6
+49.186302, -122.955753, starlight casino and annacis 
+49.339000, -123.158770, west van
+49.369119, -123.276051, horseshoe bay
+49.343043, -123.114116, capilano suspension bridge
+49.321603, -123.067810, north van central
+49.342305, -123.051416, lynn valley
+49.313843, -123.023493, lynnterm
+49.317058, -122.970286, deep cove
+49.234426, -122.865465, ikea coquitlam
+49.263390, -122.868988, port moody
+49.279089, -122.798994, coquitlam center
+49.256472, -122.746398, costco poco
+49.192690, -122.864336, surrey central
+49.188857, -122.803571, guildford town center
+49.161921, -122.890492, surrey 120&88
+49.138516, -122.843997, costco surrey
+49.131998, -122.891992, krispy kreme delta
+49.157932, -122.780606, fleetwood park village
+49.114338, -122.843924, surrey newton
+49.090807, -123.071448, ladner
+49.038955, -123.084055, tsawwassen
+49.043578, -122.849792, white rock west
+49.045707, -122.789993, white rock central
+49.112828, -122.730465, cloverdale
+49.111387, -122.661706, costco langley
+49.221725, -122.672039, pitt meadows
+49.217760, -122.598679, maple ridge
+49.204553, -122.556394, maple ridge east
+49.167329, -122.654681, langley north

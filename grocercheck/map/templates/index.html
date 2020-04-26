@@ -10,20 +10,77 @@
     </style>
   </head>
   <body>
-    <h3>GrocerCheck: Live Grocery Store Popularity</h3>
+	  {% load static %}
+
+	  	  <h1>
+
+							
+			<img src="{% static "images/GrocerCheckLogo.png" %}" width="100" height="100">
+
+		GrocerCheck: Live Grocery Store Popularity
+		  </h1>
+
+    <h6> hihi {{ size }} </h6>
+
     <!--The div element for the map -->
     <div id="map"></div>
     
     <script>
 // Initialize and add the map
 function initMap() {
-  // The location of Uluru
-  var hamber = {lat: 49.2399, lng: -123.1251};
+
+ var hamber = {lat: 49.2399, lng: -123.1251};
   // The map, centered at Uluru
   var map = new google.maps.Map(
       document.getElementById('map'), {zoom: 12, center: hamber});
-  // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: hamber, map: map});
+
+
+
+  // The location of Uluru
+
+	var name = {{name|safe}}
+	var lat = {{lat|safe}}
+	var lng = {{lng|safe}}
+	var place_id = {{place_id|safe}}
+	
+	var positions = []
+	
+	for(let x = 0;x<lat.length;x++){
+		positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lng[x])})
+	}
+
+	function buildInfoWindowString(name,x){
+		return '<div id="content">' + 
+			'<h1 id="title"> '+name[x]+' </h1>' + 
+			'<div id="body"'+
+			'<p> sample address </p>'+
+			'</div>'+
+			'</div>';
+	}
+
+	var green = "{% static 'images/greenmarker.png' %}"
+	var yellow = "{% static 'images/yellowmarker.png' %}"
+	var red = "{% static 'images/redmarker.png' %}"
+
+    	 
+	var markers = [] 
+	var infowindows = []
+
+	for(let x = 0; x<name.length;x++){
+		infowindows.push(new google.maps.InfoWindow({content:buildInfoWindowString(name,x)}))
+
+	}
+
+	
+	for(let x = 0; x<positions.length;x++){
+		markers.push(new google.maps.Marker({icon:{url:green,scaledSize:new google.maps.Size(20,20)},clickable:true,position:positions[x],map: map,label:{color:'blue'}}))
+		markers[x].addListener('click', function() { infowindows[x].open(map,markers[x])})
+
+	}
+
+
+	
+
 }
     </script>
     <!--Load the API from the specified URL
