@@ -49,28 +49,20 @@ conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/g
 
 
 API_KEY = open("/home/ihasdapie/keys/gmapkey.txt", "r").readline()
-BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/Run_Once/db_backup.json", "w")
+BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/Run_Once/db_backup.json", "a")
 
 
 place_id_list = get_columns(conn, "place_id")
 place_id_list = [pid[0] for pid in place_id_list]
 
-backup = []
 
-
-place_data=lpt.get_populartimes_by_PlaceID(API_KEY, place_id_list[0])
-backup.append(place_data)
-update_row(conn,place_data, 1)
-
-backup_json = json.dumps(backup, indent=4)
-BACKUP.write(backup_json)
-
-"""
-for ind in range(len(place_id_list)):
+for ind in range(10):
     place_data = lpt.get_populartimes_by_place_id(API_KEY, place_id_list[ind])
-    update_row(conn, place_data, ind)
-    backup.append(place_data)
-"""
+    update_row(conn, place_data, (ind+1)) #sql id starts at 1
+    BACKUP.write(json.dumps(place_data, indent=4))
+    BACKUP.write("\r\n")
+
+
 
 
 
