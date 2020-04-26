@@ -62,15 +62,15 @@ for line in coords:
         time.sleep(3)
         response = makerequest(clat,clng,nextpage)
         data = response.json()
-        #print(json.dumps(data,indent=4)) 
-        
+        #print(json.dumps(data,indent=4))
+
         output = loadjson.readData(data)
         name = output[0]
         lat = output[1]
         lng = output[2]
         address = output[3]
         placeID = output[4]
-        
+
         print(spl[2]+" "+str(len(name)))
 
         for i in range(len(name)):
