@@ -1,0 +1,1246 @@
+[
+    {
+        "populartimes": [
+            {
+                "data": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    19,
+                    38,
+                    64,
+                    87,
+                    100,
+                    96,
+                    83,
+                    77,
+                    74,
+                    61,
+                    41,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "name": "Monday"
+            },
+            {
+                "data": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    25,
+                    45,
+                    64,
+                    80,
+                    83,
+                    77,
+                    67,
+                    64,
+                    70,
+                    77,
+                    74,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "name": "Tuesday"
+            },
+            {
+                "data": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    29,
+                    48,
+                    64,
+                    74,
+                    74,
+                    70,
+                    67,
+                    67,
+                    70,
+                    67,
+                    61,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "name": "Wednesday"
+            },
+            {
+                "data": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    32,
+                    51,
+                    67,
+                    77,
+                    74,
+                    61,
+                    41,
+                    29,
+                    32,
+                    48,
+                    61,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "name": "Thursday"
+            },
+            {
+                "data": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    19,
+                    32,
+                    48,
+                    61,
+                    67,
+                    61,
+                    51,
+                    48,
+                    48,
+                    48,
+                    38,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "name": "Friday"
+            },
+            {
+                "data": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    58,
+                    61,
+                    54,
+                    45,
+                    35,
+                    25,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "name": "Saturday"
+            },
+            {
+                "data": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    100,
+                    93,
+                    58,
+                    48,
+                    93,
+                    45,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "name": "Sunday"
+            }
+        ],
+        "coordinates": {
+            "lat": 49.2663301,
+            "lng": -123.24932829999999
+        },
+        "rating_n": 46,
+        "international_phone_number": "+1 778-654-4900",
+        "address": "6133 University Blvd, Vancouver, BC V6T 1Z1",
+        "popular_times": [
+            [
+                7,
+                [
+                    [
+                        6,
+                        0,
+                        "",
+                        "",
+                        "6 a.m."
+                    ],
+                    [
+                        7,
+                        0,
+                        "",
+                        "",
+                        "7 a.m."
+                    ],
+                    [
+                        8,
+                        0,
+                        "",
+                        "",
+                        "8 a.m."
+                    ],
+                    [
+                        9,
+                        0,
+                        "",
+                        "",
+                        "9 a.m."
+                    ],
+                    [
+                        10,
+                        0,
+                        "",
+                        "",
+                        "10 a.m."
+                    ],
+                    [
+                        11,
+                        0,
+                        "",
+                        "",
+                        "11 a.m."
+                    ],
+                    [
+                        12,
+                        100,
+                        "Usually as busy as it gets",
+                        "",
+                        "12 p.m."
+                    ],
+                    [
+                        13,
+                        93,
+                        "Usually as busy as it gets",
+                        "",
+                        "1 p.m."
+                    ],
+                    [
+                        14,
+                        58,
+                        "Usually a little busy",
+                        "",
+                        "2 p.m."
+                    ],
+                    [
+                        15,
+                        48,
+                        "Usually not too busy",
+                        "",
+                        "3 p.m."
+                    ],
+                    [
+                        16,
+                        93,
+                        "Usually as busy as it gets",
+                        "",
+                        "4 p.m."
+                    ],
+                    [
+                        17,
+                        45,
+                        "Usually not too busy",
+                        "",
+                        "5 p.m."
+                    ],
+                    [
+                        18,
+                        0,
+                        "",
+                        "",
+                        "6 p.m."
+                    ],
+                    [
+                        19,
+                        0,
+                        "",
+                        "",
+                        "7 p.m."
+                    ],
+                    [
+                        20,
+                        0,
+                        "",
+                        "",
+                        "8 p.m."
+                    ],
+                    [
+                        21,
+                        0,
+                        "",
+                        "",
+                        "9 p.m."
+                    ],
+                    [
+                        22,
+                        0,
+                        "",
+                        "",
+                        "10 p.m."
+                    ],
+                    [
+                        23,
+                        0,
+                        "",
+                        "",
+                        "11 p.m."
+                    ]
+                ],
+                0
+            ],
+            [
+                1,
+                [
+                    [
+                        6,
+                        0,
+                        "",
+                        "",
+                        "6 a.m."
+                    ],
+                    [
+                        7,
+                        0,
+                        "",
+                        "",
+                        "7 a.m."
+                    ],
+                    [
+                        8,
+                        19,
+                        "Usually not busy",
+                        "",
+                        "8 a.m."
+                    ],
+                    [
+                        9,
+                        38,
+                        "Usually not too busy",
+                        "",
+                        "9 a.m."
+                    ],
+                    [
+                        10,
+                        64,
+                        "Usually a little busy",
+                        "",
+                        "10 a.m."
+                    ],
+                    [
+                        11,
+                        87,
+                        "Usually as busy as it gets",
+                        "",
+                        "11 a.m."
+                    ],
+                    [
+                        12,
+                        100,
+                        "Usually as busy as it gets",
+                        "",
+                        "12 p.m."
+                    ],
+                    [
+                        13,
+                        96,
+                        "Usually as busy as it gets",
+                        "",
+                        "1 p.m."
+                    ],
+                    [
+                        14,
+                        83,
+                        "Usually as busy as it gets",
+                        "",
+                        "2 p.m."
+                    ],
+                    [
+                        15,
+                        77,
+                        "Usually a little busy",
+                        "",
+                        "3 p.m."
+                    ],
+                    [
+                        16,
+                        74,
+                        "Usually a little busy",
+                        "",
+                        "4 p.m."
+                    ],
+                    [
+                        17,
+                        61,
+                        "Usually a little busy",
+                        "",
+                        "5 p.m."
+                    ],
+                    [
+                        18,
+                        41,
+                        "Usually not too busy",
+                        "",
+                        "6 p.m."
+                    ],
+                    [
+                        19,
+                        0,
+                        "",
+                        "",
+                        "7 p.m."
+                    ],
+                    [
+                        20,
+                        0,
+                        "",
+                        "",
+                        "8 p.m."
+                    ],
+                    [
+                        21,
+                        0,
+                        "",
+                        "",
+                        "9 p.m."
+                    ],
+                    [
+                        22,
+                        0,
+                        "",
+                        "",
+                        "10 p.m."
+                    ],
+                    [
+                        23,
+                        0,
+                        "",
+                        "",
+                        "11 p.m."
+                    ]
+                ],
+                0
+            ],
+            [
+                2,
+                [
+                    [
+                        6,
+                        0,
+                        "",
+                        "",
+                        "6 a.m."
+                    ],
+                    [
+                        7,
+                        0,
+                        "",
+                        "",
+                        "7 a.m."
+                    ],
+                    [
+                        8,
+                        25,
+                        "Usually not too busy",
+                        "",
+                        "8 a.m."
+                    ],
+                    [
+                        9,
+                        45,
+                        "Usually not too busy",
+                        "",
+                        "9 a.m."
+                    ],
+                    [
+                        10,
+                        64,
+                        "Usually a little busy",
+                        "",
+                        "10 a.m."
+                    ],
+                    [
+                        11,
+                        80,
+                        "Usually as busy as it gets",
+                        "",
+                        "11 a.m."
+                    ],
+                    [
+                        12,
+                        83,
+                        "Usually as busy as it gets",
+                        "",
+                        "12 p.m."
+                    ],
+                    [
+                        13,
+                        77,
+                        "Usually a little busy",
+                        "",
+                        "1 p.m."
+                    ],
+                    [
+                        14,
+                        67,
+                        "Usually a little busy",
+                        "",
+                        "2 p.m."
+                    ],
+                    [
+                        15,
+                        64,
+                        "Usually a little busy",
+                        "",
+                        "3 p.m."
+                    ],
+                    [
+                        16,
+                        70,
+                        "Usually a little busy",
+                        "",
+                        "4 p.m."
+                    ],
+                    [
+                        17,
+                        77,
+                        "Usually a little busy",
+                        "",
+                        "5 p.m."
+                    ],
+                    [
+                        18,
+                        74,
+                        "Usually a little busy",
+                        "",
+                        "6 p.m."
+                    ],
+                    [
+                        19,
+                        0,
+                        "",
+                        "",
+                        "7 p.m."
+                    ],
+                    [
+                        20,
+                        0,
+                        "",
+                        "",
+                        "8 p.m."
+                    ],
+                    [
+                        21,
+                        0,
+                        "",
+                        "",
+                        "9 p.m."
+                    ],
+                    [
+                        22,
+                        0,
+                        "",
+                        "",
+                        "10 p.m."
+                    ],
+                    [
+                        23,
+                        0,
+                        "",
+                        "",
+                        "11 p.m."
+                    ]
+                ],
+                0
+            ],
+            [
+                3,
+                [
+                    [
+                        6,
+                        0,
+                        "",
+                        "",
+                        "6 a.m."
+                    ],
+                    [
+                        7,
+                        0,
+                        "",
+                        "",
+                        "7 a.m."
+                    ],
+                    [
+                        8,
+                        29,
+                        "Usually not too busy",
+                        "",
+                        "8 a.m."
+                    ],
+                    [
+                        9,
+                        48,
+                        "Usually not too busy",
+                        "",
+                        "9 a.m."
+                    ],
+                    [
+                        10,
+                        64,
+                        "Usually a little busy",
+                        "",
+                        "10 a.m."
+                    ],
+                    [
+                        11,
+                        74,
+                        "Usually a little busy",
+                        "",
+                        "11 a.m."
+                    ],
+                    [
+                        12,
+                        74,
+                        "Usually a little busy",
+                        "",
+                        "12 p.m."
+                    ],
+                    [
+                        13,
+                        70,
+                        "Usually a little busy",
+                        "",
+                        "1 p.m."
+                    ],
+                    [
+                        14,
+                        67,
+                        "Usually a little busy",
+                        "",
+                        "2 p.m."
+                    ],
+                    [
+                        15,
+                        67,
+                        "Usually a little busy",
+                        "",
+                        "3 p.m."
+                    ],
+                    [
+                        16,
+                        70,
+                        "Usually a little busy",
+                        "",
+                        "4 p.m."
+                    ],
+                    [
+                        17,
+                        67,
+                        "Usually a little busy",
+                        "",
+                        "5 p.m."
+                    ],
+                    [
+                        18,
+                        61,
+                        "Usually a little busy",
+                        "",
+                        "6 p.m."
+                    ],
+                    [
+                        19,
+                        0,
+                        "",
+                        "",
+                        "7 p.m."
+                    ],
+                    [
+                        20,
+                        0,
+                        "",
+                        "",
+                        "8 p.m."
+                    ],
+                    [
+                        21,
+                        0,
+                        "",
+                        "",
+                        "9 p.m."
+                    ],
+                    [
+                        22,
+                        0,
+                        "",
+                        "",
+                        "10 p.m."
+                    ],
+                    [
+                        23,
+                        0,
+                        "",
+                        "",
+                        "11 p.m."
+                    ]
+                ],
+                0
+            ],
+            [
+                4,
+                [
+                    [
+                        6,
+                        0,
+                        "",
+                        "",
+                        "6 a.m."
+                    ],
+                    [
+                        7,
+                        0,
+                        "",
+                        "",
+                        "7 a.m."
+                    ],
+                    [
+                        8,
+                        32,
+                        "Usually not too busy",
+                        "",
+                        "8 a.m."
+                    ],
+                    [
+                        9,
+                        51,
+                        "Usually a little busy",
+                        "",
+                        "9 a.m."
+                    ],
+                    [
+                        10,
+                        67,
+                        "Usually a little busy",
+                        "",
+                        "10 a.m."
+                    ],
+                    [
+                        11,
+                        77,
+                        "Usually a little busy",
+                        "",
+                        "11 a.m."
+                    ],
+                    [
+                        12,
+                        74,
+                        "Usually a little busy",
+                        "",
+                        "12 p.m."
+                    ],
+                    [
+                        13,
+                        61,
+                        "Usually a little busy",
+                        "",
+                        "1 p.m."
+                    ],
+                    [
+                        14,
+                        41,
+                        "Usually not too busy",
+                        "",
+                        "2 p.m."
+                    ],
+                    [
+                        15,
+                        29,
+                        "Usually not too busy",
+                        "",
+                        "3 p.m."
+                    ],
+                    [
+                        16,
+                        32,
+                        "Usually not too busy",
+                        "",
+                        "4 p.m."
+                    ],
+                    [
+                        17,
+                        48,
+                        "Usually not too busy",
+                        "",
+                        "5 p.m."
+                    ],
+                    [
+                        18,
+                        61,
+                        "Usually a little busy",
+                        "",
+                        "6 p.m."
+                    ],
+                    [
+                        19,
+                        0,
+                        "",
+                        "",
+                        "7 p.m."
+                    ],
+                    [
+                        20,
+                        0,
+                        "",
+                        "",
+                        "8 p.m."
+                    ],
+                    [
+                        21,
+                        0,
+                        "",
+                        "",
+                        "9 p.m."
+                    ],
+                    [
+                        22,
+                        0,
+                        "",
+                        "",
+                        "10 p.m."
+                    ],
+                    [
+                        23,
+                        0,
+                        "",
+                        "",
+                        "11 p.m."
+                    ]
+                ],
+                0
+            ],
+            [
+                5,
+                [
+                    [
+                        6,
+                        0,
+                        "",
+                        "",
+                        "6 a.m."
+                    ],
+                    [
+                        7,
+                        0,
+                        "",
+                        "",
+                        "7 a.m."
+                    ],
+                    [
+                        8,
+                        19,
+                        "Usually not busy",
+                        "",
+                        "8 a.m."
+                    ],
+                    [
+                        9,
+                        32,
+                        "Usually not too busy",
+                        "",
+                        "9 a.m."
+                    ],
+                    [
+                        10,
+                        48,
+                        "Usually not too busy",
+                        "",
+                        "10 a.m."
+                    ],
+                    [
+                        11,
+                        61,
+                        "Usually a little busy",
+                        "",
+                        "11 a.m."
+                    ],
+                    [
+                        12,
+                        67,
+                        "Usually a little busy",
+                        "",
+                        "12 p.m."
+                    ],
+                    [
+                        13,
+                        61,
+                        "Usually a little busy",
+                        "",
+                        "1 p.m."
+                    ],
+                    [
+                        14,
+                        51,
+                        "Usually a little busy",
+                        "",
+                        "2 p.m."
+                    ],
+                    [
+                        15,
+                        48,
+                        "Usually not too busy",
+                        "",
+                        "3 p.m."
+                    ],
+                    [
+                        16,
+                        48,
+                        "Usually not too busy",
+                        "",
+                        "4 p.m."
+                    ],
+                    [
+                        17,
+                        48,
+                        "Usually not too busy",
+                        "",
+                        "5 p.m."
+                    ],
+                    [
+                        18,
+                        38,
+                        "Usually not too busy",
+                        "",
+                        "6 p.m."
+                    ],
+                    [
+                        19,
+                        0,
+                        "",
+                        "",
+                        "7 p.m."
+                    ],
+                    [
+                        20,
+                        0,
+                        "",
+                        "",
+                        "8 p.m."
+                    ],
+                    [
+                        21,
+                        0,
+                        "",
+                        "",
+                        "9 p.m."
+                    ],
+                    [
+                        22,
+                        0,
+                        "",
+                        "",
+                        "10 p.m."
+                    ],
+                    [
+                        23,
+                        0,
+                        "",
+                        "",
+                        "11 p.m."
+                    ]
+                ],
+                0
+            ],
+            [
+                6,
+                [
+                    [
+                        6,
+                        0,
+                        "",
+                        "",
+                        "6 a.m."
+                    ],
+                    [
+                        7,
+                        0,
+                        "",
+                        "",
+                        "7 a.m."
+                    ],
+                    [
+                        8,
+                        0,
+                        "",
+                        "",
+                        "8 a.m."
+                    ],
+                    [
+                        9,
+                        0,
+                        "",
+                        "",
+                        "9 a.m."
+                    ],
+                    [
+                        10,
+                        0,
+                        "",
+                        "",
+                        "10 a.m."
+                    ],
+                    [
+                        11,
+                        0,
+                        "",
+                        "",
+                        "11 a.m."
+                    ],
+                    [
+                        12,
+                        58,
+                        "Usually a little busy",
+                        "",
+                        "12 p.m."
+                    ],
+                    [
+                        13,
+                        61,
+                        "Usually a little busy",
+                        "",
+                        "1 p.m."
+                    ],
+                    [
+                        14,
+                        54,
+                        "Usually a little busy",
+                        "",
+                        "2 p.m."
+                    ],
+                    [
+                        15,
+                        45,
+                        "Usually not too busy",
+                        "",
+                        "3 p.m."
+                    ],
+                    [
+                        16,
+                        35,
+                        "Usually not too busy",
+                        "",
+                        "4 p.m."
+                    ],
+                    [
+                        17,
+                        25,
+                        "Usually not too busy",
+                        "",
+                        "5 p.m."
+                    ],
+                    [
+                        18,
+                        0,
+                        "",
+                        "",
+                        "6 p.m."
+                    ],
+                    [
+                        19,
+                        0,
+                        "",
+                        "",
+                        "7 p.m."
+                    ],
+                    [
+                        20,
+                        0,
+                        "",
+                        "",
+                        "8 p.m."
+                    ],
+                    [
+                        21,
+                        0,
+                        "",
+                        "",
+                        "9 p.m."
+                    ],
+                    [
+                        22,
+                        0,
+                        "",
+                        "",
+                        "10 p.m."
+                    ],
+                    [
+                        23,
+                        0,
+                        "",
+                        "",
+                        "11 p.m."
+                    ]
+                ],
+                0
+            ]
+        ],
+        "hours": {
+            "open_now": false,
+            "weekday_text": [
+                "Monday: 8:30 AM \u2013 7:00 PM",
+                "Tuesday: 8:30 AM \u2013 7:00 PM",
+                "Wednesday: 8:30 AM \u2013 7:00 PM",
+                "Thursday: 8:30 AM \u2013 7:00 PM",
+                "Friday: 8:30 AM \u2013 7:00 PM",
+                "Saturday: 12:00 \u2013 6:00 PM",
+                "Sunday: 12:00 \u2013 6:00 PM"
+            ],
+            "periods": [
+                {
+                    "open": {
+                        "time": "1200",
+                        "day": 0
+                    },
+                    "close": {
+                        "time": "1800",
+                        "day": 0
+                    }
+                },
+                {
+                    "open": {
+                        "time": "0830",
+                        "day": 1
+                    },
+                    "close": {
+                        "time": "1900",
+                        "day": 1
+                    }
+                },
+                {
+                    "open": {
+                        "time": "0830",
+                        "day": 2
+                    },
+                    "close": {
+                        "time": "1900",
+                        "day": 2
+                    }
+                },
+                {
+                    "open": {
+                        "time": "0830",
+                        "day": 3
+                    },
+                    "close": {
+                        "time": "1900",
+                        "day": 3
+                    }
+                },
+                {
+                    "open": {
+                        "time": "0830",
+                        "day": 4
+                    },
+                    "close": {
+                        "time": "1900",
+                        "day": 4
+                    }
+                },
+                {
+                    "open": {
+                        "time": "0830",
+                        "day": 5
+                    },
+                    "close": {
+                        "time": "1900",
+                        "day": 5
+                    }
+                },
+                {
+                    "open": {
+                        "time": "1200",
+                        "day": 6
+                    },
+                    "close": {
+                        "time": "1800",
+                        "day": 6
+                    }
+                }
+            ]
+        },
+        "time_spent": [
+            10,
+            10
+        ],
+        "categories": [
+            "Grocery store",
+            "Supermarket"
+        ],
+        "place_types": [
+            [
+                "grocery_store"
+            ],
+            [
+                "supermarket"
+            ]
+        ],
+        "rating": 4.0,
+        "name": "Grocery Checkout Fresh Market Vancouver",
+        "place_id": "ChIJ86yitLdyhlQRE440vfMWa_M",
+        "current_popularity": null
+    }
+]
