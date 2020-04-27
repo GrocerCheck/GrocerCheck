@@ -26,25 +26,26 @@ def index(request):
     context['busyness'] = []
     conn = sqlite3.connect('db1.sqlite3')
     cur = conn.cursor()
-    for s in Store.objects.all():        
-        context['name'].append(s.name)
-        context['place_id'].append(s.place_id)
-        context['address'].append(s.address)
-        context['lat'].append(s.lat)
-        context['lng'].append(s.lng)
-        cur.execute('''SELECT '''+day+'''hours FROM map_store WHERE id=?''', (s.id,))
-        context['hours'].append(cur.fetchone()[0])
-        live = s.live_busyness
-        if(live==None):
-            cur.execute('''SELECT '''+day+hour+''' FROM map_store WHERE id=?''', (s.id,))
-            live = cur.fetchone()[0]
+    for s in Store.objects.all():
+        with conn:
+            context['name'].append(s.name)
+            context['place_id'].append(s.place_id)
+            context['address'].append(s.address)
+            context['lat'].append(s.lat)
+            context['lng'].append(s.lng)
+            cur.execute('''SELECT '''+day+'''hours FROM map_store WHERE id=?''', (s.id,))
+            context['hours'].append(cur.fetchone()[0])
+            live = s.live_busyness
             if(live==None):
-                live = -1
-        else:
-            live+=1000
-        context['busyness'].append(live)
-                
-            
+                cur.execute('''SELECT '''+day+hour+''' FROM map_store WHERE id=?''', (s.id,))
+                live = cur.fetchone()[0]
+                if(live==None):
+                    live = -1
+            else:
+                live+=1000
+            context['busyness'].append(live)
+
+
 
     finalcontext = {}
 
@@ -53,7 +54,7 @@ def index(request):
 
     finalcontext['size'] = json.dumps([len(context['busyness'])])
 
-    
+
 
 
     return render(request,'index.html',context=finalcontext)
