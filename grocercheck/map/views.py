@@ -2,8 +2,8 @@ from django.shortcuts import render
 import time
 import sqlite3
 # Create your views here.
-
-
+from django.conf import settings
+import os
 
 from map.models import Store
 import json
@@ -24,7 +24,7 @@ def index(request):
     context['lng'] = []
     context['hours'] = []
     context['busyness'] = []
-    conn = sqlite3.connect('db1.sqlite3')
+    conn = sqlite3.connect(os.path.join(settings.BASE_DIR,'db1.sqlite3'))
     cur = conn.cursor()
     for s in Store.objects.all():
         with conn:
