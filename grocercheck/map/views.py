@@ -1,5 +1,6 @@
 from django.shortcuts import render
-
+import time
+import sqlite3
 # Create your views here.
 
 
@@ -8,26 +9,49 @@ from map.models import Store
 import json
 
 def index(request):
+    days = ['wed','tue','wed','thu','fri','sat','sun']
+    day = days[time.localtime()[6]]
+    hour = time.localtime()[3]
+    if(hour<10):
+        hour = '0'+str(hour)
+    else:
+        hour = str(hour)
     context = {}
     context['name'] = []
+    context['place_id'] = []
+    context['address'] = []
     context['lat'] = []
     context['lng'] = []
-    context['place_id'] = []
-
+    context['hours'] = []
+    context['busyness'] = []
+    conn = sqlite3.connect('db1.sqlite3')
+    cur = conn.cursor()
     for s in Store.objects.all():        
         context['name'].append(s.name)
+        context['place_id'].append(s.place_id)
+        context['address'].append(s.address)
         context['lat'].append(s.lat)
         context['lng'].append(s.lng)
-        context['place_id'].append(s.place_id)
-        
+        cur.execute('''SELECT '''+day+'''hours FROM map_store WHERE id=?''', (s.id,))
+        context['hours'].append(cur.fetchone()[0])
+        live = s.live_busyness
+        if(live==None):
+            cur.execute('''SELECT '''+day+hour+''' FROM map_store WHERE id=?''', (s.id,))
+            live = cur.fetchone()[0]
+            if(live==None):
+                live = -1
+        else:
+            live+=1000
+        context['busyness'].append(live)
+                
             
 
     finalcontext = {}
-    finalcontext['name'] = json.dumps(context['name'])
-    finalcontext['lat'] = json.dumps(context['lat'])
-    finalcontext['lng'] = json.dumps(context['lng'])
-    finalcontext['place_id'] = json.dumps(context['place_id'])
-    finalcontext['size'] = json.dumps([Store.objects.count()])
+
+    for key in context.keys():
+        finalcontext[key] = json.dumps(context[key])
+
+    finalcontext['size'] = json.dumps([len(context['busyness'])])
 
     
 

@@ -29,31 +29,49 @@
 // Initialize and add the map
 function initMap() {
 
- var hamber = {lat: 49.2399, lng: -123.1251};
+
   // The map, centered at Uluru
   var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 12, center: hamber});
+	  document.getElementById('map'), {zoom: 12, center: {lat:49.2399,lng:-123.1251}});
 
 
 
   // The location of Uluru
 
 	var name = {{name|safe}}
+	var place_id = {{place_id|safe}}
+	var address = {{address|safe}}
 	var lat = {{lat|safe}}
 	var lng = {{lng|safe}}
 	var place_id = {{place_id|safe}}
-	
+	var hours = {{hours|safe}}
+	var busyness = {{busyness|safe}}
 	var positions = []
 	
 	for(let x = 0;x<lat.length;x++){
 		positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lng[x])})
 	}
 
-	function buildInfoWindowString(name,x){
+	function buildInfoWindowString(name,address,hours,busyness,x){
+		var s = '';
+		var busy = busyness[x];
+		if(busy>=1000){
+			busy-=1000;
+		}
+		if(busy>60){
+			s = 'red';
+		}
+		else if(busy>30){
+			s = 'goldenrod';
+		}
+		else{
+			s = 'limegreen';
+		}
 		return '<div id="content">' + 
-			'<h1 id="title"> '+name[x]+' </h1>' + 
+			'<h1 style="color:'+s+';"> '+name[x]+' </h1>' + 
 			'<div id="body"'+
-			'<p> sample address </p>'+
+			'<p> '+address[x]+' </p>'+
+			'<p> '+hours[x]+' </p>'+
 			'</div>'+
 			'</div>';
 	}
@@ -61,19 +79,53 @@ function initMap() {
 	var green = "{% static 'images/greenmarker.png' %}"
 	var yellow = "{% static 'images/yellowmarker.png' %}"
 	var red = "{% static 'images/redmarker.png' %}"
-
+	var grey = "{% static 'images/greymarker.png' %}"
     	 
 	var markers = [] 
 	var infowindows = []
 
 	for(let x = 0; x<name.length;x++){
-		infowindows.push(new google.maps.InfoWindow({content:buildInfoWindowString(name,x)}))
+		infowindows.push(new google.maps.InfoWindow({content:buildInfoWindowString(name,address,hours,busyness,x)}))
 
 	}
 
-	
+	var icon = null
+	var skip = 0
 	for(let x = 0; x<positions.length;x++){
-		markers.push(new google.maps.Marker({icon:{url:green,scaledSize:new google.maps.Size(20,20)},clickable:true,position:positions[x],map: map,label:{color:'blue'}}))
+		
+		if(busyness[x]==-1){
+			markers.push(null)
+			continue;
+		}
+		if(busyness[x]>=1000){
+			//live data available
+			busyness[x]-=1000;
+			
+			//placeholder for code block below else
+		if(busyness[x]>60){
+			icon=red
+		}
+		else if(busyness[x]>30){
+			icon=yellow;
+		}
+		else{
+			icon=green;
+		}
+
+
+		}
+		
+		else{
+			//only historical data available
+			icon = grey;
+		}
+		
+
+		
+		
+
+		
+		markers.push(new google.maps.Marker({icon:{url:icon,scaledSize:new google.maps.Size(20,20)},clickable:true,position:positions[x],map: map}))
 		markers[x].addListener('click', function() { infowindows[x].open(map,markers[x])})
 
 	}
