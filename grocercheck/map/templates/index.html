@@ -4,61 +4,179 @@
     <style>
        /* Set the size of the div element that contains the map */
       #map {
-        height: 800px;  /* The height is 400 pixels */
+        height: 400px;  /* The height is 400 pixels */
         width: 100%;  /* The width is the width of the web page */
        }
+      #radio{
+	margin-bottom: 10px;
+	      }
+      .container{
+	      display:inline;
+	      position: relative;
+	      padding-left: 35px;
+	      margin-bottom: 12px;
+	      cursor: pointer;
+	      font-size: 22px;
+	      -webkit-user-select: none;
+	      -moz-user-select: none;
+	      -ms-user-select: none;
+	      user-select: none;
+	      margin-right: 87px;
+	      margin-left: 40px;
+      }
+      .container input{
+	      position: absolute;
+	      opacity: 0;
+	      cursor: pointer;
+      }
+      .checkmark {
+	      position: absolute;
+	      top: 0;
+	      left: 0;
+	      height: 25px;
+	      width: 25px;
+	      background-color: #eee;
+	      border-radius: 50%;
+	      margin-right: 100px;
+      }
+      .container:hover input ~ .checkmark {
+	      background-color: #ccc;
+      }
+
+      .container input:checked ~ .checkmark {
+	      background-color: #3AB64B
+      }
+      .checkmark:after {
+	      content: "";
+	      position: absolute;
+	      display: none;
+      }
+      .container input:checked ~ .chechmark:after {
+	      display:inline;
+      }
+      .container .checkmark:after{
+	      top:9px;
+	      left:9px;
+	      width: 8px;
+	      height:8px;
+	      border-radius: 50%;
+	      background:white;
+      }
+      ul#buttons li{
+	      display: inline;
+      }
+      ul#buttonlabels li{
+	      margin-right: 30px;
+	      margin-left: 0px;
+	      display:inline;
+      }
+
     </style>
   </head>
   <body>
+
+
+<script>
+
+	</script>
+
 	  {% load static %}
 
 	  	  <h1>
 
 							
-			<img src="{% static "images/GrocerCheckLogo.png" %}" width="100" height="100">
+			<img src="{% static "images/GrocerCheck-01.png" %}" width="292" height="80">
+						  </h1>
 
-		GrocerCheck: Live Grocery Store Popularity
-		  </h1>
+					
+				  <div id="radio">
+					<ul id="buttonlabels" style="color:forestgreen">
+					<b>						
+						<li>Live Data Only </li>
+							<li> Live and Historical Data</li>
+							<li> All Stores </li>
+									</b>
+						</ul>
+											
+					
+						  <ul id="buttons">
+											
+							  <li><label class="container">  
+							<input onclick="showLiveOnly()" type="radio" name="visibility" id="live" checked="checked" >
+							<span class="checkmark"></span>
+						
 
-    <h6> hihi {{ size }} </h6>
 
-    <!--The div element for the map -->
-    <div id="map"></div>
-    
-    <script>
-// Initialize and add the map
-function initMap() {
+								  </label></li>					
+								  <li><label class="container">     
+							<input onclick="showHistorical()"  type="radio"  name="visibility" id="historical">
+							<span class="checkmark"></span>
+									  </label></li>
+
+									  <li><label class="container">           
+							<input onclick="showAll()" type="radio" name="visibility" id="all" >
+							<span class="checkmark"></span>
+						</label>
+
+						  </ul>
+					  </div>
 
 
-  // The map, centered at Uluru
-  var map = new google.maps.Map(
-	  document.getElementById('map'), {zoom: 12, center: {lat:49.2399,lng:-123.1251}});
 
-
-
-  // The location of Uluru
-
-	var name = {{name|safe}}
-	var place_id = {{place_id|safe}}
-	var address = {{address|safe}}
-	var lat = {{lat|safe}}
-	var lng = {{lng|safe}}
-	var place_id = {{place_id|safe}}
-	var hours = {{hours|safe}}
-	var busyness = {{busyness|safe}}
-	var positions = []
 	
-	for(let x = 0;x<lat.length;x++){
-		positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lng[x])})
-	}
+	    <!--The div element for the map -->
+	    <div id="map"></div>
+	    
+	    <script>
 
-	function buildInfoWindowString(name,address,hours,busyness,x){
-		var s = '';
-		var busy = busyness[x];
-		if(busy>=1000){
-			busy-=1000;
+		var livemarkers = []
+		var hahaha = 0;
+		var historicalmarkers = []
+		var allstores = []
+		var markers = []
+		var map;	
+
+
+		// Initialize and add the map
+	function initMap() {
+
+															
+
+
+	
+		
+
+
+
+	  // The map, centered at Uluru
+	   map = new google.maps.Map(
+		  document.getElementById('map'), {zoom: 12, center: {lat:49.2399,lng:-123.1251}});
+
+
+
+	  // The location of Uluru
+
+		var name = {{name|safe}}
+		var place_id = {{place_id|safe}}
+		var address = {{address|safe}}
+		var lat = {{lat|safe}}
+		var lng = {{lng|safe}}
+		var place_id = {{place_id|safe}}
+		var hours = {{hours|safe}}
+		var busyness = {{busyness|safe}}
+		var positions = []
+		
+		for(let x = 0;x<lat.length;x++){
+			positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lng[x])})
 		}
-		if(busy>60){
+
+		function buildInfoWindowString(name,address,hours,busyness,x){
+			var s = '';
+			var busy = busyness[x];
+			if(busy>=1000){
+				busy-=1000;
+			}
+			if(busy>60){
 			s = 'red';
 		}
 		else if(busy>30){
@@ -81,59 +199,134 @@ function initMap() {
 	var red = "{% static 'images/redmarker.png' %}"
 	var grey = "{% static 'images/greymarker.png' %}"
     	 
-	var markers = [] 
-	var infowindows = []
-
-	for(let x = 0; x<name.length;x++){
-		infowindows.push(new google.maps.InfoWindow({content:buildInfoWindowString(name,address,hours,busyness,x)}))
-
-	}
-
-	var icon = null
-	var skip = 0
-	for(let x = 0; x<positions.length;x++){
+	
 		
-		if(busyness[x]==-1){
-			markers.push(null)
-			continue;
-		}
-		if(busyness[x]>=1000){
-        //live data available
-			busyness[x]-=1000;
-			
-			//placeholder for code block below else
+	var icon = null
+		
+
 	
 
 
+	function buildMarker(icona,width,height,position){
+
+		return new google.maps.Marker({icon:{url:icon, scaledSize:new google.maps.Size(width,height)},clickable:true,position:position,map:map});
+
+	}
+
+		function openInfoWindow(i){
+				if(infowindow){
+				infowindow.close();
+			}
+				infowindow.setContent(buildInfoWindowString(name,address,hours,busyness,i));
+				infowindow.open(map,temp);
+
+
+			}
+
+		
+	function getIcon(x){
+		if(x>60){
+				return red;
+			}
+			else if(x>30){
+				return yellow;
+			}
+			else{
+				return green;
+			}	
+	}
+
+	var infowindow = new google.maps.InfoWindow();
+	for(let x = 0; x<positions.length;x++){
+		 
+		if(busyness[x]==-1){
+			//No data available
+			var temp = buildMarker(grey,20,20,positions[x])	
+			markers.push(temp)
+			allstores.push(temp);
+		      
+			}
+		else if(busyness[x]>=1000){
+        //live data available
+			var busy = busyness[x]-1000;
+			icon = getIcon(busy);
+			var temp = buildMarker(icon,30,30,positions[x]);
+			markers.push(temp);
+			hahaha+=1;
+			livemarkers.push(temp);
+						//placeholder for code block below else
 		}
 		
 		else{
 			//only historical data available
-			icon = grey;
-		}
-		
+			icon = getIcon(busyness[x]);
+			var temp = buildMarker(icon,20,20,positions[x])
+			markers.push(temp)
+			historicalmarkers.push(temp)
+			}
 
+		
 	
-		if(busyness[x]>60){
-			icon=red
-		}
-		else if(busyness[x]>30){
-			icon=yellow;
-		}
-		else{
-			icon=green;
-		}	
-
-		
-		markers.push(new google.maps.Marker({icon:{url:icon,scaledSize:new google.maps.Size(30,30)},clickable:true,position:positions[x],map: map}))
-		markers[x].addListener('click', function() { infowindows[x].open(map,markers[x])})
-
 	}
+		for(let k = 0; k<markers.length;k++){
+		markers[k].addListener('click',function() {
+			infowindow.setContent(buildInfoWindowString(name,address,hours,busyness,k));
+			infowindow.open(map,markers[k]);
+			      		});
+
+		}
+		      showLiveOnly();
+		}
+
+
+
+function showLiveOnly(){
+																						
+								for(let x = 0; x<livemarkers.length;x++){
+									livemarkers[x].setMap(map);
+								}
+								for(let x = 0; x<historicalmarkers.length;x++){
+									historicalmarkers[x].setMap(null);
+								}
+								for(let x = 0; x<allstores.length;x++){
+									allstores[x].setMap(null);
+								}
+							}
+
+
+
+function showHistorical(){
+
+		
+			for(let x = 0; x<livemarkers.length;x++){
+				livemarkers[x].setMap(map);
+			}
+			for(let x = 0; x<historicalmarkers.length;x++){
+
+
+				historicalmarkers[x].setMap(map);
+			}
+			for(let x = 0; x<allstores.length;x++){
+				allstores[x].setMap(null);
+			}
+
+		}
+
+		function showAll(){
+			for(let x = 0; x<livemarkers.length;x++){
+				livemarkers[x].setMap(map);
+			}
+			for(let x = 0; x<historicalmarkers.length;x++){
+				historicalmarkers[x].setMap(map);
+			}
+			for(let x = 0; x<allstores.length;x++){
+				allstores[x].setMap(map);
+			}
+
+		}
 
 
 	
-
-}
     </script>
     <!--Load the API from the specified URL
     * The async attribute allows the browser to render the page while the API loads
