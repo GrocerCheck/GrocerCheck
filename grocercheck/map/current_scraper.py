@@ -6,7 +6,7 @@ import sys
 
 
 #--------GLOBAL VAR---------------#
-conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/test.sqlite3")
+
 BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/logs/current_scraper_raw_data.json", "a+")
 LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/logs/current_scraper_log.txt", "a+")
 
@@ -47,7 +47,7 @@ def get_valid_id(conn):
     ids = cur.fetchall()
     return ids
 
-def get_formatted_addresses(country):
+def get_formatted_addresses(country, conn):
     ids = get_valid_id(conn)
     ids = [x[0] for x in ids]
     formatted_address_list = []
@@ -57,7 +57,7 @@ def get_formatted_addresses(country):
         formatted_address_list.append("({name}) {address}, {country}".format(name=name, address=address, country = country))
     return formatted_address_list
 
-def update_current_popularity(formatted_address_list, doBackup, doLog):
+def update_current_popularity(formatted_address_list, doBackup, doLog, conn):
     global BACKUP
     global LOG
     for ind in range(len(formatted_address_list)):
@@ -75,9 +75,8 @@ def update_current_popularity(formatted_address_list, doBackup, doLog):
 
 def run_scraper(country, doBackup, doLog):
     global LOG
+    conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/test.sqlite3")
     try:
-        update_current_popularity(get_formatted_addresses(country), doBackup, doLog)
+        update_current_popularity(get_formatted_addresses(country, conn), doBackup, doLog, conn)
     except:
         LOG.write("ERROR IN update_current_popularity\r\n")
-
-
