@@ -1,6 +1,9 @@
 
 grocercheck/map/templates/config.js
 
+# python pycs
+*.pyc
+
 # Prerequisites
 *.d
 

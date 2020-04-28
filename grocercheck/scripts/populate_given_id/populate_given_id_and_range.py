@@ -19,9 +19,9 @@ def get_all(conn):
 
 def get_columns(conn, col):
     cur = conn.cursor()
-    cur.execute("SELECT place_id FROM map_store")
-    col = cur.fetchall()
-    return col
+    cur.execute("SELECT {col} FROM map_store".format(col=col))
+    out = cur.fetchall()
+    return out
 
 def update_row(conn, data, row_id):
     log = []

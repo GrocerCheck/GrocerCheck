@@ -1,0 +1,21 @@
+Requirements
+
+Python
+-LivePopularTimes
+-Celery
+-Redis
+
+Other
+ubuntu library - "supervisor"
+
+
+$ sudo supervisorctl start projworker
+$ sudo supervisorctl stop projworker
+$ sudo supervisorctl restart projworker
+$ sudo supervisorctl status projworker
+
+
+$ sudo supervisorctl start projbeat
+$ sudo supervisorctl stop projbeat
+$ sudo supervisorctl restart projbeat
+$ sudo supervisorctl status projbeat
