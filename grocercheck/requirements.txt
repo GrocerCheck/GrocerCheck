@@ -1,0 +1,9 @@
+Requirements
+
+Python
+-LivePopularTimes
+-Celery
+-Redis
+
+Other
+ubuntu library - "supervisor"

@@ -4,6 +4,13 @@ import livepopulartimes as lpt
 import json
 import sys
 
+
+#--------GLOBAL VAR---------------#
+conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/db1.sqlite3")
+BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/current_scraper/raw_data.json", "a+")
+LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/current_scraper/current_scraper_log.txt", "a+")
+
+
 def create_connection(db_file):
     conn = None
     try:
@@ -52,6 +59,8 @@ def get_formatted_addresses(country):
     return formatted_address_list
 
 def update_current_popularity(formatted_address_list):
+    global BACKUP
+    global LOG
     for ind in range(len(formatted_address_list)):
         place_data = lpt.get_populartimes_by_formatted_address(formatted_address_list[ind])
         log = update_row(conn, place_data, (ind+1)) #sql id starts at 1
@@ -61,21 +70,11 @@ def update_current_popularity(formatted_address_list):
             LOG.write(entry)
             LOG.write("\r\n")
 
-def scrape(country):
+def run_scraper(country):
+    global LOG
     try:
         update_current_popularity(get_formatted_addresses("Canada"))
     except:
         LOG.write("ERROR IN update_current_popularity\r\n")
 
 
-#-------------------MAIN-----------------------------------#
-
-conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/db1.sqlite3")
-BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/current_scraper/raw_data.json", "a+")
-LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/current_scraper/current_scraper_log.txt", "a+")
-
-
-import time
-start = time.time()
-scrape("Canada")
-print("--- %s seconds ---" % (time.time() - start_time))
