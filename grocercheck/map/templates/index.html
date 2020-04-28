@@ -8,20 +8,20 @@
         width: 100%;  /* The width is the width of the web page */
        }
       #radio{
-	margin-bottom: 10px;
+			align-items: center;
+	margin-bottom: 0px;
 	      }
       .container{
 	      display:inline;
 	      position: relative;
-	      padding-left: 35px;
-	      margin-bottom: 12px;
+	      	      margin-bottom: 12px;
 	      cursor: pointer;
 	      font-size: 22px;
 	      -webkit-user-select: none;
 	      -moz-user-select: none;
 	      -ms-user-select: none;
 	      user-select: none;
-	      margin-right: 87px;
+	      margin-right: 40px;
 	      margin-left: 40px;
       }
       .container input{
@@ -37,8 +37,7 @@
 	      width: 25px;
 	      background-color: #eee;
 	      border-radius: 50%;
-	      margin-right: 100px;
-      }
+	            }
       .container:hover input ~ .checkmark {
 	      background-color: #ccc;
       }
@@ -64,12 +63,99 @@
       }
       ul#buttons li{
 	      display: inline;
+	      padding-left:60px;
+	      padding-right:60px;
+	      padding-bottom:0px;
       }
       ul#buttonlabels li{
-	      margin-right: 30px;
-	      margin-left: 0px;
+	      margin-bottom: 0px;
+	      margin-right: 0px;
+	      padding: 30px;
 	      display:inline;
+	      text-align: center;
       }
+	#buttondiv{
+		margin-left:0px;
+		padding:0px;
+	}
+	ul#buttonlabels{
+		margin-bottom:0px;
+		padding-bottom:0px;
+		text-align: center;
+	}
+	#logo{
+		display:block;
+	margin-left: auto;
+	margin-right: auto;
+	width:292px;
+	}
+	ul#buttons{
+		text-align: center;
+	}
+
+.switch {
+  position: relative;
+  display: inline-block;
+    width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #3AB64B;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #3AB64B;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+	  #toggle{
+		margin-top:20px;
+	  }
+
 
     </style>
   </head>
@@ -82,15 +168,21 @@
 
 	  {% load static %}
 
-	  	  <h1>
+	  	  
+					
+				 
+				
 
 							
-			<img src="{% static "images/GrocerCheck-01.png" %}" width="292" height="80">
-						  </h1>
-
+											  
 					
-				  <div id="radio">
-					<ul id="buttonlabels" style="color:forestgreen">
+						<div id="logo">
+						<img src="{% static "images/GrocerCheck-01.png" %}" width="292" height="80">
+						</div>
+						<ul id="buttonlabels" style="color:forestgreen">
+
+						 <div id="radio">
+
 					<b>						
 						<li>Live Data Only </li>
 							<li> Live and Historical Data</li>
@@ -98,11 +190,12 @@
 									</b>
 						</ul>
 											
-					
+					</div>
+						<div id="buttondiv">
 						  <ul id="buttons">
 											
 							  <li><label class="container">  
-							<input onclick="showLiveOnly()" type="radio" name="visibility" id="live" checked="checked" >
+							<input onclick="showLiveOnly()" text-align type="radio" name="visibility" id="live" checked="checked" >
 							<span class="checkmark"></span>
 						
 
@@ -117,10 +210,19 @@
 							<input onclick="showAll()" type="radio" name="visibility" id="all" >
 							<span class="checkmark"></span>
 						</label>
-
+							<li>
+								<div id="toggle">
+									<label class="switch">
+										<input onclick="toggleStores()" type=checkbox>
+										<span class="slider round"></span>
+										
+									</label>
+									<p style="color:forestgreen; margin-bottom:0px;"><b>Show Closed Stores</b></p>
+								</div>
+							</li>
 						  </ul>
-					  </div>
-
+						</div>
+					  					
 
 
 	
@@ -134,28 +236,20 @@
 		var historicalmarkers = []
 		var allstores = []
 		var markers = []
-		var map;	
+		var map;
+		var open = [];
+		var flag = true;
+		var state = "live";
 
 
-		// Initialize and add the map
-	function initMap() {
+		function initMap() {
 
-															
-
-
-	
-		
-
-
-
-	  // The map, centered at Uluru
-	   map = new google.maps.Map(
+		  map = new google.maps.Map(
 		  document.getElementById('map'), {zoom: 12, center: {lat:49.2399,lng:-123.1251}});
 
 
 
-	  // The location of Uluru
-
+	  
 		var name = {{name|safe}}
 		var place_id = {{place_id|safe}}
 		var address = {{address|safe}}
@@ -164,17 +258,24 @@
 		var place_id = {{place_id|safe}}
 		var hours = {{hours|safe}}
 		var busyness = {{busyness|safe}}
+		 open = {{open|safe}}
 		var positions = []
 		
 		for(let x = 0;x<lat.length;x++){
 			positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lng[x])})
 		}
 
+
+		
 		function buildInfoWindowString(name,address,hours,busyness,x){
 			var s = '';
+			var pops = '';
 			var busy = busyness[x];
 			if(busy>=1000){
 				busy-=1000;
+				pops = "Currently "+busy+"% Busy";
+			}else{
+				pops = "Historically is "+busy+"% Busy Right Now"
 			}
 			if(busy>60){
 			s = 'red';
@@ -190,6 +291,7 @@
 			'<div id="body"'+
 			'<p> '+address[x]+' </p>'+
 			'<p> '+hours[x]+' </p>'+
+			'<p> '+pops+' </p> '+
 			'</div>'+
 			'</div>';
 	}
@@ -201,15 +303,13 @@
     	 
 	
 		
-	var icon = null
+	var icon = null;
 		
-
 	
-
 
 	function buildMarker(icona,width,height,position){
 
-		return new google.maps.Marker({icon:{url:icon, scaledSize:new google.maps.Size(width,height)},clickable:true,position:position,map:map});
+		return new google.maps.Marker({icon:{url:icona, scaledSize:new google.maps.Size(width,height)},clickable:true,position:position,map:map});
 
 	}
 
@@ -252,10 +352,8 @@
 			icon = getIcon(busy);
 			var temp = buildMarker(icon,30,30,positions[x]);
 			markers.push(temp);
-			hahaha+=1;
 			livemarkers.push(temp);
-						//placeholder for code block below else
-		}
+			}
 		
 		else{
 			//only historical data available
@@ -276,22 +374,38 @@
 
 		}
 		      showLiveOnly();
+			toggleStores();
 		}
 
+function filterOpen(){
+	for(let x = 0; x<markers.length;x++){
+		if(open[x]=='false'){
+			markers[x].setMap(null);
+		}
+	}
+}
 
+function checkState(){
+	if(flag==false){
+		filterOpen();
+	}
+}
 
-function showLiveOnly(){
+			function showLiveOnly(){
 																						
-								for(let x = 0; x<livemarkers.length;x++){
-									livemarkers[x].setMap(map);
-								}
-								for(let x = 0; x<historicalmarkers.length;x++){
-									historicalmarkers[x].setMap(null);
-								}
-								for(let x = 0; x<allstores.length;x++){
-									allstores[x].setMap(null);
-								}
-							}
+				for(let x = 0; x<livemarkers.length;x++){
+					livemarkers[x].setMap(map);
+				}
+				for(let x = 0; x<historicalmarkers.length;x++){
+					historicalmarkers[x].setMap(null);
+				}
+				for(let x = 0; x<allstores.length;x++){
+					allstores[x].setMap(null);
+				}
+			      state = "live";
+				checkState();
+
+			      							}
 
 
 
@@ -309,6 +423,9 @@ function showHistorical(){
 			for(let x = 0; x<allstores.length;x++){
 				allstores[x].setMap(null);
 			}
+			      state = "historical";
+	checkState();
+	
 
 		}
 
@@ -322,8 +439,47 @@ function showHistorical(){
 			for(let x = 0; x<allstores.length;x++){
 				allstores[x].setMap(map);
 			}
+			      state = "all";
+			      checkState();
+			      
+		}
+
+	function toggleStores(){
+
+		if(flag){
+		//hide closed stores
+
+			for(let x = 0; x<markers.length;x++){
+				if(open[x]=='false'){
+					markers[x].setMap(null);
+				}
+			}
+			flag = false;
+			filterOpen();
+		}
+		else{
+		//show closed stores
+
+			for(let x = 0; x<markers.length;x++){
+
+				if(open[x]=='false'){
+					markers[x].setMap(map);
+				}
+			}
+			flag = true
+			if(state=="live"){
+			      showLiveOnly();
+			      }
+			      if(state=="historical"){
+			      showHistorical();
+			      }
+			      if(state=="all"){
+			      showAll();
+			      }
 
 		}
+			      
+	}
 
 
 	

@@ -9,9 +9,13 @@ from map.models import Store
 import json
 
 def index(request):
-    days = ['wed','tue','wed','thu','fri','sat','sun']
-    day = days[time.localtime()[6]]
-    hour = time.localtime()[3]
+    days = ['mon','tue','wed','thu','fri','sat','sun']
+    t = time.localtime()
+    day = days[t[6]]
+    hour = t[3]
+    rawhour = t[3]
+    minute = t[4]
+    
     if(hour<10):
         hour = '0'+str(hour)
     else:
@@ -24,6 +28,7 @@ def index(request):
     context['lng'] = []
     context['hours'] = []
     context['busyness'] = []
+    context['open'] = []
     conn = sqlite3.connect(os.path.join(settings.BASE_DIR,'db1.sqlite3'))
     cur = conn.cursor()
     for s in Store.objects.all():
@@ -34,7 +39,8 @@ def index(request):
             context['lat'].append(s.lat)
             context['lng'].append(s.lng)
             cur.execute('''SELECT '''+day+'''hours FROM map_store WHERE id=?''', (s.id,))
-            context['hours'].append(cur.fetchone()[0])
+            hourstring = cur.fetchone()[0]
+            context['hours'].append(hourstring)
             live = s.live_busyness
             if(live==None):
                 cur.execute('''SELECT '''+day+hour+''' FROM map_store WHERE id=?''', (s.id,))
@@ -44,6 +50,33 @@ def index(request):
             else:
                 live+=1000
             context['busyness'].append(live)
+            #Monday: 7:00 AM – 10:00 PM
+            if(hourstring==None):
+                context['open'].append('false')
+            else:
+                spl = hourstring.split(": ")[1]
+                if('-' not in spl):
+                    context['open'].append('false')
+                else:
+                    spl = spl.split(' - ')
+                    o, c = spl[0],spl[1]
+                    oh = int(o.split(':')[0])
+                    om = int(o.split(':')[1][:2])
+                    ch = int(c.split(':')[0])
+                    cm = int(c.split(':')[1][:2])
+                    if(o[-2:]=='PM'):
+                        oh+=12
+                    if(c[-2:]=='PM'):
+                        ch+=12
+                    if(rawhour>oh and rawhour<ch):
+                        context['open'].append('true')
+                    elif(rawhour==oh and minute>=om):
+                        context['open'].append('true')
+                    elif(rawhour==ch and minute<cm):
+                        context['open'].append('true')
+                    else:
+                        context['open'].append('false')
+
 
 
 
