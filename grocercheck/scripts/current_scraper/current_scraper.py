@@ -12,12 +12,6 @@ def create_connection(db_file):
         print(e)
     return conn
 
-def get_all(conn):
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM map_store')
-    out = cur.fetchall()
-    return out
-
 def get_col_with_id(conn, col, i):
     cur = conn.cursor()
     cur.execute("SELECT {col} FROM map_store WHERE id = {i}".format(col=col, i=i))
@@ -32,11 +26,11 @@ def update_row(conn, data, row_id):
     try:
         if (data['current_popularity'] is None) == False:
             cur.execute("UPDATE map_store SET live_busyness=? WHERE id=?", (data['current_popularity'], row_id))
+            
         else:
             log.append("CANNOT RETRIEVE LIVE BUSYNESS FOR STORE id"+str(row_id))
     except:
         log.append("CURRENT POPULARITY KEY ERROR FOR STORE id"+str(row_id))
-
     conn.commit()
     return(log)
 
@@ -54,18 +48,24 @@ def get_formatted_addresses(country):
     for i in ids:
         address = get_col_with_id(conn, "address", i)[0][0]
         name = get_col_with_id(conn, "name", i)[0][0]
-        formatted_address_list.append("({name}) {address}, Canada".format(name=name, address=address, country = country))
-
+        formatted_address_list.append("({name}) {address}, {country}".format(name=name, address=address, country = country))
+    return formatted_address_list
 
 def update_current_popularity(formatted_address_list):
     for ind in range(len(formatted_address_list)):
-        place_data = lpt.get_populartimes_by_place_id(API_KEY, place_id_list[ind])
+        place_data = lpt.get_populartimes_by_formatted_address(formatted_address_list[ind])
         log = update_row(conn, place_data, (ind+1)) #sql id starts at 1
         BACKUP.write(json.dumps(place_data, indent=4))
         BACKUP.write("\r\n")
         for entry in log:
             LOG.write(entry)
             LOG.write("\r\n")
+
+def scrape(country):
+    try:
+        update_current_popularity(get_formatted_addresses("Canada"))
+    except:
+        LOG.write("ERROR IN update_current_popularity\r\n")
 
 
 #-------------------MAIN-----------------------------------#
@@ -75,3 +75,7 @@ BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/
 LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/current_scraper/current_scraper_log.txt", "a+")
 
 
+import time
+start = time.time()
+scrape("Canada")
+print("--- %s seconds ---" % (time.time() - start_time))
