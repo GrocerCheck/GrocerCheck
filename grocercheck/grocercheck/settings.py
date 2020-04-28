@@ -135,24 +135,13 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'America/Vancouver'
 CELERY_BEAT_SCHEDULE = {
         'taskone': {
-            'task': 'maps.tasks.taskone',
-            'schedule': crontab(minute='*/1'), #execute every minute
-            'args': ('TESTONESTRING') #arguments to pass to the function goes here
+            'task': 'update_current_popularity',
+            'schedule': 900, #execute every 15 min for now
+            #use 'schedule': crontab() for more complex schedules
+            'args': ("Canada", False, False) #arguments to pass to the function goes here
             }
 #repeat the same format as 'taskone' for other scheduled tasks
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

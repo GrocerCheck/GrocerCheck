@@ -7,9 +7,8 @@ import sys
 
 #--------GLOBAL VAR---------------#
 conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/db1.sqlite3")
-BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/current_scraper/raw_data.json", "a+")
-LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/current_scraper/current_scraper_log.txt", "a+")
-
+BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/logs/current_scraper_raw_data.json", "a+")
+LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/logs/current_scraper_log.txt", "a+")
 
 def create_connection(db_file):
     conn = None
@@ -29,11 +28,11 @@ def update_row(conn, data, row_id):
     log = []
     days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
     cur = conn.cursor()
-    
+
     try:
         if (data['current_popularity'] is None) == False:
             cur.execute("UPDATE map_store SET live_busyness=? WHERE id=?", (data['current_popularity'], row_id))
-            
+
         else:
             log.append("CANNOT RETRIEVE LIVE BUSYNESS FOR STORE id"+str(row_id))
     except:
@@ -58,22 +57,26 @@ def get_formatted_addresses(country):
         formatted_address_list.append("({name}) {address}, {country}".format(name=name, address=address, country = country))
     return formatted_address_list
 
-def update_current_popularity(formatted_address_list):
+def update_current_popularity(formatted_address_list, doBackup, doLog):
     global BACKUP
     global LOG
     for ind in range(len(formatted_address_list)):
         place_data = lpt.get_populartimes_by_formatted_address(formatted_address_list[ind])
         log = update_row(conn, place_data, (ind+1)) #sql id starts at 1
-        BACKUP.write(json.dumps(place_data, indent=4))
-        BACKUP.write("\r\n")
-        for entry in log:
-            LOG.write(entry)
-            LOG.write("\r\n")
 
-def run_scraper(country):
+        if doBackup == True:
+            BACKUP.write(json.dumps(place_data, indent=4))
+            BACKUP.write("\r\n")
+
+        if doLog == True:
+            for entry in log:
+                LOG.write(entry)
+                LOG.write("\r\n")
+
+def run_scraper(country, doBackup, doLog):
     global LOG
     try:
-        update_current_popularity(get_formatted_addresses("Canada"))
+        update_current_popularity(get_formatted_addresses(country), doBackup, doLog)
     except:
         LOG.write("ERROR IN update_current_popularity\r\n")
 
