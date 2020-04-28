@@ -15,12 +15,12 @@ def create_connection(db_file):
 def get_all(conn):
     cur = conn.cursor()
     cur.execute('SELECT * FROM map_store')
-    rows = cur.fetchall()
-    return rows
+    out = cur.fetchall()
+    return out
 
-def get_columns(conn, col):
+def get_col_with_id(conn, col, i):
     cur = conn.cursor()
-    cur.execute("SELECT place_id FROM map_store")
+    cur.execute("SELECT {col} FROM map_store WHERE id = {i}".format(col=col, i=i))
     out = cur.fetchall()
     return out
 
@@ -40,6 +40,23 @@ def update_row(conn, data, row_id):
     conn.commit()
     return(log)
 
+def get_valid_id(conn):
+    #returns list of ids if the store has a name and address
+    cur = conn.cursor()
+    cur.execute("SELECT map_store.id FROM map_store WHERE address IS NOT NULL AND name IS NOT NULL")
+    ids = cur.fetchall()
+    return ids
+
+def get_formatted_addresses(country):
+    ids = get_valid_id(conn)
+    ids = [x[0] for x in ids]
+    formatted_address_list = []
+    for i in ids:
+        address = get_col_with_id(conn, "address", i)[0][0]
+        name = get_col_with_id(conn, "name", i)[0][0]
+        formatted_address_list.append("({name}) {address}, Canada".format(name=name, address=address, country = country))
+
+
 def update_current_popularity(formatted_address_list):
     for ind in range(len(formatted_address_list)):
         place_data = lpt.get_populartimes_by_place_id(API_KEY, place_id_list[ind])
@@ -56,11 +73,5 @@ def update_current_popularity(formatted_address_list):
 conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/db1.sqlite3")
 BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/current_scraper/raw_data.json", "a+")
 LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/current_scraper/current_scraper_log.txt", "a+")
-
-
-address_list = get_columns(conn, "address")
-address_list = [pid[0] for pid in address_list]
-
-print(address_list)
 
 
