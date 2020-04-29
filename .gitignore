@@ -3,7 +3,7 @@ grocercheck/map/templates/config.js
 
 # python pycs
 *.pyc
-
+__pycache__/
 # Prerequisites
 *.d
 
