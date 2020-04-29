@@ -75,7 +75,7 @@ def update_current_popularity(formatted_address_list, doBackup, doLog, conn):
 
 def run_scraper(country, doBackup, doLog):
     global LOG
-    conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/test.sqlite3")
+    conn = create_connection("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3")
     try:
         update_current_popularity(get_formatted_addresses(country, conn), doBackup, doLog, conn)
     except:
