@@ -237,7 +237,7 @@ input:checked + .slider:before {
 		var allstores = []
 		var markers = []
 		var map;
-		var open = [];
+		var openn;
 		var flag = true;
 		var state = "live";
 
@@ -258,9 +258,8 @@ input:checked + .slider:before {
 		var place_id = {{place_id|safe}}
 		var hours = {{hours|safe}}
 		var busyness = {{busyness|safe}}
-		 open = {{open|safe}}
+		 openn = {{openn|safe}}
 		var positions = []
-		
 		for(let x = 0;x<lat.length;x++){
 			positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lng[x])})
 		}
@@ -271,7 +270,18 @@ input:checked + .slider:before {
 			var s = '';
 			var pops = '';
 			var busy = busyness[x];
-			if(busy>=1000){
+			var statusstring = '';
+			var t = "true";;
+			if(openn[x]==1){
+				statusstring = 'Open';
+			}
+			else{
+				statusstring = 'Closed';
+			}
+			 if(busy==-1){
+				pops = "No Popularity Data Available";
+			}
+			else if(busy>=1000){
 				busy-=1000;
 				pops = "Currently "+busy+"% Busy";
 			}else{
@@ -283,14 +293,24 @@ input:checked + .slider:before {
 		else if(busy>30){
 			s = 'goldenrod';
 		}
-		else{
+			else if(busy>=0){
 			s = 'limegreen';
 		}
+			else{
+			s = 'grey';
+			}
+
+		if(openn[x]==0){
+			pops='';
+			s='grey';
+		}
+
 		return '<div id="content">' + 
 			'<h1 style="color:'+s+';"> '+name[x]+' </h1>' + 
 			'<div id="body"'+
 			'<p> '+address[x]+' </p>'+
 			'<p> '+hours[x]+' </p>'+
+			'<p> '+statusstring+' </p>'+
 			'<p> '+pops+' </p> '+
 			'</div>'+
 			'</div>';
@@ -325,15 +345,25 @@ input:checked + .slider:before {
 
 		
 	function getIcon(x){
-		if(x>60){
+		if(openn[x]==0){
+			return grey;
+		}
+		let b = busyness[x];
+		if(busyness[x]>=1000){
+			b-=1000;
+		}
+		if(b>60){
 				return red;
 			}
-			else if(x>30){
+			else if(b>30){
 				return yellow;
 			}
-			else{
+		else if(b>=0){
 				return green;
-			}	
+			}
+		else{
+			return grey;
+		}
 	}
 
 	var infowindow = new google.maps.InfoWindow();
@@ -349,7 +379,7 @@ input:checked + .slider:before {
 		else if(busyness[x]>=1000){
         //live data available
 			var busy = busyness[x]-1000;
-			icon = getIcon(busy);
+			icon = getIcon(x);
 			var temp = buildMarker(icon,30,30,positions[x]);
 			markers.push(temp);
 			livemarkers.push(temp);
@@ -357,7 +387,7 @@ input:checked + .slider:before {
 		
 		else{
 			//only historical data available
-			icon = getIcon(busyness[x]);
+			icon = getIcon(x);
 			var temp = buildMarker(icon,20,20,positions[x])
 			markers.push(temp)
 			historicalmarkers.push(temp)
@@ -379,14 +409,17 @@ input:checked + .slider:before {
 
 function filterOpen(){
 	for(let x = 0; x<markers.length;x++){
-		if(open[x]=='false'){
+		if(openn[x]==0){
 			markers[x].setMap(null);
 		}
-	}
+			}
 }
 
 function checkState(){
 	if(flag==false){
+		filterOpen();
+	}
+	if(flag==true && state=="live"){
 		filterOpen();
 	}
 }
@@ -450,19 +483,18 @@ function showHistorical(){
 		//hide closed stores
 
 			for(let x = 0; x<markers.length;x++){
-				if(open[x]=='false'){
+				if(openn[x]==0){
 					markers[x].setMap(null);
 				}
 			}
 			flag = false;
-			filterOpen();
-		}
+			}
 		else{
 		//show closed stores
 
 			for(let x = 0; x<markers.length;x++){
 
-				if(open[x]=='false'){
+				if(openn[x]==0){
 					markers[x].setMap(map);
 				}
 			}

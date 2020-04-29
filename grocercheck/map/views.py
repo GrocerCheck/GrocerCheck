@@ -28,7 +28,7 @@ def index(request):
     context['lng'] = []
     context['hours'] = []
     context['busyness'] = []
-    context['open'] = []
+    context['openn'] = []
     conn = sqlite3.connect(os.path.join(settings.BASE_DIR,'db1.sqlite3'))
     cur = conn.cursor()
     for s in Store.objects.all():
@@ -52,13 +52,13 @@ def index(request):
             context['busyness'].append(live)
             #Monday: 7:00 AM – 10:00 PM
             if(hourstring==None):
-                context['open'].append('false')
+                context['openn'].append(0)
             else:
                 spl = hourstring.split(": ")[1]
-                if('-' not in spl):
-                    context['open'].append('false')
+                if('–' not in spl):
+                    context['openn'].append(0)
                 else:
-                    spl = spl.split(' - ')
+                    spl = spl.split(' – ')
                     o, c = spl[0],spl[1]
                     oh = int(o.split(':')[0])
                     om = int(o.split(':')[1][:2])
@@ -69,13 +69,13 @@ def index(request):
                     if(c[-2:]=='PM'):
                         ch+=12
                     if(rawhour>oh and rawhour<ch):
-                        context['open'].append('true')
+                        context['openn'].append(1)
                     elif(rawhour==oh and minute>=om):
-                        context['open'].append('true')
+                        context['openn'].append(1)
                     elif(rawhour==ch and minute<cm):
-                        context['open'].append('true')
+                        context['openn'].append(1)
                     else:
-                        context['open'].append('false')
+                        context['openn'].append(0)
 
 
 
