@@ -7,8 +7,8 @@ import sys
 
 #--------GLOBAL VAR---------------#
 
-BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/logs/current_scraper_raw_data.json", "a+")
-LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/logs/current_scraper_log.txt", "a+")
+BACKUP = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_raw_data.json", "a+")
+LOG = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_log.txt", "a+")
 
 def create_connection(db_file):
     conn = None
@@ -43,7 +43,7 @@ def update_row(conn, data, row_id):
 def get_valid_id(conn):
     #returns list of ids if the store has a name and address
     cur = conn.cursor()
-    cur.execute("SELECT map_store.id FROM map_store WHERE address IS NOT NULL AND name IS NOT NULL")
+    cur.execute("SELECT map_store.id FROM map_store WHERE address IS NOT NULL AND name IS NOT NULL AND fri00 IS NOT NULL")
     ids = cur.fetchall()
     return ids
 

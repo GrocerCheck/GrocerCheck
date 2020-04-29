@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 from celery.schedules import crontab
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -23,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '$*7$lu*br%(vzw%o$d289!5236)6%5(lz_3s((36-9=4^8w$@p'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# SECURITY WARNING: don't run with debug turned on in production
 DEBUG = True
 
 ALLOWED_HOSTS = ['dev.grocercheck.ca','grocercheck.ca', 'home.grocercheck.ca', 'test.grocercheck.ca', 'vancouver.grocercheck.ca','52.10.195.42','127.0.0.1']
@@ -40,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'map.apps.MapConfig',
     'django_celery_beat',
-    ]
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -127,20 +126,27 @@ STATIC_ROOT = '/opt/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/
 
 #----------------------------------CELERY----------------------------------------------
 
-CELERY_BROKER_URL = 'redis://localhost:6379'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'America/Vancouver'
+
+
 CELERY_BEAT_SCHEDULE = {
-        'taskone': {
-            'task': 'update_current_popularity',
-            'schedule': crontab(minute="*/30", hour="6-23",), #every 30 minutes between 6am-11pm, everyday
-            #use 'schedule': crontab() for more complex schedules
-            'args': ("Canada", False, False), #arguments to pass to the function goes here
-            }
-#repeat the same format as 'taskone' for other scheduled tasks
+
+    'testtask':{
+        'task': 'okurkiddingme',
+        'schedule': 10,
+    },
+    #'UPDATE_POPULARITY':{
+    #'task': 'update_current_popularity',
+    #'schedule': crontab(minute="*/30", hour="6-23",), #every 30 minutes between 6am-11pm, everyday
+    ##use 'schedule': crontab() for more complex schedules
+    #'args': ("Canada", False, False), #arguments to pass to the function goes here
+    #}
+##repeat the same format as 'taskone' for other scheduled tasks
 }
 
 
