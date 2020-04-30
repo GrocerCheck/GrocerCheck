@@ -1,22 +1,22 @@
- {% load static %}
+{% load static %}
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <style>
-       /* Set the size of the div element that contains the map */
-      #map {
-        height: 400px;  /* The height is 400 pixels */
-        width: 100%;  /* The width is the width of the web page */
-       }
+	<head>
+		<style>
+/* Set the size of the div element that contains the map */
+#map {
+	height: 400px;  /* The height is 400 pixels */
+	width: 100%;  /* The width is the width of the web page */
+}
       #radio{
-			align-items: center;
-	margin-bottom: 0px;
-	      }
+	      align-items: center;
+	      margin-bottom: 0px;
+      }
       .container{
 	      display:inline;
 	      position: relative;
-	      	      margin-bottom: 12px;
+	      margin-bottom: 12px;
 	      cursor: pointer;
 	      font-size: 22px;
 	      -webkit-user-select: none;
@@ -39,7 +39,7 @@
 	      width: 25px;
 	      background-color: #eee;
 	      border-radius: 50%;
-	            }
+      }
       .container:hover input ~ .checkmark {
 	      background-color: #ccc;
       }
@@ -76,241 +76,241 @@
 	      display:inline;
 	      text-align: center;
       }
-	#buttondiv{
-		margin-left:0px;
-		padding:0px;
-	}
-	ul#buttonlabels{
-		margin-bottom:0px;
-		padding-bottom:0px;
-		text-align: center;
-	}
-	#logo{
-		display:block;
-	margin-left: auto;
-	margin-right: auto;
-	width:292px;
-	}
-	ul#buttons{
-		text-align: center;
-	}
+      #buttondiv{
+	      margin-left:0px;
+	      padding:0px;
+      }
+      ul#buttonlabels{
+	      margin-bottom:0px;
+	      padding-bottom:0px;
+	      text-align: center;
+      }
+      #logo{
+	      display:block;
+	      margin-left: auto;
+	      margin-right: auto;
+	      width:292px;
+      }
+      ul#buttons{
+	      text-align: center;
+      }
 
-.switch {
-  position: relative;
-  display: inline-block;
-    width: 60px;
-  height: 34px;
-}
+      .switch {
+	      position: relative;
+	      display: inline-block;
+	      width: 60px;
+	      height: 34px;
+      }
 
-.switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+      .switch input {
+	      opacity: 0;
+	      width: 0;
+	      height: 0;
+      }
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+      .slider {
+	      position: absolute;
+	      cursor: pointer;
+	      top: 0;
+	      left: 0;
+	      right: 0;
+	      bottom: 0;
+	      background-color: #ccc;
+	      -webkit-transition: .4s;
+	      transition: .4s;
+      }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+      .slider:before {
+	      position: absolute;
+	      content: "";
+	      height: 26px;
+	      width: 26px;
+	      left: 4px;
+	      bottom: 4px;
+	      background-color: white;
+	      -webkit-transition: .4s;
+	      transition: .4s;
+      }
 
-input:checked + .slider {
-  background-color: #3AB64B;
-}
+      input:checked + .slider {
+	      background-color: #3AB64B;
+      }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #3AB64B;
-}
+      input:focus + .slider {
+	      box-shadow: 0 0 1px #3AB64B;
+      }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
+      input:checked + .slider:before {
+	      -webkit-transform: translateX(26px);
+	      -ms-transform: translateX(26px);
+	      transform: translateX(26px);
+      }
 
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
+      /* Rounded sliders */
+      .slider.round {
+	      border-radius: 34px;
+      }
 
-.slider.round:before {
-  border-radius: 50%;
-}
-	  #toggle{
-		margin-top:20px;
-	  }
-
-
-    </style>
-
-    <link rel='icon' type='image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
-
-  </head>
-  <body>
+      .slider.round:before {
+	      border-radius: 50%;
+      }
+      #toggle{
+	      margin-top:20px;
+      }
 
 
-<script>
+		</style>
 
-	</script>
+		<link rel='icon' type='image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
 
-	 
-	  	  
-					
-				 
-				
+	</head>
+	<body>
 
-							
-											  
-					
-						<div id="logo">
-						<img src="{% static "images/GrocerCheck-01.png" %}" width="292" height="80">
-						</div>
-						<ul id="buttonlabels" style="color:forestgreen">
 
-						 <div id="radio">
+		<script>
 
-					<b>						
-						<li>Live Data Only </li>
-							<li> Live and Historical Data</li>
-							<li> All Stores </li>
-									</b>
-						</ul>
-											
-					</div>
-						<div id="buttondiv">
-						  <ul id="buttons">
-											
-							  <li><label class="container">  
+		</script>
+
+
+
+
+
+
+
+
+
+
+		<div id="logo">
+			<img src="{% static "images/GrocerCheck-01.png" %}" width="292" height="80">
+		</div>
+		<ul id="buttonlabels" style="color:forestgreen">
+
+			<div id="radio">
+
+				<b>
+					<li>Live Data Only </li>
+					<li> Live and Historical Data</li>
+					<li> All Stores </li>
+				</b>
+		</ul>
+
+			</div>
+			<div id="buttondiv">
+				<ul id="buttons">
+
+					<li><label class="container">
 							<input onclick="showLiveOnly()" text-align type="radio" name="visibility" id="live" checked="checked" >
 							<span class="checkmark"></span>
-						
-
-
-								  </label></li>					
-								  <li><label class="container">     
-							<input onclick="showHistorical()"  type="radio"  name="visibility" id="historical">
-							<span class="checkmark"></span>
-									  </label></li>
-
-									  <li><label class="container">           
-							<input onclick="showAll()" type="radio" name="visibility" id="all" >
-							<span class="checkmark"></span>
-						</label>
-							<li>
-								<div id="toggle">
-									<label class="switch">
-										<input onclick="toggleStores()" type=checkbox>
-										<span class="slider round"></span>
-										
-									</label>
-									<p style="color:forestgreen; margin-bottom:0px;"><b>Show Closed Stores</b></p>
-								</div>
-							</li>
-						  </ul>
-						</div>
-					  					
-
-
-	
-	    <!--The div element for the map -->
-	    <div id="map"></div>
-	    
-	    <script>
-
-		var livemarkers = []
-		var hahaha = 0;
-		var historicalmarkers = []
-		var allstores = []
-		var markers = []
-		var map;
-		var openn;
-		var flag = true;
-		var state = "live";
-
-
-		function initMap() {
-
-		  map = new google.maps.Map(
-		  document.getElementById('map'), {zoom: 12, center: {lat:49.2399,lng:-123.1251}});
 
 
 
-	  
-		var name = {{name|safe}}
-		var place_id = {{place_id|safe}}
-		var address = {{address|safe}}
-		var lat = {{lat|safe}}
-		var lng = {{lng|safe}}
-		var place_id = {{place_id|safe}}
-		var hours = {{hours|safe}}
-		var busyness = {{busyness|safe}}
-		 openn = {{openn|safe}}
-		var positions = []
-		for(let x = 0;x<lat.length;x++){
-			positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lng[x])})
+						</label></li>
+						<li><label class="container">
+								<input onclick="showHistorical()"  type="radio"  name="visibility" id="historical">
+								<span class="checkmark"></span>
+							</label></li>
+
+							<li><label class="container">
+									<input onclick="showAll()" type="radio" name="visibility" id="all" >
+									<span class="checkmark"></span>
+								</label>
+								<li>
+									<div id="toggle">
+										<label class="switch">
+											<input onclick="toggleStores()" type=checkbox>
+											<span class="slider round"></span>
+
+										</label>
+										<p style="color:forestgreen; margin-bottom:0px;"><b>Show Closed Stores</b></p>
+									</div>
+								</li>
+				</ul>
+			</div>
+
+
+
+
+			<!--The div element for the map -->
+			<div id="map"></div>
+
+			<script>
+
+				var livemarkers = []
+var hahaha = 0;
+var historicalmarkers = []
+var allstores = []
+var markers = []
+var map;
+var openn;
+var flag = true;
+var state = "live";
+
+
+function initMap() {
+
+	map = new google.maps.Map(
+		document.getElementById('map'), {zoom: 12, center: {lat:49.2399,lng:-123.1251}});
+
+
+
+
+	var name = {{name|safe}}
+	var place_id = {{place_id|safe}}
+	var address = {{address|safe}}
+	var lat = {{lat|safe}}
+	var lng = {{lng|safe}}
+	var place_id = {{place_id|safe}}
+	var hours = {{hours|safe}}
+	var busyness = {{busyness|safe}}
+	openn = {{openn|safe}}
+	var positions = []
+	for(let x = 0;x<lat.length;x++){
+		positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lng[x])})
+	}
+
+
+
+	function buildInfoWindowString(name,address,hours,busyness,x){
+		var s = '';
+		var pops = '';
+		var busy = busyness[x];
+		var statusstring = '';
+		var t = "true";;
+		if(openn[x]==1){
+			statusstring = 'Open';
 		}
-
-
-		
-		function buildInfoWindowString(name,address,hours,busyness,x){
-			var s = '';
-			var pops = '';
-			var busy = busyness[x];
-			var statusstring = '';
-			var t = "true";;
-			if(openn[x]==1){
-				statusstring = 'Open';
-			}
-			else{
-				statusstring = 'Closed';
-			}
-			 if(busy==-1){
-				pops = "No Popularity Data Available";
-			}
-			else if(busy>=1000){
-				busy-=1000;
-				pops = "Currently "+busy+"% Busy";
-			}else{
-				pops = "Historically is "+busy+"% Busy Right Now"
-			}
-			if(busy>60){
+		else{
+			statusstring = 'Closed';
+		}
+		if(busy==-1){
+			pops = "No Popularity Data Available";
+		}
+		else if(busy>=1000){
+			busy-=1000;
+			pops = "Currently "+busy+"% Busy";
+		}else{
+			pops = "Historically is "+busy+"% Busy Right Now"
+		}
+		if(busy>60){
 			s = 'red';
 		}
 		else if(busy>30){
 			s = 'goldenrod';
 		}
-			else if(busy>=0){
+		else if(busy>=0){
 			s = 'limegreen';
 		}
-			else{
+		else{
 			s = 'grey';
-			}
+		}
 
 		if(openn[x]==0){
 			pops='';
 			s='grey';
 		}
 
-		return '<div id="content">' + 
-			'<h1 style="color:'+s+';"> '+name[x]+' </h1>' + 
+		return '<div id="content">' +
+			'<h1 style="color:'+s+';"> '+name[x]+' </h1>' +
 			'<div id="body"'+
 			'<p> '+address[x]+' </p>'+
 			'<p> '+hours[x]+' </p>'+
@@ -324,12 +324,12 @@ input:checked + .slider:before {
 	var yellow = "{% static 'images/yellowmarker.png' %}"
 	var red = "{% static 'images/redmarker.png' %}"
 	var grey = "{% static 'images/greymarker.png' %}"
-    	 
-	
-		
+
+
+
 	var icon = null;
-		
-	
+
+
 
 	function buildMarker(icona,width,height,position){
 
@@ -337,17 +337,17 @@ input:checked + .slider:before {
 
 	}
 
-		function openInfoWindow(i){
-				if(infowindow){
-				infowindow.close();
-			}
-				infowindow.setContent(buildInfoWindowString(name,address,hours,busyness,i));
-				infowindow.open(map,temp);
+	function openInfoWindow(i){
+		if(infowindow){
+			infowindow.close();
+		}
+		infowindow.setContent(buildInfoWindowString(name,address,hours,busyness,i));
+		infowindow.open(map,temp);
 
 
-			}
+	}
 
-		
+
 	function getIcon(x){
 		if(openn[x]==0){
 			return grey;
@@ -357,14 +357,14 @@ input:checked + .slider:before {
 			b-=1000;
 		}
 		if(b>60){
-				return red;
-			}
-			else if(b>30){
-				return yellow;
-			}
+			return red;
+		}
+		else if(b>30){
+			return yellow;
+		}
 		else if(b>=0){
-				return green;
-			}
+			return green;
+		}
 		else{
 			return grey;
 		}
@@ -372,51 +372,51 @@ input:checked + .slider:before {
 
 	var infowindow = new google.maps.InfoWindow();
 	for(let x = 0; x<positions.length;x++){
-		 
+
 		if(busyness[x]==-1){
 			//No data available
-			var temp = buildMarker(grey,20,20,positions[x])	
+			var temp = buildMarker(grey,20,20,positions[x])
 			markers.push(temp)
 			allstores.push(temp);
-		      
-			}
+
+		}
 		else if(busyness[x]>=1000){
-        //live data available
+			//live data available
 			var busy = busyness[x]-1000;
 			icon = getIcon(x);
 			var temp = buildMarker(icon,30,30,positions[x]);
 			markers.push(temp);
 			livemarkers.push(temp);
-			}
-		
+		}
+
 		else{
 			//only historical data available
 			icon = getIcon(x);
 			var temp = buildMarker(icon,20,20,positions[x])
 			markers.push(temp)
 			historicalmarkers.push(temp)
-			}
+		}
 
-		
-	
+
+
 	}
-		for(let k = 0; k<markers.length;k++){
+	for(let k = 0; k<markers.length;k++){
 		markers[k].addListener('click',function() {
 			infowindow.setContent(buildInfoWindowString(name,address,hours,busyness,k));
 			infowindow.open(map,markers[k]);
-			      		});
+		});
 
-		}
-		      showLiveOnly();
-			toggleStores();
-		}
+	}
+	showLiveOnly();
+	toggleStores();
+}
 
 function filterOpen(){
 	for(let x = 0; x<markers.length;x++){
 		if(openn[x]==0){
 			markers[x].setMap(null);
 		}
-			}
+	}
 }
 
 function checkState(){
@@ -428,106 +428,106 @@ function checkState(){
 	}
 }
 
-			function showLiveOnly(){
-																						
-				for(let x = 0; x<livemarkers.length;x++){
-					livemarkers[x].setMap(map);
-				}
-				for(let x = 0; x<historicalmarkers.length;x++){
-					historicalmarkers[x].setMap(null);
-				}
-				for(let x = 0; x<allstores.length;x++){
-					allstores[x].setMap(null);
-				}
-			      state = "live";
-				checkState();
+function showLiveOnly(){
 
-			      							}
+	for(let x = 0; x<livemarkers.length;x++){
+		livemarkers[x].setMap(map);
+	}
+	for(let x = 0; x<historicalmarkers.length;x++){
+		historicalmarkers[x].setMap(null);
+	}
+	for(let x = 0; x<allstores.length;x++){
+		allstores[x].setMap(null);
+	}
+	state = "live";
+	checkState();
+
+}
 
 
 
 function showHistorical(){
 
-		
-			for(let x = 0; x<livemarkers.length;x++){
-				livemarkers[x].setMap(map);
-			}
-			for(let x = 0; x<historicalmarkers.length;x++){
+
+	for(let x = 0; x<livemarkers.length;x++){
+		livemarkers[x].setMap(map);
+	}
+	for(let x = 0; x<historicalmarkers.length;x++){
 
 
-				historicalmarkers[x].setMap(map);
-			}
-			for(let x = 0; x<allstores.length;x++){
-				allstores[x].setMap(null);
-			}
-			      state = "historical";
+		historicalmarkers[x].setMap(map);
+	}
+	for(let x = 0; x<allstores.length;x++){
+		allstores[x].setMap(null);
+	}
+	state = "historical";
 	checkState();
-	
 
-		}
 
-		function showAll(){
-			for(let x = 0; x<livemarkers.length;x++){
-				livemarkers[x].setMap(map);
-			}
-			for(let x = 0; x<historicalmarkers.length;x++){
-				historicalmarkers[x].setMap(map);
-			}
-			for(let x = 0; x<allstores.length;x++){
-				allstores[x].setMap(map);
-			}
-			      state = "all";
-			      checkState();
-			      
-		}
+}
 
-	function toggleStores(){
+function showAll(){
+	for(let x = 0; x<livemarkers.length;x++){
+		livemarkers[x].setMap(map);
+	}
+	for(let x = 0; x<historicalmarkers.length;x++){
+		historicalmarkers[x].setMap(map);
+	}
+	for(let x = 0; x<allstores.length;x++){
+		allstores[x].setMap(map);
+	}
+	state = "all";
+	checkState();
 
-		if(flag){
+}
+
+function toggleStores(){
+
+	if(flag){
 		//hide closed stores
 
-			for(let x = 0; x<markers.length;x++){
-				if(openn[x]==0){
-					markers[x].setMap(null);
-				}
+		for(let x = 0; x<markers.length;x++){
+			if(openn[x]==0){
+				markers[x].setMap(null);
 			}
-			flag = false;
-			}
-		else{
+		}
+		flag = false;
+	}
+	else{
 		//show closed stores
 
-			for(let x = 0; x<markers.length;x++){
+		for(let x = 0; x<markers.length;x++){
 
-				if(openn[x]==0){
-					markers[x].setMap(map);
-				}
+			if(openn[x]==0){
+				markers[x].setMap(map);
 			}
-			flag = true
-			if(state=="live"){
-			      showLiveOnly();
-			      }
-			      if(state=="historical"){
-			      showHistorical();
-			      }
-			      if(state=="all"){
-			      showAll();
-			      }
-
 		}
-			      
+		flag = true
+		if(state=="live"){
+			showLiveOnly();
+		}
+		if(state=="historical"){
+			showHistorical();
+		}
+		if(state=="all"){
+			showAll();
+		}
+
 	}
 
+}
 
-	
-    </script>
-    <!--Load the API from the specified URL
-    * The async attribute allows the browser to render the page while the API loads
-    * The key parameter will contain your own API key (which is not needed for this tutorial)
-    * The callback parameter executes the initMap() function
-    -->
-    <script async defer
-         
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqwU_hVg2OJ3zB7FOORGzGIdsWnXdXT-w&callback=initMap">
-    </script>
-  </body>
+
+
+			</script>
+		<!--Load the API from the specified URL
+	  * The async attribute allows the browser to render the page while the API loads
+	  * The key parameter will contain your own API key (which is not needed for this tutorial)
+	  * The callback parameter executes the initMap() function
+		-->
+		<script async defer
+
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqwU_hVg2OJ3zB7FOORGzGIdsWnXdXT-w&callback=initMap">
+		</script>
+	</body>
 </html>
