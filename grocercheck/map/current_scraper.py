@@ -3,8 +3,9 @@ import sqlite3
 import livepopulartimes as lpt
 import json
 import sys
-
-
+import datetime
+import time
+import pytz
 #--------GLOBAL VAR---------------#
 
 BACKUP = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_raw_data.json", "a+")
@@ -40,16 +41,57 @@ def update_row(conn, data, row_id):
     conn.commit()
     return(log)
 
-def get_valid_id(conn):
+def get_valid_open_ids(conn):
+    vancouver_timezone = pytz.timezone('America/Vancouver')
+    vancouver_time = datetime.datetime.now(vancouver_timezone)
+    localhour = vancouver_time.hour
+    localminute = vancouver_time.minute
+    weekday = vancouver_time.weekday()
+
+    days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+    cur = conn.cursor()
+    cur.execute("SELECT id, {day}hours FROM map_store where address IS NOT NULL AND name IS NOT NULL AND fri00 IS NOT NULL".format(day=days[weekday]))
+    id_with_hours = cur.fetchall()
+    ids = []
+
+    for pair in range(len(id_with_hours)):
+        i = id_with_hours[pair][0]
+        hours = id_with_hours[pair][1]
+        if hours==None:
+            continue
+        else:
+            hours = hours.split(": ")[1]
+            if '24' in hours:
+                ids.append(i) #open 24h
+            elif '–' not in hours:
+                continue  #only closed (24h already caught)
+            else:
+                hours = hours.split(" – ")
+                oh, om = int(hours[0].split(':')[0]), int(hours[0].split(':')[1][:2]) #opening hour, opening minute
+                ch, cm = int(hours[1].split(':')[0]), int(hours[1].split(':')[1][:2]) #opening hour, opening minute
+                if hours[0][-2] == "PM":
+                    oh += 12
+                if hours[1][-2] == "PM":
+                    ch += 12
+                if (localhour > oh and oh < ch):
+                    ids.append(i)
+                elif (localhour == oh and localminute >= om):
+                    ids.append(i)
+                elif (localhour==ch and localminute <= cm):
+                    ids.append(i)
+    return ids
+
+
+
+def get_valid_ids(conn):
     #returns list of ids if the store has a name and address
     cur = conn.cursor()
-    cur.execute("SELECT map_store.id FROM map_store WHERE address IS NOT NULL AND name IS NOT NULL AND fri00 IS NOT NULL")
+    cur.execute("SELECT map_store.id, FROM map_store WHERE address IS NOT NULL AND name IS NOT NULL AND fri00 IS NOT NULL")
     ids = cur.fetchall()
     return ids
 
 def get_formatted_addresses(country, conn):
-    ids = get_valid_id(conn)
-    ids = [x[0] for x in ids]
+    ids = get_valid_open_ids(conn)
     formatted_address_list = []
     for i in ids:
         address = get_col_with_id(conn, "address", i)[0][0]
