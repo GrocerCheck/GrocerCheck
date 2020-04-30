@@ -15,7 +15,7 @@ def index(request):
     hour = t[3]
     rawhour = t[3]
     minute = t[4]
-    
+
     if(hour<10):
         hour = '0'+str(hour)
     else:
@@ -55,7 +55,9 @@ def index(request):
                 context['openn'].append(0)
             else:
                 spl = hourstring.split(": ")[1]
-                if('–' not in spl):
+                if ('24' in spl):
+                    context['openn'].append(1)
+                elif ('–' not in spl):
                     context['openn'].append(0)
                 else:
                     spl = spl.split(' – ')
