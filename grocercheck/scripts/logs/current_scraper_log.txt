@@ -1,0 +1,1 @@
+ERROR IN update_current_popularity
