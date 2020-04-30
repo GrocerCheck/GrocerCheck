@@ -38,7 +38,6 @@ def update_row(conn, data, row_id):
     except:
         log.append("CURRENT POPULARITY KEY ERROR FOR STORE id"+str(row_id))
     conn.commit()
-    print(data['name'], row_id, "complete")
     return(log)
 
 def get_valid_id(conn):
@@ -85,6 +84,5 @@ def run_scraper(country, doBackup, doLog):
     except:
         LOG.write("ERROR IN update_current_popularity\r\n")
 
-run_scraper('Canada', False, False)
 
 
