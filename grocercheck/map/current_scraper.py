@@ -41,7 +41,7 @@ def update_row(conn, data, row_id):
     conn.commit()
     return(log)
 
-def get_valid_open_ids(conn):
+def get_open_closed_ids(conn):
     vancouver_timezone = pytz.timezone('America/Vancouver')
     vancouver_time = datetime.datetime.now(vancouver_timezone)
     localhour = vancouver_time.hour
@@ -52,7 +52,8 @@ def get_valid_open_ids(conn):
     cur = conn.cursor()
     cur.execute("SELECT id, {day}hours FROM map_store where address IS NOT NULL AND name IS NOT NULL AND fri00 IS NOT NULL".format(day=days[weekday]))
     id_with_hours = cur.fetchall()
-    ids = []
+    open_ids= []
+    closed_ids = []
 
     for pair in range(len(id_with_hours)):
         i = id_with_hours[pair][0]
@@ -62,9 +63,9 @@ def get_valid_open_ids(conn):
         else:
             hours = hours.split(": ")[1]
             if '24' in hours:
-                ids.append(i) #open 24h
+                open_ids.append(i) #open 24h
             elif '–' not in hours:
-                continue  #only closed (24h already caught)
+                closed_ids.append(i)  #only closed (24h already caught)
             else:
                 hours = hours.split(" – ")
                 oh, om = int(hours[0].split(':')[0]), int(hours[0].split(':')[1][:2]) #opening hour, opening minute
@@ -74,38 +75,42 @@ def get_valid_open_ids(conn):
                 if hours[1][-2] == "PM":
                     ch += 12
                 if (localhour > oh and oh < ch):
-                    ids.append(i)
+                    open_ids.append(i)
                 elif (localhour == oh and localminute >= om):
-                    ids.append(i)
+                    open_ids.append(i)
                 elif (localhour==ch and localminute <= cm):
-                    ids.append(i)
-    return ids
-
+                    open_ids.append(i)
+                else:
+                    closed_ids.append(i)
+    return (open_ids, closed_ids)
 
 
 def get_valid_ids(conn):
     #returns list of ids if the store has a name and address
     cur = conn.cursor()
-    cur.execute("SELECT map_store.id, FROM map_store WHERE address IS NOT NULL AND name IS NOT NULL AND fri00 IS NOT NULL")
+    cur.execute("SELECT map_store.id FROM map_store WHERE address IS NOT NULL AND name IS NOT NULL AND fri00 IS NOT NULL")
     ids = cur.fetchall()
     return ids
 
 def get_formatted_addresses(country, conn):
-    ids = get_valid_open_ids(conn)
+    ids = get_open_closed_ids(conn)
+    open_ids = ids[0]
     formatted_address_list = []
-    for i in ids:
+    for i in open_ids:
         address = get_col_with_id(conn, "address", i)[0][0]
         name = get_col_with_id(conn, "name", i)[0][0]
         formatted_address_list.append("({name}) {address}, {country}".format(name=name, address=address, country = country))
     return (formatted_address_list, ids)
+
 def update_current_popularity(addr_and_id, doBackup, doLog, conn):
     formatted_address_list = addr_and_id[0]
-    ids = addr_and_id[1]
+    open_ids = addr_and_id[1][0]
+    closed_ids = addr_and_id[1][0]
     global BACKUP
     global LOG
     for ind in range(len(formatted_address_list)):
         place_data = lpt.get_populartimes_by_formatted_address(formatted_address_list[ind])
-        log = update_row(conn, place_data, ids[ind]) #sql id starts at 1
+        log = update_row(conn, place_data, open_ids[ind]) #sql id starts at 1
         if doBackup == True:
             BACKUP.write(json.dumps(place_data, indent=4))
             BACKUP.write("\r\n")
@@ -114,7 +119,11 @@ def update_current_popularity(addr_and_id, doBackup, doLog, conn):
             for entry in log:
                 LOG.write(entry)
                 LOG.write("\r\n")
-
+    cur = conn.cursor()
+#clean up closed stores
+    cur.execute("UPDATE map_store SET live_busyness=NULL WHERE id IN {closed}".format(closed=tuple(closed_ids)))
+    conn.commit()
+    return
 
 def run_scraper(country, doBackup, doLog):
     global LOG
