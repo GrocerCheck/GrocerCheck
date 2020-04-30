@@ -73,10 +73,22 @@ def update_current_popularity(formatted_address_list, doBackup, doLog, conn):
                 LOG.write(entry)
                 LOG.write("\r\n")
 
+def set_live_null(conn):
+    cur = conn.cursor()
+    cur.execute("UPDATE  map_store SET live_busyness = NULL") #set all to NULL before running script
+    conn.commit()
+
+
 def run_scraper(country, doBackup, doLog):
     global LOG
     conn = create_connection("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3")
     try:
+        set_live_null(conn)
         update_current_popularity(get_formatted_addresses(country, conn), doBackup, doLog, conn)
+
     except:
         LOG.write("ERROR IN update_current_popularity\r\n")
+
+
+
+
