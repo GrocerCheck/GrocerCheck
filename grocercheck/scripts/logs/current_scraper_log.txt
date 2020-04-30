@@ -1,1 +1,4 @@
 ERROR IN update_current_popularity
+ERROR IN update_current_popularity
+ERROR IN update_current_popularity
+ERROR IN update_current_popularity

@@ -56,14 +56,15 @@ def get_formatted_addresses(country, conn):
         address = get_col_with_id(conn, "address", i)[0][0]
         name = get_col_with_id(conn, "name", i)[0][0]
         formatted_address_list.append("({name}) {address}, {country}".format(name=name, address=address, country = country))
-    return formatted_address_list
-
-def update_current_popularity(formatted_address_list, doBackup, doLog, conn):
+    return (formatted_address_list, ids)
+def update_current_popularity(addr_and_id, doBackup, doLog, conn):
+    formatted_address_list = addr_and_id[0]
+    ids = addr_and_id[1]
     global BACKUP
     global LOG
     for ind in range(len(formatted_address_list)):
         place_data = lpt.get_populartimes_by_formatted_address(formatted_address_list[ind])
-        log = update_row(conn, place_data, (ind+1)) #sql id starts at 1
+        log = update_row(conn, place_data, ids[ind]) #sql id starts at 1
 
         if doBackup == True:
             BACKUP.write(json.dumps(place_data, indent=4))
@@ -84,6 +85,6 @@ def run_scraper(country, doBackup, doLog):
     except:
         LOG.write("ERROR IN update_current_popularity\r\n")
 
-
+run_scraper('Canada', False, False)
 
 
