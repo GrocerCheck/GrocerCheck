@@ -64,7 +64,6 @@ def update_current_popularity(addr_and_id, doBackup, doLog, conn):
     for ind in range(len(formatted_address_list)):
         place_data = lpt.get_populartimes_by_formatted_address(formatted_address_list[ind])
         log = update_row(conn, place_data, ids[ind]) #sql id starts at 1
-
         if doBackup == True:
             BACKUP.write(json.dumps(place_data, indent=4))
             BACKUP.write("\r\n")
