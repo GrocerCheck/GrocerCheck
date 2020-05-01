@@ -6,12 +6,24 @@
 		<style>
 /* Set the size of the div element that contains the map */
 #map {
-	height: 400px;  /* The height is 400 pixels */
+	height: 100%;  /* The height is 400 pixels */
 	width: 100%;  /* The width is the width of the web page */
 }
-      #radio{
-	      align-items: center;
-	      margin-bottom: 0px;
+      html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+      }
+            #floating_menu{
+		position: absolute;
+		top: 10px;
+		left: 30%;
+		z-index: 5;
+		background-color: #fff;
+		padding: 5px;
+		border: 1px solid #999;
+		width: 40%;
+		height: 45px;
       }
       .container{
 	      display:inline;
@@ -23,9 +35,7 @@
 	      -moz-user-select: none;
 	      -ms-user-select: none;
 	      user-select: none;
-	      margin-right: 40px;
-	      margin-left: 40px;
-      }
+	            }
       .container input{
 	      position: absolute;
 	      opacity: 0;
@@ -64,42 +74,72 @@
 	      background:white;
       }
       ul#buttons li{
+	      z-index: 10;
 	      display: inline;
-	      padding-left:60px;
-	      padding-right:60px;
-	      padding-bottom:0px;
+		margin:0;
+		padding:0;
+
+	            }
+      .leftitem{
+	display: inline-block;
+	position:absolute;
+	left: calc(50% - calc(228.44px / 2) - 30px - calc(108.89px / 2));
+	
+      }
+      .middleitem{
+	display: inline-block;
+	position: absolute;
+	left: 50%;
+	      }
+      .rightitem{
+	display: inline-block;
+	position: absolute;
+	left: calc(50% + calc(228.44px / 2) + 30px + calc(66.83px / 2));
+	      }
+
+      .lefttext{
+	padding-left:0px;
+	padding-right: 30px;
+	margin:0;
+      }
+      .middletext{
+	padding-left:30px;
+	padding-right: 30px;
+	margin:0;
+      }
+      .righttext{
+	padding-left:30px;
+	padding-right: 0px;
+	margin:0px;
       }
       ul#buttonlabels li{
-	      margin-bottom: 0px;
-	      margin-right: 0px;
-	      padding: 30px;
 	      display:inline;
 	      text-align: center;
       }
-      #buttondiv{
-	      margin-left:0px;
-	      padding:0px;
-      }
-      ul#buttonlabels{
+           ul#buttonlabels{
 	      margin-bottom:0px;
+	      margin-top: 0px;
+	      padding-top: 0px;
 	      padding-bottom:0px;
+	      padding-left:0px;
 	      text-align: center;
       }
-      #logo{
-	      display:block;
-	      margin-left: auto;
-	      margin-right: auto;
-	      width:292px;
-      }
-      ul#buttons{
+            ul#buttons{
+	      z-index: 20;
 	      text-align: center;
+	      position: relative;
+	      margin: 0px;
+	      padding: 0px;
+	      width: 100%;
       }
 
       .switch {
-	      position: relative;
+	      position: absolute;
 	      display: inline-block;
 	      width: 60px;
 	      height: 34px;
+	      top: 10;
+	      left: 10;
       }
 
       .switch input {
@@ -113,9 +153,9 @@
 	      cursor: pointer;
 	      top: 0;
 	      left: 0;
-	      right: 0;
 	      bottom: 0;
-	      background-color: #ccc;
+	      right: 0;
+	     background-color: #ccc;
 	      -webkit-transition: .4s;
 	      transition: .4s;
       }
@@ -149,13 +189,18 @@
       /* Rounded sliders */
       .slider.round {
 	      border-radius: 34px;
-      }
+	           }
 
       .slider.round:before {
 	      border-radius: 50%;
       }
       #toggle{
-	      margin-top:20px;
+	      position: absolute;
+	      top: 10%;
+	      left: 1%;
+	      background-color: #fff;
+	      z-index: 21;
+		border: 1px solid #999;
       }
 
 
@@ -177,58 +222,54 @@
 
 
 
+		<div id="floating_menu">
 
 
+			<ul id="buttonlabels" style="color:forestgreen">
 
-		<div id="logo">
-			<img src="{% static "images/GrocerCheck-01.png" %}" width="292" height="80">
-		</div>
-		<ul id="buttonlabels" style="color:forestgreen">
-
-			<div id="radio">
-
+			
 				<b>
-					<li>Live Data Only </li>
-					<li> Live and Historical Data</li>
-					<li> All Stores </li>
+					<li class='lefttext'>Live Data Only </li>
+					<li class='middletext'> Live and Historical Data</li>
+					<li class='righttext'> All Stores </li>
 				</b>
-		</ul>
+		</ul>   <!machine learning user selects a time in the future and model predicts busyness at certain store.>
 
-			</div>
-			<div id="buttondiv">
-				<ul id="buttons">
+									<ul id="buttons">
 
-					<li><label class="container">
+					<li class="leftitem"><label class="container">
 							<input onclick="showLiveOnly()" text-align type="radio" name="visibility" id="live" checked="checked" >
 							<span class="checkmark"></span>
 
 
 
 						</label></li>
-						<li><label class="container">
+						<li class="middleitem"><label class="container">
 								<input onclick="showHistorical()"  type="radio"  name="visibility" id="historical">
 								<span class="checkmark"></span>
 							</label></li>
 
-							<li><label class="container">
+							<li class="rightitem"><label class="container">
 									<input onclick="showAll()" type="radio" name="visibility" id="all" >
 									<span class="checkmark"></span>
 								</label>
-								<li>
-									<div id="toggle">
+								
+							
+				</ul>
+			
+
+		</div>
+
+		<div id="toggle">
 										<label class="switch">
 											<input onclick="toggleStores()" type=checkbox>
 											<span class="slider round"></span>
+											<p style="color:forestgreen; margin-top:0; margin-bottom: 0; border: 1px solid #999;padding-top: 20px; text-align:center; background-color:#fff;"><b>Show Closed Stores</b></p>
 
 										</label>
-										<p style="color:forestgreen; margin-bottom:0px;"><b>Show Closed Stores</b></p>
 									</div>
-								</li>
-				</ul>
-			</div>
 
-
-
+		
 
 			<!--The div element for the map -->
 			<div id="map"></div>
