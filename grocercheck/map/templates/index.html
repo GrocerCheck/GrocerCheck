@@ -17,7 +17,7 @@
             #floating_menu{
 		position: absolute;
 		top: 10px;
-		left: 30%;
+		left: 50%;
 		z-index: 5;
 		background-color: #fff;
 		padding: 5px;
@@ -203,6 +203,52 @@
 		border: 1px solid #999;
       }
 
+      #searchbar {
+	position:absolute;
+	top:10px;
+	left: 15%;
+	width: calc(35% - 10px);
+	height: 55px;
+	z-index: 25;
+	--searchheight: 55px;
+      }
+	form.search{
+	height: 100%;
+	}
+      form.search input[type=text] {
+	padding: 10px;
+	font-size: 17px;
+	border: 1px solid #999;
+	float: left;
+	width: 80%;
+	background: #f1f1f1;
+	box-sizing: border-box;
+	height: var(--searchheight);
+      }
+
+      form.search input[type=image]{
+	position: absolute;
+	left: 80%;
+	width: var(--searchheight);
+	height: var(--searchheight);
+	padding: 10px;
+	background: #3AB64B;
+	color: white;
+	font-size: 17px;
+	border: 1px solid #999;
+	border-left: none;
+	cursor: pointer;
+	box-sizing: border-box;
+      }
+
+      form.search input:hover[type=image]{
+	background: #4BE360;
+      }
+      form.search::after{
+	content:"";
+	clear: both;
+	display: table;
+      }
 
 		</style>
 
@@ -218,7 +264,13 @@
 
 
 
+		<div id="searchbar">
+			<form class="search">
+				<input type="text" placeholder="Search..." name="searchfield">
+				<input type="image" src="{% static 'images/searchicon.png' %}"></input>
+			</form>
 
+		</div>
 
 
 
