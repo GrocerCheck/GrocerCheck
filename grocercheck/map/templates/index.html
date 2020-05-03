@@ -330,8 +330,6 @@ var searchedStores = [];
 var searchInProgress = false;
 var names = [];
 var address = [];
-document.getElementById('toggle').innerHTML = Object.prototype.toString.call(namess);
-
 function initMap() {
 
 
@@ -347,8 +345,6 @@ function initMap() {
 			};
 
 			map.setCenter(userpos);
-
-
 
 
 		}, function(){
@@ -542,7 +538,7 @@ function searchClicked(){
 		return;
 	}
 
-	document.getElementById('toggle').innerHTML = fuzzball.token_set_ratio(searchstring, names[1]+" "+address[1]+" "+keywords[1]);	
+		
 
 	var max = 0;
 	var arr = [];
