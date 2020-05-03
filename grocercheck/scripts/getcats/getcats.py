@@ -8,8 +8,8 @@ import time
 import pytz
 #--------GLOBAL VAR---------------#
 
-BACKUP = open("/home/ihasdapie/GrocerCheck/grocercheck/scripts/logs/get_cats_raw_data.json", "a+")
-LOG = open("/home/ihasdapie/GrocerCheck/grocercheck/scripts/logs/get_cats_log.txt", "a+")
+BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/logs/get_cats_raw_data.json", "a+")
+LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/logs/get_cats_log.txt", "a+")
 
 def create_connection(db_file):
     conn = None
@@ -29,13 +29,13 @@ def update_row(conn, data, row_id):
     log = []
     days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
     cur = conn.cursor()
-    keys = " ".join(data['categories'])
-
     try:
-        if (data['current_popularity'] is None) == False:
+        if (data['categories'] is None) == False:
+            keys= " ".join(data['categories'])
             cur.execute("UPDATE map_store SET keywords=? WHERE id=?", (keys, row_id))
+            print(row_id, cur.excute("SELECT keywords FROM map_store WHERE id = ?", (row_id)).fetchall())
         else:
-            cur.execute("UPDATE map_store SET keywords=NULL WHERE id=?", (row_id)) #if no live busyness, set to null (clean up!)
+            #cur.execute("UPDATE map_store SET keywords=NULL WHERE id=?", (row_id)) #if no live busyness, set to null (clean up!)
             log.append("CANNOT RETRIEVE CATEGORIES FOR STORE id"+str(row_id))
     except:
         log.append("CATEGORIES KEY ERROR FOR STORE id"+str(row_id))
@@ -66,16 +66,12 @@ def get_categories(addr_and_id, doBackup, doLog, conn):
     global LOG
 
     for ind in range(len(formatted_address_list)):
-        print("try1")
         place_data = lpt.get_populartimes_by_formatted_address(formatted_address_list[ind])
-        print("try2")
         log = update_row(conn, place_data, ids[ind]) #sql id starts at 1
         print("STORE {id} COMPLETE".format(id=ids[ind]))
-        print("try3")
         if doBackup == True:
             BACKUP.write(json.dumps(place_data, indent=4))
             BACKUP.write("\r\n")
-
         if doLog == True:
             for entry in log:
                 LOG.write(entry)
@@ -86,10 +82,8 @@ def get_categories(addr_and_id, doBackup, doLog, conn):
 
 def get_cats(country, doBackup, doLog):
     global LOG
-    conn = create_connection("/home/ihasdapie/GrocerCheck/grocercheck/db1.sqlite3")
-    
+    conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/db1.sqlite3")
     try:
-        print("getcats")
         get_categories(get_formatted_addresses(country, conn), doBackup, doLog, conn)
 
     except:
