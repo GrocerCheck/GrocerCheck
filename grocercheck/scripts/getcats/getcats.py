@@ -12,7 +12,7 @@ BACKUP = open("/home/ihasdapie/GrocerCheck/grocercheck/scripts/logs/get_cats_raw
 LOG = open("/home/ihasdapie/GrocerCheck/grocercheck/scripts/logs/get_cats_log.txt", "a+")
 
 def create_connection(db_file):
-	conn = None
+    conn = None
     try:
         conn = sqlite3.connect(db_file)
     except sqlite3.Error as e:
@@ -29,7 +29,7 @@ def update_row(conn, data, row_id):
     log = []
     days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
     cur = conn.cursor()
-	keys = " ".join(data['categories'])
+    keys = " ".join(data['categories'])
 
     try:
         if (data['current_popularity'] is None) == False:
@@ -53,7 +53,7 @@ def get_formatted_addresses(country, conn):
     ids = get_valid_ids(conn)
     formatted_address_list = []
     for i in open_ids:
-		address = get_col_with_id(conn, "address", i)[0][0]
+        address = get_col_with_id(conn, "address", i)[0][0]
         name = get_col_with_id(conn, "name", i)[0][0]
         formatted_address_list.append("({name}) {address}, {country}".format(name=name, address=address, country = country))
     return (formatted_address_list, ids)
@@ -67,11 +67,10 @@ def get_categories(addr_and_id, doBackup, doLog, conn):
 
     for ind in range(len(formatted_address_list)):
         place_data = lpt.get_populartimes_by_formatted_address(formatted_address_list[ind])
-		print("STORE {id} COMPLETE".format(id=ids[ind]))
         log = update_row(conn, place_data, ids[ind]) #sql id starts at 1
-		print("STORE {id} COMPLETE".format(id=ids[ind]))
+        print("STORE {id} COMPLETE".format(id=ids[ind]))
        
-		if doBackup == True:
+        if doBackup == True:
             BACKUP.write(json.dumps(place_data, indent=4))
             BACKUP.write("\r\n")
 
@@ -80,7 +79,6 @@ def get_categories(addr_and_id, doBackup, doLog, conn):
                 LOG.write(entry)
                 LOG.write("\r\n")
     cur = conn.cursor()
-#clean up closed stores
     conn.commit()
     return
 
