@@ -10,20 +10,20 @@
 	width: 100%;  /* The width is the width of the web page */
 }
       html, body {
-	height: 100%;
-	margin: 0;
-	padding: 0;
+	      height: 100%;
+	      margin: 0;
+	      padding: 0;
       }
-            #floating_menu{
-		position: absolute;
-		top: 10px;
-		left: 50%;
-		z-index: 5;
-		background-color: #fff;
-		padding: 5px;
-		border: 1px solid #999;
-		width: 40%;
-		height: 45px;
+      #floating_menu{
+	      position: absolute;
+	      top: 10px;
+	      left: 50%;
+	      z-index: 5;
+	      background-color: #fff;
+	      padding: 5px;
+	      border: 1px solid #999;
+	      width: 40%;
+	      height: 45px;
       }
       .container{
 	      display:inline;
@@ -35,7 +35,7 @@
 	      -moz-user-select: none;
 	      -ms-user-select: none;
 	      user-select: none;
-	            }
+      }
       .container input{
 	      position: absolute;
 	      opacity: 0;
@@ -76,47 +76,47 @@
       ul#buttons li{
 	      z-index: 10;
 	      display: inline;
-		margin:0;
-		padding:0;
+	      margin:0;
+	      padding:0;
 
-	            }
+      }
       .leftitem{
-	display: inline-block;
-	position:absolute;
-	left: calc(50% - calc(228.44px / 2) - 30px - calc(108.89px / 2));
-	
+	      display: inline-block;
+	      position:absolute;
+	      left: calc(50% - calc(228.44px / 2) - 30px - calc(108.89px / 2));
+
       }
       .middleitem{
-	display: inline-block;
-	position: absolute;
-	left: 50%;
-	      }
+	      display: inline-block;
+	      position: absolute;
+	      left: 50%;
+      }
       .rightitem{
-	display: inline-block;
-	position: absolute;
-	left: calc(50% + calc(228.44px / 2) + 30px + calc(66.83px / 2));
-	      }
+	      display: inline-block;
+	      position: absolute;
+	      left: calc(50% + calc(228.44px / 2) + 30px + calc(66.83px / 2));
+      }
 
       .lefttext{
-	padding-left:0px;
-	padding-right: 30px;
-	margin:0;
+	      padding-left:0px;
+	      padding-right: 30px;
+	      margin:0;
       }
       .middletext{
-	padding-left:30px;
-	padding-right: 30px;
-	margin:0;
+	      padding-left:30px;
+	      padding-right: 30px;
+	      margin:0;
       }
       .righttext{
-	padding-left:30px;
-	padding-right: 0px;
-	margin:0px;
+	      padding-left:30px;
+	      padding-right: 0px;
+	      margin:0px;
       }
       ul#buttonlabels li{
 	      display:inline;
 	      text-align: center;
       }
-           ul#buttonlabels{
+      ul#buttonlabels{
 	      margin-bottom:0px;
 	      margin-top: 0px;
 	      padding-top: 0px;
@@ -124,7 +124,7 @@
 	      padding-left:0px;
 	      text-align: center;
       }
-            ul#buttons{
+      ul#buttons{
 	      z-index: 20;
 	      text-align: center;
 	      position: relative;
@@ -155,7 +155,7 @@
 	      left: 0;
 	      bottom: 0;
 	      right: 0;
-	     background-color: #ccc;
+	      background-color: #ccc;
 	      -webkit-transition: .4s;
 	      transition: .4s;
       }
@@ -189,7 +189,7 @@
       /* Rounded sliders */
       .slider.round {
 	      border-radius: 34px;
-	           }
+      }
 
       .slider.round:before {
 	      border-radius: 50%;
@@ -200,56 +200,51 @@
 	      left: 1%;
 	      background-color: #fff;
 	      z-index: 21;
-		border: 1px solid #999;
+	      border: 1px solid #999;
       }
 
       #searchbar {
-	position:absolute;
-	top:10px;
-	left: 15%;
-	width: calc(35% - 10px);
-	height: 55px;
-	z-index: 25;
-	--searchheight: 55px;
+	      position:absolute;
+	      top:10px;
+	      left: 15%;
+	      width: calc(35% - 10px);
+	      height: 55px;
+	      z-index: 25;
+	      --searchheight: 55px;
       }
-	form.search{
-	height: 100%;
-	}
+      form.search{
+	      height: 100%;
+      }
       form.search input[type=text] {
-	padding: 10px;
-	font-size: 17px;
-	border: 1px solid #999;
-	float: left;
-	width: 80%;
-	background: #f1f1f1;
-	box-sizing: border-box;
-	height: var(--searchheight);
+	      padding: 10px;
+	      font-size: 17px;
+	      border: 1px solid #999;
+	      float: left;
+	      width: 80%;
+	      background: #f1f1f1;
+	      box-sizing: border-box;
+	      height: var(--searchheight);
       }
 
       form.search input[type=image]{
-	position: absolute;
-	left: 80%;
-	width: var(--searchheight);
-	height: var(--searchheight);
-	padding: 10px;
-	background: #3AB64B;
-	color: white;
-	font-size: 17px;
-	border: 1px solid #999;
-	border-left: none;
-	cursor: pointer;
-	box-sizing: border-box;
+	      position: absolute;
+	      left: 80%;
+	      width: var(--searchheight);
+	      height: var(--searchheight);
+	      padding: 10px;
+	      background: #3AB64B;
+	      color: white;
+	      font-size: 17px;
+	      border: 1px solid #999;
+	      border-left: none;
+	      cursor: pointer;
+	      box-sizing: border-box;
       }
 
       form.search input:hover[type=image]{
-	background: #4BE360;
+	      background: #4BE360;
       }
-      form.search::after{
-	content:"";
-	clear: both;
-	display: table;
-      }
-
+      
 		</style>
 
 		<link rel='icon' type='image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
@@ -265,9 +260,9 @@
 
 
 		<div id="searchbar">
-			<form class="search">
-				<input type="text" placeholder="Search..." name="searchfield">
-				<input type="image" src="{% static 'images/searchicon.png' %}"></input>
+			<form class="search" onsubmit='return false;'>
+				<input id='searchtextfield' type="text" placeholder="Search..." name="searchfield"></input>
+				<input type="image" onclick='searchClicked()'  src="{% static 'images/searchicon.png' %}"></input>
 			</form>
 
 		</div>
@@ -279,56 +274,55 @@
 
 			<ul id="buttonlabels" style="color:forestgreen">
 
-			
+
 				<b>
 					<li class='lefttext'>Live Data Only </li>
 					<li class='middletext'> Live and Historical Data</li>
 					<li class='righttext'> All Stores </li>
 				</b>
-		</ul>   <!machine learning user selects a time in the future and model predicts busyness at certain store.>
+			</ul>   
+			<ul id="buttons">
 
-									<ul id="buttons">
+				<li class="leftitem"><label class="container">
+						<input onclick="showLiveOnly()" text-align type="radio" name="visibility" id="live" checked="checked" >
+						<span class="checkmark"></span>
 
-					<li class="leftitem"><label class="container">
-							<input onclick="showLiveOnly()" text-align type="radio" name="visibility" id="live" checked="checked" >
+
+
+					</label></li>
+					<li class="middleitem"><label class="container">
+							<input onclick="showHistorical()"  type="radio"  name="visibility" id="historical">
 							<span class="checkmark"></span>
-
-
-
 						</label></li>
-						<li class="middleitem"><label class="container">
-								<input onclick="showHistorical()"  type="radio"  name="visibility" id="historical">
-								<span class="checkmark"></span>
-							</label></li>
 
-							<li class="rightitem"><label class="container">
-									<input onclick="showAll()" type="radio" name="visibility" id="all" >
-									<span class="checkmark"></span>
-								</label>
-								
-							
-				</ul>
-			
+						<li class="rightitem"><label class="container">
+								<input onclick="showAll()" type="radio" name="visibility" id="all" >
+								<span class="checkmark"></span>
+							</label>
+
+
+			</ul>
+
 
 		</div>
 
 		<div id="toggle">
-										<label class="switch">
-											<input onclick="toggleStores()" type=checkbox>
-											<span class="slider round"></span>
-											<p style="color:forestgreen; margin-top:0; margin-bottom: 0; border: 1px solid #999;padding-top: 20px; text-align:center; background-color:#fff;"><b>Show Closed Stores</b></p>
+			<label class="switch">
+				<input onclick="toggleStores()" type=checkbox>
+				<span class="slider round"></span>
+				<p style="color:forestgreen; margin-top:0; margin-bottom: 0; border: 1px solid #999;padding-top: 20px; text-align:center; background-color:#fff;"><b>Show Closed Stores</b></p>
 
-										</label>
-									</div>
+			</label>
+		</div>
 
-		
 
-			<!--The div element for the map -->
-			<div id="map"></div>
 
-			<script>
+		<!--The div element for the map -->
+		<div id="map"></div>
 
-				var livemarkers = []
+		<script>
+
+			var livemarkers = []
 var hahaha = 0;
 var historicalmarkers = []
 var allstores = []
@@ -337,12 +331,42 @@ var map;
 var openn;
 var flag = true;
 var state = "live";
-
+var keywords;
 
 function initMap() {
 
+
 	map = new google.maps.Map(
 		document.getElementById('map'), {zoom: 12, center: {lat:49.2399,lng:-123.1251}});
+
+	if(navigator.geolocation){
+			
+		navigator.geolocation.getCurrentPosition(function(position) {
+			var userpos = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			};
+
+			var userinfowindow = new google.maps.InfoWindow();
+			userinfowindow.setPosition(userpos);
+			userinfowindow.setContent('location found');
+			userinfowindow.open(map);
+			map.setCenter(userpos);
+
+
+
+
+		}, function(){
+			handleLocationError(true,map.getCenter());
+		}
+		);
+
+	}
+		else{
+			handleLocationError(false,map.getCenter());
+		}
+
+	
 
 
 
@@ -356,6 +380,7 @@ function initMap() {
 	var hours = {{hours|safe}}
 	var busyness = {{busyness|safe}}
 	openn = {{openn|safe}}
+	keywords = {{keywords|safe}}
 	var positions = []
 	for(let x = 0;x<lat.length;x++){
 		positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lng[x])})
@@ -504,6 +529,23 @@ function initMap() {
 	toggleStores();
 }
 
+function searchClicked(){
+var searchstring = document.getElementById('searchtextfield').value;
+
+
+
+}
+
+
+function handleLocationError(hasgeo, pos){
+	if(hasgeo){
+		map.setCenter(pos);
+	}
+	else{
+		map.setCenter(pos);
+	}
+}
+
 function filterOpen(){
 	for(let x = 0; x<markers.length;x++){
 		if(openn[x]==0){
@@ -612,7 +654,7 @@ function toggleStores(){
 
 
 
-			</script>
+		</script>
 		<!--Load the API from the specified URL
 	  * The async attribute allows the browser to render the page while the API loads
 	  * The key parameter will contain your own API key (which is not needed for this tutorial)
