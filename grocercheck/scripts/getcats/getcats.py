@@ -12,7 +12,7 @@ BACKUP = open("/home/ihasdapie/GrocerCheck/grocercheck/scripts/logs/get_cats_raw
 LOG = open("/home/ihasdapie/GrocerCheck/grocercheck/scripts/logs/get_cats_log.txt", "a+")
 
 def create_connection(db_file):
-    conn = None
+	conn = None
     try:
         conn = sqlite3.connect(db_file)
     except sqlite3.Error as e:
@@ -29,7 +29,7 @@ def update_row(conn, data, row_id):
     log = []
     days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
     cur = conn.cursor()
-	keys = " ".join(data['categories']
+	keys = " ".join(data['categories'])
 
     try:
         if (data['current_popularity'] is None) == False:
