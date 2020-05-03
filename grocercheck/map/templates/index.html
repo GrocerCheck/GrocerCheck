@@ -244,7 +244,7 @@
       form.search input:hover[type=image]{
 	      background: #4BE360;
       }
-      
+
 		</style>
 
 		<link rel='icon' type='image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
@@ -253,12 +253,7 @@
 	<body>
 
 
-		<script>
-
-		</script>
-
-
-
+		
 		<div id="searchbar">
 			<form class="search" onsubmit='return false;'>
 				<input id='searchtextfield' type="text" placeholder="Search..." name="searchfield"></input>
@@ -280,7 +275,7 @@
 					<li class='middletext'> Live and Historical Data</li>
 					<li class='righttext'> All Stores </li>
 				</b>
-			</ul>   
+			</ul>
 			<ul id="buttons">
 
 				<li class="leftitem"><label class="container">
@@ -319,11 +314,10 @@
 
 		<!--The div element for the map -->
 		<div id="map"></div>
-
+<script src="https://cdn.jsdelivr.net/npm/fuzzball@1.3.0/dist/fuzzball.umd.min.js"></script>
 		<script>
 
 			var livemarkers = []
-var hahaha = 0;
 var historicalmarkers = []
 var allstores = []
 var markers = []
@@ -332,6 +326,11 @@ var openn;
 var flag = true;
 var state = "live";
 var keywords;
+var searchedStores = [];
+var searchInProgress = false;
+var names = [];
+var address = [];
+document.getElementById('toggle').innerHTML = Object.prototype.toString.call(namess);
 
 function initMap() {
 
@@ -340,17 +339,13 @@ function initMap() {
 		document.getElementById('map'), {zoom: 12, center: {lat:49.2399,lng:-123.1251}});
 
 	if(navigator.geolocation){
-			
+
 		navigator.geolocation.getCurrentPosition(function(position) {
 			var userpos = {
 				lat: position.coords.latitude,
 				lng: position.coords.longitude
 			};
 
-			var userinfowindow = new google.maps.InfoWindow();
-			userinfowindow.setPosition(userpos);
-			userinfowindow.setContent('location found');
-			userinfowindow.open(map);
 			map.setCenter(userpos);
 
 
@@ -362,18 +357,21 @@ function initMap() {
 		);
 
 	}
-		else{
-			handleLocationError(false,map.getCenter());
-		}
+	else{
+		handleLocationError(false,map.getCenter());
+	}
+
+
+
+
+
+
+	names = {{name|safe}}
 
 	
-
-
-
-
-	var name = {{name|safe}}
 	var place_id = {{place_id|safe}}
-	var address = {{address|safe}}
+
+	address = {{address|safe}}
 	var lat = {{lat|safe}}
 	var lng = {{lng|safe}}
 	var place_id = {{place_id|safe}}
@@ -388,7 +386,7 @@ function initMap() {
 
 
 
-	function buildInfoWindowString(name,address,hours,busyness,x){
+	function buildInfoWindowString(names,address,hours,busyness,x){
 		var s = '';
 		var pops = '';
 		var busy = busyness[x];
@@ -428,7 +426,7 @@ function initMap() {
 		}
 
 		return '<div id="content">' +
-			'<h1 style="color:'+s+';"> '+name[x]+' </h1>' +
+			'<h1 style="color:'+s+';"> '+names[x]+' </h1>' +
 			'<div id="body"'+
 			'<p> '+address[x]+' </p>'+
 			'<p> '+hours[x]+' </p>'+
@@ -459,7 +457,7 @@ function initMap() {
 		if(infowindow){
 			infowindow.close();
 		}
-		infowindow.setContent(buildInfoWindowString(name,address,hours,busyness,i));
+		infowindow.setContent(buildInfoWindowString(names,address,hours,busyness,i));
 		infowindow.open(map,temp);
 
 
@@ -520,7 +518,7 @@ function initMap() {
 	}
 	for(let k = 0; k<markers.length;k++){
 		markers[k].addListener('click',function() {
-			infowindow.setContent(buildInfoWindowString(name,address,hours,busyness,k));
+			infowindow.setContent(buildInfoWindowString(names,address,hours,busyness,k));
 			infowindow.open(map,markers[k]);
 		});
 
@@ -530,10 +528,61 @@ function initMap() {
 }
 
 function searchClicked(){
-var searchstring = document.getElementById('searchtextfield').value;
+	searchedStores = [];
+
+	var searchstring = encodeURI(document.getElementById('searchtextfield').value);
+	if(searchstring!=""){
+		searchInProgress = true;
+
+	}
+	else{
+
+		searchInProgress = false;
+		searchedStores = [];
+		return;
+	}
+
+	document.getElementById('toggle').innerHTML = fuzzball.token_set_ratio(searchstring, names[1]+" "+address[1]+" "+keywords[1]);	
+
+	var max = 0;
+	var arr = [];
+	let r;
+	let comparestring;
+	for(let x = 0; x<markers.length;x++){
+		comparestring = names[x]+" "+address[x]+" "+keywords[x];
+		if(searchstring.includes("+") || searchstring.includes("&") || searchstring.includes("-")){
+			//account for misspellings	
+		}
+		r = Math.max(fuzzball.token_set_ratio(searchstring, comparestring), fuzzball.ratio(searchstring, comparestring)); 
+		arr.push(r);
+		if(r>max){
+			max = r;
+		}
+	}
+	
+	for(let x = 0; x<markers.length;x++){
+				
+		if(arr[x] > max*0.75){
+						searchedStores.push(markers[x]);
+
+		}
+
+	}
+	if(state=='live'){ showLiveOnly();}
+	if(state=='historical'){ showHistorical();}
+	if(state=='all') { showAll();}
+	displaySearched();
+}
 
 
-
+function displaySearched(){
+	for(let x = 0; x<markers.length;x++){
+		if(markers[x].getVisible()){
+			if(searchedStores.includes(markers[x])==false){
+				markers[x].setMap(null);	
+			}
+		}
+	}
 }
 
 
@@ -560,6 +609,9 @@ function checkState(){
 	}
 	if(flag==true && state=="live"){
 		filterOpen();
+	}
+	if(searchInProgress){
+		displaySearched();
 	}
 }
 
