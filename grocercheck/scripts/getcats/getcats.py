@@ -21,7 +21,7 @@ def create_connection(db_file):
 
 def get_col_with_id(conn, col, i):
     cur = conn.cursor()
-    cur.execute("SELECT {col} FROM map_store WHERE id = {i}".format(col=col, i=i))
+    cur.execute("SELECT {col} FROM map_store WHERE id == {i}".format(col=col, i=i))
     out = cur.fetchall()
     return out
 
@@ -51,8 +51,9 @@ def get_valid_ids(conn):
 
 def get_formatted_addresses(country, conn):
     ids = get_valid_ids(conn)
+    ids = [x[0] for x in ids]
     formatted_address_list = []
-    for i in open_ids:
+    for i in ids:
         address = get_col_with_id(conn, "address", i)[0][0]
         name = get_col_with_id(conn, "name", i)[0][0]
         formatted_address_list.append("({name}) {address}, {country}".format(name=name, address=address, country = country))
@@ -61,15 +62,16 @@ def get_formatted_addresses(country, conn):
 def get_categories(addr_and_id, doBackup, doLog, conn):
     formatted_address_list = addr_and_id[0]
     ids = addr_and_id[1]
-
     global BACKUP
     global LOG
 
     for ind in range(len(formatted_address_list)):
+        print("try1")
         place_data = lpt.get_populartimes_by_formatted_address(formatted_address_list[ind])
+        print("try2")
         log = update_row(conn, place_data, ids[ind]) #sql id starts at 1
         print("STORE {id} COMPLETE".format(id=ids[ind]))
-       
+        print("try3")
         if doBackup == True:
             BACKUP.write(json.dumps(place_data, indent=4))
             BACKUP.write("\r\n")
@@ -85,7 +87,9 @@ def get_categories(addr_and_id, doBackup, doLog, conn):
 def get_cats(country, doBackup, doLog):
     global LOG
     conn = create_connection("/home/ihasdapie/GrocerCheck/grocercheck/db1.sqlite3")
+    
     try:
+        print("getcats")
         get_categories(get_formatted_addresses(country, conn), doBackup, doLog, conn)
 
     except:
