@@ -42,8 +42,11 @@ def index(request):
             cur.execute('''SELECT '''+day+'''hours FROM map_store WHERE id=?''', (s.id,))
             hourstring = cur.fetchone()[0]
             context['hours'].append(hourstring)
-
-            context['keywords'].append(s.keywords)
+            if(s.keywords==None):
+                context['keywords'].append("")
+                    
+            else:
+                context['keywords'].append(s.keywords)
 
             live = s.live_busyness
             if(live==None):
