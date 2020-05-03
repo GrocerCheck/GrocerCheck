@@ -94,12 +94,12 @@ def update_row(conn, data, row_id):
 
 #-------------------MAIN-----------------------------------#
 
-conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/db1.sqlite3")
+conn = create_connection("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3")
 
 
-API_KEY = open("/home/ihasdapie/keys/gmapkey.txt", "r").readline()
-BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/populate_given_id/db_backup.json", "a")
-LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/scripts/populate_given_id/populate_given_id_log.txt", "a+")
+API_KEY = open("/home/bitnami/gmapkey.txt", "r").readline()
+BACKUP = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/populate_given_id/db_backup.json", "a+")
+LOG = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/populate_given_id/populate_given_id_log.txt", "a+")
 
 place_id_list = get_columns(conn, "place_id")
 place_id_list = [pid[0] for pid in place_id_list]
@@ -129,12 +129,12 @@ elif len(args) == 3:
     except:
         print("Error! Double check your arguments!\nTry --help for help")
         sys.exit()
-   
+
 else:
     print("Too many arguments!\nUse --help for help")
     sys.exit()
 
-        
+
 for ind in r:
     place_data = lpt.get_populartimes_by_place_id(API_KEY, place_id_list[ind-1])
     log = update_row(conn, place_data, ind) #sql id starts at 1
