@@ -10,20 +10,20 @@
 	width: 100%;  /* The width is the width of the web page */
 }
       html, body {
-	height: 100%;
-	margin: 0;
-	padding: 0;
+	      height: 100%;
+	      margin: 0;
+	      padding: 0;
       }
-            #floating_menu{
-		position: absolute;
-		top: 10px;
-		left: 50%;
-		z-index: 5;
-		background-color: #fff;
-		padding: 5px;
-		border: 1px solid #999;
-		width: 40%;
-		height: 45px;
+      #floating_menu{
+	      position: absolute;
+	      top: 10px;
+	      left: 50%;
+	      z-index: 5;
+	      background-color: #fff;
+	      padding: 5px;
+	      border: 1px solid #999;
+	      width: 40%;
+	      height: 45px;
       }
       .container{
 	      display:inline;
@@ -35,7 +35,7 @@
 	      -moz-user-select: none;
 	      -ms-user-select: none;
 	      user-select: none;
-	            }
+      }
       .container input{
 	      position: absolute;
 	      opacity: 0;
@@ -76,47 +76,47 @@
       ul#buttons li{
 	      z-index: 10;
 	      display: inline;
-		margin:0;
-		padding:0;
+	      margin:0;
+	      padding:0;
 
-	            }
+      }
       .leftitem{
-	display: inline-block;
-	position:absolute;
-	left: calc(50% - calc(228.44px / 2) - 30px - calc(108.89px / 2));
-	
+	      display: inline-block;
+	      position:absolute;
+	      left: calc(50% - calc(228.44px / 2) - 30px - calc(108.89px / 2));
+
       }
       .middleitem{
-	display: inline-block;
-	position: absolute;
-	left: 50%;
-	      }
+	      display: inline-block;
+	      position: absolute;
+	      left: 50%;
+      }
       .rightitem{
-	display: inline-block;
-	position: absolute;
-	left: calc(50% + calc(228.44px / 2) + 30px + calc(66.83px / 2));
-	      }
+	      display: inline-block;
+	      position: absolute;
+	      left: calc(50% + calc(228.44px / 2) + 30px + calc(66.83px / 2));
+      }
 
       .lefttext{
-	padding-left:0px;
-	padding-right: 30px;
-	margin:0;
+	      padding-left:0px;
+	      padding-right: 30px;
+	      margin:0;
       }
       .middletext{
-	padding-left:30px;
-	padding-right: 30px;
-	margin:0;
+	      padding-left:30px;
+	      padding-right: 30px;
+	      margin:0;
       }
       .righttext{
-	padding-left:30px;
-	padding-right: 0px;
-	margin:0px;
+	      padding-left:30px;
+	      padding-right: 0px;
+	      margin:0px;
       }
       ul#buttonlabels li{
 	      display:inline;
 	      text-align: center;
       }
-           ul#buttonlabels{
+      ul#buttonlabels{
 	      margin-bottom:0px;
 	      margin-top: 0px;
 	      padding-top: 0px;
@@ -124,7 +124,7 @@
 	      padding-left:0px;
 	      text-align: center;
       }
-            ul#buttons{
+      ul#buttons{
 	      z-index: 20;
 	      text-align: center;
 	      position: relative;
@@ -155,7 +155,7 @@
 	      left: 0;
 	      bottom: 0;
 	      right: 0;
-	     background-color: #ccc;
+	      background-color: #ccc;
 	      -webkit-transition: .4s;
 	      transition: .4s;
       }
@@ -189,7 +189,7 @@
       /* Rounded sliders */
       .slider.round {
 	      border-radius: 34px;
-	           }
+      }
 
       .slider.round:before {
 	      border-radius: 50%;
@@ -200,54 +200,49 @@
 	      left: 1%;
 	      background-color: #fff;
 	      z-index: 21;
-		border: 1px solid #999;
+	      border: 1px solid #999;
       }
 
       #searchbar {
-	position:absolute;
-	top:10px;
-	left: 15%;
-	width: calc(35% - 10px);
-	height: 55px;
-	z-index: 25;
-	--searchheight: 55px;
+	      position:absolute;
+	      top:10px;
+	      left: 15%;
+	      width: calc(35% - 10px);
+	      height: 55px;
+	      z-index: 25;
+	      --searchheight: 55px;
       }
-	form.search{
-	height: 100%;
-	}
+      form.search{
+	      height: 100%;
+      }
       form.search input[type=text] {
-	padding: 10px;
-	font-size: 17px;
-	border: 1px solid #999;
-	float: left;
-	width: 80%;
-	background: #f1f1f1;
-	box-sizing: border-box;
-	height: var(--searchheight);
+	      padding: 10px;
+	      font-size: 17px;
+	      border: 1px solid #999;
+	      float: left;
+	      width: 80%;
+	      background: #f1f1f1;
+	      box-sizing: border-box;
+	      height: var(--searchheight);
       }
 
       form.search input[type=image]{
-	position: absolute;
-	left: 80%;
-	width: var(--searchheight);
-	height: var(--searchheight);
-	padding: 10px;
-	background: #3AB64B;
-	color: white;
-	font-size: 17px;
-	border: 1px solid #999;
-	border-left: none;
-	cursor: pointer;
-	box-sizing: border-box;
+	      position: absolute;
+	      left: 80%;
+	      width: var(--searchheight);
+	      height: var(--searchheight);
+	      padding: 10px;
+	      background: #3AB64B;
+	      color: white;
+	      font-size: 17px;
+	      border: 1px solid #999;
+	      border-left: none;
+	      cursor: pointer;
+	      box-sizing: border-box;
       }
 
       form.search input:hover[type=image]{
-	background: #4BE360;
-      }
-      form.search::after{
-	content:"";
-	clear: both;
-	display: table;
+	      background: #4BE360;
       }
 
 		</style>
@@ -258,16 +253,11 @@
 	<body>
 
 
-		<script>
-
-		</script>
-
-
-
+		
 		<div id="searchbar">
-			<form class="search">
-				<input type="text" placeholder="Search..." name="searchfield">
-				<input type="image" src="{% static 'images/searchicon.png' %}"></input>
+			<form class="search" onsubmit='return false;'>
+				<input id='searchtextfield' type="text" placeholder="Search..." name="searchfield"></input>
+				<input type="image" onclick='searchClicked()'  src="{% static 'images/searchicon.png' %}"></input>
 			</form>
 
 		</div>
@@ -279,57 +269,55 @@
 
 			<ul id="buttonlabels" style="color:forestgreen">
 
-			
+
 				<b>
 					<li class='lefttext'>Live Data Only </li>
 					<li class='middletext'> Live and Historical Data</li>
 					<li class='righttext'> All Stores </li>
 				</b>
-		</ul>   <!machine learning user selects a time in the future and model predicts busyness at certain store.>
+			</ul>
+			<ul id="buttons">
 
-									<ul id="buttons">
+				<li class="leftitem"><label class="container">
+						<input onclick="showLiveOnly()" text-align type="radio" name="visibility" id="live" checked="checked" >
+						<span class="checkmark"></span>
 
-					<li class="leftitem"><label class="container">
-							<input onclick="showLiveOnly()" text-align type="radio" name="visibility" id="live" checked="checked" >
+
+
+					</label></li>
+					<li class="middleitem"><label class="container">
+							<input onclick="showHistorical()"  type="radio"  name="visibility" id="historical">
 							<span class="checkmark"></span>
-
-
-
 						</label></li>
-						<li class="middleitem"><label class="container">
-								<input onclick="showHistorical()"  type="radio"  name="visibility" id="historical">
-								<span class="checkmark"></span>
-							</label></li>
 
-							<li class="rightitem"><label class="container">
-									<input onclick="showAll()" type="radio" name="visibility" id="all" >
-									<span class="checkmark"></span>
-								</label>
-								
-							
-				</ul>
-			
+						<li class="rightitem"><label class="container">
+								<input onclick="showAll()" type="radio" name="visibility" id="all" >
+								<span class="checkmark"></span>
+							</label>
+
+
+			</ul>
+
 
 		</div>
 
 		<div id="toggle">
-										<label class="switch">
-											<input onclick="toggleStores()" type=checkbox>
-											<span class="slider round"></span>
-											<p style="color:forestgreen; margin-top:0; margin-bottom: 0; border: 1px solid #999;padding-top: 20px; text-align:center; background-color:#fff;"><b>Show Closed Stores</b></p>
+			<label class="switch">
+				<input onclick="toggleStores()" type=checkbox>
+				<span class="slider round"></span>
+				<p style="color:forestgreen; margin-top:0; margin-bottom: 0; border: 1px solid #999;padding-top: 20px; text-align:center; background-color:#fff;"><b>Show Closed Stores</b></p>
 
-										</label>
-									</div>
+			</label>
+		</div>
 
-		
 
-			<!--The div element for the map -->
-			<div id="map"></div>
 
-			<script>
+		<!--The div element for the map -->
+		<div id="map"></div>
+<script src="https://cdn.jsdelivr.net/npm/fuzzball@1.3.0/dist/fuzzball.umd.min.js"></script>
+		<script>
 
-				var livemarkers = []
-var hahaha = 0;
+			var livemarkers = []
 var historicalmarkers = []
 var allstores = []
 var markers = []
@@ -337,25 +325,60 @@ var map;
 var openn;
 var flag = true;
 var state = "live";
-
+var keywords;
+var searchedStores = [];
+var searchInProgress = false;
+var names = [];
+var address = [];
+document.getElementById('toggle').innerHTML = Object.prototype.toString.call(namess);
 
 function initMap() {
+
 
 	map = new google.maps.Map(
 		document.getElementById('map'), {zoom: 12, center: {lat:49.2399,lng:-123.1251}});
 
+	if(navigator.geolocation){
+
+		navigator.geolocation.getCurrentPosition(function(position) {
+			var userpos = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			};
+
+			map.setCenter(userpos);
 
 
 
-	var name = {{name|safe}}
+
+		}, function(){
+			handleLocationError(true,map.getCenter());
+		}
+		);
+
+	}
+	else{
+		handleLocationError(false,map.getCenter());
+	}
+
+
+
+
+
+
+	names = {{name|safe}}
+
+	
 	var place_id = {{place_id|safe}}
-	var address = {{address|safe}}
+
+	address = {{address|safe}}
 	var lat = {{lat|safe}}
 	var lng = {{lng|safe}}
 	var place_id = {{place_id|safe}}
 	var hours = {{hours|safe}}
 	var busyness = {{busyness|safe}}
 	openn = {{openn|safe}}
+	keywords = {{keywords|safe}}
 	var positions = []
 	for(let x = 0;x<lat.length;x++){
 		positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lng[x])})
@@ -363,7 +386,7 @@ function initMap() {
 
 
 
-	function buildInfoWindowString(name,address,hours,busyness,x){
+	function buildInfoWindowString(names,address,hours,busyness,x){
 		var s = '';
 		var pops = '';
 		var busy = busyness[x];
@@ -403,7 +426,7 @@ function initMap() {
 		}
 
 		return '<div id="content">' +
-			'<h1 style="color:'+s+';"> '+name[x]+' </h1>' +
+			'<h1 style="color:'+s+';"> '+names[x]+' </h1>' +
 			'<div id="body"'+
 			'<p> '+address[x]+' </p>'+
 			'<p> '+hours[x]+' </p>'+
@@ -434,7 +457,7 @@ function initMap() {
 		if(infowindow){
 			infowindow.close();
 		}
-		infowindow.setContent(buildInfoWindowString(name,address,hours,busyness,i));
+		infowindow.setContent(buildInfoWindowString(names,address,hours,busyness,i));
 		infowindow.open(map,temp);
 
 
@@ -495,13 +518,81 @@ function initMap() {
 	}
 	for(let k = 0; k<markers.length;k++){
 		markers[k].addListener('click',function() {
-			infowindow.setContent(buildInfoWindowString(name,address,hours,busyness,k));
+			infowindow.setContent(buildInfoWindowString(names,address,hours,busyness,k));
 			infowindow.open(map,markers[k]);
 		});
 
 	}
 	showLiveOnly();
 	toggleStores();
+}
+
+function searchClicked(){
+	searchedStores = [];
+
+	var searchstring = encodeURI(document.getElementById('searchtextfield').value);
+	if(searchstring!=""){
+		searchInProgress = true;
+
+	}
+	else{
+
+		searchInProgress = false;
+		searchedStores = [];
+		return;
+	}
+
+	document.getElementById('toggle').innerHTML = fuzzball.token_set_ratio(searchstring, names[1]+" "+address[1]+" "+keywords[1]);	
+
+	var max = 0;
+	var arr = [];
+	let r;
+	let comparestring;
+	for(let x = 0; x<markers.length;x++){
+		comparestring = names[x]+" "+address[x]+" "+keywords[x];
+		if(searchstring.includes("+") || searchstring.includes("&") || searchstring.includes("-")){
+			//account for misspellings	
+		}
+		r = Math.max(fuzzball.token_set_ratio(searchstring, comparestring), fuzzball.ratio(searchstring, comparestring)); 
+		arr.push(r);
+		if(r>max){
+			max = r;
+		}
+	}
+	
+	for(let x = 0; x<markers.length;x++){
+				
+		if(arr[x] > max*0.75){
+						searchedStores.push(markers[x]);
+
+		}
+
+	}
+	if(state=='live'){ showLiveOnly();}
+	if(state=='historical'){ showHistorical();}
+	if(state=='all') { showAll();}
+	displaySearched();
+}
+
+
+function displaySearched(){
+	for(let x = 0; x<markers.length;x++){
+		if(markers[x].getVisible()){
+			if(searchedStores.includes(markers[x])==false){
+				markers[x].setMap(null);	
+			}
+		}
+	}
+}
+
+
+function handleLocationError(hasgeo, pos){
+	if(hasgeo){
+		map.setCenter(pos);
+	}
+	else{
+		map.setCenter(pos);
+	}
 }
 
 function filterOpen(){
@@ -518,6 +609,9 @@ function checkState(){
 	}
 	if(flag==true && state=="live"){
 		filterOpen();
+	}
+	if(searchInProgress){
+		displaySearched();
 	}
 }
 
@@ -612,7 +706,7 @@ function toggleStores(){
 
 
 
-			</script>
+		</script>
 		<!--Load the API from the specified URL
 	  * The async attribute allows the browser to render the page while the API loads
 	  * The key parameter will contain your own API key (which is not needed for this tutorial)

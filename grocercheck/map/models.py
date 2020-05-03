@@ -19,6 +19,7 @@ class Store(models.Model):
     sathours = models.CharField(max_length=100, null=True, blank=True)
     sunhours = models.CharField(max_length=100, null=True, blank=True)
     live_busyness = models.IntegerField(null=True)
+    keywords = models.CharField(max_length=2000, null=True, blank=True)
     mon00 = models.IntegerField(null=True)
     mon01 = models.IntegerField(null=True)
     mon02 = models.IntegerField(null=True)

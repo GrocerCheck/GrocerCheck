@@ -29,6 +29,7 @@ def index(request):
     context['hours'] = []
     context['busyness'] = []
     context['openn'] = []
+    context['keywords'] = []
     conn = sqlite3.connect(os.path.join(settings.BASE_DIR,'db1.sqlite3'))
     cur = conn.cursor()
     for s in Store.objects.all():
@@ -41,6 +42,12 @@ def index(request):
             cur.execute('''SELECT '''+day+'''hours FROM map_store WHERE id=?''', (s.id,))
             hourstring = cur.fetchone()[0]
             context['hours'].append(hourstring)
+            if(s.keywords==None):
+                context['keywords'].append("")
+                    
+            else:
+                context['keywords'].append(s.keywords)
+
             live = s.live_busyness
             if(live==None):
                 cur.execute('''SELECT '''+day+hour+''' FROM map_store WHERE id=?''', (s.id,))
