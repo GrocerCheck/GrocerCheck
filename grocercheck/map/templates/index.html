@@ -143,9 +143,9 @@
       }
 
       .switch input {
-	      opacity: 0;
-	      width: 0;
-	      height: 0;
+	      	      opacity: 0;
+	      width: 0px;
+	      height: 0px;
       }
 
       .slider {
@@ -154,13 +154,13 @@
 	      top: 0;
 	      left: 0;
 	      bottom: 0;
-	      right: 0;
+	     right: 0; 
 	      background-color: #ccc;
 	      -webkit-transition: .4s;
 	      transition: .4s;
+	      
       }
-
-      .slider:before {
+	      .slider:before {
 	      position: absolute;
 	      content: "";
 	      height: 26px;
@@ -672,11 +672,11 @@ function initMap() {
 	showLiveOnly();
 	toggleStores();
 }
-
 function searchClicked(){
 	searchedStores = [];
 
-	var searchstring = encodeURI(document.getElementById('searchtextfield').value);
+	var searchstring = encodeURI(document.getElementById('searchtextfield').value).toLowerCase();
+	
 	if(searchstring!=""){
 		searchInProgress = true;
 
@@ -687,23 +687,30 @@ function searchClicked(){
 		searchedStores = [];
 		return;
 	}
-
+	searchstring = searchstring.replace(/%20/g, " ");
 		
 
 	var max = 0;
 	var arr = [];
 	let r;
 	let comparestring;
-	if(searchstring.includes("tnt")){
+			if(searchstring.includes("street") || searchstring.includes("avenue") || searchstring.includes("boulevard") || searchstring.includes(" highway") || searchstring.includes("+")  || searchstring.includes("-") || searchstring.includes(" ") || searchstring.includes(" and ")){
+			//account for misspellings
+			let variations = getVariations(searchstring);
+			for(let p = 0; p<variations.length;p++){
+				searchstring += " "+variations[p];
+			}
+		}
+
+if(searchstring.includes("tnt")){
 			searchstring = "t&t "+searchstring;
 		}
-		if(searchstring.includes("+") || searchstring.includes("&") || searchstring.includes("-")){
-			//account for misspellings	
-		}
-	for(let x = 0; x<markers.length;x++){
+
+		for(let x = 0; x<markers.length;x++){
 		comparestring = names[x]+" "+address[x]+" "+keywords[x];
-				r = Math.max(fuzzball.token_set_ratio(searchstring, comparestring), fuzzball.ratio(searchstring, comparestring)); 
-		arr.push(r);
+			//	r = Math.max(fuzzball.token_set_ratio(searchstring, comparestring), fuzzball.ratio(searchstring, comparestring)); 
+			r = fuzzball.token_set_ratio(searchstring, comparestring)
+			arr.push(r);
 		if(r>max){
 			max = r;
 		}
@@ -721,6 +728,37 @@ function searchClicked(){
 	if(state=='historical'){ showHistorical();}
 	if(state=='all') { showAll();}
 	displaySearched();
+}
+
+function getVariations(word){
+	let arr = [];
+
+	if(word.includes("+")){
+		arr.push(word.replace(/\+/g, " and "));
+	}
+	if(word.includes("-")){
+		arr.push(word.replace(/-/g, " "));
+	}
+	if(word.includes(" ")){
+		arr.push(word.replace(/ /g, "-"));
+		arr.push(word.replace(/ /g, ""));
+	}
+	if(word.includes(" and ")){
+		arr.push(word.replace(/ and /g, "&"));
+	}
+	if(word.includes("street")){
+		arr.push(word.replace(/street/g, "st"));
+	}
+	if(word.includes("avenue")){
+		arr.push(word.replace(/avenue/g, "ave"));
+	}
+	if(word.includes("boulevard")){
+		arr.push(word.replace(/boulevard/g, "blvd"));
+	}
+	if(word.includes("highway")){
+		arr.push(word.replace(/highway/g, "hwy"));
+	}
+	return arr;
 }
 
 
