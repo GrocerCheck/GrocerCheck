@@ -196,7 +196,7 @@
       }
       #toggle{
 	      position: absolute;
-	      top: 10%;
+	      top: 20%;
 	      left: 1%;
 	      background-color: #fff;
 	      z-index: 21;
@@ -244,6 +244,139 @@
       form.search input:hover[type=image]{
 	      background: #4BE360;
       }
+      
+
+#navtoggle
+{
+  display: block;
+  position: absolute;
+  top: 10%;
+  left: 1%;
+    z-index: 500;
+ bottom: 0; 
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#navtoggle a
+{
+  text-decoration: none;
+  color: #232323;
+  
+  transition: color 0.3s ease;
+}
+
+#navtoggle a:hover
+{
+  color: forestgreen;
+}
+
+#navtoggle input
+{
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: 3px;
+ background: #fff; 
+  cursor: pointer;
+  
+  opacity: 0; /* hide this */
+  z-index: 1001; /* and place it over the hamburger */
+  
+  -webkit-touch-callout: none;
+}
+#navtoggle span
+{
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+left: 10px;
+  background: #3AB64B;
+  border-radius: 3px;
+
+  z-index: 1000;
+
+  transform-origin: 4px 0px;
+
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#navtoggle span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#navtoggle span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+#navtoggle input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #3AB64B;
+}
+#navtoggle input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+#navtoggle input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(0, -1px);
+}
+#navmenu
+{
+  position: absolute;
+  display: block;
+  width: 300px;
+  margin: -100px 0 0 -50px;
+  padding: 50px;
+  padding-top: 125px;
+  height: auto;
+  top: 0;
+ bottom: 0; 
+ z-index: 500; 
+  background: #ededed;
+  
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  /* to stop flickering of text in safari */
+  
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+#navmenu ul{
+z-index: 500;
+
+}
+#spansquare{
+	position: absolute;
+	background: #fff;
+	top: -6px;
+	left: 5px;
+	width: 40px;
+	height: 34px;
+	border: 1px solid #999;
+}
+#navmenu li
+{
+  padding: 10px 0;
+  font-size: 22px;
+}
+#navtoggle input:checked ~ ul
+{
+
+  transform: none;
+}
 
 		</style>
 
@@ -251,6 +384,23 @@
 
 	</head>
 	<body>
+
+
+		<nav role="navigation">
+			<div id="navtoggle">
+				<input type="checkbox" id="hamburgerbutton"/>
+				<div id='spansquare'>	</div>
+					<span></span>
+					<span></span>
+					<span></span>
+				
+
+				<ul id="navmenu">
+					<a href="#"><li>Home</li></a>
+					<a href="#"><li>About Us</li></a>
+				</ul>
+			</div>
+		</nav>
 
 
 		
@@ -544,12 +694,15 @@ function searchClicked(){
 	var arr = [];
 	let r;
 	let comparestring;
-	for(let x = 0; x<markers.length;x++){
-		comparestring = names[x]+" "+address[x]+" "+keywords[x];
+	if(searchstring.includes("tnt")){
+			searchstring = "t&t "+searchstring;
+		}
 		if(searchstring.includes("+") || searchstring.includes("&") || searchstring.includes("-")){
 			//account for misspellings	
 		}
-		r = Math.max(fuzzball.token_set_ratio(searchstring, comparestring), fuzzball.ratio(searchstring, comparestring)); 
+	for(let x = 0; x<markers.length;x++){
+		comparestring = names[x]+" "+address[x]+" "+keywords[x];
+				r = Math.max(fuzzball.token_set_ratio(searchstring, comparestring), fuzzball.ratio(searchstring, comparestring)); 
 		arr.push(r);
 		if(r>max){
 			max = r;
