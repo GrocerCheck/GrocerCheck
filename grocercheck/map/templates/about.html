@@ -3,116 +3,120 @@
 <html>
 	<head>
 		<style>
- #navtoggle
-{
-  display: block;
-  position: absolute;
-  top: 10%;
-  left: 1%;
-    z-index: 500;
- bottom: 0;
-  -webkit-user-select: none;
-  user-select: none;
+.fa {
+	font-size: 30px;
+}
+
+#navtoggle
+	{
+	display: block;
+	position: absolute;
+	top: 10%;
+	left: 1%;
+	z-index: 500;
+	bottom: 0;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 #navtoggle a
-{
-  text-decoration: none;
-  color: #232323;
+	{
+	text-decoration: none;
+	color: #232323;
 
-  transition: color 0.3s ease;
+	transition: color 0.3s ease;
 }
 
 #navtoggle a:hover
-{
-  color: forestgreen;
+	{
+	color: forestgreen;
 }
 
 #navtoggle input
-{
-  display: block;
-  width: 40px;
-  height: 32px;
-  position: absolute;
-  top: -7px;
-  left: 3px;
- background: #fff;
-  cursor: pointer;
+	{
+	display: block;
+	width: 40px;
+	height: 32px;
+	position: absolute;
+	top: -7px;
+	left: 3px;
+	background: #fff;
+	cursor: pointer;
 
-  opacity: 0; /* hide this */
-  z-index: 1001; /* and place it over the hamburger */
+	opacity: 0; /* hide this */
+	z-index: 1001; /* and place it over the hamburger */
 
-  -webkit-touch-callout: none;
+	-webkit-touch-callout: none;
 }
 #navtoggle span
-{
-  display: block;
-  width: 33px;
-  height: 4px;
-  margin-bottom: 5px;
-  position: relative;
-left: 10px;
-  background: #3AB64B;
-  border-radius: 3px;
+	{
+	display: block;
+	width: 33px;
+	height: 4px;
+	margin-bottom: 5px;
+	position: relative;
+	left: 10px;
+	background: #3AB64B;
+	border-radius: 3px;
 
-  z-index: 1000;
+	z-index: 1000;
 
-  transform-origin: 4px 0px;
+	transform-origin: 4px 0px;
 
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              opacity 0.55s ease;
+	transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+	background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+	opacity 0.55s ease;
 }
 
 #navtoggle span:first-child
-{
-  transform-origin: 0% 0%;
+	{
+	transform-origin: 0% 0%;
 }
 
 #navtoggle span:nth-last-child(2)
 {
-  transform-origin: 0% 100%;
+	transform-origin: 0% 100%;
 }
 #navtoggle input:checked ~ span
-{
-  opacity: 1;
-  transform: rotate(45deg) translate(-2px, -1px);
-  background: #3AB64B;
+	{
+	opacity: 1;
+	transform: rotate(45deg) translate(-2px, -1px);
+	background: #3AB64B;
 }
 #navtoggle input:checked ~ span:nth-last-child(3)
 {
-  opacity: 0;
-  transform: rotate(0deg) scale(0.2, 0.2);
+	opacity: 0;
+	transform: rotate(0deg) scale(0.2, 0.2);
 }
 #navtoggle input:checked ~ span:nth-last-child(2)
 {
-  transform: rotate(-45deg) translate(0, -1px);
+	transform: rotate(-45deg) translate(0, -1px);
 }
 #navmenu
-{
-  position: absolute;
-  display: block;
-  width: 300px;
-  margin: -100px 0 0 -50px;
-  padding: 50px;
-  padding-top: 125px;
-  height: auto;
-  top: 0;
- bottom: 0;
- z-index: 500;
-  background: #ededed;
+	{
+	position: absolute;
+	display: block;
+	width: 300px;
+	margin: -100px 0 0 -50px;
+	padding: 50px;
+	padding-top: 125px;
+	height: auto;
+	top: 0;
+	bottom: 0;
+	z-index: 500;
+	background: #ededed;
 
-  list-style-type: none;
-  -webkit-font-smoothing: antialiased;
-  /* to stop flickering of text in safari */
+	list-style-type: none;
+	-webkit-font-smoothing: antialiased;
+	/* to stop flickering of text in safari */
 
-  transform-origin: 0% 0%;
-  transform: translate(-100%, 0);
+	transform-origin: 0% 0%;
+	transform: translate(-100%, 0);
 
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+	transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
 }
 #navmenu ul{
-z-index: 500;
+	z-index: 500;
 
 }
 #spansquare{
@@ -125,28 +129,119 @@ z-index: 500;
 	border: 1px solid #999;
 }
 #navmenu li
-{
-  padding: 10px 0;
-  font-size: 22px;
+	{
+	padding: 10px 0;
+	font-size: 22px;
 }
 #navtoggle input:checked ~ ul
-{
+	{
 
-  transform: none;
+	transform: none;
+}
+
+#socialmedia{
+	position: fixed;
+	bottom: 5%;
+	left: 5%;
+	width: 90%;
+	height: 10%;
+	border: 3px solid #3AB64B;
+	border-radius: 15px;
+	text-align: center;
+	}
+ul#socialmedialist {
+	margin: 0;
+		padding-left:0;
+		text-align: center;
+		height: 100%;
+			
+}
+li {
+	text-align: center;
+	height: 90%;
+	vertical-align:middle;
+	}
+#socialmedialist li{
+	list-style-type: none;
+	display: inline;
+	font-size: 30px;
+margin-top: 5%;	
+	height: 90%;
+		}
+
+li a{
+	display: inline-block;
+	text-align: center;
+	height: 90%;
+	width: calc(88% / 5);
+	margin:0;
+	margin-left: 1%;
+	margin-right: 1%;
+	font-size: 30px;
+	text-decoration: none;
+						
+}
+.fa-facebook {
+background: #3B5998;
+  color: white;
+	}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.fa-instagram {
+  background:#E1306C;
+  color: white;
+}
+
+.fa-github{
+background: #24292E;
+color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
 }
 
 
 		</style>
-<link rel='icon' type='image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
+		<link rel='icon' type='image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
 	</head>
 	<body>
-<nav role="navigation">
+
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+		<div id="socialmedia">
+			
+			<ul id="socialmedialist">
+				
+				<li><a href="#" class="fa fa-facebook"></a></li>
+				<li><a href="#" class="fa fa-instagram"></a></li>
+				<li><a href="#" class="fa fa-linkedin"></a></li>
+				<li><a href="#" class="fa fa-github"></a></li>
+				<li><a href="#" class="fa fa-twitter"></a></li>
+				
+
+			</ul>
+
+		</div>
+
+
+
+		<nav role="navigation">
 			<div id="navtoggle">
 				<input type="checkbox" id="hamburgerbutton"/>
 				<div id='spansquare'>	</div>
-					<span></span>
-					<span></span>
-					<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
 
 
 				<ul id="navmenu">
@@ -157,7 +252,7 @@ z-index: 500;
 		</nav>
 
 
-	<h1>About Us</h1>
+		<h1>About Us</h1>
 
 	</body>
 </html>
