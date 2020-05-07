@@ -16,123 +16,39 @@
       }
       #floating_menu{
 	      position: absolute;
-	      top: 10px;
-	      left: 50%;
-	      z-index: 5;
+	      top: 20%;
+	      left: 1%;
+	      z-index: 50;
+	      height: auto;
 	      background-color: #fff;
 	      padding: 5px;
 	      border: 1px solid #999;
-	      width: 40%;
-	      height: 45px;
+	      width: 6em;
 	      border-radius: 15px;
       }
-      .container{
-	      display:inline;
+
+      #floating_menu label{
+	      display: block;
+	      margin: 0;
+	     margin-top: 6px;
+	     margin-bottom: 6px;
 	      position: relative;
-	      margin-bottom: 12px;
 	      cursor: pointer;
-	      font-size: 22px;
+	      padding-left: 0;
+	      font-size: 18px;
 	      -webkit-user-select: none;
 	      -moz-user-select: none;
 	      -ms-user-select: none;
 	      user-select: none;
+	      text-align: center;
+		border-radius: 10px;
       }
-      .container input{
+      #floating_menu input{
 	      position: absolute;
 	      opacity: 0;
-	      cursor: pointer;
-      }
-      .checkmark {
-	      position: absolute;
-	      top: 0;
-	      left: 0;
-	      height: 25px;
-	      width: 25px;
-	      background-color: #eee;
-	      border-radius: 50%;
-      }
-      .container:hover input ~ .checkmark {
-	      background-color: #ccc;
       }
 
-      .container input:checked ~ .checkmark {
-	      background-color: #3AB64B
-      }
-      .checkmark:after {
-	      content: "";
-	      position: absolute;
-	      display: none;
-      }
-      .container input:checked ~ .chechmark:after {
-	      display:inline;
-      }
-      .container .checkmark:after{
-	      top:9px;
-	      left:9px;
-	      width: 8px;
-	      height:8px;
-	      border-radius: 50%;
-	      background:white;
-      }
-      ul#buttons li{
-	      z-index: 10;
-	      display: inline;
-	      margin:0;
-	      padding:0;
 
-      }
-      .leftitem{
-	      display: inline-block;
-	      position:absolute;
-	      left: calc(50% - calc(228.44px / 2) - 30px - calc(108.89px / 2));
-
-      }
-      .middleitem{
-	      display: inline-block;
-	      position: absolute;
-	      left: 50%;
-      }
-      .rightitem{
-	      display: inline-block;
-	      position: absolute;
-	      left: calc(50% + calc(228.44px / 2) + 30px + calc(66.83px / 2));
-      }
-
-      .lefttext{
-	      padding-left:0px;
-	      padding-right: 30px;
-	      margin:0;
-      }
-      .middletext{
-	      padding-left:30px;
-	      padding-right: 30px;
-	      margin:0;
-      }
-      .righttext{
-	      padding-left:30px;
-	      padding-right: 0px;
-	      margin:0px;
-      }
-      ul#buttonlabels li{
-	      display:inline;
-	      text-align: center;
-      }
-      ul#buttonlabels{
-	      margin-bottom:0px;
-	      margin-top: 0px;
-	      padding-top: 0px;
-	      padding-bottom:0px;
-	      padding-left:0px;
-	      text-align: center;
-      }
-      ul#buttons{
-	      z-index: 20;
-	      text-align: center;
-	      position: relative;
-	      margin: 0px;
-	      padding: 0px;
-	      width: 100%;
-      }
 
       .switch {
 	      position: absolute;
@@ -144,7 +60,7 @@
       }
 
       .switch input {
-	      	      opacity: 0;
+	      opacity: 0;
 	      width: 0px;
 	      height: 0px;
       }
@@ -155,13 +71,13 @@
 	      top: 0;
 	      left: 0;
 	      bottom: 0;
-	     right: 0; 
+	      right: 0;
 	      background-color: #ccc;
 	      -webkit-transition: .4s;
 	      transition: .4s;
-	      
+
       }
-	      .slider:before {
+      .slider:before {
 	      position: absolute;
 	      content: "";
 	      height: 26px;
@@ -197,7 +113,7 @@
       }
       #toggle{
 	      position: absolute;
-	      top: 20%;
+	      top: 50%;
 	      left: 1%;
 	      background-color: #fff;
 	      z-index: 21;
@@ -246,141 +162,142 @@
       form.search input:hover[type=image]{
 	      background: #4BE360;
       }
-      
 
-#navtoggle
-{
-  display: block;
-  position: absolute;
-  top: 10%;
-  left: 1%;
-    z-index: 500;
- bottom: 0; 
-  -webkit-user-select: none;
-  user-select: none;
-  
-}
 
-#navtoggle a
-{
-  text-decoration: none;
-  color: #232323;
-  
-  transition: color 0.3s ease;
-}
+      #navtoggle
+	      {
+	      display: block;
+	      position: absolute;
+	      top: 10%;
+	      left: 1%;
+	      z-index: 500;
+	      bottom: 0;
+	      width: 0;
+	      -webkit-user-select: none;
+	      user-select: none;
 
-#navtoggle a:hover
-{
-  color: forestgreen;
-}
+      }
 
-#navtoggle input
-{
-  display: block;
-  width: 40px;
-  height: 32px;
-  position: absolute;
-  top: -7px;
-  left: 3px;
- background: #fff; 
-  cursor: pointer;
- border-radius: 15px; 
-  opacity: 0; /* hide this */
-  z-index: 1001; /* and place it over the hamburger */
-  
-  -webkit-touch-callout: none;
-}
-#navtoggle span
-{
-  display: block;
-  width: 33px;
-  height: 4px;
-  margin-bottom: 5px;
-  position: relative;
-left: 10px;
-  background: #3AB64B;
-  border-radius: 3px;
+      #navtoggle a
+	      {
+	      text-decoration: none;
+	      color: #232323;
 
-  z-index: 1000;
+	      transition: color 0.3s ease;
+      }
 
-  transform-origin: 4px 0px;
+      #navtoggle a:hover
+	      {
+	      color: forestgreen;
+      }
 
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              opacity 0.55s ease;
-}
+      #navtoggle input
+	      {
+	      display: block;
+	      width: 40px;
+	      height: 32px;
+	      position: absolute;
+	      top: -7px;
+	      left: 3px;
+	      background: #fff;
+	      cursor: pointer;
+	      border-radius: 15px;
+	      opacity: 0; /* hide this */
+	      z-index: 1001; /* and place it over the hamburger */
 
-#navtoggle span:first-child
-{
-  transform-origin: 0% 0%;
-}
+	      -webkit-touch-callout: none;
+      }
+      #navtoggle span
+	      {
+	      display: block;
+	      width: 33px;
+	      height: 4px;
+	      margin-bottom: 5px;
+	      position: relative;
+	      left: 10px;
+	      background: #3AB64B;
+	      border-radius: 3px;
 
-#navtoggle span:nth-last-child(2)
-{
-  transform-origin: 0% 100%;
-}
-#navtoggle input:checked ~ span
-{
-  opacity: 1;
-  transform: rotate(45deg) translate(-2px, -1px);
-  background: #3AB64B;
-}
-#navtoggle input:checked ~ span:nth-last-child(3)
-{
-  opacity: 0;
-  transform: rotate(0deg) scale(0.2, 0.2);
-}
-#navtoggle input:checked ~ span:nth-last-child(2)
-{
-  transform: rotate(-45deg) translate(0, -1px);
-}
-#navmenu
-{
-  position: absolute;
-  display: block;
-  width: 300px;
-  margin: -100px 0 0 -50px;
-  padding: 50px;
-  padding-top: 125px;
-  height: auto;
-  top: 0;
- bottom: 0; 
- z-index: 500; 
-  background: #ededed;
-  
-  list-style-type: none;
-  -webkit-font-smoothing: antialiased;
-  /* to stop flickering of text in safari */
-  
-  transform-origin: 0% 0%;
-  transform: translate(-100%, 0);
-  
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-}
-#navmenu ul{
-z-index: 500;
+	      z-index: 1000;
 
-}
-#spansquare{
-	position: absolute;
-	background: #fff;
-	top: -6px;
-	left: 5px;
-	width: 40px;
-	height: 34px;
-	border: 1px solid #999;
-	border-radius: 5px;
-}
-#navmenu li
-{
-  padding: 10px 0;
-  font-size: 22px;
-}
-#navtoggle input:checked ~ ul
-{
+	      transform-origin: 4px 0px;
 
-  transform: none;
-}
+	      transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+	      background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+	      opacity 0.55s ease;
+      }
+
+      #navtoggle span:first-child
+	      {
+	      transform-origin: 0% 0%;
+      }
+
+      #navtoggle span:nth-last-child(2)
+      {
+	      transform-origin: 0% 100%;
+      }
+      #navtoggle input:checked ~ span
+	      {
+	      opacity: 1;
+	      transform: rotate(45deg) translate(-2px, -1px);
+	      background: #3AB64B;
+      }
+      #navtoggle input:checked ~ span:nth-last-child(3)
+      {
+	      opacity: 0;
+	      transform: rotate(0deg) scale(0.2, 0.2);
+      }
+      #navtoggle input:checked ~ span:nth-last-child(2)
+      {
+	      transform: rotate(-45deg) translate(0, -1px);
+      }
+      #navmenu
+	      {
+	      position: absolute;
+	      display: block;
+	      width: 300px;
+	      margin: -100px 0 0 -50px;
+	      padding: 50px;
+	      padding-top: 125px;
+	      height: auto;
+	      top: 0;
+	      bottom: 0;
+	      z-index: 500;
+	      background: #ededed;
+
+	      list-style-type: none;
+	      -webkit-font-smoothing: antialiased;
+	      /* to stop flickering of text in safari */
+
+	      transform-origin: 0% 0%;
+	      transform: translate(-100%, 0);
+
+	      transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+      }
+      #navmenu ul{
+	      z-index: 500;
+
+      }
+      #spansquare{
+	      position: absolute;
+	      background: #fff;
+	      top: -6px;
+	      left: 5px;
+	      width: 40px;
+	      height: 34px;
+	      border: 1px solid #999;
+	      border-radius: 5px;
+      }
+      #navmenu li
+	      {
+	      padding: 10px 0;
+	      font-size: 22px;
+      }
+      #navtoggle input:checked ~ ul
+	      {
+
+	      transform: none;
+      }
 
 		</style>
 
@@ -394,10 +311,10 @@ z-index: 500;
 			<div id="navtoggle">
 				<input type="checkbox" id="hamburgerbutton"/>
 				<div id='spansquare'>	</div>
-					<span></span>
-					<span></span>
-					<span></span>
-				
+				<span></span>
+				<span></span>
+				<span></span>
+
 
 				<ul id="navmenu">
 					<a href="{% url 'index' %}"><li>Home</li></a>
@@ -407,7 +324,7 @@ z-index: 500;
 		</nav>
 
 
-		
+
 		<div id="searchbar">
 			<form class="search" onsubmit='return false;'>
 				<input id='searchtextfield' type="text" placeholder="Search..." name="searchfield"></input>
@@ -420,39 +337,19 @@ z-index: 500;
 
 		<div id="floating_menu">
 
+			<label class="container" id="livecontainer" for="livebutton">Show Live Data Only
+				<input id="livebutton" type="radio" checked="checked" onclick="showLiveOnly()" name="radio">
+			</label>
 
-			<ul id="buttonlabels" style="color:forestgreen">
+			<label class="container" id="histcontainer" for="histbutton">
+				Live and Historical Data
+				<input id="histbutton" type="radio" onclick="showHistorical()" name="radio">
+			</label>
 
-
-				<b>
-					<li class='lefttext'>Live Data Only </li>
-					<li class='middletext'> Live and Historical Data</li>
-					<li class='righttext'> All Stores </li>
-				</b>
-			</ul>
-			<ul id="buttons">
-
-				<li class="leftitem"><label class="container">
-						<input onclick="showLiveOnly()" text-align type="radio" name="visibility" id="live" checked="checked" >
-						<span class="checkmark"></span>
-
-
-
-					</label></li>
-					<li class="middleitem"><label class="container">
-							<input onclick="showHistorical()"  type="radio"  name="visibility" id="historical">
-							<span class="checkmark"></span>
-						</label></li>
-
-						<li class="rightitem"><label class="container">
-								<input onclick="showAll()" type="radio" name="visibility" id="all" >
-								<span class="checkmark"></span>
-							</label>
-
-
-			</ul>
-
-
+			<label class="container" id="allcontainer" for="allbutton">
+				Show All Stores
+				<input id="allbutton" type="radio" onclick="showAll()"  name="radio">
+			</label>
 		</div>
 
 		<div id="toggle">
@@ -468,7 +365,7 @@ z-index: 500;
 
 		<!--The div element for the map -->
 		<div id="map"></div>
-<script src="https://cdn.jsdelivr.net/npm/fuzzball@1.3.0/dist/fuzzball.umd.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/fuzzball@1.3.0/dist/fuzzball.umd.min.js"></script>
 		<script>
 
 			var livemarkers = []
@@ -518,7 +415,7 @@ function initMap() {
 
 	names = {{name|safe}}
 
-	
+
 	var place_id = {{place_id|safe}}
 
 	address = {{address|safe}}
@@ -680,7 +577,7 @@ function searchClicked(){
 	searchedStores = [];
 
 	var searchstring = encodeURI(document.getElementById('searchtextfield').value).toLowerCase();
-	
+
 	if(searchstring!=""){
 		searchInProgress = true;
 
@@ -692,38 +589,38 @@ function searchClicked(){
 		return;
 	}
 	searchstring = searchstring.replace(/%20/g, " ");
-		
+
 
 	var max = 0;
 	var arr = [];
 	let r;
 	let comparestring;
-			if(searchstring.includes("street") || searchstring.includes("avenue") || searchstring.includes("boulevard") || searchstring.includes(" highway") || searchstring.includes("+")  || searchstring.includes("-") || searchstring.includes(" ") || searchstring.includes(" and ")){
-			//account for misspellings
-			let variations = getVariations(searchstring);
-			for(let p = 0; p<variations.length;p++){
-				searchstring += " "+variations[p];
-			}
+	if(searchstring.includes("street") || searchstring.includes("avenue") || searchstring.includes("boulevard") || searchstring.includes(" highway") || searchstring.includes("+")  || searchstring.includes("-") || searchstring.includes(" ") || searchstring.includes(" and ")){
+		//account for misspellings
+		let variations = getVariations(searchstring);
+		for(let p = 0; p<variations.length;p++){
+			searchstring += " "+variations[p];
 		}
+	}
 
-if(searchstring.includes("tnt")){
-			searchstring = "t&t "+searchstring;
-		}
+	if(searchstring.includes("tnt")){
+		searchstring = "t&t "+searchstring;
+	}
 
-		for(let x = 0; x<markers.length;x++){
+	for(let x = 0; x<markers.length;x++){
 		comparestring = names[x]+" "+address[x]+" "+keywords[x];
-			//	r = Math.max(fuzzball.token_set_ratio(searchstring, comparestring), fuzzball.ratio(searchstring, comparestring)); 
-			r = fuzzball.token_set_ratio(searchstring, comparestring)
-			arr.push(r);
+		//	r = Math.max(fuzzball.token_set_ratio(searchstring, comparestring), fuzzball.ratio(searchstring, comparestring));
+		r = fuzzball.token_set_ratio(searchstring, comparestring)
+		arr.push(r);
 		if(r>max){
 			max = r;
 		}
 	}
-	
+
 	for(let x = 0; x<markers.length;x++){
-				
+
 		if(arr[x] > max*0.75){
-						searchedStores.push(markers[x]);
+			searchedStores.push(markers[x]);
 
 		}
 
@@ -770,7 +667,7 @@ function displaySearched(){
 	for(let x = 0; x<markers.length;x++){
 		if(markers[x].getVisible()){
 			if(searchedStores.includes(markers[x])==false){
-				markers[x].setMap(null);	
+				markers[x].setMap(null);
 			}
 		}
 	}
@@ -807,7 +704,9 @@ function checkState(){
 }
 
 function showLiveOnly(){
-
+	document.getElementById("livecontainer").style.background = "#3AB64B";
+	document.getElementById("histcontainer").style.background = "transparent";
+	document.getElementById("allcontainer").style.background = "transparent";
 	for(let x = 0; x<livemarkers.length;x++){
 		livemarkers[x].setMap(map);
 	}
@@ -825,6 +724,9 @@ function showLiveOnly(){
 
 
 function showHistorical(){
+	document.getElementById("livecontainer").style.background = "transparent";
+	document.getElementById("histcontainer").style.background = "#3AB64B";
+	document.getElementById("allcontainer").style.background = "transparent";
 
 
 	for(let x = 0; x<livemarkers.length;x++){
@@ -845,6 +747,10 @@ function showHistorical(){
 }
 
 function showAll(){
+	document.getElementById("livecontainer").style.background = "transparent";
+	document.getElementById("histcontainer").style.background = "transparent";
+	document.getElementById("allcontainer").style.background = "#3AB64B";
+
 	for(let x = 0; x<livemarkers.length;x++){
 		livemarkers[x].setMap(map);
 	}
