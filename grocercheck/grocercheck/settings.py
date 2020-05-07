@@ -133,6 +133,10 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'America/Vancouver'
 
+#store lumaniti ip & keys somewhere
+#LUMANITI=open("", "r").readline()
+
+#change task to 'update_current_popularity_with_proxy', add LUMANITI as argument
 
 CELERY_BEAT_SCHEDULE = {
     'UPDATE_POPULARITY':{
