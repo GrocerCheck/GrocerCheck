@@ -27,7 +27,6 @@ from django.urls import include
 
 urlpatterns += [
         path('map/', include('map.urls')),
-
 ]
 
 from django.views.generic import RedirectView
