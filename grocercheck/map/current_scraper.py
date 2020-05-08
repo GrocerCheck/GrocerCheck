@@ -35,20 +35,13 @@ def update_row(conn, data, row_id):
     days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
     cur = conn.cursor()
     try:
-        print(data['current_popularity'])
-    except:
-        print("getfucked")
-    try:
         if (data['current_popularity'] is None) == False:
-            print(row_id, data['current_popularity'])
-            print("UPDATEROW")
             cur.execute("UPDATE map_store SET live_busyness=? WHERE id=?", (data['current_popularity'], row_id))
 
         else:
             cur.execute("UPDATE map_store SET live_busyness=NULL WHERE id=?", (row_id)) #if no live busyness, set to null (clean up!)
             log.append("CANNOT RETRIEVE LIVE BUSYNESS FOR STORE id"+str(row_id))
     except:
-        print("excepted")
         log.append("CURRENT POPULARITY KEY ERROR FOR STORE id"+str(row_id))
     conn.commit()
     return(log)
@@ -114,20 +107,16 @@ def get_formatted_addresses(country, conn):
         address = get_col_with_id(conn, "address", i)[0][0]
         name = get_col_with_id(conn, "name", i)[0][0]
         formatted_address_list.append("({name}) {address}, {country}".format(name=name, address=address, country = country))
-    print("got formatted addresses, ids")
     return (formatted_address_list, ids)
 
 def update_current_popularity(addr_and_id, conn, doBackup, doLog, proxy, num_processes):
-    print("made function call")
     formatted_address_list = addr_and_id[0]
     open_ids = addr_and_id[1][0]
     closed_ids = addr_and_id[1][0]
     global BACKUP
     global LOG
-    print("generated addreses")
 
     if ((num_processes is None) == True):
-        print("num proccesses None")
         for ind in range(len(formatted_address_list)):
             place_data = lpt.get_populartimes_by_formatted_address(formatted_address_list[ind], proxy)
             log = update_row(conn, place_data, open_ids[ind]) #sql id starts at 1
@@ -145,18 +134,14 @@ def update_current_popularity(addr_and_id, conn, doBackup, doLog, proxy, num_pro
         conn.commit()
 
     else:
-        print("Num_processes is ", num_processes)
-        print(len(open_ids), "openids len")
         pool = Pool(num_processes)
         place_data = {}
 
         for ind in range(len(formatted_address_list)):
             #place_data[ind] =  pool.apply_async(lpt.get_populartimes_by_formatted_address, args=(formatted_address_list[ind], proxy,))
             place_data[ind] =  pool.apply_async(lpt.get_populartimes_by_formatted_address, args=(formatted_address_list[ind], ))
-        print("made all calls")
         for ind in range(len(formatted_address_list)):
             place_data[ind] = place_data[ind].get()
-        print("got all placedata")
         for ind in range(len(formatted_address_list)):
             log = update_row(conn, place_data[ind], open_ids[ind]) #sql id starts at 1
             if doBackup == True:
@@ -184,18 +169,10 @@ def run_scraper(country, doBackup = False, doLog = False, proxy = False, num_pro
     :param proxy: (optional) proxy ip, default = False
     :param num_threads: (optional) number of threads to run, default = None
     """
-    print(country, doBackup, doLog, proxy, num_processes)
     global LOG
     #conn = create_connection("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3")
     conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/db1.sqlite3")
-    print("created conn")
     try:
-        print("try")
         update_current_popularity(get_formatted_addresses(country, conn), conn, doBackup, doLog, proxy, num_processes)
     except:
         LOG.write("ERROR IN update_current_popularity\r\n")
-
-
-conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/db1.sqlite3")
-
-run_scraper("Canada", num_processes = 16)
