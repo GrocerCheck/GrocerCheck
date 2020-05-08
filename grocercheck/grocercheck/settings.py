@@ -25,7 +25,7 @@ SECRET_KEY = '$*7$lu*br%(vzw%o$d289!5236)6%5(lz_3s((36-9=4^8w$@p'
 # SECURITY WARNING: don't run with debug turned on in production
 DEBUG = True
 
-ALLOWED_HOSTS = ['dev.grocercheck.ca','grocercheck.ca', 'home.grocercheck.ca', 'test.grocercheck.ca', 'vancouver.grocercheck.ca','52.10.195.42','127.0.0.1']
+ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca','grocercheck.ca', 'home.grocercheck.ca', 'test.grocercheck.ca', 'vancouver.grocercheck.ca','52.10.195.42','127.0.0.1']
 
 
 # Application definition
