@@ -40,7 +40,6 @@ def update_row(conn, data, row_id):
         if (data['current_popularity'] is None) == False:
             cur.execute("UPDATE map_store SET live_busyness=? WHERE id=?", (data['current_popularity'], row_id))
             conn.commit()
-            print(cur.execute("SELECT live_busyness FROM map_store WHERE id=?"), (row_id,).fetchall(), " | ", data['live_busyness'])
         else:
             cur.execute("UPDATE map_store SET live_busyness=NULL WHERE id=?", (row_id)) #if no live busyness, set to null (clean up!)
             log.append("CANNOT RETRIEVE LIVE BUSYNESS FOR STORE id"+str(row_id))

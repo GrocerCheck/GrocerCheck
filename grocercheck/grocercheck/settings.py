@@ -142,7 +142,7 @@ CELERY_TIMEZONE = 'America/Vancouver'
 CELERY_BEAT_SCHEDULE = {
     'UPDATE_POPULARITY':{
     'task': 'update_current_popularity',
-    'schedule': crontab(minute="*/15",), #every 30 minutes between 6am-11pm, everyday
+    'schedule': crontab(minute="*/15",), #every 15 min, 24/7
         'args': ("Canada", False, False, p, 8), #arguments to pass to the function goes here
 # Country, doBackup, doLogy, proxy, num_processes
 
