@@ -36,8 +36,8 @@ def update_row(conn, data, row_id):
     cur = conn.cursor()
     try:
         if (data['current_popularity'] is None) == False:
+            print(data['current_popularity'], data['name'], data['address'])
             cur.execute("UPDATE map_store SET live_busyness=? WHERE id=?", (data['current_popularity'], row_id))
-
         else:
             cur.execute("UPDATE map_store SET live_busyness=NULL WHERE id=?", (row_id)) #if no live busyness, set to null (clean up!)
             log.append("CANNOT RETRIEVE LIVE BUSYNESS FOR STORE id"+str(row_id))
@@ -52,7 +52,6 @@ def get_open_closed_ids(conn):
     localhour = vancouver_time.hour
     localminute = vancouver_time.minute
     weekday = vancouver_time.weekday()
-
     days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
     cur = conn.cursor()
     cur.execute("SELECT id, {day}hours FROM map_store where address IS NOT NULL AND name IS NOT NULL AND fri00 IS NOT NULL".format(day=days[weekday]))
@@ -110,9 +109,9 @@ def get_formatted_addresses(country, conn):
     return (formatted_address_list, ids)
 
 def update_current_popularity(addr_and_id, conn, doBackup, doLog, proxy, num_processes):
-    formatted_address_list = addr_and_id[0]
+    formatted_address_list = addr_and_id[0] #formatted addresses of all open valid stores
     open_ids = addr_and_id[1][0]
-    closed_ids = addr_and_id[1][0]
+    closed_ids = addr_and_id[1][1]
     global BACKUP
     global LOG
 
@@ -131,15 +130,13 @@ def update_current_popularity(addr_and_id, conn, doBackup, doLog, proxy, num_pro
         cur = conn.cursor()
 #clean up closed stores
         cur.execute("UPDATE map_store SET live_busyness=NULL WHERE id IN {closed}".format(closed=tuple(closed_ids)))
-        conn.commit()
-
+        cur.commit()
     else:
         pool = Pool(num_processes)
         place_data = {}
-
         for ind in range(len(formatted_address_list)):
-            #place_data[ind] =  pool.apply_async(lpt.get_populartimes_by_formatted_address, args=(formatted_address_list[ind], proxy,))
-            place_data[ind] =  pool.apply_async(lpt.get_populartimes_by_formatted_address, args=(formatted_address_list[ind], ))
+            place_data[ind] =  pool.apply_async(lpt.get_populartimes_by_formatted_address, args=(formatted_address_list[ind], proxy,))
+            #place_data[ind] =  pool.apply_async(lpt.get_populartimes_by_formatted_address, args=(formatted_address_list[ind], ))
         for ind in range(len(formatted_address_list)):
             place_data[ind] = place_data[ind].get()
         for ind in range(len(formatted_address_list)):
@@ -151,12 +148,11 @@ def update_current_popularity(addr_and_id, conn, doBackup, doLog, proxy, num_pro
                 for entry in log:
                     LOG.write(entry)
                     LOG.write("\r\n")
-
         cur = conn.cursor()
+        print(open_ids, closed_ids, len(open_ids), len(closed_ids), len(set(open_ids + closed_ids)))
 #clean up closed stores
         cur.execute("UPDATE map_store SET live_busyness=NULL WHERE id IN {closed}".format(closed=tuple(closed_ids)))
         conn.commit()
-
     return
 
 def run_scraper(country, doBackup = False, doLog = False, proxy = False, num_processes = None):
@@ -170,7 +166,12 @@ def run_scraper(country, doBackup = False, doLog = False, proxy = False, num_pro
     global LOG
     conn = create_connection("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3")
     # conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/db1.sqlite3")
+    cur = conn.cursor()
+    # print(cur.execute("SELECT id, name, live_busyness FROM map_store WHERE live_busyness IS NOT NULL").fetchall())
     try:
         update_current_popularity(get_formatted_addresses(country, conn), conn, doBackup, doLog, proxy, num_processes)
+        conn.commit()
+        print("\n\n\n\n")
+        # print(cur.execute("SELECT id, name, live_busyness FROM map_store WHERE live_busyness IS NOT NULL").fetchall())
     except:
         LOG.write("ERROR IN update_current_popularity\r\n")
