@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import json
 from celery.schedules import crontab
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -123,6 +124,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/opt/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/map/static/'
 
 
+#--------------------------------PROXY------------------------------
+p = json.load(open("/home/bitnami/keys/luminati.txt"))
 
 #----------------------------------CELERY----------------------------------------------
 
@@ -133,19 +136,15 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'America/Vancouver'
 
-#store lumaniti ip & keys somewhere
-#LUMANITI=open("", "r").readline()
-
-#change task to 'update_current_popularity_with_proxy', add LUMANITI as argument
 
 CELERY_BEAT_SCHEDULE = {
     'UPDATE_POPULARITY':{
     'task': 'update_current_popularity',
     'schedule': crontab(minute="*/15",), #every 30 minutes between 6am-11pm, everyday
-    #use 'schedule': crontab() for more complex schedules
-    'args': ("Canada", False, False), #arguments to pass to the function goes here
+        'args': ("Canada", False, False, p, 8), #arguments to pass to the function goes here
+# Country, doBackup, doLogy, proxy, num_processes
+
     }
-##repeat the same format as 'taskone' for other scheduled tasks
 }
 
 

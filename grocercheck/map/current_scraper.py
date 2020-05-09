@@ -10,11 +10,11 @@ from multiprocessing.pool import Pool
 
 #--------GLOBAL VAR---------------#
 
-#BACKUP = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_raw_data.json", "a+")
-#LOG = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_log.txt", "a+")
+BACKUP = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_raw_data.json", "a+")
+LOG = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_log.txt", "a+")
 
-BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/backup.json", "a+")
-LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/LOG.txt", "a+")
+# BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/backup.json", "a+")
+# LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/LOG.txt", "a+")
 
 def create_connection(db_file):
     conn = None
@@ -159,8 +159,6 @@ def update_current_popularity(addr_and_id, conn, doBackup, doLog, proxy, num_pro
 
     return
 
-
-
 def run_scraper(country, doBackup = False, doLog = False, proxy = False, num_processes = None):
     """
     :param country: country to append to formatted address
@@ -170,8 +168,8 @@ def run_scraper(country, doBackup = False, doLog = False, proxy = False, num_pro
     :param num_threads: (optional) number of threads to run, default = None
     """
     global LOG
-    #conn = create_connection("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3")
-    conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/db1.sqlite3")
+    conn = create_connection("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3")
+    # conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/db1.sqlite3")
     try:
         update_current_popularity(get_formatted_addresses(country, conn), conn, doBackup, doLog, proxy, num_processes)
     except:
