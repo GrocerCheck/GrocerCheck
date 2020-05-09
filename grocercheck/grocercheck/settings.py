@@ -125,8 +125,10 @@ STATIC_ROOT = '/opt/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/
 
 
 #--------------------------------PROXY------------------------------
-p = json.load(open("/home/bitnami/keys/luminati.txt"))
-
+try:
+    p = json.load(open("/home/bitnami/keys/luminati.txt"))
+except:
+    p = {}
 #----------------------------------CELERY----------------------------------------------
 
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
