@@ -6,10 +6,15 @@ import sys
 import datetime
 import time
 import pytz
+from multiprocessing.pool import Pool
+
 #--------GLOBAL VAR---------------#
 
 BACKUP = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_raw_data.json", "a+")
 LOG = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_log.txt", "a+")
+
+# BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/backup.json", "a+")
+# LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/LOG.txt", "a+")
 
 def create_connection(db_file):
     conn = None
@@ -93,6 +98,8 @@ def get_valid_ids(conn):
     return ids
 
 def get_formatted_addresses(country, conn):
+    #returns formatted addresses in open ids
+    #no point multi-processing this: memory concerns & it's fast enough anyways (for now)
     ids = get_open_closed_ids(conn)
     open_ids = ids[0]
     formatted_address_list = []
@@ -102,37 +109,68 @@ def get_formatted_addresses(country, conn):
         formatted_address_list.append("({name}) {address}, {country}".format(name=name, address=address, country = country))
     return (formatted_address_list, ids)
 
-def update_current_popularity(addr_and_id, doBackup, doLog, conn):
+def update_current_popularity(addr_and_id, conn, doBackup, doLog, proxy, num_processes):
     formatted_address_list = addr_and_id[0]
     open_ids = addr_and_id[1][0]
     closed_ids = addr_and_id[1][0]
     global BACKUP
     global LOG
-    for ind in range(len(formatted_address_list)):
-        place_data = lpt.get_populartimes_by_formatted_address(formatted_address_list[ind])
-        log = update_row(conn, place_data, open_ids[ind]) #sql id starts at 1
-        if doBackup == True:
-            BACKUP.write(json.dumps(place_data, indent=4))
-            BACKUP.write("\r\n")
 
-        if doLog == True:
-            for entry in log:
-                LOG.write(entry)
-                LOG.write("\r\n")
-    cur = conn.cursor()
+    if ((num_processes is None) == True):
+        for ind in range(len(formatted_address_list)):
+            place_data = lpt.get_populartimes_by_formatted_address(formatted_address_list[ind], proxy)
+            log = update_row(conn, place_data, open_ids[ind]) #sql id starts at 1
+            if doBackup == True:
+                BACKUP.write(json.dumps(place_data, indent=4))
+                BACKUP.write("\r\n")
+
+            if doLog == True:
+                for entry in log:
+                    LOG.write(entry)
+                    LOG.write("\r\n")
+        cur = conn.cursor()
 #clean up closed stores
-    cur.execute("UPDATE map_store SET live_busyness=NULL WHERE id IN {closed}".format(closed=tuple(closed_ids)))
-    conn.commit()
+        cur.execute("UPDATE map_store SET live_busyness=NULL WHERE id IN {closed}".format(closed=tuple(closed_ids)))
+        conn.commit()
+
+    else:
+        pool = Pool(num_processes)
+        place_data = {}
+
+        for ind in range(len(formatted_address_list)):
+            #place_data[ind] =  pool.apply_async(lpt.get_populartimes_by_formatted_address, args=(formatted_address_list[ind], proxy,))
+            place_data[ind] =  pool.apply_async(lpt.get_populartimes_by_formatted_address, args=(formatted_address_list[ind], ))
+        for ind in range(len(formatted_address_list)):
+            place_data[ind] = place_data[ind].get()
+        for ind in range(len(formatted_address_list)):
+            log = update_row(conn, place_data[ind], open_ids[ind]) #sql id starts at 1
+            if doBackup == True:
+                BACKUP.write(json.dumps(place_data, indent=4))
+                BACKUP.write("\r\n")
+            if doLog == True:
+                for entry in log:
+                    LOG.write(entry)
+                    LOG.write("\r\n")
+
+        cur = conn.cursor()
+#clean up closed stores
+        cur.execute("UPDATE map_store SET live_busyness=NULL WHERE id IN {closed}".format(closed=tuple(closed_ids)))
+        conn.commit()
+
     return
 
-def run_scraper(country, doBackup, doLog):
+def run_scraper(country, doBackup = False, doLog = False, proxy = False, num_processes = None):
+    """
+    :param country: country to append to formatted address
+    :param doBackup:  backup raw json data, default = False
+    :param doLog: error/success log, default = False
+    :param proxy: (optional) proxy ip, default = False
+    :param num_threads: (optional) number of threads to run, default = None
+    """
     global LOG
     conn = create_connection("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3")
+    # conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/db1.sqlite3")
     try:
-        update_current_popularity(get_formatted_addresses(country, conn), doBackup, doLog, conn)
-
+        update_current_popularity(get_formatted_addresses(country, conn), conn, doBackup, doLog, proxy, num_processes)
     except:
         LOG.write("ERROR IN update_current_popularity\r\n")
-
-
-
