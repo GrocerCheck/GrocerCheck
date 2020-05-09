@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>GrocerCheck: Your Local Supermarket Social Distancing Search Engine</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<style>
 /* Set the size of the div element that contains the map */
 #map {
@@ -30,8 +32,8 @@
       #floating_menu label{
 	      display: block;
 	      margin: 0;
-	     margin-top: 6px;
-	     margin-bottom: 6px;
+	      margin-top: 6px;
+	      margin-bottom: 6px;
 	      position: relative;
 	      cursor: pointer;
 	      padding-left: 0;
@@ -41,7 +43,7 @@
 	      -ms-user-select: none;
 	      user-select: none;
 	      text-align: center;
-		border-radius: 10px;
+	      border-radius: 10px;
       }
       #floating_menu input{
 	      position: absolute;
@@ -298,6 +300,65 @@
 
 	      transform: none;
       }
+      #helpbuttondiv{
+	      position: absolute;
+	      top: 10px;
+	      left: 50%;
+	      width: 55px;
+	      height: 55px;
+	      z-index: 501;
+	      border: 1px solid #999;
+
+
+      }
+      #helpbutton{
+	      background-color: #3AB64B;
+	      border: none;
+	      color: white;
+	      font-size: 40px;
+	      cursor: pointer;
+	      padding: 0;
+	      height: 100%;
+	      width: 100%;
+	      padding-left: 15px;
+	      padding-right: 15px;
+      }
+
+      .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 100000; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
 
 		</style>
 
@@ -306,6 +367,32 @@
 	</head>
 	<body>
 
+		<div id="helpbuttondiv">
+			<button id="helpbutton"><i class="fa fa-question"></i></button>
+		</div>
+
+		<div id="modaldiv" class="modal">
+			<div class="modal-content">
+				<span class="close" id="close">&times;</span>
+				<p>lorem ipsum</p>
+			</div>
+		</div>
+
+	<script>
+		document.getElementById("helpbutton").onclick = function(){
+			
+			document.getElementById("modaldiv").style.display = "block";
+		}
+		document.getElementById("close").onclick = function(){
+			document.getElementById("modaldiv").style.display = "none";
+		}
+window.onclick = function(event){
+	if(event.target == document.getElementById("modaldiv")){
+		document.getElementById("modaldiv").style.display = "none";
+	}
+}
+
+	</script>
 
 		<nav role="navigation">
 			<div id="navtoggle">
@@ -360,6 +447,7 @@
 
 			</label>
 		</div>
+
 
 
 
@@ -586,6 +674,8 @@ function searchClicked(){
 
 		searchInProgress = false;
 		searchedStores = [];
+		displaySearched();
+		filterByState();
 		return;
 	}
 	searchstring = searchstring.replace(/%20/g, " ");
@@ -673,6 +763,17 @@ function displaySearched(){
 	}
 }
 
+function filterByState(){
+	if(state=='live'){
+		showLiveOnly();
+	}
+	if(state=='historical'){
+		showHistorical();
+	}
+	if(state=='all'){
+		showAll();
+	}
+}
 
 function handleLocationError(hasgeo, pos){
 	if(hasgeo){
