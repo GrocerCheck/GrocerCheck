@@ -616,7 +616,10 @@ function initMap() {
 			b-=1000;
 		}
 		if(b>=0){
-			if(b>=70){
+			if(b>100){
+				return "rgb(255,0,255)";
+			}
+			else if(b>=70){
 				return "rgb(255, 0, 0)";
 			}
 			else if(b>=35){
