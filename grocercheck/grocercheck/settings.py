@@ -141,13 +141,12 @@ CELERY_TIMEZONE = 'America/Vancouver'
 
 CELERY_BEAT_SCHEDULE = {
     'UPDATE_POPULARITY':{
-    'task': 'update_current_popularity',
-    'schedule': crontab(minute="*/15",), #every 15 min, 24/7
-        'args': ("Canada", False, False, p, 8), #arguments to pass to the function goes here
-# Country, doBackup, doLogy, proxy, num_processes
-
-    }
+    'task': 'hardcoded_scrape',
+        'schedule': crontab(minute="*/5",), #every 15 min, 24/7
+        #'args': ("Canada", False, False, p, 8), #arguments to pass to the function goes here
+# Country, doBackup, doLog, proxy, num_processe
 }
+
 
 
 

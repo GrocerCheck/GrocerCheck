@@ -172,15 +172,16 @@ def update_current_popularity(addr_and_id, conn, doBackup, doLog, proxy, num_pro
         cur = conn.cursor()
         cur.execute("UPDATE map_store SET live_busyness=NULL WHERE id IN {closed}".format(closed=tuple(closed_ids)))
         conn.commit()
-    return
+        print("cleaned up and commited")
+        return
 
 def run_scraper(country, doBackup = False, doLog = False, proxy = False, num_processes = None):
     """
     :param country: country to append to formatted address
-    :param doBackup:  backup raw json data, default = False
-    :param doLog: error/success log, default = False
+    :param doBackup:  (optional) backup raw json data, default = False
+    :param doLog: (optional) error/success log, default = False
     :param proxy: (optional) proxy ip, default = False
-    :param num_threads: (optional) number of threads to run, default = None
+    :param num_processes (optional) number of threads to run, default = None
     """
     global LOG
     conn = create_connection("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3")
@@ -192,7 +193,3 @@ def run_scraper(country, doBackup = False, doLog = False, proxy = False, num_pro
         # print(cur.execute("SELECT id, name, live_busyness FROM map_store WHERE live_busyness IS NOT NULL").fetchall())
     except:
         LOG.write("ERROR IN update_current_popularity\r\n")
-
-import json
-p = json.load(open("/home/bitnami/keys/luminati.txt"))
-
