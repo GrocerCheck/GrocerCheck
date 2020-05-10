@@ -7,7 +7,8 @@ import sys
 import datetime
 import time
 import pytz
-from multiprocessing.pool import Pool
+from multiprocessing.dummy import Pool #for compatability w/ celery
+
 
 #--------GLOBAL VAR---------------#
 
@@ -121,9 +122,10 @@ def update_current_popularity(addr_and_id, conn, doBackup, doLog, proxy, num_pro
     formatted_address_list = addr_and_id[0] #formatted addresses of all open valid stores
     open_ids = addr_and_id[1][0]
     closed_ids = addr_and_id[1][1]
-    #print("LEN OPEN: ", len(open_ids), "LEN CLOSED: ", len(closed_ids))
+    print("LEN OPEN: ", len(open_ids), "LEN CLOSED: ", len(closed_ids))
     global BACKUP
     global LOG
+
     if ((num_processes is None) == True):
         #for ind in range(10):
         for ind in range(len(formatted_address_list)):
@@ -141,6 +143,8 @@ def update_current_popularity(addr_and_id, conn, doBackup, doLog, proxy, num_pro
 #clean up closed stores
         cur.execute("UPDATE map_store SET live_busyness=NULL WHERE id IN {closed}".format(closed=tuple(closed_ids)))
         cur.commit()
+
+
     else:
         pool = Pool(num_processes)
         place_data = {}
@@ -172,7 +176,6 @@ def update_current_popularity(addr_and_id, conn, doBackup, doLog, proxy, num_pro
         cur = conn.cursor()
         cur.execute("UPDATE map_store SET live_busyness=NULL WHERE id IN {closed}".format(closed=tuple(closed_ids)))
         conn.commit()
-        print("cleaned up and commited")
         return
 
 def run_scraper(country, doBackup = False, doLog = False, proxy = False, num_processes = None):
@@ -186,10 +189,10 @@ def run_scraper(country, doBackup = False, doLog = False, proxy = False, num_pro
     global LOG
     conn = create_connection("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3")
     # conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/db1.sqlite3")
-    # print(cur.execute("SELECT id, name, live_busyness FROM map_store WHERE live_busyness IS NOT NULL").fetchall())
     try:
         update_current_popularity(get_formatted_addresses(country, conn), conn, doBackup, doLog, proxy, num_processes)
         conn.commit()
-        # print(cur.execute("SELECT id, name, live_busyness FROM map_store WHERE live_busyness IS NOT NULL").fetchall())
+        print("complete update")
     except:
+        print("YOU GOT EXCEPTED BITCH")
         LOG.write("ERROR IN update_current_popularity\r\n")
