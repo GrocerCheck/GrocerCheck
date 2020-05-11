@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>GrocerCheck: Your Local Supermarket Social Distancing Search Engine</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<style>
 /* Set the size of the div element that contains the map */
 #map {
@@ -16,122 +18,39 @@
       }
       #floating_menu{
 	      position: absolute;
-	      top: 10px;
-	      left: 50%;
-	      z-index: 5;
+	      top: 20%;
+	      left: 1%;
+	      z-index: 50;
+	      height: auto;
 	      background-color: #fff;
 	      padding: 5px;
 	      border: 1px solid #999;
-	      width: 40%;
-	      height: 45px;
+	      width: 6em;
+	      border-radius: 15px;
       }
-      .container{
-	      display:inline;
+
+      #floating_menu label{
+	      display: block;
+	      margin: 0;
+	      margin-top: 6px;
+	      margin-bottom: 6px;
 	      position: relative;
-	      margin-bottom: 12px;
 	      cursor: pointer;
-	      font-size: 22px;
+	      padding-left: 0;
+	      font-size: 18px;
 	      -webkit-user-select: none;
 	      -moz-user-select: none;
 	      -ms-user-select: none;
 	      user-select: none;
+	      text-align: center;
+	      border-radius: 10px;
       }
-      .container input{
+      #floating_menu input{
 	      position: absolute;
 	      opacity: 0;
-	      cursor: pointer;
-      }
-      .checkmark {
-	      position: absolute;
-	      top: 0;
-	      left: 0;
-	      height: 25px;
-	      width: 25px;
-	      background-color: #eee;
-	      border-radius: 50%;
-      }
-      .container:hover input ~ .checkmark {
-	      background-color: #ccc;
       }
 
-      .container input:checked ~ .checkmark {
-	      background-color: #3AB64B
-      }
-      .checkmark:after {
-	      content: "";
-	      position: absolute;
-	      display: none;
-      }
-      .container input:checked ~ .chechmark:after {
-	      display:inline;
-      }
-      .container .checkmark:after{
-	      top:9px;
-	      left:9px;
-	      width: 8px;
-	      height:8px;
-	      border-radius: 50%;
-	      background:white;
-      }
-      ul#buttons li{
-	      z-index: 10;
-	      display: inline;
-	      margin:0;
-	      padding:0;
 
-      }
-      .leftitem{
-	      display: inline-block;
-	      position:absolute;
-	      left: calc(50% - calc(228.44px / 2) - 30px - calc(108.89px / 2));
-
-      }
-      .middleitem{
-	      display: inline-block;
-	      position: absolute;
-	      left: 50%;
-      }
-      .rightitem{
-	      display: inline-block;
-	      position: absolute;
-	      left: calc(50% + calc(228.44px / 2) + 30px + calc(66.83px / 2));
-      }
-
-      .lefttext{
-	      padding-left:0px;
-	      padding-right: 30px;
-	      margin:0;
-      }
-      .middletext{
-	      padding-left:30px;
-	      padding-right: 30px;
-	      margin:0;
-      }
-      .righttext{
-	      padding-left:30px;
-	      padding-right: 0px;
-	      margin:0px;
-      }
-      ul#buttonlabels li{
-	      display:inline;
-	      text-align: center;
-      }
-      ul#buttonlabels{
-	      margin-bottom:0px;
-	      margin-top: 0px;
-	      padding-top: 0px;
-	      padding-bottom:0px;
-	      padding-left:0px;
-	      text-align: center;
-      }
-      ul#buttons{
-	      z-index: 20;
-	      text-align: center;
-	      position: relative;
-	      margin: 0px;
-	      padding: 0px;
-	      width: 100%;
-      }
 
       .switch {
 	      position: absolute;
@@ -144,8 +63,8 @@
 
       .switch input {
 	      opacity: 0;
-	      width: 0;
-	      height: 0;
+	      width: 0px;
+	      height: 0px;
       }
 
       .slider {
@@ -158,8 +77,8 @@
 	      background-color: #ccc;
 	      -webkit-transition: .4s;
 	      transition: .4s;
-      }
 
+      }
       .slider:before {
 	      position: absolute;
 	      content: "";
@@ -196,11 +115,12 @@
       }
       #toggle{
 	      position: absolute;
-	      top: 20%;
+	      top: 50%;
 	      left: 1%;
 	      background-color: #fff;
 	      z-index: 21;
 	      border: 1px solid #999;
+	      border-radius: 0 0 15px 15px;
       }
 
       #searchbar {
@@ -244,139 +164,201 @@
       form.search input:hover[type=image]{
 	      background: #4BE360;
       }
-      
 
-#navtoggle
-{
-  display: block;
-  position: absolute;
-  top: 10%;
-  left: 1%;
-    z-index: 500;
- bottom: 0; 
-  -webkit-user-select: none;
-  user-select: none;
-}
 
-#navtoggle a
-{
-  text-decoration: none;
-  color: #232323;
-  
-  transition: color 0.3s ease;
-}
+      #navtoggle
+	      {
+	      display: block;
+	      position: absolute;
+	      top: 10%;
+	      left: 1%;
+	      z-index: 500;
+	      bottom: 0;
+	      width: 0;
+	      -webkit-user-select: none;
+	      user-select: none;
 
-#navtoggle a:hover
-{
-  color: forestgreen;
-}
+      }
 
-#navtoggle input
-{
-  display: block;
-  width: 40px;
-  height: 32px;
-  position: absolute;
-  top: -7px;
-  left: 3px;
- background: #fff; 
-  cursor: pointer;
-  
-  opacity: 0; /* hide this */
-  z-index: 1001; /* and place it over the hamburger */
-  
-  -webkit-touch-callout: none;
-}
-#navtoggle span
-{
-  display: block;
-  width: 33px;
-  height: 4px;
-  margin-bottom: 5px;
-  position: relative;
-left: 10px;
-  background: #3AB64B;
-  border-radius: 3px;
+      #navtoggle a
+	      {
+	      text-decoration: none;
+	      color: #232323;
 
-  z-index: 1000;
+	      transition: color 0.3s ease;
+      }
 
-  transform-origin: 4px 0px;
+      #navtoggle a:hover
+	      {
+	      color: forestgreen;
+      }
 
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              opacity 0.55s ease;
-}
+      #navtoggle input
+	      {
+	      display: block;
+	      width: 40px;
+	      height: 32px;
+	      position: absolute;
+	      top: -7px;
+	      left: 3px;
+	      background: #fff;
+	      cursor: pointer;
+	      border-radius: 15px;
+	      opacity: 0; /* hide this */
+	      z-index: 1001; /* and place it over the hamburger */
 
-#navtoggle span:first-child
-{
-  transform-origin: 0% 0%;
-}
+	      -webkit-touch-callout: none;
+      }
+      #navtoggle span
+	      {
+	      display: block;
+	      width: 33px;
+	      height: 4px;
+	      margin-bottom: 5px;
+	      position: relative;
+	      left: 10px;
+	      background: #3AB64B;
+	      border-radius: 3px;
 
-#navtoggle span:nth-last-child(2)
-{
-  transform-origin: 0% 100%;
-}
-#navtoggle input:checked ~ span
-{
-  opacity: 1;
-  transform: rotate(45deg) translate(-2px, -1px);
-  background: #3AB64B;
-}
-#navtoggle input:checked ~ span:nth-last-child(3)
-{
-  opacity: 0;
-  transform: rotate(0deg) scale(0.2, 0.2);
-}
-#navtoggle input:checked ~ span:nth-last-child(2)
-{
-  transform: rotate(-45deg) translate(0, -1px);
-}
-#navmenu
-{
-  position: absolute;
-  display: block;
-  width: 300px;
-  margin: -100px 0 0 -50px;
-  padding: 50px;
-  padding-top: 125px;
-  height: auto;
-  top: 0;
- bottom: 0; 
- z-index: 500; 
-  background: #ededed;
-  
-  list-style-type: none;
-  -webkit-font-smoothing: antialiased;
-  /* to stop flickering of text in safari */
-  
-  transform-origin: 0% 0%;
-  transform: translate(-100%, 0);
-  
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-}
-#navmenu ul{
-z-index: 500;
+	      z-index: 1000;
 
-}
-#spansquare{
-	position: absolute;
-	background: #fff;
-	top: -6px;
-	left: 5px;
-	width: 40px;
-	height: 34px;
-	border: 1px solid #999;
-}
-#navmenu li
-{
-  padding: 10px 0;
-  font-size: 22px;
-}
-#navtoggle input:checked ~ ul
-{
+	      transform-origin: 4px 0px;
 
-  transform: none;
-}
+	      transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+	      background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+	      opacity 0.55s ease;
+      }
+
+      #navtoggle span:first-child
+	      {
+	      transform-origin: 0% 0%;
+      }
+
+      #navtoggle span:nth-last-child(2)
+      {
+	      transform-origin: 0% 100%;
+      }
+      #navtoggle input:checked ~ span
+	      {
+	      opacity: 1;
+	      transform: rotate(45deg) translate(-2px, -1px);
+	      background: #3AB64B;
+      }
+      #navtoggle input:checked ~ span:nth-last-child(3)
+      {
+	      opacity: 0;
+	      transform: rotate(0deg) scale(0.2, 0.2);
+      }
+      #navtoggle input:checked ~ span:nth-last-child(2)
+      {
+	      transform: rotate(-45deg) translate(0, -1px);
+      }
+      #navmenu
+	      {
+	      position: absolute;
+	      display: block;
+	      width: 300px;
+	      margin: -100px 0 0 -50px;
+	      padding: 50px;
+	      padding-top: 125px;
+	      height: auto;
+	      top: 0;
+	      bottom: 0;
+	      z-index: 500;
+	      background: #ededed;
+
+	      list-style-type: none;
+	      -webkit-font-smoothing: antialiased;
+	      /* to stop flickering of text in safari */
+
+	      transform-origin: 0% 0%;
+	      transform: translate(-100%, 0);
+
+	      transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+      }
+      #navmenu ul{
+	      z-index: 500;
+
+      }
+      #spansquare{
+	      position: absolute;
+	      background: #fff;
+	      top: -6px;
+	      left: 5px;
+	      width: 40px;
+	      height: 34px;
+	      border: 1px solid #999;
+	      border-radius: 5px;
+      }
+      #navmenu li
+	      {
+	      padding: 10px 0;
+	      font-size: 22px;
+      }
+      #navtoggle input:checked ~ ul
+	      {
+
+	      transform: none;
+      }
+      #helpbuttondiv{
+	      position: absolute;
+	      top: 10px;
+	      left: 50%;
+	      width: 55px;
+	      height: 55px;
+	      z-index: 501;
+	      border: 1px solid #999;
+
+
+      }
+      #helpbutton{
+	      background-color: #3AB64B;
+	      border: none;
+	      color: white;
+	      font-size: 40px;
+	      cursor: pointer;
+	      padding: 0;
+	      height: 100%;
+	      width: 100%;
+	      padding-left: 15px;
+	      padding-right: 15px;
+      }
+
+      .modal {
+	      display: none; /* Hidden by default */
+	      position: fixed; /* Stay in place */
+	      z-index: 100000; /* Sit on top */
+	      padding-top: 100px; /* Location of the box */
+	      left: 0;
+	      top: 0;
+	      width: 100%; /* Full width */
+	      height: 100%; /* Full height */
+	      overflow: auto; /* Enable scroll if needed */
+	      background-color: rgb(0,0,0); /* Fallback color */
+	      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      }
+      .modal-content {
+	      background-color: #fefefe;
+	      margin: auto;
+	      padding: 20px;
+	      border: 1px solid #888;
+	      width: 80%;
+      }
+
+      /* The Close Button */
+      .close {
+	      color: #aaaaaa;
+	      float: right;
+	      font-size: 28px;
+	      font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+	      color: #000;
+	      text-decoration: none;
+	      cursor: pointer;
+      }
 
 		</style>
 
@@ -385,25 +367,55 @@ z-index: 500;
 	</head>
 	<body>
 
+		<div id="helpbuttondiv">
+			<button id="helpbutton"><i class="fa fa-question"></i></button>
+		</div>
+
+		<div id="modaldiv" class="modal">
+			<div class="modal-content">
+				<span class="close" id="close">&times;</span>
+				<p>lorem ipsum</p>
+			</div>
+		</div>
+
+		<script>
+			document.getElementById("helpbutton").onclick = function(){
+
+				document.getElementById("modaldiv").style.display = "block";
+			}
+document.getElementById("close").onclick = function(){
+	document.getElementById("modaldiv").style.display = "none";
+}
+window.onclick = function(event){
+	if(event.target == document.getElementById("modaldiv")){
+		document.getElementById("modaldiv").style.display = "none";
+	}
+}
+
+		</script>
 
 		<nav role="navigation">
 			<div id="navtoggle">
 				<input type="checkbox" id="hamburgerbutton"/>
 				<div id='spansquare'>	</div>
-					<span></span>
-					<span></span>
-					<span></span>
-				
+				<span></span>
+				<span></span>
+				<span></span>
+
 
 				<ul id="navmenu">
-					<a href="#"><li>Home</li></a>
-					<a href="#"><li>About Us</li></a>
+					<a href="{% url 'index' %}"><li>Home</li></a>
+					<a href="{% url 'about' %}"><li>About Us</li></a>
+					<a href="{% url 'blog' %}"><li>Blog</li></a>
+					<a href="{% url 'sponsors' %}"><li>Sponsors</li></a>
+					<a href="{% url 'contact' %}"><li>Contact Us</li></a>
+					<a href="{% url 'media' %}"><li>Media</li></a>
 				</ul>
 			</div>
 		</nav>
 
 
-		
+
 		<div id="searchbar">
 			<form class="search" onsubmit='return false;'>
 				<input id='searchtextfield' type="text" placeholder="Search GrocerCheck (Try name, address, location, or near me!)" name="searchfield"></input>
@@ -416,55 +428,36 @@ z-index: 500;
 
 		<div id="floating_menu">
 
+			<label class="container" id="livecontainer" for="livebutton">Show Live Data Only
+				<input id="livebutton" type="radio" checked="checked" onclick="showLiveOnly()" name="radio">
+			</label>
 
-			<ul id="buttonlabels" style="color:forestgreen">
+			<label class="container" id="histcontainer" for="histbutton">
+				Live and Historical Data
+				<input id="histbutton" type="radio" onclick="showHistorical()" name="radio">
+			</label>
 
-
-				<b>
-					<li class='lefttext'>Live Data Only </li>
-					<li class='middletext'> Live and Historical Data</li>
-					<li class='righttext'> All Stores </li>
-				</b>
-			</ul>
-			<ul id="buttons">
-
-				<li class="leftitem"><label class="container">
-						<input onclick="showLiveOnly()" text-align type="radio" name="visibility" id="live" checked="checked" >
-						<span class="checkmark"></span>
-
-
-
-					</label></li>
-					<li class="middleitem"><label class="container">
-							<input onclick="showHistorical()"  type="radio"  name="visibility" id="historical">
-							<span class="checkmark"></span>
-						</label></li>
-
-						<li class="rightitem"><label class="container">
-								<input onclick="showAll()" type="radio" name="visibility" id="all" >
-								<span class="checkmark"></span>
-							</label>
-
-
-			</ul>
-
-
+			<label class="container" id="allcontainer" for="allbutton">
+				Show All Stores
+				<input id="allbutton" type="radio" onclick="showAll()"  name="radio">
+			</label>
 		</div>
 
 		<div id="toggle">
 			<label class="switch">
 				<input onclick="toggleStores()" type=checkbox>
 				<span class="slider round"></span>
-				<p style="color:forestgreen; margin-top:0; margin-bottom: 0; border: 1px solid #999;padding-top: 20px; text-align:center; background-color:#fff;"><b>Show Closed Stores</b></p>
+				<p style="color:forestgreen; margin-top:0;border-radius: 0 0 10px 10px; margin-bottom: 0; border: 1px solid #999;padding-top: 20px; text-align:center; background-color:#fff;"><b>Show Closed Stores</b></p>
 
 			</label>
 		</div>
 
 
 
+
 		<!--The div element for the map -->
 		<div id="map"></div>
-<script src="https://cdn.jsdelivr.net/npm/fuzzball@1.3.0/dist/fuzzball.umd.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/fuzzball@1.3.0/dist/fuzzball.umd.min.js"></script>
 		<script>
 
 			var livemarkers = []
@@ -514,7 +507,7 @@ function initMap() {
 
 	names = {{name|safe}}
 
-	
+
 	var place_id = {{place_id|safe}}
 
 	address = {{address|safe}}
@@ -574,7 +567,7 @@ function initMap() {
 		return '<div id="content">' +
 			'<h1 style="color:'+s+';"> '+names[x]+' </h1>' +
 			'<div id="body"'+
-			'<p> '+address[x]+' </p>'+
+				  '<p> '+address[x]+' </p>'+
 			'<p> '+hours[x]+' </p>'+
 			'<p> '+statusstring+' </p>'+
 			'<p> '+pops+' </p> '+
@@ -593,9 +586,13 @@ function initMap() {
 
 
 
-	function buildMarker(icona,width,height,position){
+	function buildMarker(color,radius,position){
+		if(color=="grey"){
+			return new google.maps.Marker({icon:{url:grey, scaledSize:new google.maps.Size(radius*2, radius*2)}, clickable:true, position:position, map:map});
+		}
 
-		return new google.maps.Marker({icon:{url:icona, scaledSize:new google.maps.Size(width,height)},clickable:true,position:position,map:map});
+		let pathstring = "M-"+radius+",0a"+radius+","+radius+" 0 1,0 "+(radius*2)+",0a"+radius+","+radius+" 0 1,0 -"+(radius*2)+",0";
+		return new google.maps.Marker({icon:{path:pathstring,fillColor:color, fillOpacity:0.6, strokeWeight:0},clickable:true,position:position,map:map});
 
 	}
 
@@ -612,49 +609,53 @@ function initMap() {
 
 	function getIcon(x){
 		if(openn[x]==0){
-			return grey;
+			return "grey";
 		}
 		let b = busyness[x];
 		if(busyness[x]>=1000){
 			b-=1000;
 		}
-		if(b>60){
-			return red;
-		}
-		else if(b>30){
-			return yellow;
-		}
-		else if(b>=0){
-			return green;
+		if(b>=0){
+			if(b>100){
+				return "rgb(255,0,255)";
+			}
+			else if(b>=70){
+				return "rgb(255, 0, 0)";
+			}
+			else if(b>=35){
+				return "rgb(255, "+Math.round((70-b)*(255/35))+", 0)";
+			}
+			else{
+				return "rgb("+Math.round((b)*(255/35))+", 255, 0)";
+			}
 		}
 		else{
-			return grey;
+			return "grey";
 		}
 	}
 
 	var infowindow = new google.maps.InfoWindow();
 	for(let x = 0; x<positions.length;x++){
 
-		if(busyness[x]==-1){
-			//No data available
-			var temp = buildMarker(grey,20,20,positions[x])
-			markers.push(temp)
-			allstores.push(temp);
+			      if(busyness[x]==-1){
+			      //No data available
+			      var temp = buildMarker(getIcon(x),10,positions[x])
+			      markers.push(temp)
+			      allstores.push(temp);
 
-		}
-		else if(busyness[x]>=1000){
-			//live data available
-			var busy = busyness[x]-1000;
-			icon = getIcon(x);
-			var temp = buildMarker(icon,30,30,positions[x]);
-			markers.push(temp);
-			livemarkers.push(temp);
-		}
+			      }
+			      else if(busyness[x]>=1000){
+				      //live data available
+				      var busy = busyness[x]-1000;
+
+				      var temp = buildMarker(getIcon(x),15,positions[x]);
+				      markers.push(temp);
+				      livemarkers.push(temp);
+			      }
 
 		else{
 			//only historical data available
-			icon = getIcon(x);
-			var temp = buildMarker(icon,20,20,positions[x])
+			var temp = buildMarker(getIcon(x),10,positions[x])
 			markers.push(temp)
 			historicalmarkers.push(temp)
 		}
@@ -663,207 +664,270 @@ function initMap() {
 
 	}
 	for(let k = 0; k<markers.length;k++){
-		markers[k].addListener('click',function() {
-			infowindow.setContent(buildInfoWindowString(names,address,hours,busyness,k));
-			infowindow.open(map,markers[k]);
-		});
+			      markers[k].addListener('click',function() {
+			      infowindow.setContent(buildInfoWindowString(names,address,hours,busyness,k));
+			      infowindow.open(map,markers[k]);
+			      });
 
-	}
-	showLiveOnly();
-	toggleStores();
+			      }
+
+
+
+			      showLiveOnly();
+			      toggleStores();
+			      }
+			      function searchClicked(){
+			      searchedStores = [];
+
+			      var searchstring = encodeURI(document.getElementById('searchtextfield').value).toLowerCase();
+
+			      if(searchstring!=""){
+			      searchInProgress = true;
+
+			      }
+			      else{
+
+			      searchInProgress = false;
+			      searchedStores = [];
+			      displaySearched();
+			      filterByState();
+			      return;
+			      }
+			      searchstring = searchstring.replace(/%20/g, " ");
+
+
+			      var max = 0;
+			      var arr = [];
+			      let r;
+			      let comparestring;
+			      if(searchstring.includes("street") || searchstring.includes("avenue") || searchstring.includes("boulevard") || searchstring.includes(" highway") || searchstring.includes("+")  || searchstring.includes("-") || searchstring.includes(" ") || searchstring.includes(" and ")){
+			      //account for misspellings
+			      let variations = getVariations(searchstring);
+			      for(let p = 0; p<variations.length;p++){
+			      searchstring += " "+variations[p];
+			      }
+			      }
+
+			      if(searchstring.includes("tnt")){
+			      searchstring = "t&t "+searchstring;
+			      }
+
+			      for(let x = 0; x<markers.length;x++){
+			      comparestring = names[x]+" "+address[x]+" "+keywords[x];
+							//	r = Math.max(fuzzball.token_set_ratio(searchstring, comparestring), fuzzball.ratio(searchstring, comparestring));
+							r = fuzzball.token_set_ratio(searchstring, comparestring)
+							arr.push(r);
+							if(r>max){
+							max = r;
+							}
+							}
+
+for(let x = 0; x<markers.length;x++){
+
+if(arr[x] > max*0.75){
+searchedStores.push(markers[x]);
+
 }
 
-function searchClicked(){
-	searchedStores = [];
-
-	var searchstring = encodeURI(document.getElementById('searchtextfield').value);
-	if(searchstring!=""){
-		searchInProgress = true;
-
-	}
-	else{
-
-		searchInProgress = false;
-		searchedStores = [];
-		return;
-	}
-
-		
-
-	var max = 0;
-	var arr = [];
-	let r;
-	let comparestring;
-	if(searchstring.includes("tnt")){
-			searchstring = "t&t "+searchstring;
-		}
-		if(searchstring.includes("+") || searchstring.includes("&") || searchstring.includes("-")){
-			//account for misspellings	
-		}
-	for(let x = 0; x<markers.length;x++){
-		comparestring = names[x]+" "+address[x]+" "+keywords[x];
-				r = Math.max(fuzzball.token_set_ratio(searchstring, comparestring), fuzzball.ratio(searchstring, comparestring)); 
-		arr.push(r);
-		if(r>max){
-			max = r;
-		}
-	}
-	
-	for(let x = 0; x<markers.length;x++){
-				
-		if(arr[x] > max*0.75){
-						searchedStores.push(markers[x]);
-
-		}
-
-	}
-	if(state=='live'){ showLiveOnly();}
-	if(state=='historical'){ showHistorical();}
-	if(state=='all') { showAll();}
-	displaySearched();
 }
+if(state=='live'){ showLiveOnly();}
+if(state=='historical'){ showHistorical();}
+if(state=='all') { showAll();}
+displaySearched();
+}
+
+function getVariations(word){
+let arr = [];
+
+if(word.includes("+")){
+		  arr.push(word.replace(/\+/g, " and "));
+						}
+						if(word.includes("-")){
+								  arr.push(word.replace(/-/g, " "));
+											       }
+											       if(word.includes(" ")){
+														 arr.push(word.replace(/ /g, "-"));
+																	      arr.push(word.replace(/ /g, ""));
+																					   }
+																					   if(word.includes(" and ")){
+																							     arr.push(word.replace(/ and /g, "&"));
+																											      }
+																											      if(word.includes("street")){
+																														arr.push(word.replace(/street/g, "st"));
+																																		  }
+																																		  if(word.includes("avenue")){
+																																				    arr.push(word.replace(/avenue/g, "ave"));
+																																								      }
+																																								      if(word.includes("boulevard")){
+																																											arr.push(word.replace(/boulevard/g, "blvd"));
+																																															     }
+																																															     if(word.includes("highway")){
+																																																	       arr.push(word.replace(/highway/g, "hwy"));
+																																																						  }
+																																																						  return arr;
+																																																						  }
 
 
 function displaySearched(){
-	for(let x = 0; x<markers.length;x++){
-		if(markers[x].getVisible()){
-			if(searchedStores.includes(markers[x])==false){
-				markers[x].setMap(null);	
-			}
-		}
-	}
+for(let x = 0; x<markers.length;x++){
+if(markers[x].getVisible()){
+if(searchedStores.includes(markers[x])==false){
+markers[x].setMap(null);
+}
+}
+}
 }
 
+function filterByState(){
+if(state=='live'){
+showLiveOnly();
+}
+if(state=='historical'){
+showHistorical();
+}
+if(state=='all'){
+showAll();
+}
+}
 
 function handleLocationError(hasgeo, pos){
-	if(hasgeo){
-		map.setCenter(pos);
-	}
-	else{
-		map.setCenter(pos);
-	}
+if(hasgeo){
+map.setCenter(pos);
+}
+else{
+map.setCenter(pos);
+}
 }
 
 function filterOpen(){
-	for(let x = 0; x<markers.length;x++){
-		if(openn[x]==0){
-			markers[x].setMap(null);
-		}
-	}
+for(let x = 0; x<markers.length;x++){
+if(openn[x]==0){
+markers[x].setMap(null);
+}
+}
 }
 
 function checkState(){
-	if(flag==false){
-		filterOpen();
-	}
-	if(flag==true && state=="live"){
-		filterOpen();
-	}
-	if(searchInProgress){
-		displaySearched();
-	}
+if(flag==false){
+filterOpen();
 }
+if(flag==true && state=="live"){
+			 filterOpen();
+			 }
+			 if(searchInProgress){
+			 displaySearched();
+			 }
+			 }
 
 function showLiveOnly(){
-
-	for(let x = 0; x<livemarkers.length;x++){
-		livemarkers[x].setMap(map);
-	}
-	for(let x = 0; x<historicalmarkers.length;x++){
-		historicalmarkers[x].setMap(null);
-	}
-	for(let x = 0; x<allstores.length;x++){
-		allstores[x].setMap(null);
-	}
-	state = "live";
-	checkState();
+document.getElementById("livecontainer").style.background = "#3AB64B";
+			 document.getElementById("histcontainer").style.background = "transparent";
+						  document.getElementById("allcontainer").style.background = "transparent";
+									   for(let x = 0; x<livemarkers.length;x++){
+									   livemarkers[x].setMap(map);
+									   }
+									   for(let x = 0; x<historicalmarkers.length;x++){
+									   historicalmarkers[x].setMap(null);
+									   }
+									   for(let x = 0; x<allstores.length;x++){
+									   allstores[x].setMap(null);
+									   }
+									   state = "live";
+										    checkState();
 
 }
 
 
 
 function showHistorical(){
+document.getElementById("livecontainer").style.background = "transparent";
+			 document.getElementById("histcontainer").style.background = "#3AB64B";
+						  document.getElementById("allcontainer").style.background = "transparent";
 
 
-	for(let x = 0; x<livemarkers.length;x++){
-		livemarkers[x].setMap(map);
-	}
-	for(let x = 0; x<historicalmarkers.length;x++){
+for(let x = 0; x<livemarkers.length;x++){
+livemarkers[x].setMap(map);
+}
+for(let x = 0; x<historicalmarkers.length;x++){
 
 
-		historicalmarkers[x].setMap(map);
-	}
-	for(let x = 0; x<allstores.length;x++){
-		allstores[x].setMap(null);
-	}
-	state = "historical";
-	checkState();
+historicalmarkers[x].setMap(map);
+}
+for(let x = 0; x<allstores.length;x++){
+allstores[x].setMap(null);
+}
+state = "historical";
+	 checkState();
 
 
 }
 
 function showAll(){
-	for(let x = 0; x<livemarkers.length;x++){
-		livemarkers[x].setMap(map);
-	}
-	for(let x = 0; x<historicalmarkers.length;x++){
-		historicalmarkers[x].setMap(map);
-	}
-	for(let x = 0; x<allstores.length;x++){
-		allstores[x].setMap(map);
-	}
-	state = "all";
-	checkState();
+document.getElementById("livecontainer").style.background = "transparent";
+			 document.getElementById("histcontainer").style.background = "transparent";
+						  document.getElementById("allcontainer").style.background = "#3AB64B";
+
+for(let x = 0; x<livemarkers.length;x++){
+livemarkers[x].setMap(map);
+}
+for(let x = 0; x<historicalmarkers.length;x++){
+historicalmarkers[x].setMap(map);
+}
+for(let x = 0; x<allstores.length;x++){
+allstores[x].setMap(map);
+}
+state = "all";
+	 checkState();
 
 }
 
 function toggleStores(){
 
-	if(flag){
-		//hide closed stores
+if(flag){
+//hide closed stores
 
-		for(let x = 0; x<markers.length;x++){
-			if(openn[x]==0){
-				markers[x].setMap(null);
-			}
-		}
-		flag = false;
-	}
-	else{
-		//show closed stores
+for(let x = 0; x<markers.length;x++){
+if(openn[x]==0){
+markers[x].setMap(null);
+}
+}
+flag = false;
+}
+else{
+//show closed stores
 
-		for(let x = 0; x<markers.length;x++){
+for(let x = 0; x<markers.length;x++){
 
-			if(openn[x]==0){
-				markers[x].setMap(map);
-			}
-		}
-		flag = true
-		if(state=="live"){
-			showLiveOnly();
-		}
-		if(state=="historical"){
-			showHistorical();
-		}
-		if(state=="all"){
-			showAll();
-		}
+if(openn[x]==0){
+markers[x].setMap(map);
+}
+}
+flag = true
+if(state=="live"){
+	   showLiveOnly();
+	   }
+	   if(state=="historical"){
+		      showHistorical();
+		      }
+		      if(state=="all"){
+				 showAll();
+				 }
 
-	}
+}
 
 }
 
 
 
 		</script>
-		<!--Load the API from the specified URL
-	  * The async attribute allows the browser to render the page while the API loads
-	  * The key parameter will contain your own API key (which is not needed for this tutorial)
-	  * The callback parameter executes the initMap() function
-		-->
-		<script async defer
+<!--Load the API from the specified URL
+* The async attribute allows the browser to render the page while the API loads
+* The key parameter will contain your own API key (which is not needed for this tutorial)
+* The callback parameter executes the initMap() function
+-->
+<script async defer
 
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqwU_hVg2OJ3zB7FOORGzGIdsWnXdXT-w&callback=initMap">
-		</script>
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqwU_hVg2OJ3zB7FOORGzGIdsWnXdXT-w&callback=initMap">
+</script>
 	</body>
 </html>

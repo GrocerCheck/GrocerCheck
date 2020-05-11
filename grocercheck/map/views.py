@@ -100,3 +100,19 @@ def index(request):
 
 
     return render(request,'index.html',context=finalcontext)
+
+def about(request):
+    return render(request,'about.html')
+
+def blog(request):
+    return render(request, 'blog.html')
+
+def sponsors(request):
+    return render(request, 'sponsors.html')
+
+def contact(request):
+    return render(request, 'contact.html')
+
+def media(request):
+    return render(request, 'media.html')
+

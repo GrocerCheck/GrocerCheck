@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+
+<head>
+	<title>Sponsors</title>
+
+<style>
+
+ul#navbarlist{
+	position: relative;
+	display: inline-block;
+	top: 0;
+
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: white;
+
+	top: 0;
+
+}
+ul#navbarlist li{
+	float: left;
+}
+
+ul#navbarlist li a {
+	display: block;
+	color: #999;
+	text-align: center;
+	padding: calc(1.5em * calc(2/3)) 2em;
+	text-decoration: none;
+	font-size: 1.5em;
+}
+
+ul#navbarlist li a:hover{
+	color: #3AB64B;
+}
+head{
+	background-color: white;
+}
+body{
+	background-color: #3AB64B;
+	color: white;
+}
+#horizontalnav{
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	height: 4.75em;
+	display: block;
+	background-color: white;
+	z-index: 100;
+}
+#spacer{
+position: relative;
+width: 100%;
+height: 5em;
+background-color: white;
+opacity: 0;
+z-index: 1;
+}
+.currentpage{
+	background-color: #555;
+}
+
+
+</style>
+<link rel='icon' type=image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
+</head>
+
+<body>
+
+<div id="horizontalnav">
+		<a href="{% url 'index' %}">
+			<img src="{% static 'images/GrocerCheck-01.png' %}" alt="GrocerCheck Logo" style="position: relative; left: 0; top: 0;background-color:top: 0; whitve;display: inline; padding: calc(1em / 4); padding-bottom: 0;margin: 0; float: left;margin-right: 10em;height: 4.5em; width: calc(4.5em * calc(1146 / 314)); border: 0;">
+		</a>
+
+		<ul id="navbarlist">
+			<li><a href="{% url 'index' %}">Home</a></li>
+
+			<li><a href="{% url 'about' %}">About Us</a></li>
+			<li><a href="{% url 'blog' %}">Blog</a></li>
+		<li class="currentpage"><a href="{% url 'sponsors' %}">Sponsors</a></li>
+				<li><a href="{% url 'contact' %}">Contact Us</a></li>
+				<li><a href="{% url 'media' %}">Media</a></li>	
+		</ul>
+	</div>
+
+	<div id="spacer">
+	</div>
+
+
+
+
+</body>
+
