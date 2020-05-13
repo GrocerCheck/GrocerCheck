@@ -8,6 +8,18 @@
 	font-size: 30px;
 }
 
+
+
+
+head{
+	background-color: white;
+}
+body{
+    font-family: 'Nunito';
+	background-color: white;
+	color: black;
+}
+
 #navtoggle
 	{
 	display: block;
@@ -155,10 +167,9 @@
 	padding-left: calc(1em/5);
 	padding-right: calc(1em/5);
 	border: 3px solid #3AB64B;
-	border-radius: 15px;
+	border-radius: 30px;
 	text-align: center;
 	background-color: white;
-	border: 2px solid black;
 }
 ul#socialmedialist {
 	margin: 0;
@@ -174,7 +185,6 @@ ul#socialmedialist li{
 	padding: 0;
 	margin: 0;
 	font-size: 30px;
-
 	height: 1em;
 }
 
@@ -195,26 +205,25 @@ ul#socialmedialist li a{
 
 }
 .fa-facebook {
+    border-radius: 25px;
 	background: #3B5998;
 }
 
 .fa-linkedin {
+    border-radius: 25px;
 	background: #007bb5;
 
 }
 
 .fa-instagram {
-	background:#E1306C;
+	border-radius: 25px;
+    background:#E1306C;
 
 }
 
 .fa-github{
+    border-radius: 25px;
 	background: #24292E;
-
-}
-
-.fa-twitter {
-	background: #55ACEE;
 
 }
 
@@ -222,14 +231,12 @@ ul#navbarlist{
 	position: relative;
 	display: inline-block;
 	top: 0;
-
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
 	background-color: white;
-
-	top: 0;
+    top: 0;
 
 }
 ul#navbarlist li{
@@ -237,8 +244,12 @@ ul#navbarlist li{
 }
 
 ul#navbarlist li a {
-	display: block;
-	color: #999;
+    float: right;
+    border-radius: 10px;
+    border-right: 2px solid #fff;
+    background-color: #3AB64B;
+    display: block;
+    color: white;
 	text-align: center;
 	padding: calc(1.5em * calc(2/3)) 2em;
 	text-decoration: none;
@@ -246,16 +257,11 @@ ul#navbarlist li a {
 }
 
 ul#navbarlist li a:hover{
-	color: #3AB64B;
+/* on hover on navbar */
+    background-color: #033307;
+    color: white;
 }
-head{
-	background-color: white;
-}
-body{
-    font-family: 'Nunito';
-	background-color: #3AB64B;
-	color: white;
-}
+
 #horizontalnav{
 	position: fixed;
 	width: 100%;
@@ -274,6 +280,7 @@ background-color: white;
 opacity: 0;
 z-index: 1;
 }
+
 #whoarewe{
 text-align: center;
 text-decoration: none;
@@ -311,8 +318,6 @@ background-color: #555;
 				<li><a href="https://www.instagram.com/grocercheck/" target="_blank" class="fa fa-instagram"></a></li>
 				<li><a href="https://www.linkedin.com/company/grocercheck/" target="_blank" class="fa fa-linkedin"></a></li>
 				<li><a href="https://github.com/grocercheck/" target="_blank" class="fa fa-github"></a></li>
-				<li><a href="#" class="fa fa-twitter"></a></li>
-
 
 			</ul>
 
