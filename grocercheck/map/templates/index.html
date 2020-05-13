@@ -8,357 +8,382 @@
 		<style>
 /* Set the size of the div element that contains the map */
 #map {
-	height: 100%;  /* The height is 400 pixels */
-	width: 100%;  /* The width is the width of the web page */
-}
-      html, body {
-	      height: 100%;
-	      margin: 0;
-	      padding: 0;
-      }
-      #floating_menu{
-	      position: absolute;
-	      top: 20%;
-	      left: 1%;
-	      z-index: 50;
-	      height: auto;
-	      background-color: #fff;
-	      padding: 5px;
-	      border: 1px solid #999;
-	      width: 6em;
-	      border-radius: 15px;
-      }
+	height: 100%;
+	width: 100%;
+	html, body {
+		height: 100%;
+		margin: 0;
+		padding: 0;
+	}
 
-      #floating_menu label{
-	      display: block;
-	      margin: 0;
-	      margin-top: 6px;
-	      margin-bottom: 6px;
-	      position: relative;
-	      cursor: pointer;
-	      padding-left: 0;
-	      font-size: 18px;
-	      -webkit-user-select: none;
-	      -moz-user-select: none;
-	      -ms-user-select: none;
-	      user-select: none;
-	      text-align: center;
-	      border-radius: 10px;
-      }
-      #floating_menu input{
-	      position: absolute;
-	      opacity: 0;
-      }
+	/* floating menu with live, historical, all stores buttons */
+	#floating_menu{
+		position: absolute;
+		top: 20%;
+		left: 1%;
+		z-index: 50;
+		height: auto;
+		background-color: #fff;
+		padding: 5px;
+		border: 1px solid #999;
+		width: 6em;
+		border-radius: 15px;
+	}
+	/* container for store visibility buttons */
+	#floating_menu label{
+		display: block;
+		margin: 0;
+		margin-top: 6px;
+		margin-bottom: 6px;
+		position: relative;
+		cursor: pointer;
+		padding-left: 0;
+		font-size: 18px;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		text-align: center;
+		border-radius: 10px;
+	}
 
-
-
-      .switch {
-	      position: absolute;
-	      display: inline-block;
-	      width: 60px;
-	      height: 34px;
-	      top: 10;
-	      left: 10;
-      }
-
-      .switch input {
-	      opacity: 0;
-	      width: 0px;
-	      height: 0px;
-      }
-
-      .slider {
-	      position: absolute;
-	      cursor: pointer;
-	      top: 0;
-	      left: 0;
-	      bottom: 0;
-	      right: 0;
-	      background-color: #ccc;
-	      -webkit-transition: .4s;
-	      transition: .4s;
-
-      }
-      .slider:before {
-	      position: absolute;
-	      content: "";
-	      height: 26px;
-	      width: 26px;
-	      left: 4px;
-	      bottom: 4px;
-	      background-color: white;
-	      -webkit-transition: .4s;
-	      transition: .4s;
-      }
-
-      input:checked + .slider {
-	      background-color: #3AB64B;
-      }
-
-      input:focus + .slider {
-	      box-shadow: 0 0 1px #3AB64B;
-      }
-
-      input:checked + .slider:before {
-	      -webkit-transform: translateX(26px);
-	      -ms-transform: translateX(26px);
-	      transform: translateX(26px);
-      }
-
-      /* Rounded sliders */
-      .slider.round {
-	      border-radius: 34px;
-      }
-
-      .slider.round:before {
-	      border-radius: 50%;
-      }
-      #toggle{
-	      position: absolute;
-	      top: 50%;
-	      left: 1%;
-	      background-color: #fff;
-	      z-index: 21;
-	      border: 1px solid #999;
-	      border-radius: 0 0 15px 15px;
-      }
-
-      #searchbar {
-	      position:absolute;
-	      top:10px;
-	      left: 15%;
-	      width: calc(35% - 10px);
-	      height: 55px;
-	      z-index: 25;
-	      --searchheight: 55px;
-      }
-      form.search{
-	      height: 100%;
-      }
-      form.search input[type=text] {
-	      padding: 10px;
-	      font-size: 17px;
-	      border: 1px solid #999;
-	      float: left;
-	      width: 80%;
-	      background: #f1f1f1;
-	      box-sizing: border-box;
-	      height: var(--searchheight);
-      }
-
-      form.search input[type=image]{
-	      position: absolute;
-	      left: 80%;
-	      width: var(--searchheight);
-	      height: var(--searchheight);
-	      padding: 10px;
-	      background: #3AB64B;
-	      color: white;
-	      font-size: 17px;
-	      border: 1px solid #999;
-	      border-left: none;
-	      cursor: pointer;
-	      box-sizing: border-box;
-      }
-
-      form.search input:hover[type=image]{
-	      background: #4BE360;
-      }
+	/* radio buttons, hidden */
+	#floating_menu input{
+		position: absolute;
+		opacity: 0;
+	}
 
 
-      #navtoggle
-	      {
-	      display: block;
-	      position: absolute;
-	      top: 10%;
-	      left: 1%;
-	      z-index: 500;
-	      bottom: 0;
-	      width: 0;
-	      -webkit-user-select: none;
-	      user-select: none;
+	/* class for toggle */
+	.switch {
+		position: absolute;
+		display: inline-block;
+		width: 60px;
+		height: 34px;
+		top: 10;
+		left: 10;
+	}
 
-      }
+	/* the checkbox for the toggle, hidden */
+	.switch input {
+		opacity: 0;
+		width: 0px;
+		height: 0px;
+	}
 
-      #navtoggle a
-	      {
-	      text-decoration: none;
-	      color: #232323;
+	/* span for the custom toggle */
+	.slider {
+		position: absolute;
+		cursor: pointer;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		background-color: #ccc;
+		-webkit-transition: .4s;
+		transition: .4s;
 
-	      transition: color 0.3s ease;
-      }
+	}
 
-      #navtoggle a:hover
-	      {
-	      color: forestgreen;
-      }
+	/* custom white dot inside toggle */
+	.slider:before {
+		position: absolute;
+		content: "";
+		height: 26px;
+		width: 26px;
+		left: 4px;
+		bottom: 4px;
+		background-color: white;
+		-webkit-transition: .4s;
+		transition: .4s;
+	}
 
-      #navtoggle input
-	      {
-	      display: block;
-	      width: 40px;
-	      height: 32px;
-	      position: absolute;
-	      top: -7px;
-	      left: 3px;
-	      background: #fff;
-	      cursor: pointer;
-	      border-radius: 15px;
-	      opacity: 0; /* hide this */
-	      z-index: 1001; /* and place it over the hamburger */
+	/* change color of span when button checked */
+	input:checked + .slider {
+		background-color: #3AB64B;
+	}
 
-	      -webkit-touch-callout: none;
-      }
-      #navtoggle span
-	      {
-	      display: block;
-	      width: 33px;
-	      height: 4px;
-	      margin-bottom: 5px;
-	      position: relative;
-	      left: 10px;
-	      background: #3AB64B;
-	      border-radius: 3px;
+	input:focus + .slider {
+		box-shadow: 0 0 1px #3AB64B;
+	}
 
-	      z-index: 1000;
+	input:checked + .slider:before {
+		-webkit-transform: translateX(26px);
+		-ms-transform: translateX(26px);
+		transform: translateX(26px);
+	}
 
-	      transform-origin: 4px 0px;
+	/* Rounded sliders */
+	.slider.round {
+		border-radius: 34px;
+	}
 
-	      transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-	      background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-	      opacity 0.55s ease;
-      }
+	.slider.round:before {
+		border-radius: 50%;
+	}
 
-      #navtoggle span:first-child
-	      {
-	      transform-origin: 0% 0%;
-      }
+	/* big container div for everything for the toggle */
+	#toggle{
+		position: absolute;
+		top: 50%;
+		left: 1%;
+		background-color: #fff;
+		z-index: 21;
+		border: 1px solid #999;
+		border-radius: 0 0 15px 15px;
+	}
 
-      #navtoggle span:nth-last-child(2)
-      {
-	      transform-origin: 0% 100%;
-      }
-      #navtoggle input:checked ~ span
-	      {
-	      opacity: 1;
-	      transform: rotate(45deg) translate(-2px, -1px);
-	      background: #3AB64B;
-      }
-      #navtoggle input:checked ~ span:nth-last-child(3)
-      {
-	      opacity: 0;
-	      transform: rotate(0deg) scale(0.2, 0.2);
-      }
-      #navtoggle input:checked ~ span:nth-last-child(2)
-      {
-	      transform: rotate(-45deg) translate(0, -1px);
-      }
-      #navmenu
-	      {
-	      position: absolute;
-	      display: block;
-	      width: 300px;
-	      margin: -100px 0 0 -50px;
-	      padding: 50px;
-	      padding-top: 125px;
-	      height: auto;
-	      top: 0;
-	      bottom: 0;
-	      z-index: 500;
-	      background: #ededed;
+	/* div container for search bar */
+	#searchbar {
+		position:absolute;
+		top:10px;
+		left: 15%;
+		width: calc(35% - 10px);
+		height: 55px;
+		z-index: 25;
+		--searchheight: 55px;
+	}
 
-	      list-style-type: none;
-	      -webkit-font-smoothing: antialiased;
-	      /* to stop flickering of text in safari */
+	/* form of search bar including text and button */
+	form.search{
+		height: 100%;
+	}
 
-	      transform-origin: 0% 0%;
-	      transform: translate(-100%, 0);
+	/* text input of search bar */
+	form.search input[type=text] {
+		padding: 10px;
+		font-size: 17px;
+		border: 1px solid #999;
+		float: left;
+		width: 80%;
+		background: #f1f1f1;
+		box-sizing: border-box;
+		height: var(--searchheight);
+	}
 
-	      transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-      }
-      #navmenu ul{
-	      z-index: 500;
+	/* image input of search bar (i.e. button) */
+	form.search input[type=image]{
+		position: absolute;
+		left: 80%;
+		width: var(--searchheight);
+		height: var(--searchheight);
+		padding: 10px;
+		background: #3AB64B;
+		color: white;
+		font-size: 17px;
+		border: 1px solid #999;
+		border-left: none;
+		cursor: pointer;
+		box-sizing: border-box;
+	}
 
-      }
-      #spansquare{
-	      position: absolute;
-	      background: #fff;
-	      top: -6px;
-	      left: 5px;
-	      width: 40px;
-	      height: 34px;
-	      border: 1px solid #999;
-	      border-radius: 5px;
-      }
-      #navmenu li
-	      {
-	      padding: 10px 0;
-	      font-size: 22px;
-      }
-      #navtoggle input:checked ~ ul
-	      {
+	/* change color of search button when hovered */
+	form.search input:hover[type=image]{
+		background: #4BE360;
+	}
 
-	      transform: none;
-      }
-      #helpbuttondiv{
-	      position: absolute;
-	      top: 10px;
-	      left: 50%;
-	      width: 55px;
-	      height: 55px;
-	      z-index: 501;
-	      border: 1px solid #999;
+	/* refer to comments in about.html for hamburger menu */
+	#navtoggle
+		{
+		display: block;
+		position: absolute;
+		top: 10%;
+		left: 1%;
+		z-index: 500;
+		bottom: 0;
+		width: 0;
+		-webkit-user-select: none;
+		user-select: none;
+
+	}
+
+	#navtoggle a
+		{
+		text-decoration: none;
+		color: #232323;
+
+		transition: color 0.3s ease;
+	}
+
+	#navtoggle a:hover
+		{
+		color: forestgreen;
+	}
+
+	#navtoggle input
+		{
+		display: block;
+		width: 40px;
+		height: 32px;
+		position: absolute;
+		top: -7px;
+		left: 3px;
+		background: #fff;
+		cursor: pointer;
+		border-radius: 15px;
+		opacity: 0; /* hide this */
+		z-index: 1001; /* and place it over the hamburger */
+
+		-webkit-touch-callout: none;
+	}
+	#navtoggle span
+		{
+		display: block;
+		width: 33px;
+		height: 4px;
+		margin-bottom: 5px;
+		position: relative;
+		left: 10px;
+		background: #3AB64B;
+		border-radius: 3px;
+
+		z-index: 1000;
+
+		transform-origin: 4px 0px;
+
+		transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+		background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+		opacity 0.55s ease;
+	}
+
+	#navtoggle span:first-child
+		{
+		transform-origin: 0% 0%;
+	}
+
+	#navtoggle span:nth-last-child(2)
+	{
+		transform-origin: 0% 100%;
+	}
+	#navtoggle input:checked ~ span
+		{
+		opacity: 1;
+		transform: rotate(45deg) translate(-2px, -1px);
+		background: #3AB64B;
+	}
+	#navtoggle input:checked ~ span:nth-last-child(3)
+	{
+		opacity: 0;
+		transform: rotate(0deg) scale(0.2, 0.2);
+	}
+	#navtoggle input:checked ~ span:nth-last-child(2)
+	{
+		transform: rotate(-45deg) translate(0, -1px);
+	}
+	#navmenu
+		{
+		position: absolute;
+		display: block;
+		width: 300px;
+		margin: -100px 0 0 -50px;
+		padding: 50px;
+		padding-top: 125px;
+		height: auto;
+		top: 0;
+		bottom: 0;
+		z-index: 500;
+		background: #ededed;
+
+		list-style-type: none;
+		-webkit-font-smoothing: antialiased;
+		/* to stop flickering of text in safari */
+
+		transform-origin: 0% 0%;
+		transform: translate(-100%, 0);
+
+		transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+	}
+	#navmenu ul{
+		z-index: 500;
+
+	}
+	#spansquare{
+		position: absolute;
+		background: #fff;
+		top: -6px;
+		left: 5px;
+		width: 40px;
+		height: 34px;
+		border: 1px solid #999;
+		border-radius: 5px;
+	}
+	#navmenu li
+		{
+		padding: 10px 0;
+		font-size: 22px;
+	}
+	#navtoggle input:checked ~ ul
+		{
+
+		transform: none;
+	}
 
 
-      }
-      #helpbutton{
-	      background-color: #3AB64B;
-	      border: none;
-	      color: white;
-	      font-size: 40px;
-	      cursor: pointer;
-	      padding: 0;
-	      height: 100%;
-	      width: 100%;
-	      padding-left: 15px;
-	      padding-right: 15px;
-      }
+	/* container button for help button */
+	#helpbuttondiv{
+		position: absolute;
+		top: 10px;
+		left: 50%;
+		width: 55px;
+		height: 55px;
+		z-index: 501;
+		border: 1px solid #999;
 
-      .modal {
-	      display: none; /* Hidden by default */
-	      position: fixed; /* Stay in place */
-	      z-index: 100000; /* Sit on top */
-	      padding-top: 100px; /* Location of the box */
-	      left: 0;
-	      top: 0;
-	      width: 100%; /* Full width */
-	      height: 100%; /* Full height */
-	      overflow: auto; /* Enable scroll if needed */
-	      background-color: rgb(0,0,0); /* Fallback color */
-	      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-      }
-      .modal-content {
-	      background-color: #fefefe;
-	      margin: auto;
-	      padding: 20px;
-	      border: 1px solid #888;
-	      width: 80%;
-      }
 
-      /* The Close Button */
-      .close {
-	      color: #aaaaaa;
-	      float: right;
-	      font-size: 28px;
-	      font-weight: bold;
-      }
+	}
 
-      .close:hover,
-      .close:focus {
-	      color: #000;
-	      text-decoration: none;
-	      cursor: pointer;
-      }
+	/* help button itself */
+	#helpbutton{
+		background-color: #3AB64B;
+		border: none;
+		color: white;
+		font-size: 40px;
+		cursor: pointer;
+		padding: 0;
+		height: 100%;
+		width: 100%;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+
+	/* div container for modal, appears on click of help button */
+	.modal {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 100000; /* Sit on top */
+		padding-top: 100px; /* Location of the box */
+		left: 0;
+		top: 0;
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	}
+
+	/* div for modal content */
+	.modal-content {
+		background-color: #fefefe;
+		margin: auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 80%;
+	}
+
+	/* The Close Button */
+	.close {
+		color: #aaaaaa;
+		float: right;
+		font-size: 28px;
+		font-weight: bold;
+	}
+
+	.close:hover,
+	.close:focus {
+		color: #000;
+		text-decoration: none;
+		cursor: pointer;
+	}
 
 		</style>
 
@@ -379,21 +404,29 @@
 		</div>
 
 		<script>
+			//callback function for helpbutton clicked
 			document.getElementById("helpbutton").onclick = function(){
-
+				//display modal
 				document.getElementById("modaldiv").style.display = "block";
 			}
-document.getElementById("close").onclick = function(){
-	document.getElementById("modaldiv").style.display = "none";
-}
-window.onclick = function(event){
-	if(event.target == document.getElementById("modaldiv")){
-		document.getElementById("modaldiv").style.display = "none";
-	}
-}
+
+			//callback function for close button clicked
+			document.getElementById("close").onclick = function(){
+				//close modal
+				document.getElementById("modaldiv").style.display = "none";
+			}
+			//callback function for click anywhere
+			window.onclick = function(event){
+				//if click target is modal (content and background)
+				if(event.target == document.getElementById("modaldiv")){
+					//close modal
+					document.getElementById("modaldiv").style.display = "none";
+				}
+			}
 
 		</script>
 
+		<!-- hamburger menu -->
 		<nav role="navigation">
 			<div id="navtoggle">
 				<input type="checkbox" id="hamburgerbutton"/>
@@ -459,13 +492,13 @@ window.onclick = function(event){
 		<div id="map"></div>
 		<script src="https://cdn.jsdelivr.net/npm/fuzzball@1.3.0/dist/fuzzball.umd.min.js"></script>
 		<script>
-
-			var livemarkers = []
-var historicalmarkers = []
-var allstores = []
-var markers = []
+//define global variables outside of initMap()
+			var livemarkers = [] //all live markers
+var historicalmarkers = [] //all markers with historical only
+var allstores = [] //the remaining stores with no data at all
+var markers = [] //all markers 
 var map;
-var openn;
+var openn; 
 var flag = true;
 var state = "live";
 var keywords;
@@ -475,12 +508,14 @@ var names = [];
 var address = [];
 function initMap() {
 
-
+//create map
 	map = new google.maps.Map(
 		document.getElementById('map'), {zoom: 12, center: {lat:49.2399,lng:-123.1251}});
 
+	// if geolocation is available
 	if(navigator.geolocation){
-
+		
+		//get current position
 		navigator.geolocation.getCurrentPosition(function(position) {
 			var userpos = {
 				lat: position.coords.latitude,
@@ -490,13 +525,13 @@ function initMap() {
 			map.setCenter(userpos);
 
 
-		}, function(){
+		}, function(){ //handle error if location invalid
 			handleLocationError(true,map.getCenter());
 		}
 		);
 
 	}
-	else{
+	else{ //handle error
 		handleLocationError(false,map.getCenter());
 	}
 
@@ -504,7 +539,7 @@ function initMap() {
 
 
 
-
+//importing from context from views.py
 	names = {{name|safe}}
 
 
@@ -518,7 +553,7 @@ function initMap() {
 	var busyness = {{busyness|safe}}
 	openn = {{openn|safe}}
 	keywords = {{keywords|safe}}
-	var positions = []
+	var positions = [] //list of all positions as {lat, lng}
 	for(let x = 0;x<lat.length;x++){
 		positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lng[x])})
 	}
@@ -526,8 +561,8 @@ function initMap() {
 
 
 	function buildInfoWindowString(names,address,hours,busyness,x){
-		var s = '';
-		var pops = '';
+		var s = '';//text color
+		var pops = '';//popularity string
 		var busy = busyness[x];
 		var statusstring = '';
 		var t = "true";;
@@ -563,11 +598,11 @@ function initMap() {
 			pops='';
 			s='grey';
 		}
-
+//return formatted html of infowindow
 		return '<div id="content">' +
 			'<h1 style="color:'+s+';"> '+names[x]+' </h1>' +
 			'<div id="body"'+
-				  '<p> '+address[x]+' </p>'+
+			'<p> '+address[x]+' </p>'+
 			'<p> '+hours[x]+' </p>'+
 			'<p> '+statusstring+' </p>'+
 			'<p> '+pops+' </p> '+
@@ -575,6 +610,7 @@ function initMap() {
 			'</div>';
 	}
 
+	//loading static images of markers
 	var green = "{% static 'images/greenmarker.png' %}"
 	var yellow = "{% static 'images/yellowmarker.png' %}"
 	var red = "{% static 'images/redmarker.png' %}"
@@ -585,28 +621,31 @@ function initMap() {
 	var icon = null;
 
 
-
+//build marker
 	function buildMarker(color,radius,position){
-		if(color=="grey"){
+		if(color=="grey"){//if grey, use static image instead of vector for efficiency
 			return new google.maps.Marker({icon:{url:grey, scaledSize:new google.maps.Size(radius*2, radius*2)}, clickable:true, position:position, map:map});
 		}
-
+		//build vector path of circle with radius=radius 
 		let pathstring = "M-"+radius+",0a"+radius+","+radius+" 0 1,0 "+(radius*2)+",0a"+radius+","+radius+" 0 1,0 -"+(radius*2)+",0";
 		return new google.maps.Marker({icon:{path:pathstring,fillColor:color, fillOpacity:0.6, strokeWeight:0},clickable:true,position:position,map:map});
 
 	}
 
 	function openInfoWindow(i){
+		//if infowindow already open, close it
 		if(infowindow){
 			infowindow.close();
 		}
+
+		//open infowindow on new marker with new html content
 		infowindow.setContent(buildInfoWindowString(names,address,hours,busyness,i));
 		infowindow.open(map,temp);
 
 
 	}
 
-
+//returns gradient color of marker given x index
 	function getIcon(x){
 		if(openn[x]==0){
 			return "grey";
@@ -637,21 +676,21 @@ function initMap() {
 	var infowindow = new google.maps.InfoWindow();
 	for(let x = 0; x<positions.length;x++){
 
-			      if(busyness[x]==-1){
-			      //No data available
-			      var temp = buildMarker(getIcon(x),10,positions[x])
-			      markers.push(temp)
-			      allstores.push(temp);
+		if(busyness[x]==-1){
+			//No data available
+			var temp = buildMarker(getIcon(x),10,positions[x])
+			markers.push(temp)
+			allstores.push(temp);
 
-			      }
-			      else if(busyness[x]>=1000){
-				      //live data available
-				      var busy = busyness[x]-1000;
+		}
+		else if(busyness[x]>=1000){
+			//live data available
+			var busy = busyness[x]-1000;
 
-				      var temp = buildMarker(getIcon(x),15,positions[x]);
-				      markers.push(temp);
-				      livemarkers.push(temp);
-			      }
+			var temp = buildMarker(getIcon(x),15,positions[x]);
+			markers.push(temp);
+			livemarkers.push(temp);
+		}
 
 		else{
 			//only historical data available
@@ -664,270 +703,275 @@ function initMap() {
 
 	}
 	for(let k = 0; k<markers.length;k++){
-			      markers[k].addListener('click',function() {
-			      infowindow.setContent(buildInfoWindowString(names,address,hours,busyness,k));
-			      infowindow.open(map,markers[k]);
-			      });
+		markers[k].addListener('click',function() {
+			infowindow.setContent(buildInfoWindowString(names,address,hours,busyness,k));
+			infowindow.open(map,markers[k]);
+		});
 
-			      }
-
-
-
-			      showLiveOnly();
-			      toggleStores();
-			      }
-			      function searchClicked(){
-			      searchedStores = [];
-
-			      var searchstring = encodeURI(document.getElementById('searchtextfield').value).toLowerCase();
-
-			      if(searchstring!=""){
-			      searchInProgress = true;
-
-			      }
-			      else{
-
-			      searchInProgress = false;
-			      searchedStores = [];
-			      displaySearched();
-			      filterByState();
-			      return;
-			      }
-			      searchstring = searchstring.replace(/%20/g, " ");
+	}
 
 
-			      var max = 0;
-			      var arr = [];
-			      let r;
-			      let comparestring;
-			      if(searchstring.includes("street") || searchstring.includes("avenue") || searchstring.includes("boulevard") || searchstring.includes(" highway") || searchstring.includes("+")  || searchstring.includes("-") || searchstring.includes(" ") || searchstring.includes(" and ")){
-			      //account for misspellings
-			      let variations = getVariations(searchstring);
-			      for(let p = 0; p<variations.length;p++){
-			      searchstring += " "+variations[p];
-			      }
-			      }
 
-			      if(searchstring.includes("tnt")){
-			      searchstring = "t&t "+searchstring;
-			      }
-
-			      for(let x = 0; x<markers.length;x++){
-			      comparestring = names[x]+" "+address[x]+" "+keywords[x];
-							//	r = Math.max(fuzzball.token_set_ratio(searchstring, comparestring), fuzzball.ratio(searchstring, comparestring));
-							r = fuzzball.token_set_ratio(searchstring, comparestring)
-							arr.push(r);
-							if(r>max){
-							max = r;
-							}
-							}
-
-for(let x = 0; x<markers.length;x++){
-
-if(arr[x] > max*0.75){
-searchedStores.push(markers[x]);
-
+	showLiveOnly();//default view on site visit is live only
+	toggleStores();//toggle on and off, starts as show closed = true, toggle to set it to false immediately so it displays properly
 }
 
-}
-if(state=='live'){ showLiveOnly();}
-if(state=='historical'){ showHistorical();}
-if(state=='all') { showAll();}
-displaySearched();
+//callback function on search button click
+function searchClicked(){
+	searchedStores = [];
+	//grab user input and encode to prevent injection
+	var searchstring = encodeURI(document.getElementById('searchtextfield').value).toLowerCase();
+
+	//if search not empty
+	if(searchstring!=""){
+		searchInProgress = true;
+
+	}
+	else{
+		//clear search, display all markers with the right state
+		searchInProgress = false;
+		searchedStores = [];
+		displaySearched();
+		filterByState();
+		return;
+	}
+
+	//replace encoded space " " with actual space
+	searchstring = searchstring.replace(/%20/g, " ");
+
+
+	var max = 0;
+	var arr = [];
+	let r;
+	let comparestring;
+	if(searchstring.includes("street") || searchstring.includes("avenue") || searchstring.includes("boulevard") || searchstring.includes(" highway") || searchstring.includes("+")  || searchstring.includes("-") || searchstring.includes(" ") || searchstring.includes(" and ")){
+		//account for misspellings
+		let variations = getVariations(searchstring);
+		for(let p = 0; p<variations.length;p++){
+			searchstring += " "+variations[p];
+		}
+	}
+
+	if(searchstring.includes("tnt")){
+		searchstring = "t&t "+searchstring;
+	}
+
+	for(let x = 0; x<markers.length;x++){
+		comparestring = names[x]+" "+address[x]+" "+keywords[x];
+		//	r = Math.max(fuzzball.token_set_ratio(searchstring, comparestring), fuzzball.ratio(searchstring, comparestring));
+		r = fuzzball.token_set_ratio(searchstring, comparestring)
+		arr.push(r);
+		if(r>max){
+			max = r;
+		}
+	}
+
+	for(let x = 0; x<markers.length;x++){
+
+		if(arr[x] > max*0.75){
+			searchedStores.push(markers[x]);
+
+		}
+
+	}
+	if(state=='live'){ showLiveOnly();}
+	if(state=='historical'){ showHistorical();}
+	if(state=='all') { showAll();}
+	displaySearched();
 }
 
 function getVariations(word){
-let arr = [];
+	let arr = [];
 
-if(word.includes("+")){
-		  arr.push(word.replace(/\+/g, " and "));
-						}
-						if(word.includes("-")){
-								  arr.push(word.replace(/-/g, " "));
-											       }
-											       if(word.includes(" ")){
-														 arr.push(word.replace(/ /g, "-"));
-																	      arr.push(word.replace(/ /g, ""));
-																					   }
-																					   if(word.includes(" and ")){
-																							     arr.push(word.replace(/ and /g, "&"));
-																											      }
-																											      if(word.includes("street")){
-																														arr.push(word.replace(/street/g, "st"));
-																																		  }
-																																		  if(word.includes("avenue")){
-																																				    arr.push(word.replace(/avenue/g, "ave"));
-																																								      }
-																																								      if(word.includes("boulevard")){
-																																											arr.push(word.replace(/boulevard/g, "blvd"));
-																																															     }
-																																															     if(word.includes("highway")){
-																																																	       arr.push(word.replace(/highway/g, "hwy"));
-																																																						  }
-																																																						  return arr;
-																																																						  }
+	if(word.includes("+")){
+		arr.push(word.replace(/\+/g, " and "));
+	}
+	if(word.includes("-")){
+		arr.push(word.replace(/-/g, " "));
+	}
+	if(word.includes(" ")){
+		arr.push(word.replace(/ /g, "-"));
+		arr.push(word.replace(/ /g, ""));
+	}
+	if(word.includes(" and ")){
+		arr.push(word.replace(/ and /g, "&"));
+	}
+	if(word.includes("street")){
+		arr.push(word.replace(/street/g, "st"));
+	}
+	if(word.includes("avenue")){
+		arr.push(word.replace(/avenue/g, "ave"));
+	}
+	if(word.includes("boulevard")){
+		arr.push(word.replace(/boulevard/g, "blvd"));
+	}
+	if(word.includes("highway")){
+		arr.push(word.replace(/highway/g, "hwy"));
+	}
+	return arr;
+}
 
 
 function displaySearched(){
-for(let x = 0; x<markers.length;x++){
-if(markers[x].getVisible()){
-if(searchedStores.includes(markers[x])==false){
-markers[x].setMap(null);
-}
-}
-}
+	for(let x = 0; x<markers.length;x++){
+		if(markers[x].getVisible()){
+			if(searchedStores.includes(markers[x])==false){
+				markers[x].setMap(null);
+			}
+		}
+	}
 }
 
 function filterByState(){
-if(state=='live'){
-showLiveOnly();
-}
-if(state=='historical'){
-showHistorical();
-}
-if(state=='all'){
-showAll();
-}
+	if(state=='live'){
+		showLiveOnly();
+	}
+	if(state=='historical'){
+		showHistorical();
+	}
+	if(state=='all'){
+		showAll();
+	}
 }
 
 function handleLocationError(hasgeo, pos){
-if(hasgeo){
-map.setCenter(pos);
-}
-else{
-map.setCenter(pos);
-}
+	if(hasgeo){
+		map.setCenter(pos);
+	}
+	else{
+		map.setCenter(pos);
+	}
 }
 
 function filterOpen(){
-for(let x = 0; x<markers.length;x++){
-if(openn[x]==0){
-markers[x].setMap(null);
-}
-}
+	for(let x = 0; x<markers.length;x++){
+		if(openn[x]==0){
+			markers[x].setMap(null);
+		}
+	}
 }
 
 function checkState(){
-if(flag==false){
-filterOpen();
+	if(flag==false){
+		filterOpen();
+	}
+	if(flag==true && state=="live"){
+		filterOpen();
+	}
+	if(searchInProgress){
+		displaySearched();
+	}
 }
-if(flag==true && state=="live"){
-			 filterOpen();
-			 }
-			 if(searchInProgress){
-			 displaySearched();
-			 }
-			 }
 
 function showLiveOnly(){
-document.getElementById("livecontainer").style.background = "#3AB64B";
-			 document.getElementById("histcontainer").style.background = "transparent";
-						  document.getElementById("allcontainer").style.background = "transparent";
-									   for(let x = 0; x<livemarkers.length;x++){
-									   livemarkers[x].setMap(map);
-									   }
-									   for(let x = 0; x<historicalmarkers.length;x++){
-									   historicalmarkers[x].setMap(null);
-									   }
-									   for(let x = 0; x<allstores.length;x++){
-									   allstores[x].setMap(null);
-									   }
-									   state = "live";
-										    checkState();
+	document.getElementById("livecontainer").style.background = "#3AB64B";
+	document.getElementById("histcontainer").style.background = "transparent";
+	document.getElementById("allcontainer").style.background = "transparent";
+	for(let x = 0; x<livemarkers.length;x++){
+		livemarkers[x].setMap(map);
+	}
+	for(let x = 0; x<historicalmarkers.length;x++){
+		historicalmarkers[x].setMap(null);
+	}
+	for(let x = 0; x<allstores.length;x++){
+		allstores[x].setMap(null);
+	}
+	state = "live";
+	checkState();
 
 }
 
 
 
 function showHistorical(){
-document.getElementById("livecontainer").style.background = "transparent";
-			 document.getElementById("histcontainer").style.background = "#3AB64B";
-						  document.getElementById("allcontainer").style.background = "transparent";
+	document.getElementById("livecontainer").style.background = "transparent";
+	document.getElementById("histcontainer").style.background = "#3AB64B";
+	document.getElementById("allcontainer").style.background = "transparent";
 
 
-for(let x = 0; x<livemarkers.length;x++){
-livemarkers[x].setMap(map);
-}
-for(let x = 0; x<historicalmarkers.length;x++){
+	for(let x = 0; x<livemarkers.length;x++){
+		livemarkers[x].setMap(map);
+	}
+	for(let x = 0; x<historicalmarkers.length;x++){
 
 
-historicalmarkers[x].setMap(map);
-}
-for(let x = 0; x<allstores.length;x++){
-allstores[x].setMap(null);
-}
-state = "historical";
-	 checkState();
+		historicalmarkers[x].setMap(map);
+	}
+	for(let x = 0; x<allstores.length;x++){
+		allstores[x].setMap(null);
+	}
+	state = "historical";
+	checkState();
 
 
 }
 
 function showAll(){
-document.getElementById("livecontainer").style.background = "transparent";
-			 document.getElementById("histcontainer").style.background = "transparent";
-						  document.getElementById("allcontainer").style.background = "#3AB64B";
+	document.getElementById("livecontainer").style.background = "transparent";
+	document.getElementById("histcontainer").style.background = "transparent";
+	document.getElementById("allcontainer").style.background = "#3AB64B";
 
-for(let x = 0; x<livemarkers.length;x++){
-livemarkers[x].setMap(map);
-}
-for(let x = 0; x<historicalmarkers.length;x++){
-historicalmarkers[x].setMap(map);
-}
-for(let x = 0; x<allstores.length;x++){
-allstores[x].setMap(map);
-}
-state = "all";
-	 checkState();
+	for(let x = 0; x<livemarkers.length;x++){
+		livemarkers[x].setMap(map);
+	}
+	for(let x = 0; x<historicalmarkers.length;x++){
+		historicalmarkers[x].setMap(map);
+	}
+	for(let x = 0; x<allstores.length;x++){
+		allstores[x].setMap(map);
+	}
+	state = "all";
+	checkState();
 
 }
 
 function toggleStores(){
 
-if(flag){
-//hide closed stores
+	if(flag){
+		//hide closed stores
 
-for(let x = 0; x<markers.length;x++){
-if(openn[x]==0){
-markers[x].setMap(null);
-}
-}
-flag = false;
-}
-else{
-//show closed stores
+		for(let x = 0; x<markers.length;x++){
+			if(openn[x]==0){
+				markers[x].setMap(null);
+			}
+		}
+		flag = false;
+	}
+	else{
+		//show closed stores
 
-for(let x = 0; x<markers.length;x++){
+		for(let x = 0; x<markers.length;x++){
 
-if(openn[x]==0){
-markers[x].setMap(map);
-}
-}
-flag = true
-if(state=="live"){
-	   showLiveOnly();
-	   }
-	   if(state=="historical"){
-		      showHistorical();
-		      }
-		      if(state=="all"){
-				 showAll();
-				 }
+			if(openn[x]==0){
+				markers[x].setMap(map);
+			}
+		}
+		flag = true
+		if(state=="live"){
+			showLiveOnly();
+		}
+		if(state=="historical"){
+			showHistorical();
+		}
+		if(state=="all"){
+			showAll();
+		}
 
-}
+	}
 
 }
 
 
 
 		</script>
-<!--Load the API from the specified URL
-* The async attribute allows the browser to render the page while the API loads
-* The key parameter will contain your own API key (which is not needed for this tutorial)
-* The callback parameter executes the initMap() function
--->
-<script async defer
+		<!--Load the API from the specified URL
+	  * The async attribute allows the browser to render the page while the API loads
+	  * The key parameter will contain your own API key (which is not needed for this tutorial)
+	  * The callback parameter executes the initMap() function
+		-->
+		<script async defer
 
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqwU_hVg2OJ3zB7FOORGzGIdsWnXdXT-w&callback=initMap">
-</script>
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqwU_hVg2OJ3zB7FOORGzGIdsWnXdXT-w&callback=initMap">
+		</script>
 	</body>
 </html>
