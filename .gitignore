@@ -1,6 +1,9 @@
 
 grocercheck/map/templates/config.js
 
+#database files
+*.sqlite3
+
 # python pycs
 *.pyc
 __pycache__/
