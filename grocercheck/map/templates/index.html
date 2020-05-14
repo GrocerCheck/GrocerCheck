@@ -6,8 +6,17 @@
 		<title>GrocerCheck: Your Local Supermarket Social Distancing Search Engine</title>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+        <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
+        <link rel='stylesheet' href = "{% static 'css/floatingmenu.css' %}">
+        <link rel='stylesheet' href = "{% static 'css/togglebutton.css' %}">
+        <link rel='stylesheet' href = "{% static 'css/searchbar.css' %}">
+        <link rel='stylesheet' href = "{% static 'css/helpbutton.css' %}">
+        <link rel='stylesheet' href = "{% static 'css/modal.css' %}">
+        <link rel='icon' type='image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
+
         <style>
-/* Set the size of the div element that contains the map */
+            /* Set the size of the div element that contains the map */
+
 body{
     font-family: 'Nunito';
 }
@@ -21,395 +30,8 @@ body{
 		margin: 0;
 		padding: 0;
 	}
-
-	/* floating menu with live, historical, all stores buttons */
-	#floating_menu{
-		position: absolute;
-		top: 20%;
-		left: 1%;
-		z-index: 50;
-		height: auto;
-		background-color: #fff;
-		padding: 5px;
-		border: 1px solid #999;
-		width: 6em;
-		border-radius: 10px;
-	}
-	/* container for store visibility buttons */
-	#floating_menu label{
-		display: block;
-		margin: 0;
-		margin-top: 6px;
-		margin-bottom: 6px;
-		position: relative;
-		cursor: pointer;
-		padding-left: 0;
-		font-size: 18px;
-		-webkit-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
-		text-align: center;
-		border-radius: 10px;
-	}
-
-	/* radio buttons, hidden */
-	#floating_menu input{
-		position: absolute;
-		opacity: 0;
-	}
-
-
-
-	/* class for toggle */
-	.switch {
-		position: absolute;
-		display: inline-block;
-		width: 60px;
-		height: 34px;
-		top: 10;
-		left: 10;
-	}
-
-	/* the checkbox for the toggle, hidden */
-	.switch input {
-		opacity: 0;
-		width: 0px;
-		height: 0px;
-	}
-
-	/* span for the custom toggle */
-	.slider {
-		position: absolute;
-		cursor: pointer;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		right: 0;
-		background-color: #ccc;
-		-webkit-transition: .4s;
-		transition: .4s;
-
-	}
-
-	/* custom white dot inside toggle */
-	.slider:before {
-		position: absolute;
-		content: "";
-		height: 26px;
-		width: 26px;
-		left: 4px;
-		bottom: 4px;
-		background-color: white;
-		-webkit-transition: .4s;
-		transition: .4s;
-	}
-
-	/* change color of span when button checked */
-	input:checked + .slider {
-		background-color: #3AB64B;
-	}
-
-	input:focus + .slider {
-		box-shadow: 0 0 1px #3AB64B;
-	}
-
-	input:checked + .slider:before {
-		-webkit-transform: translateX(26px);
-		-ms-transform: translateX(26px);
-		transform: translateX(26px);
-	}
-
-	/* Rounded sliders */
-	.slider.round {
-		border-radius: 34px;
-	}
-
-	.slider.round:before {
-		border-radius: 50%;
-	}
-
-	/* big container div for everything for the toggle */
-	#toggle{
-		position: absolute;
-		top: 50%;
-		left: 1%;
-		background-color: #fff;
-		z-index: 21;
-		border: 1px solid #999;
-		border-radius: 0 0 15px 15px;
-	}
-
-	/* div container for search bar */
-	#searchbar {
-		position:absolute;
-		top:10px;
-		left: 15%;
-		width: calc(35% - 10px);
-		height: 55px;
-		z-index: 25;
-		--searchheight: 55px;
-	}
-
-	/* form of search bar including text and button */
-	form.search{
-		height: 100%;
-	}
-
-	/* text input of search bar */
-	form.search input[type=text] {
-		padding: 10px;
-		font-size: 17px;
-		border: none;
-        border-bottom-left-radius: 10px;
-        border-top-left-radius: 10px;
-		float: left;
-		width: 80%;
-		background: #f1f1f1;
-		box-sizing: border-box;
-		height: var(--searchheight);
-	}
-
-	/* image input of search bar (i.e. button) */
-	form.search input[type=image]{
-		position: absolute;
-		left: 80%;
-		width: var(--searchheight);
-		height: var(--searchheight);
-		padding: 10px;
-		background: #3AB64B;
-		color: white;
-		font-size: 17px;
-		border: none;
-		border-left: none;
-		cursor: pointer;
-		box-sizing: border-box;
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px;
-	}
-
-	/* change color of search button when hovered */
-	form.search input:hover[type=image]{
-		background: #35CE8D;
-	}
-
-	/* refer to comments in about.html for hamburger menu */
-	#navtoggle
-		{
-		display: block;
-		position: absolute;
-		top: 10%;
-		left: 1%;
-		z-index: 500;
-		bottom: 0;
-		width: 0;
-		-webkit-user-select: none;
-		user-select: none;
-
-	}
-
-	#navtoggle a
-		{
-		text-decoration: none;
-		color: #232323;
-
-		transition: color 0.3s ease;
-	}
-
-	#navtoggle a:hover
-		{
-		color: #35CE8D;
-    }
-
-	#navtoggle input
-		{
-		display: block;
-		width: 40px;
-		height: 32px;
-		position: absolute;
-		top: -7px;
-		left: 3px;
-		background: #fff;
-		cursor: pointer;
-        border: none;
-        border-radius: 10px;
-		opacity: 0; /* hide this */
-		z-index: 1001; /* and place it over the hamburger */
-
-		-webkit-touch-callout: none;
-	}
-	#navtoggle span
-		{
-		display: block;
-		width: 33px;
-		height: 4px;
-		margin-bottom: 5px;
-		position: relative;
-		left: 10px;
-		background: #3AB64B;
-		border-radius: 3px;
-		z-index: 1000;
-        border: none;
-		transform-origin: 4px 0px;
-
-		transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-		background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-		opacity 0.55s ease;
-	}
-
-	#navtoggle span:first-child
-		{
-		transform-origin: 0% 0%;
-	}
-
-	#navtoggle span:nth-last-child(2)
-	{
-		transform-origin: 0% 100%;
-	}
-	#navtoggle input:checked ~ span
-		{
-		opacity: 1;
-		transform: rotate(45deg) translate(-2px, -1px);
-		background: #3AB64B;
-	}
-	#navtoggle input:checked ~ span:nth-last-child(3)
-	{
-		opacity: 0;
-		transform: rotate(0deg) scale(0.2, 0.2);
-	}
-	#navtoggle input:checked ~ span:nth-last-child(2)
-	{
-		transform: rotate(-45deg) translate(0, -1px);
-	}
-	#navmenu
-		{
-		position: absolute;
-		display: block;
-		width: 300px;
-		margin: -100px 0 0 -50px;
-		padding: 50px;
-		padding-top: 125px;
-		height: auto;
-		top: 0;
-		bottom: 0;
-		z-index: 500;
-		background: #ededed;
-        border: none;
-
-		list-style-type: none;
-		-webkit-font-smoothing: antialiased;
-		/* to stop flickering of text in safari */
-
-		transform-origin: 0% 0%;
-		transform: translate(-100%, 0);
-
-		transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-	}
-	#navmenu ul{
-		z-index: 500;
-
-	}
-	#spansquare{
-		position: absolute;
-		background: #fff;
-		top: -6px;
-		left: 5px;
-		width: 40px;
-		height: 34px;
-		border: none;
-		border-radius: 5px;
-
-    }
-	#navmenu li
-		{
-		padding: 10px 0;
-		font-size: 22px;
-	}
-	#navtoggle input:checked ~ ul
-		{
-
-		transform: none;
-	}
-
-
-	/* container button for help button */
-	#helpbuttondiv{
-        border-radius: 10px;
-        border: none;
-		position: absolute;
-		top: 10px;
-		left: 50%;
-		width: 55px;
-		height: 55px;
-		z-index: 501;
-		border: none;
-
-
-	}
-
-	/* help button itself */
-	#helpbutton {
-        border-radius: 10px;
-		background-color: #3AB64B;
-		border: none;
-		color: white;
-		font-size: 40px;
-		cursor: pointer;
-		padding: 0;
-		height: 100%;
-		width: 100%;
-		padding-left: 15px;
-		padding-right: 15px;
-	}
-
-    #helpbutton:hover{
-        background-color: #35CE8D;
-
-    }
-	
-    /* div container for modal, appears on click of help button */
-	.modal {
-		display: none; /* Hidden by default */
-		position: fixed; /* Stay in place */
-		z-index: 100000; /* Sit on top */
-		padding-top: 100px; /* Location of the box */
-		left: 0;
-		top: 0;
-		width: 100%; /* Full width */
-		height: 100%; /* Full height */
-		overflow: auto; /* Enable scroll if needed */
-		background-color: rgb(0,0,0); /* Fallback color */
-		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-	}
-
-	/* div for modal content */
-	.modal-content {
-		background-color: #fefefe;
-		margin: auto;
-		padding: 20px;
-		border: none;
-        border-radius: 10px;
-		width: 80%;
-	}
-
-	/* The Close Button */
-	.close {
-		color: #aaaaaa;
-		float: right;
-		font-size: 28px;
-		font-weight: bold;
-	}
-
-	.close:hover,
-	.close:focus {
-		color: #000;
-		text-decoration: none;
-		cursor: pointer;
-	}
-
-		</style>
-		<link rel='icon' type='image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
-
+    
+		</style>    
 	</head>
 	<body>
 
@@ -470,7 +92,6 @@ body{
 		</nav>
 
 
-
 		<div id="searchbar">
 			<form class="search" onsubmit='return false;'>
 				<input id='searchtextfield' type="text" placeholder="Search GrocerCheck (Try name, address, location, or near me!)" name="searchfield"></input>
@@ -507,16 +128,13 @@ body{
 			</label>
 		</div>
 
-
-
-
 		<!--The div element for the map -->
 		<div id="map"></div>
-		
+
         <script src="https://cdn.jsdelivr.net/npm/fuzzball@1.3.0/dist/fuzzball.umd.min.js"></script>
 		<script>
 //define global variables outside of initMap()
-			var livemarkers = [] //all live markers
+var livemarkers = [] //all live markers
 var historicalmarkers = [] //all markers with historical only
 var allstores = [] //the remaining stores with no data at all
 var markers = [] //all markers 
@@ -565,7 +183,6 @@ function initMap() {
 //importing from context from views.py
 	names = {{name|safe}}
 
-
 	var place_id = {{place_id|safe}}
 
 	address = {{address|safe}}
@@ -580,8 +197,6 @@ function initMap() {
 	for(let x = 0;x<lat.length;x++){
 		positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lng[x])})
 	}
-
-
 
 	function buildInfoWindowString(names,address,hours,busyness,x){
 		var s = '';//text color
@@ -984,8 +599,6 @@ function toggleStores(){
 
 }
 
-
-
 		</script>
 		<!--Load the API from the specified URL
 	  * The async attribute allows the browser to render the page while the API loads
@@ -993,8 +606,9 @@ function toggleStores(){
 	  * The callback parameter executes the initMap() function
 		-->
 		<script async defer
-
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqwU_hVg2OJ3zB7FOORGzGIdsWnXdXT-w&callback=initMap">
 		</script>
+
+        
 	</body>
 </html>

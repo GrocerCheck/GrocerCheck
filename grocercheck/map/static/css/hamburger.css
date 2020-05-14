@@ -16,7 +16,7 @@
 #navtoggle a
 	{
 	text-decoration: none;
-	color: #232323;
+	color: #00120B;
 
 	transition: color 0.3s ease;
 }
@@ -24,7 +24,7 @@
 /* change text color of links on hover */
 #navtoggle a:hover
 	{
-	color: #00120B;
+	color: #35CE8D;
 }
 
 /* hamburger button input */
@@ -38,7 +38,7 @@
 	left: 3px;
 	background: #fff;
 	cursor: pointer;
-
+    border-radius: 3px;
 	opacity: 0; /* hide this */
 	z-index: 1001; /* and place it over the hamburger */
 
@@ -55,6 +55,7 @@
 	position: relative;
 	left: 10px;
 	background: #3AB64B;
+    border: none;
 	border-radius: 3px;
 
 	z-index: 1000;
@@ -107,7 +108,6 @@
 	bottom: 0;
 	z-index: 500;
 	background: #ededed;
-
 	list-style-type: none;
 	-webkit-font-smoothing: antialiased;
 	/* to stop flickering of text in safari */
@@ -130,7 +130,8 @@
 	left: 5px;
 	width: 40px;
 	height: 34px;
-	border: 1px solid #999;
+	border: none;
+    border-radius: 5px;
 }
 
 #navmenu li
@@ -143,4 +144,3 @@
 
 	transform: none;
 }
-

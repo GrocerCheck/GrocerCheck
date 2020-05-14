@@ -1,0 +1,37 @@
+/* floating menu with live, historical, all stores buttons */
+#floating_menu{
+    position: absolute;
+    top: 20%;
+    left: 1%;
+    z-index: 50;
+    height: auto;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    width: 6em;
+    border-radius: 10px;
+}
+/* container for store visibility buttons */
+#floating_menu label{
+    display: block;
+    margin: 0;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    position: relative;
+    cursor: pointer;
+    padding-left: 0;
+    font-size: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-align: center;
+    border-radius: 10px;
+}
+
+/* radio buttons, hidden */
+#floating_menu input{
+    position: absolute;
+    opacity: 0;
+}
+

@@ -1,0 +1,54 @@
+
+/* div container for search bar */
+#searchbar {
+    position:absolute;
+    top:10px;
+    left: 15%;
+    width: calc(35% - 10px);
+    height: 55px;
+    z-index: 25;
+    --searchheight: 55px;
+}
+
+/* form of search bar including text and button */
+form.search{
+    height: 100%;
+}
+
+/* text input of search bar */
+form.search input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: none;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+    box-sizing: border-box;
+    height: var(--searchheight);
+}
+
+/* image input of search bar (i.e. button) */
+form.search input[type=image]{
+    position: absolute;
+    left: 80%;
+    width: var(--searchheight);
+    height: var(--searchheight);
+    padding: 10px;
+    background: #3AB64B;
+    color: white;
+    font-size: 17px;
+    border: none;
+    border-left: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+/* change color of search button when hovered */
+form.search input:hover[type=image]{
+    background: #35CE8D;
+}
+
