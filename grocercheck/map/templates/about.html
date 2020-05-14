@@ -327,10 +327,64 @@ ul#navbarlist li a:hover{
 	left: 25%;
 }
 
+div.teamprofiles {
+    border: none;
+    border-radius: 10px;
+    color: #00120B;
+}
+
+div.teamprofiles:hover {
+    background-color: #35CE8D;
+    color: white;
+}
+
+
+div.teamprofiles img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.responsive {
+    padding: 0 6px;
+    float: left;
+    width: 24.999999%
+}
+
+
 /* the list item in the nav bar corresponding to the current page has this class to make the background grey */
 .currentpage{
 	background-color: #35605A;
 }
+
+
+@media only screen and (max-width: 700px){
+    .responsive{
+        width: 49.999999%;
+    }
+}
+
+@media only screen and (max-width: 500px){
+    .responsive{
+        width: 100%;
+    }
+}
+
+.clearfix:after{
+    content="";
+    display: table;
+    clear: both;
+}
+
 
 		</style>
 		<link rel='icon' type='image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
@@ -411,15 +465,62 @@ ul#navbarlist li a:hover{
 		</div>
 
         <div id="our_team">
-            <h1 style: "font-size 30px;">
-                Meet our team.
-            </h1>
-            <h2 style="font-size 20 px;">
-                Brian Chen
-            </h2>
-            <img src= "{% static 'images/brian.jpg' %}" alt= "Brian Chen">
-        </div>
+            <div id="brian" class = "responsive">
+                <div class = "teamprofiles">
+                    <a target="_blank" href = "{% static 'images/brian.jpg' %}">
+                        <img src = "{% static 'images/brian.jpg' %}" alt = "Brian Chen">
+                    </a>
+                    <div class="desc">
+                        PLACEHOLDER_TEXT
+                    </div>
+                </div>
+            </div>
 
+             <div id="andy" class = "responsive">
+                <div class = "teamprofiles">
+                    <a target="_blank" href = "{% static 'images/GrocerCheckFavicon.png' %}">
+                        <img src = "{% static 'images/GrocerCheckFavicon.png' %}" alt = "Andy Liang">
+                    </a>
+                    <div class="desc">
+                        PLACEHOLDER_TEXT
+                    </div>
+                </div>
+            </div>
+            
+            <div id="preston" class = "responsive">
+                <div class = "teamprofiles">
+                    <a target="_blank" href = "{% static 'images/preston.png' %}">
+                        <img src = "{% static 'images/preston.png' %}" alt = "Preston Lai">
+                    </a>
+                    <div class="desc">
+                        PLACEHOLDER_TEXT
+                    </div>
+                </div>
+            </div>
+            
+            <div id="jason" class = "responsive">
+                <div class = "teamprofiles">
+                    <a target="_blank" href = "{% static 'images/jason.jpeg' %}">
+                        <img src = "{% static 'images/jason.jpeg' %}" alt = "Jason Yu">
+                    </a>
+                    <div class="desc">
+                        PLACEHOLDER_TEXT
+                    </div>
+                </div>
+            
+            </div>        
+                <div id="luke" class = "responsive">
+                <div class = "teamprofiles">
+                    <a target="_blank" href = "{% static 'images/GrocerCheckFavicon.png' %}">
+                        <img src = "{% static 'images/GrocerCheckFavicon.png' %}" alt = "Luke Dunn">
+                    </a>
+                    <div class="desc">
+                        PLACEHOLDER_TEXT
+                    </div>
+                </div>
+            </div>
+        
+        </div>
 
 
 
