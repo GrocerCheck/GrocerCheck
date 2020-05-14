@@ -1,17 +1,9 @@
 
-#our_sponsor{
-    text-align: center;
-    text-decoration: none;
-    position: relative;
-    width: 50%;
-    left: 25%;
-    padding-top: 20px;
-}
-
 div.sponsorprofiles {
     border: none;
     border-radius: 10px;
-    color: #00120B;
+    color: white;
+    background-color: #35605A;
 }
 
 div.sponsorprofiles:hover {
@@ -37,15 +29,32 @@ div.sponsor_name{
     text-align: center;
 }
 
-div.sponsor_rank{
+div.sponsor_rank_gold{
+    color: gold;
     font-weight: bold;
     padding: 5px;
     text-align: center;
 }
 
+div.sponsor_rank_silver{
+    color: silver;
+    font-weight: bold;
+    padding: 5px;
+    text-align: center;
+}
+
+div.sponsor_rank_bronze{
+    color: #CD7F32;
+    font-weight: bold;
+    padding: 5px;
+    text-align: center;
+}
+
+
+
 .responsive {
     padding: 0 6px;
     float: left;
-    width: 19.99999%
+    width: 33.3333%
 }
 

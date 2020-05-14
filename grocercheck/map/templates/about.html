@@ -10,46 +10,49 @@
         <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
         <link rel='stylesheet' href = "{% static 'css/infopage.css' %}">
   		<link rel='icon' type='image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
+        
         <title>About Us: GrocerCheck</title>
-		<style>
+        
+        <style>
+            /* div for who are we */
+            #whoarewe{
+                text-align: center;
+                text-decoration: none;
+                position: relative;
+                width: 70%;
+                left: 15%;
+            }
 
-/* div for who are we */
-#whoarewe{
-	text-align: center;
-	text-decoration: none;
-	position: relative;
-	width: 70%;
-	left: 15%;
-}
 
-#forkus{
-    color: #00120B;
-    text-align: center;
-    text-decoration: none;
-    position: relative;
-    width: 50%;
-    left: 25%;
-    border: none;
-    padding-top: 20px;
-    margin-top: 50px;
-}
+            #our_team{
+                text-align: center;
+                text-decoration: none;
+                position: relative;
+                width: 50%;
+                left: 25%;
+                padding-top: 20px;
+            }
+
+
+            #forkus{
+                color: #00120B;
+                text-align: center;
+                text-decoration: none;
+                position: relative;
+                width: 50%;
+                left: 25%;
+                border: none;
+                padding-top: 20px;
+                margin-top: 50px;
+            }
 		</style>
 
-        
 	</head>
 
     
 	<body>
 
-		<div id="socialmedia">
-			<ul id="socialmedialist">
 
-				<li><a href="https://www.facebook.com/GrocerCheck-102588141447791/" target="_blank" class="fa fa-facebook"></a></li>
-				<li><a href="https://www.instagram.com/grocercheck/" target="_blank" class="fa fa-instagram"></a></li>
-				<li><a href="https://www.linkedin.com/company/grocercheck/" target="_blank" class="fa fa-linkedin"></a></li>
-				<li><a href="https://github.com/grocercheck/" target="_blank" class="fa fa-github"></a></li>
-			</ul>
-		</div>
 
 		<!-- this is the hamburger menu commented out for now
 	  <nav role="navigation">
@@ -68,36 +71,36 @@
 	  </div>
 	  </nav>
 		-->
-		<div id="horizontalnav">
-			<a href="{% url 'index' %}">
-				<img src="{% static 'images/GrocerCheck-01.png' %}" alt="GrocerCheck Logo" style="position: relative; left: 0; top: 0;background-color:top: 0; white;display: inline; padding: calc(1em / 4); padding-bottom: 0;margin: 0; float: left;margin-right: 10em;height: 4.5em; width: calc(4.5em * calc(1146 / 314)); border: 0;">
-			</a>
+
+        <div id="horizontalnav">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'images/GrocerCheck-01.png' %}" alt="GrocerCheck Logo" style="position: relative; left: 0; top: 0;background-color:top: 0; whitve;display: inline; padding: calc(1em / 4); padding-bottom: 0;margin: 0; float: left;margin-right: 10em;height: 4.5em; width: calc(4.5em * calc(1146 / 314)); border: 0;">
+            </a>
             <ul id="navbarlist">
-				<li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'index' %}">Home</a></li>
 				<li class="currentpage"><a href="{% url 'about' %}">About Us</a></li>
-				<li><a href="{% url 'blog' %}">Blog</a></li>
+                <li><a href="{% url 'blog' %}">Blog</a></li>
 				<li><a href="{% url 'sponsors' %}">Sponsors</a></li>
-				<li><a href="{% url 'contact' %}">Contact Us</a></li>
-				<li><a href="{% url 'media' %}">Media</a></li>
+                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                    <li><a href="{% url 'media' %}">Media</a></li>	
+            </ul>
+        </div>
 
-
-			</ul>
-		</div>
-
-
-		<div id="spacer">
-		</div>
+        <div id="spacer">
+        </div>
 
 		<div id="whoarewe">
 			<h1 style="font-size: 60px;">GrocerCheck: Who are we?</h1>
-			<p>Grocercheck Foundation is a non profit organization centered around a web application project, grocercheck.ca, that makes accessible live grocery business data to help consumers follow social distancing guidelines during the COVID-19 pandemic.</p>
+			<p>Grocercheck Foundation is a non profit organization centered around a web application, grocercheck.ca, that makes accessible live grocery business data to help consumers follow social distancing guidelines during the COVID-19 pandemic.</p>
 		</div>
 
         <div id="our_team">
             <h1 style="font-size 50px;">Meet our team.</h1>
             <p>We are a team of passionate highschool and incoming university students looking to help make a difference</p>
-
         </div>
+        
+        
+        <div id = "teammembers">
             <div id="brian" class = "responsive">
                 <div class = "teamprofiles">
                     <a target="_blank" href = "{% static 'images/brian.jpg' %}">
@@ -182,7 +185,22 @@
         <div id="spacer"></div>
         <div id="spacer"></div>
         <div id="spacer"></div>
-
+        
+        
+        
+        
+        
+        
+        
+        
+		<div id="socialmedia">
+			<ul id="socialmedialist">
+				<li><a href="https://www.facebook.com/GrocerCheck-102588141447791/" target="_blank" class="fa fa-facebook"></a></li>
+				<li><a href="https://www.instagram.com/grocercheck/" target="_blank" class="fa fa-instagram"></a></li>
+				<li><a href="https://www.linkedin.com/company/grocercheck/" target="_blank" class="fa fa-linkedin"></a></li>
+				<li><a href="https://github.com/grocercheck/" target="_blank" class="fa fa-github"></a></li>
+			</ul>
+		</div>
 
 
 	</body>

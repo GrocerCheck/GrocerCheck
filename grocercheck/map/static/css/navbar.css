@@ -9,7 +9,6 @@ ul#navbarlist{
 	margin: 0;
 	padding: 0;
 	background-color: #3AB64B;
-
 }
 
 ul#navbarlist li {
@@ -36,12 +35,6 @@ ul#navbarlist li a:hover{
     color: white;
 }
 
-@media screen and (max-width: 100px){
-    /* TODO: Change to hamburger menu */
-    /* ANDY HELP thanks */
-}
-
-
 /* div for horizontal nav bar */
 #horizontalnav{
 	position: fixed;
@@ -54,9 +47,7 @@ ul#navbarlist li a:hover{
 	z-index: 100;
 }
 
-
-
-/* the list item in the nav bar corresponding to the current page has this class to make the background grey */
+/* the list item in the nav bar corresponding to the current page has this class to make the background a different colour */
 .currentpage{
 	background-color: #35605A;
 }

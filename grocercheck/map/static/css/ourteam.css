@@ -1,17 +1,10 @@
 
-#our_team{
-    text-align: center;
-    text-decoration: none;
-    position: relative;
-    width: 50%;
-    left: 25%;
-    padding-top: 20px;
-}
 
 div.teamprofiles {
     border: none;
     border-radius: 10px;
-    color: #00120B;
+    color: white;
+    background-color: #35605A;
 }
 
 div.teamprofiles:hover {

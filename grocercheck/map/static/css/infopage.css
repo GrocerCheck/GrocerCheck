@@ -20,6 +20,7 @@ body{
 	z-index: 1;
 }
 
+/* put responsive page elements here (e.g. navbar...) */
 
 
 @media only screen and (max-width: 700px){
