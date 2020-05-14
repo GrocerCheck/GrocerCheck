@@ -1,0 +1,146 @@
+
+/* container for hamburger */
+#navtoggle
+	{
+	display: block;
+	position: absolute;
+	top: 10%;
+	left: 1%;
+	z-index: 500;
+	bottom: 0; /* make the div stretch to the bottom of the screen */
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+/* links inside nav menu */
+#navtoggle a
+	{
+	text-decoration: none;
+	color: #232323;
+
+	transition: color 0.3s ease;
+}
+
+/* change text color of links on hover */
+#navtoggle a:hover
+	{
+	color: #00120B;
+}
+
+/* hamburger button input */
+#navtoggle input
+	{
+	display: block;
+	width: 40px;
+	height: 32px;
+	position: absolute;
+	top: -7px;
+	left: 3px;
+	background: #fff;
+	cursor: pointer;
+
+	opacity: 0; /* hide this */
+	z-index: 1001; /* and place it over the hamburger */
+
+	-webkit-touch-callout: none;
+}
+
+/* lines inside hamburger button */
+#navtoggle span
+	{
+	display: block;
+	width: 33px;
+	height: 4px;
+	margin-bottom: 5px;
+	position: relative;
+	left: 10px;
+	background: #3AB64B;
+	border-radius: 3px;
+
+	z-index: 1000;
+
+	transform-origin: 4px 0px;
+
+	transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+	background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+	opacity 0.55s ease;
+}
+
+/* animation effects for the spans */
+#navtoggle span:first-child
+	{
+	transform-origin: 0% 0%;
+}
+
+#navtoggle span:nth-last-child(2)
+{
+	transform-origin: 0% 100%;
+}
+
+#navtoggle input:checked ~ span
+	{
+	opacity: 1;
+	transform: rotate(45deg) translate(-2px, -1px);
+	background: #3AB64B;
+}
+#navtoggle input:checked ~ span:nth-last-child(3)
+{
+	opacity: 0;
+	transform: rotate(0deg) scale(0.2, 0.2);
+}
+#navtoggle input:checked ~ span:nth-last-child(2)
+{
+	transform: rotate(-45deg) translate(0, -1px);
+}
+
+/* ul of nav menu */
+#navmenu
+	{
+	position: absolute;
+	display: block;
+	width: 300px;
+	margin: -100px 0 0 -50px;
+	padding: 50px;
+	padding-top: 125px;
+	height: auto;
+	top: 0;
+	bottom: 0;
+	z-index: 500;
+	background: #ededed;
+
+	list-style-type: none;
+	-webkit-font-smoothing: antialiased;
+	/* to stop flickering of text in safari */
+
+	transform-origin: 0% 0%;
+	transform: translate(-100%, 0);
+
+	transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+#navmenu ul{
+	z-index: 500;
+
+}
+
+/* container for spans */
+#spansquare{
+	position: absolute;
+	background: #fff;
+	top: -6px;
+	left: 5px;
+	width: 40px;
+	height: 34px;
+	border: 1px solid #999;
+}
+
+#navmenu li
+	{
+	padding: 10px 0;
+	font-size: 22px;
+}
+#navtoggle input:checked ~ ul
+	{
+
+	transform: none;
+}
+

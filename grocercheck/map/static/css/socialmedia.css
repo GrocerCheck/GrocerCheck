@@ -1,0 +1,90 @@
+
+/* div for social media list */
+
+
+/* class="fa" is for social icons */
+.fa {
+	font-size: 30px;
+}
+
+
+#socialmedia{
+	position: fixed;
+	display: inline-block;
+	bottom: 5%;
+	left: 5%;
+	width: auto;
+	font-size: 30px;
+	height: 1em;
+	margin: 0;
+	padding: 0;
+	padding-top: calc(1em / 10);
+	padding-bottom: calc(1em / 10);
+	padding-left: calc(1em/5);
+	padding-right: calc(1em/5);
+	border: 3px solid #3AB64B;
+	border-radius: 15px;
+	text-align: center;
+	background-color: none;
+	border: none;
+}
+ul#socialmedialist {
+	margin: 0;
+	padding-left:0;
+	text-align: center;
+	height: 100%;
+
+}
+ul#socialmedialist li{
+
+	list-style-type: none;
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+	font-size: 30px;
+
+	height: 1em;
+}
+
+/* links on each button */
+ul#socialmedialist li a{
+	display: inline;
+	text-align: center;
+	position: relative;
+	height: 100%;
+	top: calc(-1em / 10);
+	width: auto;
+	margin:0;
+	padding: 0;
+	padding-left: 1em;
+	padding-right: 1em;
+	font-size: 30px;
+	text-decoration: none;
+	color: white;
+
+}
+
+/* each following class defines the color of the button */
+.fa-facebook {
+    border-radius: 25px;
+	background: #3B5998;
+}
+
+.fa-linkedin {
+    border-radius: 25px;
+	background: #007bb5;
+
+}
+
+.fa-instagram {
+	border-radius: 25px;
+    background:#E1306C;
+
+}
+
+.fa-github{
+    border-radius: 25px;
+	background: #24292E;
+
+}
+
