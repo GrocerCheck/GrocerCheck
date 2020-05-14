@@ -1,25 +1,16 @@
 {% load static %}
 <!DOCTYPE HTML>
 <html>
-	<head>
+	<head> <!-- title is the text in the tab at the top -->
 		<title>About Us: GrocerCheck</title>
 		<style>
+
+/* class="fa" is for social icons */
 .fa {
 	font-size: 30px;
 }
 
-
-
-
-head{
-	background-color: white;
-}
-body{
-    font-family: 'Nunito';
-	background-color: white;
-	color: black;
-}
-
+/* container for hamburger */
 #navtoggle
 	{
 	display: block;
@@ -27,11 +18,12 @@ body{
 	top: 10%;
 	left: 1%;
 	z-index: 500;
-	bottom: 0;
+	bottom: 0; /* make the div stretch to the bottom of the screen */
 	-webkit-user-select: none;
 	user-select: none;
 }
 
+/* links inside nav menu */
 #navtoggle a
 	{
 	text-decoration: none;
@@ -40,11 +32,13 @@ body{
 	transition: color 0.3s ease;
 }
 
+/* change text color of links on hover */
 #navtoggle a:hover
 	{
 	color: forestgreen;
 }
 
+/* hamburger button input */
 #navtoggle input
 	{
 	display: block;
@@ -61,6 +55,8 @@ body{
 
 	-webkit-touch-callout: none;
 }
+
+/* lines inside hamburger button */
 #navtoggle span
 	{
 	display: block;
@@ -81,6 +77,7 @@ body{
 	opacity 0.55s ease;
 }
 
+/* animation effects for the spans */
 #navtoggle span:first-child
 	{
 	transform-origin: 0% 0%;
@@ -90,6 +87,7 @@ body{
 {
 	transform-origin: 0% 100%;
 }
+
 #navtoggle input:checked ~ span
 	{
 	opacity: 1;
@@ -105,6 +103,8 @@ body{
 {
 	transform: rotate(-45deg) translate(0, -1px);
 }
+
+/* ul of nav menu */
 #navmenu
 	{
 	position: absolute;
@@ -132,6 +132,8 @@ body{
 	z-index: 500;
 
 }
+
+/* container for spans */
 #spansquare{
 	position: absolute;
 	background: #fff;
@@ -141,6 +143,7 @@ body{
 	height: 34px;
 	border: 1px solid #999;
 }
+
 #navmenu li
 	{
 	padding: 10px 0;
@@ -152,6 +155,7 @@ body{
 	transform: none;
 }
 
+/* div for social media list */
 #socialmedia{
 	position: fixed;
 	display: inline-block;
@@ -167,9 +171,10 @@ body{
 	padding-left: calc(1em/5);
 	padding-right: calc(1em/5);
 	border: 3px solid #3AB64B;
-	border-radius: 30px;
+	border-radius: 15px;
 	text-align: center;
 	background-color: white;
+	border: 2px solid black;
 }
 ul#socialmedialist {
 	margin: 0;
@@ -185,9 +190,11 @@ ul#socialmedialist li{
 	padding: 0;
 	margin: 0;
 	font-size: 30px;
+
 	height: 1em;
 }
 
+/* links on each button */
 ul#socialmedialist li a{
 	display: inline;
 	text-align: center;
@@ -204,6 +211,8 @@ ul#socialmedialist li a{
 	color: white;
 
 }
+
+/* each following class defines the color of the button */
 .fa-facebook {
     border-radius: 25px;
 	background: #3B5998;
@@ -227,22 +236,31 @@ ul#socialmedialist li a{
 
 }
 
+.fa-twitter {
+	background: #55ACEE;
+
+}
+
+/* ul of horizontal nav bar */
 ul#navbarlist{
 	position: relative;
 	display: inline-block;
 	top: 0;
+
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
 	background-color: white;
-    top: 0;
+
+	top: 0;
 
 }
 ul#navbarlist li{
 	float: left;
 }
 
+/* clickable link area of each text item in nav bar list */
 ul#navbarlist li a {
     border-right: 2px solid #fff;
     background-color: #3AB64B;
@@ -254,12 +272,25 @@ ul#navbarlist li a {
 	font-size: 1.5em;
 }
 
+/* change color of text on hover */
 ul#navbarlist li a:hover{
 /* on hover on navbar */
     background-color: #033307;
     color: white;
 }
 
+/* color of header/nav bar */
+head{
+	background-color: white;
+}
+
+/* color of the rest of the page */
+body{
+	background-color: #3AB64B;
+	color: white;/* text color */
+}
+
+/* div for horizontal nav bar */
 #horizontalnav{
 	position: fixed;
 	width: 100%;
@@ -270,24 +301,29 @@ ul#navbarlist li a:hover{
 	background-color: white;
 	z-index: 100;
 }
+
+/* spacer directly underneath nav bar, to push everything on the page down the width of the nav bar */<F12>
 #spacer{
-position: relative;
-width: 100%;
-height: 5em;
-background-color: white;
-opacity: 0;
-z-index: 1;
+	position: relative;
+	width: 100%;
+	height: 5em;
+	background-color: white;
+	opacity: 0;
+	z-index: 1;
 }
 
+/* div for who are we */
 #whoarewe{
-text-align: center;
-text-decoration: none;
-position: relative;
-width: 50%;
-left: 25%;
+	text-align: center;
+	text-decoration: none;
+	position: relative;
+	width: 50%;
+	left: 25%;
 }
+
+/* the list item in the nav bar corresponding to the current page has this class to make the background grey */
 .currentpage{
-background-color: #555;
+	background-color: #555;
 }
 
 		</style>
@@ -299,9 +335,11 @@ background-color: #555;
 
 
 	</head>
-    <body>
+	<body>
+
+
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+
 
 
 
@@ -316,27 +354,29 @@ background-color: #555;
 				<li><a href="https://www.instagram.com/grocercheck/" target="_blank" class="fa fa-instagram"></a></li>
 				<li><a href="https://www.linkedin.com/company/grocercheck/" target="_blank" class="fa fa-linkedin"></a></li>
 				<li><a href="https://github.com/grocercheck/" target="_blank" class="fa fa-github"></a></li>
+				<li><a href="#" class="fa fa-twitter"></a></li>
+
 
 			</ul>
 
 		</div>
 
-		<!--
-		<nav role="navigation">
-			<div id="navtoggle">
-				<input type="checkbox" id="hamburgerbutton"/>
-				<div id='spansquare'>	</div>
-				<span></span>
-				<span></span>
-				<span></span>
+		<!-- this is the hamburger menu commented out for now
+	  <nav role="navigation">
+	  <div id="navtoggle">
+	  <input type="checkbox" id="hamburgerbutton"/>
+	  <div id='spansquare'>	</div>
+	  <span></span>
+	  <span></span>
+	  <span></span>
 
 
-				<ul id="navmenu">
-					<a href="{% url 'index' %}"><li>Home</li></a>
-					<a href="{% url 'about' %}"><li>About Us</li></a>
-				</ul>
-			</div>
-		</nav>
+	  <ul id="navmenu">
+	  <a href="{% url 'index' %}"><li>Home</li></a>
+	  <a href="{% url 'about' %}"><li>About Us</li></a>
+	  </ul>
+	  </div>
+	  </nav>
 		-->
 		<div id="horizontalnav">
 			<a href="{% url 'index' %}">
@@ -348,7 +388,7 @@ background-color: #555;
 
 				<li class="currentpage"><a href="{% url 'about' %}">About Us</a></li>
 				<li><a href="{% url 'blog' %}">Blog</a></li>
-				
+
 				<li><a href="{% url 'sponsors' %}">Sponsors</a></li>
 				<li><a href="{% url 'contact' %}">Contact Us</a></li>
 				<li><a href="{% url 'media' %}">Media</a></li>
@@ -362,7 +402,7 @@ background-color: #555;
 
 		<div id="whoarewe">
 			<h1 style="font-size: 60px;">GrocerCheck: Who are we?</h1>
-			<p style = "">Grocercheck Foundation is a non profit organization centered around a web application project, grocercheck.ca, that makes accessible live grocery business data to help consumers follow social distancing guidelines during the COVID-19 pandemic.</p>
+			<p>Grocercheck Foundation is a non profit organization centered around a web application project, grocercheck.ca, that makes accessible live grocery business data to help consumers follow social distancing guidelines during the COVID-19 pandemic.</p>
 		</div>
 
 
