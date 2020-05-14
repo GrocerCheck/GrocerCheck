@@ -188,7 +188,7 @@ body{
 	border: 3px solid #3AB64B;
 	border-radius: 15px;
 	text-align: center;
-	background-color: white;
+	background-color: none;
 	border: none;
 }
 ul#socialmedialist {
@@ -254,25 +254,29 @@ ul#socialmedialist li a{
 
 /* ul of horizontal nav bar */
 ul#navbarlist{
+    /* why is this no longer at the top? */
     float: right;
     position: relative;
+    top: 0;
     display: inline-block;
     list-style-type: none;
 	margin: 0;
 	padding: 0;
-    overflow: hidden;
 	background-color: #3AB64B;
-    top: 0;
 
 }
 
 ul#navbarlist li {
+    position: sticky;
+    top: 0;
     float: left;
 }
 
 
 /* clickable link area of each text item in nav bar list */
 ul#navbarlist li a {
+    position: sticky;
+    top: 0;
     border-right: 3px solid #fff;
     display: block;
     color: white;
@@ -347,7 +351,16 @@ div.teamprofiles img {
 div.desc {
     padding: 15px;
     text-align: center;
+}
 
+div.member_name{
+    padding: 15px;
+    text-align: center;
+}
+
+div.team_title{
+    padding: 5px;
+    text-align: center;
 }
 
 * {
@@ -357,7 +370,7 @@ div.desc {
 .responsive {
     padding: 0 6px;
     float: left;
-    width: 24.999999%
+    width: 19.99999%
 }
 
 
@@ -468,10 +481,9 @@ div.desc {
             <div id="brian" class = "responsive">
                 <div class = "teamprofiles">
                     <a target="_blank" href = "{% static 'images/brian.jpg' %}">
-                        <img src = "{% static 'images/brian.jpg' %}" alt = "Brian Chen">
+                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/brian.jpg' %}" alt = "Brian Chen">
                     </a>
-                    <div class="desc">
-                        PLACEHOLDER_TEXT
+                    <div class="desc">Hi! I’m Brian, and I’m an incoming freshman at the University of Toronto. The idea for GrocerCheck came about when I had to buy eggs for a quarantine loaf I was baking, and couldn’t figure out which one was the best choice: do I go to Costco and risk a long line, or face the same fate at the ethnic grocery store five blocks away? I’m super passionate about identifying problems in the world around me, and developing solutions for them. I believe GrocerCheck is a genuinely useful tool, and am beyond excited to see it come to life. In my spare time, I enjoy playing badminton and desperately trying to bake a half-decent sourdough.             
                     </div>
                 </div>
             </div>
@@ -479,7 +491,7 @@ div.desc {
              <div id="andy" class = "responsive">
                 <div class = "teamprofiles">
                     <a target="_blank" href = "{% static 'images/GrocerCheckFavicon.png' %}">
-                        <img src = "{% static 'images/GrocerCheckFavicon.png' %}" alt = "Andy Liang">
+                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/GrocerCheckFavicon.png' %}" alt = "Andy Liang">
                     </a>
                     <div class="desc">
                         PLACEHOLDER_TEXT
@@ -490,10 +502,9 @@ div.desc {
             <div id="preston" class = "responsive">
                 <div class = "teamprofiles">
                     <a target="_blank" href = "{% static 'images/preston.png' %}">
-                        <img src = "{% static 'images/preston.png' %}" alt = "Preston Lai">
+                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/preston.png' %}" alt = "Preston Lai">
                     </a>
-                    <div class="desc">
-                        PLACEHOLDER_TEXT
+                    <div class="desc">Hi there! My name is Preston and I’m an incoming freshman at the University of British Columbia. Throughout my life I have always been passionate about getting involved with projects to create social differences around my community. So when I had the opportunity to join the GrocerCheck team, a group of amazing individuals working towards a common goal of making the world a safer place, I couldn’t resist! Now after working with this team for a few months, I look forward to building lifelong networks, creating solutions to make a difference in the world, and challenging the status quo.                     
                     </div>
                 </div>
             </div>
@@ -501,7 +512,7 @@ div.desc {
             <div id="jason" class = "responsive">
                 <div class = "teamprofiles">
                     <a target="_blank" href = "{% static 'images/jason.jpeg' %}">
-                        <img src = "{% static 'images/jason.jpeg' %}" alt = "Jason Yu">
+                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/jason.jpeg' %}" alt = "Jason Yu">
                     </a>
                     <div class="desc">
                         PLACEHOLDER_TEXT
@@ -512,7 +523,7 @@ div.desc {
                 <div id="luke" class = "responsive">
                 <div class = "teamprofiles">
                     <a target="_blank" href = "{% static 'images/GrocerCheckFavicon.png' %}">
-                        <img src = "{% static 'images/GrocerCheckFavicon.png' %}" alt = "Luke Dunn">
+                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px; " src = "{% static 'images/GrocerCheckFavicon.png' %}" alt = "Luke Dunn">
                     </a>
                     <div class="desc">
                         PLACEHOLDER_TEXT
