@@ -5,17 +5,31 @@
 	<title>Media Inquiries: GrocerCheck</title>
 <link rel='icon' type=image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
 	<style>
+
+
+/* color of header/nav bar */
+head{
+	background-color: #F9ECCC;
+}
+
+/* color of the rest of the page */
+body{
+	font-family: 'Nunito';
+    background-color: #F9ECCC;
+	color: #00120B;/* text color */
+}
+
+
+/* ul of horizontal nav bar */
 ul#navbarlist{
 	position: relative;
 	display: inline-block;
 	top: 0;
-
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
-	background-color: white;
-
+	background-color: #3AB64B;
 	top: 0;
 
 }
@@ -23,26 +37,24 @@ ul#navbarlist li{
 	float: left;
 }
 
+/* clickable link area of each text item in nav bar list */
 ul#navbarlist li a {
-	display: block;
-	color: #999;
+    border-right: 3px solid #fff;
+    display: block;
+    color: white;
 	text-align: center;
 	padding: calc(1.5em * calc(2/3)) 2em;
 	text-decoration: none;
 	font-size: 1.5em;
 }
 
+/* change color of text on hover */
 ul#navbarlist li a:hover{
-	color: #3AB64B;
+/* on hover on navbar */
+    background-color: #35CE8D;
+    color: white;
 }
-head{
-	background-color: white;
-}
-body{
-	font-family: 'Nunito';
-    background-color: #3AB64B;
-	color: white;
-}
+/* div for horizontal nav bar */
 #horizontalnav{
 	position: fixed;
 	width: 100%;
@@ -53,6 +65,8 @@ body{
 	background-color: white;
 	z-index: 100;
 }
+
+/* spacer directly underneath nav bar, to push everything on the page down the width of the nav bar */<F12>
 #spacer{
 	position: relative;
 	width: 100%;
@@ -61,8 +75,9 @@ body{
 	opacity: 0;
 	z-index: 1;
 }
+
 .currentpage{
-	background-color: #555;
+	background-color: #35605A;
 }
 	</style>
 

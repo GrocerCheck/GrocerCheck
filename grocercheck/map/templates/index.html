@@ -15,7 +15,8 @@ body{
 #map {
 	height: 100%;
 	width: 100%;
-	html, body {
+}
+    html, body {
 		height: 100%;
 		margin: 0;
 		padding: 0;
@@ -32,7 +33,7 @@ body{
 		padding: 5px;
 		border: 1px solid #999;
 		width: 6em;
-		border-radius: 15px;
+		border-radius: 10px;
 	}
 	/* container for store visibility buttons */
 	#floating_menu label{
@@ -158,7 +159,9 @@ body{
 	form.search input[type=text] {
 		padding: 10px;
 		font-size: 17px;
-		border: 1px solid #999;
+		border: none;
+        border-bottom-left-radius: 10px;
+        border-top-left-radius: 10px;
 		float: left;
 		width: 80%;
 		background: #f1f1f1;
@@ -176,10 +179,12 @@ body{
 		background: #3AB64B;
 		color: white;
 		font-size: 17px;
-		border: 1px solid #999;
+		border: none;
 		border-left: none;
 		cursor: pointer;
 		box-sizing: border-box;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
 	}
 
 	/* change color of search button when hovered */
@@ -225,7 +230,8 @@ body{
 		left: 3px;
 		background: #fff;
 		cursor: pointer;
-		border-radius: 15px;
+        border: none;
+        border-radius: 10px;
 		opacity: 0; /* hide this */
 		z-index: 1001; /* and place it over the hamburger */
 
@@ -241,9 +247,8 @@ body{
 		left: 10px;
 		background: #3AB64B;
 		border-radius: 3px;
-
 		z-index: 1000;
-
+        border: none;
 		transform-origin: 4px 0px;
 
 		transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
@@ -288,6 +293,7 @@ body{
 		bottom: 0;
 		z-index: 500;
 		background: #ededed;
+        border: none;
 
 		list-style-type: none;
 		-webkit-font-smoothing: antialiased;
@@ -309,9 +315,10 @@ body{
 		left: 5px;
 		width: 40px;
 		height: 34px;
-		border: 1px solid #999;
+		border: none;
 		border-radius: 5px;
-	}
+
+    }
 	#navmenu li
 		{
 		padding: 10px 0;

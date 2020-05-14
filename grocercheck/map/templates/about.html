@@ -2,13 +2,28 @@
 <!DOCTYPE HTML>
 <html>
 	<head> <!-- title is the text in the tab at the top -->
-		<title>About Us: GrocerCheck</title>
+        <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+        <title>About Us: GrocerCheck</title>
 		<style>
 
 /* class="fa" is for social icons */
 .fa {
 	font-size: 30px;
 }
+
+
+/* color of header/nav bar */
+head{
+	background-color: #F9ECCC;
+}
+
+/* color of the rest of the page */
+body{
+	font-family: 'Nunito';
+    background-color: #F9ECCC;
+	color: #00120B;/* text color */
+}
+
 
 /* container for hamburger */
 #navtoggle
@@ -35,7 +50,7 @@
 /* change text color of links on hover */
 #navtoggle a:hover
 	{
-	color: forestgreen;
+	color: #00120B;
 }
 
 /* hamburger button input */
@@ -174,7 +189,7 @@
 	border-radius: 15px;
 	text-align: center;
 	background-color: white;
-	border: 2px solid black;
+	border: none;
 }
 ul#socialmedialist {
 	margin: 0;
@@ -236,38 +251,33 @@ ul#socialmedialist li a{
 
 }
 
-.fa-twitter {
-	background: #55ACEE;
-
-}
 
 /* ul of horizontal nav bar */
 ul#navbarlist{
-	position: relative;
-	display: inline-block;
-	top: 0;
-
-	list-style-type: none;
+    float: right;
+    position: relative;
+    display: inline-block;
+    list-style-type: none;
 	margin: 0;
 	padding: 0;
-	overflow: hidden;
-	background-color: white;
-
-	top: 0;
+    overflow: hidden;
+	background-color: #3AB64B;
+    top: 0;
 
 }
-ul#navbarlist li{
-	float: left;
+
+ul#navbarlist li {
+    float: left;
 }
+
 
 /* clickable link area of each text item in nav bar list */
 ul#navbarlist li a {
-    border-right: 2px solid #fff;
-    background-color: #3AB64B;
+    border-right: 3px solid #fff;
     display: block;
     color: white;
 	text-align: center;
-	padding: calc(1.5em * calc(2/3)) 2em;
+    padding: calc(1em * calc(2/3)) 2em;
 	text-decoration: none;
 	font-size: 1.5em;
 }
@@ -275,20 +285,15 @@ ul#navbarlist li a {
 /* change color of text on hover */
 ul#navbarlist li a:hover{
 /* on hover on navbar */
-    background-color: #033307;
+    background-color: #35CE8D;
     color: white;
 }
 
-/* color of header/nav bar */
-head{
-	background-color: white;
+@media screen and (max-width: 100px){
+    /* TODO: Change to hamburger menu */
+    /* ANDY HELP thanks */
 }
 
-/* color of the rest of the page */
-body{
-	background-color: #3AB64B;
-	color: white;/* text color */
-}
 
 /* div for horizontal nav bar */
 #horizontalnav{
@@ -296,13 +301,13 @@ body{
 	width: 100%;
 	top: 0;
 	left: 0;
-	height: 4.75em;
+	height: 0em;
 	display: block;
-	background-color: white;
+	background-color: #F9ECCC;
 	z-index: 100;
 }
 
-/* spacer directly underneath nav bar, to push everything on the page down the width of the nav bar */<F12>
+/* spacer directly underneath nav bar, to push everything on the page down the width of the nav bar */
 #spacer{
 	position: relative;
 	width: 100%;
@@ -311,6 +316,7 @@ body{
 	opacity: 0;
 	z-index: 1;
 }
+
 
 /* div for who are we */
 #whoarewe{
@@ -323,7 +329,7 @@ body{
 
 /* the list item in the nav bar corresponding to the current page has this class to make the background grey */
 .currentpage{
-	background-color: #555;
+	background-color: #35605A;
 }
 
 		</style>
@@ -354,7 +360,6 @@ body{
 				<li><a href="https://www.instagram.com/grocercheck/" target="_blank" class="fa fa-instagram"></a></li>
 				<li><a href="https://www.linkedin.com/company/grocercheck/" target="_blank" class="fa fa-linkedin"></a></li>
 				<li><a href="https://github.com/grocercheck/" target="_blank" class="fa fa-github"></a></li>
-				<li><a href="#" class="fa fa-twitter"></a></li>
 
 
 			</ul>
