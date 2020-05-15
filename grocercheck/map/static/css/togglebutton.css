@@ -75,6 +75,6 @@ input:checked + .slider:before {
     left: 1%;
     background-color: #fff;
     z-index: 21;
-    border: 1px solid #999;
+    border: none;
     border-radius: 0 0 15px 15px;
 }
