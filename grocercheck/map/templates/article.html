@@ -3,6 +3,7 @@
 <html>
 	<head> <!-- title is the text in the tab at the top -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>CovidWatch: {{title|slice:"1:-1"}}</title>
         <link rel='icon' type='image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito'>
@@ -58,18 +59,19 @@
             <div class="image_card">
                 <img id="article_image" style = "width: 100%;" src="{% static 'images/GrocerCheckFavicon.jpeg' %}">
                 <div class="image_card_text">
+                    {% autoescape off %}
                     <p id=image_blurb>{{image_blurb}}</p>
                 </div>
             </div> 
-            
-            <p id="article_content">{{content|slice:"1:-1"}}</p>
-            
-            <p id="about_the_author">About {{author_name|slice:"1:-1"}}: </p>
+            <br>
+
+            <p id="article_content">{{content|safe|slice:"1:-1"}}</p>
+            <p id="about_the_author">About the author, {{author_name|slice:"1:-1"}}: </p>
             <p id="author_blurb">{{author_blurb|slice:"1:-1"}}</p>
 
             <p id = "works_cited_header">Sources</p>
             <p id="article_sources">{{article_sources|slice:"1:-1"}}</p>
-    
+            {% endautoescape %}
         </div>        
 
         

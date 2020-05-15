@@ -44,7 +44,7 @@ def index(request):
             context['hours'].append(hourstring)
             if(s.keywords==None):
                 context['keywords'].append("")
-                    
+
             else:
                 context['keywords'].append(s.keywords)
 
@@ -124,13 +124,13 @@ def article(request, articleid):
     with conn:
         curr.execute("SELECT id,title,author_name,author_blurb,date,content,image_blurb,article_sources FROM map_blog_entry WHERE id=?", (articleid,))
         art = curr.fetchall()[0]
-        context['title'] = json.dumps(art[1])
-        context['author_name'] = json.dumps(art[2])
-        context['author_blurb'] = json.dumps(art[3])
-        context['date'] = json.dumps(art[4])
-        context['content'] = json.dumps(art[5])
-        context['image_blurb'] = json.dumps(art[6])
-        context['article_sources'] = json.dumps(art[7])
+        context['title'] = json.dumps(art[1], ensure_ascii=False)
+        context['author_name'] = json.dumps(art[2], ensure_ascii=False)
+        context['author_blurb'] = json.dumps(art[3], ensure_ascii=False)
+        context['date'] = json.dumps(art[4], ensure_ascii=False)
+        context['content'] = json.dumps(art[5], ensure_ascii=False)
+        context['image_blurb'] = json.dumps(art[6], ensure_ascii=False)
+        context['article_sources'] = json.dumps(art[7], ensure_ascii=False)
 
 
     return render(request, 'article.html', context=context)
