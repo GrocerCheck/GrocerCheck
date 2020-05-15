@@ -9,7 +9,7 @@
         <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
         <link rel='stylesheet' href = "{% static 'css/infopage.css' %}">
         <link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
-        <link rel='stylesheet' href = "{% static 'css/article.css' %}">
+        <link rel='stylesheet' href = "{% static 'css/articlecss.css' %}">
     </head>
 
     <body>
@@ -50,21 +50,38 @@
 
         <div id="spacer"></div>
         
+        <div id="article">           
+            <h1 id="article_title">{{title|slice:"1:-1"}}</h1>             
+            <p id="author_name">{{author_name|slice:"1:-1"}}</p>
+            <p id="article_date">{{date|slice:"1:-1"}}</p>
+
+            <div class="image_card">
+                <img id="article_image" style = "width: 100%;" src="{% static 'images/GrocerCheckFavicon.jpeg' %}">
+                <div class="image_card_text">
+                    <p id=image_blurb>{{image_blurb}}</p>
+                </div>
+            </div> 
+            
+            <p id="article_content">{{content|slice:"1:-1"}}</p>
+            
+            <p id="about_the_author">About {{author_name|slice:"1:-1"}}: </p>
+            <p id="author_blurb">{{author_blurb|slice:"1:-1"}}</p>
+
+            <p id = "works_cited_header">Sources</p>
+            <p id="article_sources">{{article_sources|slice:"1:-1"}}</p>
+    
+        </div>        
+
         
-        <h1 id="article_title">{{title|slice:"1:-1"}}</h1>
-        <img id="article_image" style = "border-radius: 10px;" src="{% static 'images/GrocerCheckFavicon.jpeg' %}">
-        <p id="author_name">{{author_name|slice:"1:-1"}}</p>
-        <p id="author_blurb">{{author_blurb|slice:"1:-1"}}</p>
-        <p id="article_date">{{date|slice:"1:-1"}}</p>
-        <p id="article_content">{{content|slice:"1:-1"}}</p>
-        <p id="image_blurb">{{image_blurb|slice:"1:-1"}}</p>
-        <p id="article_source">{{article_sources|slice:"1:-1"}}</p>
+        
+        
         
         <script>
             var imgtitle = document.getElementById("article_title").innerHTML;
             var staticdir = "{% static 'images/covidwatch/' %}";
-            var article_image_dir = document.getElementById("article_image");
-            article_image_dir.src = staticdir + imgtitle + ".jpeg";
+            var article_image_element = document.getElementById("article_image");
+            article_image_element.src = staticdir + imgtitle + ".jpeg"; //CHANGE TO PNG LATER
+            article_image_element.alt = imgtitle;
         </script>
         
     </body>

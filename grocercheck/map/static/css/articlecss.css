@@ -1,19 +1,32 @@
 div.image_card{
+    border-radius: 25px;
+    width: 70%;
+    left: 15%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     color: white;
     width: 80%;
-    background-color: #35CE8D;
+    background-color: #35505A;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin-bottom: 25px;
 }
 
 div.image_card:hover{
-    background-color: #35605A;
+    background-color: #35CE8D;
 }
 
 div.image_card_text{
     text-align: center;
     padding: 10px 20px;
 }
+
+
+#article_image{
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+}
+
 
 
 
@@ -23,8 +36,11 @@ div.image_card_text{
     width: auto;
     left: auto;
     padding: 0;
+    padding-left: 10%;
+    padding-right: 10%;
     text-align: center;
     font-size: 80px;
+    margin-bottom: 0;
 }
 #author_name{
     font-size: 20px;
@@ -32,11 +48,12 @@ div.image_card_text{
     text-decoration: none;
     position: relative;
     width: auto;
-    left: auto;
+    right: 5%;
     padding: 0;
     padding-left: 10%;
     padding-right: 10%;
-    text-align: center;
+    text-align: right;
+    margin-bottom: 0;
 }
 #author_blurb{
     font-size: 15px;
@@ -54,11 +71,11 @@ div.image_card_text{
     text-decoration: none;
     position: relative;
     width: auto;
-    left: auto;
+    right: 5%;
     padding: 0;
     padding-left: 10%;
     padding-right: 10%;
-    text-align: center;
+    text-align: right;
 }
 #article_content{
     font-size: 15px;
@@ -67,8 +84,8 @@ div.image_card_text{
     width: auto;
     left: auto;
     padding: 0;
-    padding-left: 20%;
-    padding-right: 20%;
+    padding-left: 15%;
+    padding-right: 15%;
     text-align: left;
 }
 #image_blurb{
@@ -94,15 +111,30 @@ div.image_card_text{
     text-align: left;
 }
 
-#article_image{
-    border-radius: 10px;
-    width: 70%;
-    left: 15%;
+
+#about_the_author{
+    font-size: 20px;
+    text-decoration: none;
     position: relative;
+    width: auto;
+    left: 10%
     padding: 0;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 20%;
+    padding-right: 20%;
+    text-align: left;
 }
 
+
+#works_cited_header{
+    font-size: 40px;
+    text-decoration: none;
+    position: relative;
+    width: auto;
+    left: auto:
+    padding: 0;
+    padding-left: 20%;
+    padding-right: 20%;
+    text-align: center;
+}
 
 
