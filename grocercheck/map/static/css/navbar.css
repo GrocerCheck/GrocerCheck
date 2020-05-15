@@ -78,21 +78,45 @@ ul#navbarlist li a:hover{
 	background-color: #f6e4b6;
 	z-index: 100;
 }
+@media screen and (min-width: 600px) and (max-width: 1200px) {
+   
+#horizontalnav {
+font-size: 0.5em;
+}
+}
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 600px) {
    
    ul#navbarlist { display: none }
    ul#navbarlist li{ display: none }
    ul#navbarlist li a{ display: none }
 #horizontalnav img{ position: relative; width: 100%; height: auto; }
+#spacer{
+height: calc(calc(100vw * calc( 314 / 1146)) * 0.9);
 }
+}
+#navtoggle {
+position: fixed;
+left: 1%;
+top: 25%;
 
-@media screen and (min-width: 1200px) {
+}
+ul#navmenu{
+	
+height: auto;
+top: 0;
+bottom: 0;
+padding: 50px;
+padding-top: 250px;
+margin: -200px 0 0 -50px;
+}
+@media screen and (min-width: 600px) {
 #navtoggle{ display: none}
 #spansquare{ display: none}
 #navmenu{ display: none}
 #navtoggle span{ display: none}
 nav{ display: none }
+
 
 }
 
