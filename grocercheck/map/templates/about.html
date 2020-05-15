@@ -71,7 +71,7 @@
 
         <div id="horizontalnav">
             <a href="{% url 'index' %}">
-                <img src="{% static 'images/GrocerCheck-01.png' %}" alt="GrocerCheck Logo" style="position: relative; left: 0; top: 0;background-color:top: 0; whitve;display: inline; padding: calc(1em / 4); padding-bottom: 0;margin: 0; float: left;margin-right: 10em;height: 4.5em; width: calc(4.5em * calc(1146 / 314)); border: 0;">
+                <img src="{% static 'images/GrocerCheck-01.png' %}" alt="GrocerCheck Logo" >
             </a>
             <ul id="navbarlist">
                 <li><a href="{% url 'index' %}">Home</a></li>
@@ -79,7 +79,7 @@
                 <li><a href="{% url 'blog' %}">Blog</a></li>
 				<li><a href="{% url 'sponsors' %}">Sponsors</a></li>
                     <li><a href="{% url 'contact' %}">Contact Us</a></li>
-                    <li><a href="{% url 'media' %}">Media</a></li>	
+                    
             </ul>
         </div>
 
@@ -111,13 +111,12 @@
 
              <div id="andy" class = "responsive">
                 <div class = "teamprofiles">
-                    <a target="_blank" href = "{% static 'images/GrocerCheckFavicon.png' %}">
-                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/GrocerCheckFavicon.png' %}" alt = "Andy Liang">
+                    <a target="_blank" href = "{% static 'images/andy.jpg' %}">
+                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/andy.jpg' %}" alt = "Andy Liang">
                     </a>
                     <div class="member_name">Andy Liang</div>
                     <div class="member_title">COO &amp; Co-Founder, VP Development</div>
-                    <div class="desc">
-                        PLACEHOLDER_TEXT
+                    <div class="desc">Hey! My name is Andy and I am a grade 11 student at Eric Hamber Secondary. I started GrocerCheck with the goal of helping myself and others practice social distancing during this crucial time. I wanted to be able to see a map of the city and where I could go to get groceries without exposing myself to the potentially infectious crowds. I am very passionate about finding problems that I can solve or existing things that I can improve on, and I love getting my hands dirty and working on building solutions. I was so glad to see Grocercheck take shape, bit by bit, and I believe that it will be an important website for everybody to visit.
                     </div>
                 </div>
             </div>
@@ -128,7 +127,7 @@
                         <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/preston.png' %}" alt = "Preston Lai">
                     </a>
                     <div class="member_name">Preston Lai</div>
-                    <div class="member_title">Chief Information Officer</div>
+		    <div class="member_title">Chief Information Officer<br>  </br> </div>
  
                     <div class="desc">Hi there! My name is Preston and I’m an incoming freshman at the University of British Columbia. Throughout my life I have always been passionate about getting involved with projects to create social differences around my community. So when I had the opportunity to join the GrocerCheck team, a group of amazing individuals working towards a common goal of making the world a safer place, I couldn’t resist! Now after working with this team for a few months, I look forward to building lifelong networks, creating solutions to make a difference in the world, and challenging the status quo.                     
                     </div>
@@ -164,13 +163,7 @@
             </div>
         </div>
 
-        <div id="spacer"></div>
-        <div id="spacer"></div>
-        <div id="spacer"></div>
-        <div id="spacer"></div>
-        <div id="spacer"></div>
-        <div id="spacer"></div>
-
+        
 
         <div id="forkus">
             <a target="_blank" href = "https://github.com/GrocerCheck">
@@ -190,7 +183,11 @@
 				<li><a href="https://github.com/grocercheck/" target="_blank" class="fa fa-github"></a></li>
 			</ul>
 		</div>
-
+		<script>/*
+			var imgheight = document.getElementById("Brian").style.width;
+			document.getElementById("teammembers").style.setProperty("--imgheight", imgheight);
+			*/
+		</script>
 
 	</body>
 </html>

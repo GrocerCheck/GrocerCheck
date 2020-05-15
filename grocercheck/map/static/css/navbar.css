@@ -2,30 +2,61 @@
 ul#navbarlist{
     /* why is this no longer at the top? */
     float: right;
-    position: static;
+    position: fixed;
     top: 0;
+    right: 0;
     display: inline-block;
     list-style-type: none;
 	margin: 0;
 	padding: 0;
-	background-color: #3AB64B;
+	background-color: #f6e4b6;
+	border: 0;
+	height: 5em;
+	--navbarheight: 5em;
 }
-
+ul#navbarlist .currentpage{
+	background-color: #35605A;
+}
 ul#navbarlist li {
     float: left;
-}
+    background-color: #3AB64B;
+    }
 
 
 /* clickable link area of each text item in nav bar list */
 ul#navbarlist li a {
     top: 0;
-    border-right: 3px solid #fff;
+    border: 0;
+    border-left: 3px solid #f6e4b6;
+    
     display: block;
+    
     color: white;
 	text-align: center;
-    padding: calc(1em * calc(2/3)) 2em;
+	
+    padding: calc(calc(var(--navbarheight) - 3em) / 2);
+    padding-left: 2em;
+    padding-right: 2em;
+    
 	text-decoration: none;
-	font-size: 1.5em;
+	font-size:1.5em;
+		
+}
+
+#horizontalnav img {
+	background-color: #f6e4b6;
+	position: relative; 
+	left: 0; 
+	top: 0;
+	display: inline; 
+	padding: calc(1em / 4);
+	margin: 0; 
+	float: left;
+	padding-right: 0;
+	height: var(--navbarheight); 
+	width:  calc(4.5em * calc(1146 / 314)); 
+	border:0;
+       box-sizing: content-box;	
 }
 
 /* change color of text on hover */
@@ -38,17 +69,16 @@ ul#navbarlist li a:hover{
 /* div for horizontal nav bar */
 #horizontalnav{
 	position: fixed;
+	
 	width: 100%;
 	top: 0;
 	left: 0;
-	height: 0em;
+	height: 5em;
 	display: block;
-	background-color: #F9ECCC;
+	background-color: #f6e4b6;
 	z-index: 100;
 }
 
 /* the list item in the nav bar corresponding to the current page has this class to make the background a different colour */
-.currentpage{
-	background-color: #35605A;
-}
+
 
