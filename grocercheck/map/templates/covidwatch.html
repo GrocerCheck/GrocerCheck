@@ -5,10 +5,10 @@
         <title>COVID Watch: GrocerCheck</title>
         <link rel='icon' type=image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
-        <link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
-	
+        <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
+        <link rel='stylesheet' href = "{% static 'css/covidwatchposts.css' %}">
         <link rel='stylesheet' href = "{% static 'css/infopage.css' %}">
-<link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
+        <link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
         
         <style>
         </style>
@@ -57,7 +57,30 @@
         </div>
 
         <div id="spacer">
+            
+            
         </div>
+        <div style = "display: relative;"id = "watchposts">
+            <div id="post_id_1" class = "responsive">
+                <div class = "post">
+                    <a target="_blank" href = "https://grocercheck.ca/map/covidwatch/1">
+                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px; background-color: white;" src = "{% static 'images/covidwatch/sanatizer.jpeg' %}" alt = "Test 1">
+                    </a>
+                    <div class="title">Title One</div>
+                    <div class="author_name">Author One</div>
+                    <div class="blurb">
+                        <p>Lorem</p>
+                        <p>Ipsum</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+
+
 
 
     </body>

@@ -1,0 +1,60 @@
+#spacer{
+z-index: 1;
+}
+
+
+
+div.post {
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: #35605A;
+    z-index: 2;
+}
+
+div.post:hover {
+    background-color: #35CE8D;
+    color: white;
+}
+
+
+div.post img {
+    width: 100%;
+    height: calc(calc(100vw - 16px) / 5);
+    height: auto;
+    object-fit: cover;
+    height: auto;
+    
+    
+    
+}
+
+div.blurb {
+    font-size: 15px;
+    padding: 5px;
+    text-align: center;
+}
+
+div.author_name{
+    font-weight: bold;
+    font-size: 20px;
+    padding: 0px;
+    text-align: center;
+}
+
+div.title{
+    font-weight: bold;
+    font-size: 40px;
+    padding: 5px;
+    text-align: center;
+}
+
+
+.responsive {
+    padding: 6px;
+    float: left;
+    width: 33.3333%;
+    box-sizing: border-box;
+    z-index: 3;
+}
+
