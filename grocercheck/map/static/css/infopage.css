@@ -40,6 +40,10 @@ body{
     display: table;
     clear: both;
 }
-* {
+
+div.teamprofiles {
+    box-sizing: border-box;
+}
+div.sponsorprofiles {
     box-sizing: border-box;
 }

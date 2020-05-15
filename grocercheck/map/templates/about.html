@@ -2,6 +2,8 @@
 <!DOCTYPE HTML>
 <html>
 	<head> <!-- title is the text in the tab at the top -->
+        <title>About Us: GrocerCheck</title>
+        <link rel='icon' type='image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito'>        
 		<link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
@@ -9,10 +11,8 @@
         <link rel='stylesheet' href = "{% static 'css/ourteam.css' %}">
         <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
         <link rel='stylesheet' href = "{% static 'css/infopage.css' %}">
-  		<link rel='icon' type='image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
-        
-        <title>About Us: GrocerCheck</title>
-        
+
+
         <style>
             /* div for who are we */
             #whoarewe{
@@ -23,7 +23,6 @@
                 left: 15%;
             }
 
-
             #our_team{
                 text-align: center;
                 text-decoration: none;
@@ -33,17 +32,16 @@
                 padding-top: 20px;
             }
 
-
             #forkus{
                 color: #00120B;
                 text-align: center;
                 text-decoration: none;
                 position: relative;
-                width: 50%;
-                left: 25%;
+                width: 70%;
+                left: 15%;
                 border: none;
-                padding-top: 20px;
-                margin-top: 50px;
+                padding-top: 200px;
+                display: flex;
             }
 		</style>
 
@@ -52,9 +50,8 @@
     
 	<body>
 
-
-
-		<!-- this is the hamburger menu commented out for now
+<!--
+		 this is the hamburger menu commented out for now
 	  <nav role="navigation">
 	  <div id="navtoggle">
 	  <input type="checkbox" id="hamburgerbutton"/>
@@ -70,7 +67,7 @@
 	  </ul>
 	  </div>
 	  </nav>
-		-->
+-->
 
         <div id="horizontalnav">
             <a href="{% url 'index' %}">
@@ -78,7 +75,7 @@
             </a>
             <ul id="navbarlist">
                 <li><a href="{% url 'index' %}">Home</a></li>
-				<li class="currentpage"><a href="{% url 'about' %}">About Us</a></li>
+            <li class="currentpage"><a href="{% url 'about' %}">About Us</a></li>
                 <li><a href="{% url 'blog' %}">Blog</a></li>
 				<li><a href="{% url 'sponsors' %}">Sponsors</a></li>
                     <li><a href="{% url 'contact' %}">Contact Us</a></li>
@@ -96,7 +93,7 @@
 
         <div id="our_team">
             <h1 style="font-size 50px;">Meet our team.</h1>
-            <p>We are a team of passionate highschool and incoming university students looking to help make a difference</p>
+            <p>We are a team of passionate students looking to help make a difference</p>
         </div>
         
         
@@ -175,23 +172,15 @@
         <div id="spacer"></div>
 
 
-        <div id="forkus" style="display: flex; align-items: center;">
+        <div id="forkus">
             <a target="_blank" href = "https://github.com/GrocerCheck">
                 <img style="vertical-align: bottom; margin-right: 5px; display: block;" src="{% static 'images/github.png' %}" width=30px, height = 30px>
             </a>
             <a style="margin: 0; color: #00120B" href="https://github.com/GrocerCheck" target="_blank">GrocerCheck is an open source project! Fork us on GitHub!<a>
         </div>
 
-        <div id="spacer"></div>
-        <div id="spacer"></div>
-        <div id="spacer"></div>
         
-        
-        
-        
-        
-        
-        
+
         
 		<div id="socialmedia">
 			<ul id="socialmedialist">
