@@ -58,8 +58,9 @@
         <p id="article_content">{{content|slice:"1:-1"}}</p>
         
         <script>
-            var img = document.getElementById("article_title")
-            
+            var img = document.getElementById("article_title");
+            var staticdir = "{% static 'images/covidwatch/'}";
+            var imgdir = staticdir + img + ".jpeg";
         </script>
         
     </body>
