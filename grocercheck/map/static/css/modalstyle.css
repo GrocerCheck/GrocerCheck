@@ -5,7 +5,7 @@
 		display: none; /* Hidden by default */
 		position: fixed; /* Stay in place */
 		z-index: 100000; /* Sit on top */
-		padding-top: 100px; /* Location of the box */
+		padding-top: 10px; /* Location of the box */
 		left: 0;
 		top: 0;
 		width: 100%; /* Full width */
@@ -20,7 +20,7 @@
 	.modal-content {
 		background-color: #fefefe;
 		margin: auto;
-		padding: 20px;
+		padding: 5px;
 		border: none;
         border-radius: 10px;
 		width: 80%;
