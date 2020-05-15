@@ -11,7 +11,7 @@ class blog_entry(models.Model):
     date = models.CharField(max_length=100)
     content = models.CharField(max_length=40000)
     image_blurb = models.CharField(max_length=500)
-    article_sources = models.CharField(max_length=500)
+    article_sources = models.CharField(max_length=10000)
 
 
 class Store(models.Model):
@@ -198,7 +198,7 @@ class Store(models.Model):
     sun21 = models.IntegerField(null=True)
     sun22 = models.IntegerField(null=True)
     sun23 = models.IntegerField(null=True)
-     
+
     def __str__(self):
         return self.name
 
