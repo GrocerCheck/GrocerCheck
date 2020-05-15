@@ -219,18 +219,8 @@ function initMap() {
 		}else{
 			pops = "Historically is "+busy+"% Busy Right Now"
 		}
-		if(busy>60){
-			s = 'red';
-		}
-		else if(busy>30){
-			s = 'goldenrod';
-		}
-		else if(busy>=0){
-			s = 'limegreen';
-		}
-		else{
-			s = 'grey';
-		}
+	
+		s = getIcon(x);
 
 		if(openn[x]==0){
 			pops='';
