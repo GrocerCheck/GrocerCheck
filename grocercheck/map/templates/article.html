@@ -3,13 +3,13 @@
 <html>
 	<head> <!-- title is the text in the tab at the top -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>About Us: GrocerCheck</title>
+        <title>CovidWatch: GrocerCheck</title>
         <link rel='icon' type='image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito'>
         <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
         <link rel='stylesheet' href = "{% static 'css/infopage.css' %}">
         <link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
-
+        <link rel='stylesheet' href = "{% static 'css/article.css' %}">
     </head>
 
     <body>
@@ -50,15 +50,22 @@
 
         <div id="spacer">
         </div>
-
-
-        <p id="title">{{title|slice:"1:-1"}}</p>
+        <h1 id="article_title">{{title|slice:"1:-1"}}</h1>
+        <img id="article_image" alt = "{% static 'images/covidwatch/{{title|slice:'1:-1'}}' %}">
+<!--
+        <img id="article_image">
+-->
         <p id="author_name">{{author_name|slice:"1:-1"}}</p>
         <p id="author_blurb">{{author_blurb|slice:"1:-1"}}</p>
-        <p id="date">{{date|slice:"1:-1"}}</p>
-        <p id="content">{{content|slice:"1:-1"}}</p>
+        <p id="article_date">{{date|slice:"1:-1"}}</p>
+        <p id="article_content">{{content|slice:"1:-1"}}</p>
         
-        
+        <script>
+            var imgtitle = document.getElementById("article_title");
+            var staticdir = "{% static 'images/covidwatch/'}";
+            var imgdir = staticdir + img + ".jpeg";
+            document.getElementById("article_image").alt="asfdasdfasdfasdf";
+        </script>
         
     </body>
 </html>
