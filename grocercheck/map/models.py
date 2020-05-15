@@ -4,6 +4,15 @@ from django.db import models
 
 
 
+class blog_entry(models.Model):
+    title = models.CharField(max_length=500)
+    author_name = models.CharField(max_length=100)
+    author_blurb = models.CharField(max_length=200)
+    date = models.CharField(max_length=100)
+    content = models.CharField(max_length=40000)
+
+
+
 class Store(models.Model):
     ''' MODEL REPRESENTING A GROCERY STORE '''
     name = models.CharField(max_length=100)
@@ -192,4 +201,4 @@ class Store(models.Model):
     def __str__(self):
         return self.name
 
-	
+
