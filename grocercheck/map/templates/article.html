@@ -7,18 +7,17 @@
 
 <body>
 
-	<h1 id="test">hi</h1>
+	<p id="test">{{title|safe}}</p>
 
 	<script>
-		
-		var id = {{id|safe}}
+				
 		var title = {{title|safe}}
 		var author_name = {{author_name|safe}}
 		var author_blurb = {{author_blurb|safe}}
 		var dates = {{date|safe}}
 		var content = {{content|safe}}
 
-		document.getElementById("test").innerHTML = "hello";
+		
 
 
 	</script>

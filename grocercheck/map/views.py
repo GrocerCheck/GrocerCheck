@@ -120,7 +120,7 @@ def article(request, articleid):
     #id, title, author_name, author_blurb, date, content
     conn = sqlite3.connect(os.path.join(settings.BASE_DIR,'db1.sqlite3'))
     curr = conn.cursor()
-    context = []
+    context = {}
     with conn:
         curr.execute("SELECT id,title,author_name,author_blurb,date,content FROM map_blog_entry WHERE id=?", (articleid,))
         art = curr.fetchall()[0]
