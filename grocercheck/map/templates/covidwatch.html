@@ -4,6 +4,7 @@
     <head>
         <title>COVID Watch: GrocerCheck</title>
         <link rel='icon' type=image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
         <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
         <link rel='stylesheet' href = "{% static 'css/covidwatchposts.css' %}">
@@ -73,7 +74,7 @@
 
             
         </div>
-        <div style = "display: relative;"id = "watchposts">
+        <div style = "display: inline-block;"id = "watchposts">
             <div id="post_id_1" class = "responsive">
                 <a target="_blank" style="text-decoration: none;" href = "https://grocercheck.ca/map/covidwatch/1">
                     <div class = "post">
@@ -87,10 +88,10 @@
                     </div>
                 </a>
             </div>
-        </div>
+        
 
 
-            <div id="thiscouldbeyou" class = "responsive">
+            <div id="thiscouldbeyou"  class = "responsive">
                 <a target="_blank" style="text-decoration: none;" href = "mailto:info@grocercheck.ca?subject=GrocerCheck-Interested%20Writer">
                     <div class = "post">
                         <img style="border-top-right-radius: 10px; border-top-left-radius: 10px; background-color: white;" src = "{% static 'images/GrocerCheckFavicon.png' %}" alt = "This could be you!">
@@ -104,7 +105,14 @@
             </div>
         </div>
 
-
+<div id="paypalbutton">
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick" />
+<input type="hidden" name="hosted_button_id" value="KGS4K4PLBS6ES" />
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+<img alt="" border="0" src="https://www.paypal.com/en_CA/i/scr/pixel.gif" width="1" height="1" />
+</form>
+	</div>
 
 
     </body>

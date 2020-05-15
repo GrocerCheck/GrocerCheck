@@ -119,6 +119,17 @@ margin: -200px 0 0 -50px;
 
 }
 
+
+#paypalbutton {
+	position: relative;
+	
+	width: auto;
+	height: auto;
+	text-align: center;
+	z-index: 502;
+}
+
+
 /* the list item in the nav bar corresponding to the current page has this class to make the background a different colour */
 
 

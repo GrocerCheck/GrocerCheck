@@ -36,6 +36,15 @@ body{
 		padding: 0;
 	}
     
+    #paypalbutton {
+	position: absolute;
+	width: auto;
+	height: auto;
+	left: 1%;
+	top: 90%;
+	z-index: 502;
+    }
+
 		</style>    
 	</head>
 	<body>
@@ -48,7 +57,7 @@ body{
 		<div id="modaldiv" class="modal">
 			<div class="modal-content">
 				<span class="close" id="close">&times;</span>
-				<img style="width: 100%"src="{% static 'images/tutorial.png' %}">
+				<img alt="grocercheck tutorial help" style="width: 100%"src="{% static 'images/tutorial.png' %}">
 			</div>
 		</div>
 
@@ -131,6 +140,16 @@ body{
 				<p style="color:forestgreen; margin-top:0;border-radius: 0 0 10px 10px; margin-bottom: 0; border: none;padding-top: 20px; text-align:center; background-color:#fff;"><b>Show Closed Stores</b></p>
 
 			</label>
+		</div>
+
+		<div id="paypalbutton">
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick" />
+<input type="hidden" name="hosted_button_id" value="KGS4K4PLBS6ES" />
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+<img alt="" border="0" src="https://www.paypal.com/en_CA/i/scr/pixel.gif" width="1" height="1" />
+</form>
+
 		</div>
 
 		<!--The div element for the map -->
@@ -232,7 +251,7 @@ function initMap() {
 			s='grey';
 		}
 //return formatted html of infowindow
-		return '<div id="content">' //+<link rel="canonical" href="http://example.com/" />
+		return '<div id="content">' + 
 			'<h1 style="color:'+s+';"> '+names[x]+' </h1>' +
 			'<div id="body"'+
 			'<p> '+address[x]+' </p>'+
