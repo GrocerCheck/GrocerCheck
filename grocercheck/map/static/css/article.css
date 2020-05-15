@@ -56,9 +56,10 @@
 }
 
 #article_image{
+    border-radius: 10px;
+    width: 70%;
+    left: 15%;
     position: relative;
-    width: auto;
-    left: auto;
     padding: 0;
     padding-left: 10%;
     padding-right: 10%;

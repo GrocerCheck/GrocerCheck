@@ -3,7 +3,7 @@
 <html>
 	<head> <!-- title is the text in the tab at the top -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>CovidWatch: GrocerCheck</title>
+        <title>CovidWatch: {{title|slice:"1:-1"}}</title>
         <link rel='icon' type='image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito'>
         <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
@@ -41,30 +41,30 @@
             <ul id="navbarlist">
                 <li><a href="{% url 'index' %}">Home</a></li>
                 <li><a href="{% url 'about' %}">About Us</a></li>
-                <li class="currentpage"><a " href="{% url 'covidwatch' %}">COVID Watch</a></li>
+                <li class="currentpage"><a href="{% url 'covidwatch' %}">COVID Watch</a></li>
 				<li><a href="{% url 'sponsors' %}">Sponsors</a></li>
                 <li><a href="{% url 'contact' %}">Contact Us</a></li>
-                    
             </ul>
         </div>
 
-        <div id="spacer">
-        </div>
+
+        <div id="spacer"></div>
+        
+        
         <h1 id="article_title">{{title|slice:"1:-1"}}</h1>
-        <img id="article_image" alt = "{% static 'images/covidwatch/{{title|slice:'1:-1'}}' %}">
-<!--
-        <img id="article_image">
--->
+        <img id="article_image" style = "border-radius: 10px;" src="{% static 'images/GrocerCheckFavicon.jpeg' %}">
         <p id="author_name">{{author_name|slice:"1:-1"}}</p>
         <p id="author_blurb">{{author_blurb|slice:"1:-1"}}</p>
         <p id="article_date">{{date|slice:"1:-1"}}</p>
         <p id="article_content">{{content|slice:"1:-1"}}</p>
+        <p id="image_blurb">{{image_blurb|slice:"1:-1"}}</p>
+        <p id="article_source">{{article_sources|slice:"1:-1"}}</p>
         
         <script>
-            var imgtitle = document.getElementById("article_title");
-            var staticdir = "{% static 'images/covidwatch/'}";
-            var imgdir = staticdir + img + ".jpeg";
-            document.getElementById("article_image").alt="asfdasdfasdfasdf";
+            var imgtitle = document.getElementById("article_title").innerHTML;
+            var staticdir = "{% static 'images/covidwatch/' %}";
+            var article_image_dir = document.getElementById("article_image");
+            article_image_dir.src = staticdir + imgtitle + ".jpeg";
         </script>
         
     </body>

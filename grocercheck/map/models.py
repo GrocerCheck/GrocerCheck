@@ -10,7 +10,8 @@ class blog_entry(models.Model):
     author_blurb = models.CharField(max_length=200)
     date = models.CharField(max_length=100)
     content = models.CharField(max_length=40000)
-
+    image_blurb = models.CharField(max_length=500)
+    article_sources = models.CharField(max_length=500)
 
 
 class Store(models.Model):

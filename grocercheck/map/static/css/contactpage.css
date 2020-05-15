@@ -24,7 +24,7 @@ body{
 /* put responsive page elements here (e.g. navbar...) */
 
 
-@media only screen and (max-width: 1000px){
+@media only screen and (max-width: 1100px){
     .responsive{
         width: 100%;
         
@@ -38,9 +38,6 @@ body{
     clear: both;
 }
 
-div.teamprofiles {
-    box-sizing: border-box;
-}
-div.sponsorprofiles {
+div.contacts {
     box-sizing: border-box;
 }
