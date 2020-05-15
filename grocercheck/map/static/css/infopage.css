@@ -37,11 +37,7 @@ body{
     }
 }
 
-.clearfix:after{
-    content="";
-    display: table;
-    clear: both;
-}
+
 
 div.teamprofiles {
     box-sizing: border-box;

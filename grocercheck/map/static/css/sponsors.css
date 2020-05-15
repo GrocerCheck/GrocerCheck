@@ -1,9 +1,15 @@
+#spacer{
+z-index: 1;
+}
+
+
 
 div.sponsorprofiles {
     border: none;
     border-radius: 10px;
     color: white;
     background-color: #35605A;
+    z-index: 2;
 }
 
 div.sponsorprofiles:hover {
@@ -14,7 +20,13 @@ div.sponsorprofiles:hover {
 
 div.sponsorprofiles img {
     width: 100%;
+    height: calc(calc(100vw - 16px) / 5);
     height: auto;
+    object-fit: cover;
+    height: auto;
+    
+    
+    
 }
 
 div.blurb {
@@ -50,11 +62,11 @@ div.sponsor_rank_bronze{
     text-align: center;
 }
 
-
-
 .responsive {
-    padding: 0 6px;
+    padding: 6px;
     float: left;
-    width: 33.3333%
+    width: 33.3333%;
+    box-sizing: border-box;
+    z-index: 3;
 }
 

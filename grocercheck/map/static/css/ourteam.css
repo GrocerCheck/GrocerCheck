@@ -21,7 +21,7 @@ div.teamprofiles img {
     
     height: calc(calc(100vw - 16px) / 5);
     height: auto;
-object-fit: cover;
+    object-fit: cover;
 
 }
 

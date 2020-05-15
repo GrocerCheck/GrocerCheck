@@ -26,17 +26,12 @@ body{
 
 @media only screen and (max-width: 1000px){
     .responsive{
-        width: 49.99999999%;
+        width: 100%;
         background-color: blue;
         
     }
 }
 
-.clearfix:after{
-    content="";
-    display: table;
-    clear: both;
-}
 
 div.teamprofiles {
     box-sizing: border-box;
