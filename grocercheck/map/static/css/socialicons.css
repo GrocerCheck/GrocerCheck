@@ -9,24 +9,20 @@
 
 
 #socialmedia{
-	position: fixed;
+	position: relative;
 	display: inline-block;
-	bottom: 5%;
-	left: 5%;
-	width: auto;
+	text-align: center;
+	width: 100%;
 	font-size: 30px;
 	height: 1em;
 	margin: 0;
-	padding: 0;
-	padding-top: calc(1em / 10);
-	padding-bottom: calc(1em / 10);
-	padding-left: calc(1em/5);
-	padding-right: calc(1em/5);
+	padding: auto;
+	
 	border: 3px solid #3AB64B;
 	border-radius: 15px;
-	text-align: center;
 	background-color: none;
 	border: none;
+		
 }
 ul#socialmedialist {
 	margin: 0;
