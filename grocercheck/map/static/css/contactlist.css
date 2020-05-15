@@ -31,6 +31,15 @@ div.contact_name{
     text-align: center;
 }
 
+div.contact_talk{
+    color: white;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 60px;
+    padding: 15px;
+    text-align: center;
+}
+
 div.contact_email{
     color: white;
     font-size: 25px;

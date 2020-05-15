@@ -18,7 +18,7 @@
 	margin: 0;
 	padding: auto;
 	
-	border: 3px solid #3AB64B;
+	border: none;
 	border-radius: 15px;
 	background-color: none;
 	border: none;
@@ -50,8 +50,8 @@ ul#socialmedialist li a{
 	height: 100%;
 	top: calc(-1em / 10);
 	width: auto;
-	margin:0;
-	padding: 0;
+	margin: 0;
+	padding: 0.5em;
 	padding-left: 1em;
 	padding-right: 1em;
 	font-size: 30px;
