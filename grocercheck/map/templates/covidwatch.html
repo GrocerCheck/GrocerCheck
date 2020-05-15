@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Blog: GrocerCheck</title>
+        <title>COVID Watch: GrocerCheck</title>
         <link rel='icon' type=image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
         <link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
@@ -31,7 +31,7 @@
 				<ul id="navmenu">
 					<a href="{% url 'index' %}"><li>Home</li></a>
 					<a href="{% url 'about' %}"><li>About Us</li></a>
-					<a href="{% url 'blog' %}"><li>Blog</li></a>
+					<a href="{% url 'covidwatch' %}"><li>COVID Watch</li></a>
 					<a href="{% url 'sponsors' %}"><li>Sponsors</li></a>
 					<a href="{% url 'contact' %}"><li>Contact Us</li></a>
 
@@ -49,7 +49,7 @@
                 <li><a href="{% url 'index' %}">Home</a></li>
 
                 <li><a href="{% url 'about' %}">About Us</a></li>
-                <li class="currentpage"><a href="{% url 'blog' %}">Blog</a></li>
+                <li class="currentpage"><a href="{% url 'covidwatch' %}">COVID Watch</a></li>
                 <li><a href="{% url 'sponsors' %}">Sponsors</a></li>
                     <li><a href="{% url 'contact' %}">Contact Us</a></li>
                     

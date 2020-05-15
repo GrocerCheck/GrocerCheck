@@ -78,14 +78,14 @@ ul#navbarlist li a:hover{
 	background-color: #f6e4b6;
 	z-index: 100;
 }
-@media screen and (min-width: 600px) and (max-width: 1200px) {
+@media screen and (min-width: 650px) and (max-width: 1300px) {
    
 #horizontalnav {
 font-size: 0.5em;
 }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
    
    ul#navbarlist { display: none }
    ul#navbarlist li{ display: none }
@@ -110,7 +110,7 @@ padding: 50px;
 padding-top: 250px;
 margin: -200px 0 0 -50px;
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 650px) {
     #navtoggle{ display: none}
     #spansquare{ display: none}
     #navmenu{ display: none}
