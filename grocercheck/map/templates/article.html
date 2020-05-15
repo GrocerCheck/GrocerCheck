@@ -52,14 +52,13 @@
         </div>
 
 
-        <p id="test">{{title|safe}}</p>
-        <script>
-            var title = {{title|safe}}
-            var author_name = {{author_name|safe}}
-            var author_blurb = {{author_blurb|safe}}
-            var dates = {{date|safe}}
-            var content = {{content|safe}}
-        </script>
-
+        <p id="title">{{title|slice:"1:-1"}}</p>
+        <p id="author_name">{{author_name|slice:"1:-1"}}</p>
+        <p id="author_blurb">{{author_blurb|slice:"1:-1"}}</p>
+        <p id="date">{{date|slice:"1:-1"}}</p>
+        <p id="content">{{content|slice:"1:-1"}}</p>
+        
+        
+        
     </body>
 </html>
