@@ -61,7 +61,9 @@ div.image_card_text{
     text-align: center;
 }
 #article_content{
-    font-size: 15px;
+    background-color: white;
+    border-radius: 25px;
+    font-size: 20px;
     text-decoration: none;
     position: relative;
     width: auto;

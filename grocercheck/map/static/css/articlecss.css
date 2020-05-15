@@ -78,16 +78,22 @@ div.image_card_text{
     text-align: right;
 }
 #article_content{
-    font-size: 15px;
+    font-size: 20px;
+    border-radius: 25px;
+    background-color: white;
     text-decoration: none;
     position: relative;
-    width: auto;
-    left: auto;
-    padding: 0;
-    padding-left: 15%;
-    padding-right: 15%;
+    width: 70%;
+    padding: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: left;
 }
+
+
+
+
 #image_blurb{
     font-size: 15px;
     text-decoration: none;
