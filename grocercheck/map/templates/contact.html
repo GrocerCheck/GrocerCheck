@@ -5,12 +5,13 @@
         <title>Contact Us: GrocerCheck</title>
         <link rel='icon' type=image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
         <link href = 'https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
-        	<link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
-<link rel='stylesheet' href = "{% static 'css/contactlist.css' %}">
-
+        <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+       
+        <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
+        <link rel='stylesheet' href = "{% static 'css/contactlist.css' %}">
         <link rel='stylesheet' href = "{% static 'css/contactpage.css' %}">
-<link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
-
+        <link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
+        <link rel='stylesheet' href = "{% static 'css/socialicons.css' %}">
         
         <style>
             #contacttitle {
@@ -20,6 +21,18 @@
                 width: 75%;
                 left: 15%;
             }
+
+            #connectwithus{
+                text-decoration: none;
+                position: relative;
+                width: auto;
+                left: auto;
+                padding: 0;
+                padding-left: 10%;
+                padding-right: 10%;
+                text-align: center;
+            }
+
 
         </style>
     </head>
@@ -70,8 +83,7 @@
         </div>
 
 
-        <div id = "contactlistdiv">
-          
+        <div style="position: relative;" id = "contactlistdiv">
             <a target="_blank" href="mailto:brian@grocercheck.ca?subject=GrocerCheck%20Buisness%20Inquiry">
                 <div id = "general_inq" class = "responsive">
                     <div class="contacts">
@@ -114,12 +126,23 @@
                 </div>
             </a>
 
-
         </div>
             
+        <div id="connectwithus">
+            <h1 style="font-size: 70px;">Or connect with us on social media</h1>
+ 
+        
+    
+            <div id="socialmedia">
+                <ul id="socialmedialist">
+                    <li><a href="https://www.facebook.com/GrocerCheck-102588141447791/" target="_blank" class="fa fa-facebook"></a></li>
+                    <li><a href="https://www.instagram.com/grocercheck/" target="_blank" class="fa fa-instagram"></a></li>
+                    <li><a href="https://www.linkedin.com/company/grocercheck/" target="_blank" class="fa fa-linkedin"></a></li>
+                    <li><a href="https://github.com/grocercheck/" target="_blank" class="fa fa-github"></a></li>
+                </ul>
+            </div>
 
-
-
+        </div>
 
 
 
