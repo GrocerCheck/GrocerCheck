@@ -3,7 +3,7 @@
 #navtoggle
 	{
 	display: block;
-	position: absolute;
+	position: fixed;
 	top: 10%;
 	left: 1%;
 	z-index: 500;
@@ -127,7 +127,7 @@
 	position: absolute;
 	background: #fff;
 	top: -6px;
-	left: 5px;
+	left: 6px;
 	width: 40px;
 	height: 34px;
 	border: none;
@@ -144,3 +144,4 @@
 
 	transform: none;
 }
+

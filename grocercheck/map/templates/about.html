@@ -2,25 +2,31 @@
 <!DOCTYPE HTML>
 <html>
 	<head> <!-- title is the text in the tab at the top -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>About Us: GrocerCheck</title>
         <link rel='icon' type='image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito'>        
 		<link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
-        <link rel='stylesheet' href = "{% static 'css/socialmedia.css' %}">
-        <link rel='stylesheet' href = "{% static 'css/ourteam.css' %}">
+        
+                <link rel='stylesheet' href = "{% static 'css/ourteam.css' %}">
         <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
         <link rel='stylesheet' href = "{% static 'css/infopage.css' %}">
+	<link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
+<link rel='stylesheet' href = "{% static 'css/socialicons.css' %}">
 
 
         <style>
             /* div for who are we */
             #whoarewe{
-                text-align: center;
-                text-decoration: none;
+                                text-decoration: none;
                 position: relative;
-                width: 70%;
-                left: 15%;
+                width: auto;
+                left: auto;
+		padding: 0;
+		padding-left: 10%;
+		padding-right: 10%;
+		text-align: center;
+
             }
 
             #our_team{
@@ -50,8 +56,6 @@
     
 	<body>
 
-<!--
-		 this is the hamburger menu commented out for now
 	  <nav role="navigation">
 	  <div id="navtoggle">
 	  <input type="checkbox" id="hamburgerbutton"/>
@@ -67,7 +71,6 @@
 	  </ul>
 	  </div>
 	  </nav>
--->
 
         <div id="horizontalnav">
             <a href="{% url 'index' %}">
@@ -87,8 +90,17 @@
         </div>
 
 		<div id="whoarewe">
-			<h1 style="font-size: 60px;">GrocerCheck: Who are we?</h1>
+			<h1 style="font-size: 50px;">GrocerCheck: Who are we?</h1>
 			<p>Grocercheck Foundation is a non profit organization centered around a web application, grocercheck.ca, that makes accessible live grocery business data to help consumers follow social distancing guidelines during the COVID-19 pandemic.</p>
+			
+		</div>
+<div id="socialmedia">
+			<ul id="socialmedialist">
+				<li><a href="https://www.facebook.com/GrocerCheck-102588141447791/" target="_blank" class="fa fa-facebook"></a></li>
+				<li><a href="https://www.instagram.com/grocercheck/" target="_blank" class="fa fa-instagram"></a></li>
+				<li><a href="https://www.linkedin.com/company/grocercheck/" target="_blank" class="fa fa-linkedin"></a></li>
+				<li><a href="https://github.com/grocercheck/" target="_blank" class="fa fa-github"></a></li>
+			</ul>
 		</div>
 
         <div id="our_team">
@@ -155,7 +167,7 @@
                     <div class="member_name">Luke Dunn</div>
                     <div class="member_title">Chief Experience Officer</div>
  
-                    <div class="desc">Hi! I’m Luke, and while I was trying to figure out what to do with myself during the Covid-19 pandemic I was invited to join the GrocerChek team and in the process make a difference in my community. What an opportunity! In my spare time I work on my own design based projects and fantasize about being outside.
+                    <div class="desc">Hi! I’m Luke, and while I was trying to figure out what to do with myself during the Covid-19 pandemic I was invited to join the GrocerCheck team and in the process make a difference in my community. What an opportunity! In my spare time I work on my own design based projects and fantasize about being outside.
                     </div>
                 </div>
             </div>
@@ -173,19 +185,6 @@
         
 
         
-		<div id="socialmedia">
-			<ul id="socialmedialist">
-				<li><a href="https://www.facebook.com/GrocerCheck-102588141447791/" target="_blank" class="fa fa-facebook"></a></li>
-				<li><a href="https://www.instagram.com/grocercheck/" target="_blank" class="fa fa-instagram"></a></li>
-				<li><a href="https://www.linkedin.com/company/grocercheck/" target="_blank" class="fa fa-linkedin"></a></li>
-				<li><a href="https://github.com/grocercheck/" target="_blank" class="fa fa-github"></a></li>
-			</ul>
-		</div>
-		<script>/*
-			var imgheight = document.getElementById("Brian").style.width;
-			document.getElementById("teammembers").style.setProperty("--imgheight", imgheight);
-			*/
-		</script>
-
+				
 	</body>
 </html>

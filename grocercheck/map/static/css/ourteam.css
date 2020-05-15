@@ -18,6 +18,7 @@ div.teamprofiles:hover {
 
 div.teamprofiles img {
     width: 100%;
+    
     height: calc(calc(100vw - 16px) / 5);
     height: auto;
 object-fit: cover;
@@ -44,7 +45,7 @@ div.member_title{
 
 
 .responsive {
-    padding: 6px;
+    padding: 10px 6px 0;
     float: left;
     width: 19.99999%;
     box-sizing: border-box;
