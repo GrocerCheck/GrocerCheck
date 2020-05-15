@@ -11,6 +11,14 @@
         <link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
         
         <style>
+            #titletext {
+                text-align: center;
+                text-decoration: none;
+                position: relative;
+                width: 75%;
+                left: 15%;
+            }
+            
         </style>
     </head>
 
@@ -40,54 +48,59 @@
 		</nav>
 
 
+
         <div id="horizontalnav">
             <a href="{% url 'index' %}">
                 <img src="{% static 'images/GrocerCheck-01.png' %}" alt="GrocerCheck Logo" >
             </a>
 
-            <ul id="navbarlist">
+                <ul id="navbarlist">
                 <li><a href="{% url 'index' %}">Home</a></li>
-
                 <li><a href="{% url 'about' %}">About Us</a></li>
                 <li class="currentpage"><a href="{% url 'covidwatch' %}">COVID Watch</a></li>
                 <li><a href="{% url 'sponsors' %}">Sponsors</a></li>
-                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
-                    
+                <li><a href="{% url 'contact' %}">Contact Us</a></li>
             </ul>
         </div>
 
-        <div id="spacer">
-            
+        <div id="spacer"></div>
+
+        <div id = "titletext">
+            <h1 style = "font-size: 80px; margin-bottom: 0;">COVID Watch</h1>
+            <p style="font-size:30px">COVID Watch is your source for quality student journalism on the impacts of COVID-19</p>
+        </div>
+
+
             
         </div>
         <div style = "display: relative;"id = "watchposts">
             <div id="post_id_1" class = "responsive">
-                <div class = "post">
-                    <a target="_blank" href = "https://grocercheck.ca/map/covidwatch/1">
+                <a target="_blank" style="text-decoration: none;" href = "https://grocercheck.ca/map/covidwatch/1">
+                    <div class = "post">
                         <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/covidwatch/sanatizer.jpeg' %}" alt = "Test 1">
-                    </a>
-                    <div class="title">Title One</div>
-                    <div class="author_name">Author One</div>
-                    <div class="blurb">
-                        <p>Lorem</p>
-                        <p>Ipsum</p>
+                        <div class="title">Title One</div>
+                        <div class="author_name">Author One</div>
+                        <div class="blurb">
+                            <p>Lorem</p>
+                            <p>Ipsum</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
 
 
             <div id="thiscouldbeyou" class = "responsive">
-                <div class = "post">
-                    <a target="_blank" href = "mailto:info@grocercheck.ca?subject=GrocerCheck%20Interested%20Writer">
+                <a target="_blank" style="text-decoration: none;" href = "mailto:info@grocercheck.ca?subject=GrocerCheck-Interested%20Writer">
+                    <div class = "post">
                         <img style="border-top-right-radius: 10px; border-top-left-radius: 10px; background-color: white;" src = "{% static 'images/GrocerCheckFavicon.png' %}" alt = "This could be you!">
-                    </a>
-                    <div class="title">This could be you!</div>
-                    <div class="author_name">Interest in writing for CovidWatch?</div>
-                    <div class="blurb">
-                        <p>Get in touch with us! Email us at info@grocercheck.ca with your articles and we'll help you get it published.</p>
+                        <div class="title">This could be you!</div>
+                        <div class="author_name">Interested in writing for CovidWatch?</div>
+                        <div class="blurb">
+                            <p>Get in touch with us! Email us at info@grocercheck.ca with your articles and we'll help you get it published.</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
 
