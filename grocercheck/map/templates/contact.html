@@ -8,6 +8,16 @@
         <link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
         <link rel='stylesheet' href = "{% static 'css/infopage.css' %}">
         <style>
+            #contacttitle {
+                text-align: center;
+                text-decoration: none;
+                position: relative;
+                width: 75%;
+                left: 15%;
+            }
+
+
+
         </style>
     </head>
 
@@ -31,6 +41,25 @@
         </div>
 
         <div id="spacer">
+        </div>
+
+        <div id = "contacttitle">
+            <h1 style = "font-size: 60px;">Let's get in touch.</h1>
+            <h2 style = "font-size: 30px;">Questions? Concerns? Or just want to say hi?</h2>
+        </div>
+
+        <div id = "emailform">
+            <form role="form" action="" method="post">
+                {% csrf_token %}
+                <label for="form_name">Name: </label><br>
+                <input type="text" id = "form_name" name="form_name"<br>
+                <label for="form_email">Email Address: </label><br>
+                <input type="text" id = "form_email" name="form_email"<br>
+                <label for="form_query">What you have to say: </label><br>
+                <input type="text" id = "form_query" name="form_query"<br>
+                
+                <button type="submit">Say hi!</button>
+            </form>
         </div>
 
 
