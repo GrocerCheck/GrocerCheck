@@ -36,6 +36,7 @@ div.blurb {
 }
 
 div.author_name{
+    text-decoration: none;
     font-weight: bold;
     font-size: 20px;
     padding: 0px;
