@@ -71,7 +71,7 @@ input:checked + .slider:before {
 /* big container div for everything for the toggle */
 #toggle{
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 1%;
     background-color: #fff;
     z-index: 21;
