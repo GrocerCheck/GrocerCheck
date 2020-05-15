@@ -240,10 +240,27 @@ function initMap() {
 		}
 		else if(busy>=1000){
 			busy-=1000;
-			pops = "Currently "+busy+"% Busy";
-		}else{
-			pops = "Historically is "+busy+"% Busy Right Now"
-		}
+            pops = "Not very busy right now" + " (" + busy + '%)';
+			if (busy > 33){
+                pops = "A bit busy right now" + " (" + busy + '%)';
+            }else if (busy > 55){
+                pops = "Moderately busy right now" + " (" + busy + '%)';
+            }else if (busy > 77){
+                pops = "Very busy right now" + " (" + busy + '%)';
+            }else if (busy > 100){
+                pops = "Much busier than it ever gets right now" + " (" + busy + '%)';
+            }
+            
+        }else{
+            pops = "Historically not very busy right now" + " (" + busy + '%)';
+			if (busy > 33){
+                pops = "Historically a bit busy right now" + " (" + busy + '%)';
+            }else if (busy > 55){
+                pops = "Historically moderately busy right now" + " (" + busy + '%)';
+            }else if (busy > 77){
+                pops = "Historically very busy right now" + " (" + busy + '%)';
+        }
+    }
 	
 		s = getIcon(x);
 
