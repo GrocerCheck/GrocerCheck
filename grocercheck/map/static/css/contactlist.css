@@ -1,7 +1,12 @@
 #spacer{
 z-index: 1;
 }
-
+#contactlistdiv{
+position: relative;
+display: block;
+margin: 0;
+margin-bottom: 20px;
+}
 div.contacts {
     border-radius: 10px;
     color: white;
@@ -35,7 +40,7 @@ div.contact_talk{
     color: white;
     text-decoration: underline;
     font-weight: bold;
-    font-size: 60px;
+    font-size: 45px;
     padding: 15px;
     text-align: center;
 }
