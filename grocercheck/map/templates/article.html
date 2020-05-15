@@ -1,27 +1,65 @@
 {% load static %}
 <!DOCTYPE html>
+<html>
+	<head> <!-- title is the text in the tab at the top -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>About Us: GrocerCheck</title>
+        <link rel='icon' type='image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito'>
+        <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
+        <link rel='stylesheet' href = "{% static 'css/infopage.css' %}">
+        <link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
 
-<head>
+    </head>
 
-</head>
-
-<body>
-
-	<p id="test">{{title|safe}}</p>
-
-	<script>
-				
-		var title = {{title|safe}}
-		var author_name = {{author_name|safe}}
-		var author_blurb = {{author_blurb|safe}}
-		var dates = {{date|safe}}
-		var content = {{content|safe}}
-
-		
+    <body>
+        <!-- hamburger menu -->
+		<nav role="navigation">
+			<div id="navtoggle">
+				<input type="checkbox" id="hamburgerbutton"/>
+				<div id='spansquare'>	</div>
+				<span></span>
+				<span></span>
+				<span></span>
 
 
-	</script>
+				<ul id="navmenu">
+					<a href="{% url 'index' %}"><li>Home</li></a>
+					<a href="{% url 'about' %}"><li>About Us</li></a>
+					<a href="{% url 'covidwatch' %}"><li>COVID Watch</li></a>
+					<a href="{% url 'sponsors' %}"><li>Sponsors</li></a>
+					<a href="{% url 'contact' %}"><li>Contact Us</li></a>
+
+				</ul>
+			</div>
+		</nav>
+        
+        <div id="horizontalnav">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'images/GrocerCheck-01.png' %}" alt="GrocerCheck Logo" >
+            </a>
+            <ul id="navbarlist">
+                <li><a href="{% url 'index' %}">Home</a></li>
+            <li class="currentpage"><a href="{% url 'about' %}">About Us</a></li>
+                <li><a href="{% url 'covidwatch' %}">COVID Watch</a></li>
+				<li><a href="{% url 'sponsors' %}">Sponsors</a></li>
+                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                    
+            </ul>
+        </div>
+
+        <div id="spacer">
+        </div>
 
 
+        <p id="test">{{title|safe}}</p>
+        <script>
+            var title = {{title|safe}}
+            var author_name = {{author_name|safe}}
+            var author_blurb = {{author_blurb|safe}}
+            var dates = {{date|safe}}
+            var content = {{content|safe}}
+        </script>
 
-</body>
+    </body>
+</html>
