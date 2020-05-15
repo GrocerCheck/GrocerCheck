@@ -38,8 +38,8 @@ ul#socialmedialist li{
 	padding: 0;
 	margin: 0;
 	font-size: 30px;
-
-	height: 1em;
+	margin-bottom: 10px;
+	height: 2em;
 }
 
 /* links on each button */
@@ -52,11 +52,12 @@ ul#socialmedialist li a{
 	width: auto;
 	margin: 0;
 	padding: 0.5em;
-	padding-left: 1em;
-	padding-right: 1em;
+	padding-left: 2em;
+	padding-right: 2em;
 	font-size: 30px;
 	text-decoration: none;
 	color: white;
+	margin-bottom: 10px;
 
 }
 
