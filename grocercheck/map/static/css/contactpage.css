@@ -24,15 +24,10 @@ body{
 /* put responsive page elements here (e.g. navbar...) */
 
 
-@media only screen and (max-width: 1200px){
+@media only screen and (max-width: 1000px){
     .responsive{
-        width: 49.999999%;
-    }
-}
-
-@media only screen and (max-width: 650px){
-    .responsive{
-        width: 100%;
+        width: 49.99999999%;
+        background-color: blue;
         
     }
 }

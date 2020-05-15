@@ -2,41 +2,38 @@
 z-index: 1;
 }
 
-div.teamprofiles {
-    border: none;
+div.contacts {
     border-radius: 10px;
     color: white;
     background-color: #35605A;
     z-index: 2;
     
 }
-div.teamprofiles:hover {
+div.contacts:hover {
     background-color: #35CE8D;
     color: white;
 }
 
 
-div.teamprofiles img {
-    width: 100%;
-    height: calc(calc(100vw - 16px) / 5);
-    height: auto;
-object-fit: cover;
-
-}
-
-div.desc {
-    padding: 15px;
-    text-align: center;
-}
-
-div.member_name{
+div.contact_desc {
+    font-size: 40px;
     font-weight: bold;
-    font-size: 30px;
     padding: 15px;
     text-align: center;
 }
 
-div.member_title{
+div.contact_name{
+    color: white;
+    text-decorators: none;
+    font-weight: bold;
+    font-size: 25px;
+    padding: 15px;
+    text-align: center;
+}
+
+div.contact_email{
+    color: white;
+    font-size: 25px;
     font-weight: bold;
     padding: 5px;
     text-align: center;
@@ -46,7 +43,7 @@ div.member_title{
 .responsive {
     padding: 6px;
     float: left;
-    width: 19.99999%;
+    width: 33.333333%;
     box-sizing: border-box;
     z-index: 3;
 }
