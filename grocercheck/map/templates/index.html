@@ -6,7 +6,7 @@
 	<head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>GrocerCheck</title>
-		<meta name="description" content="Your Local Supermarket Social Distancing Search Engine" />
+		<meta name="description" content="GrocerCheck: Your Local Grocery and Supermarket Social Distancing Search Engine" />
 		<meta name="robots" content="index,follow" />
 		<link rel="canonical" href="https://grocercheck.ca" /> 		
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -108,7 +108,7 @@
 
 		<div id="searchbar">
 			<form class="search" onsubmit='return false;'>
-				<input id='searchtextfield' type="text" placeholder="Search GrocerCheck (Try name, address, location, or near me!)" name="searchfield"></input>
+				<input id='searchtextfield' type="text" placeholder='Search GrocerCheck (Try name, street, city, or near me! e.g. "costco", "kingsway", "richmond", "safeway near me")' name="searchfield"></input>
 				<input type="image" onclick='searchClicked()'  src="{% static 'images/searchicon.png' %}"></input>
 			</form>
 
@@ -146,18 +146,39 @@
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                 <input type="hidden" name="cmd" value="_s-xclick" />
                 <input type="hidden" name="hosted_button_id" value="KGS4K4PLBS6ES" />
-                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="Donate to GrocerCheck with PayPal! We will donate all excess proceeds to the Vancouver General Hospital COVID-19 relief fund" alt="Donate with PayPal button" />
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="Support GrocerCheck by donating via PayPal! All proceeds go towards keeping the site alive, and we'll donate the rest to local charities fighting against COVID-19" alt="Donate with PayPal button" />
                 <img alt="" border="0" src="https://www.paypal.com/en_CA/i/scr/pixel.gif" width="1" height="1" />
                 <p>GrocerCheck is a registered student-run nonprofit that relies on donations to keep our service running</p>
             </form>
         </div>
 
+		</div>
 
 		<!--The div element for the map -->
 		<div id="map"></div>
 
         <script src="https://cdn.jsdelivr.net/npm/fuzzball@1.3.0/dist/fuzzball.umd.min.js"></script>
 		<script>
+
+function getDistance(lat1,lon1,lat2,lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  var dLon = deg2rad(lon2-lon1); 
+  var a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
+}
+
+
 //define global variables outside of initMap()
 var livemarkers = [] //all live markers
 var historicalmarkers = [] //all markers with historical only
@@ -172,6 +193,11 @@ var earchedStores = [];
 var searchInProgress = false;
 var names = [];
 var address = [];
+var userlat;
+var userlng;
+var usermarker;
+var lat = [];
+var lng = [];
 function initMap() {
 
 //create map
@@ -183,12 +209,15 @@ function initMap() {
 		
 		//get current position
 		navigator.geolocation.getCurrentPosition(function(position) {
-			var userpos = {
+			 var userpos = {
 				lat: position.coords.latitude,
 				lng: position.coords.longitude
 			};
+			userlat = position.coords.latitude;
+			userlng = position.coords.longitude;
 
 			map.setCenter(userpos);
+			usermarker = new google.maps.Marker({clickable:true,icon:{url:"{% static 'images/GrocerCheckFavicon.png' %}",scaledSize: new google.maps.Size(40,40)},map:null,position:userpos});
 
 
 		}, function(){ //handle error if location invalid
@@ -211,8 +240,8 @@ function initMap() {
 	var place_id = {{place_id|safe}}
 
 	address = {{address|safe}}
-	var lat = {{lat|safe}}
-	var lng = {{lng|safe}}
+	lat = {{lat|safe}}
+	lng = {{lng|safe}}
 	var place_id = {{place_id|safe}}
 	var hours = {{hours|safe}}
 	var busyness = {{busyness|safe}}
@@ -385,13 +414,21 @@ function initMap() {
 	showLiveOnly();//default view on site visit is live only
 	toggleStores();//toggle on and off, starts as show closed = true, toggle to set it to false immediately so it displays properly
 }
-
+var nearflag = false;
 //callback function on search button click
 function searchClicked(){
 	searchedStores = [];
 	//grab user input and encode to prevent injection
+	nearflag = false;
 	var searchstring = encodeURI(document.getElementById('searchtextfield').value).toLowerCase();
-
+	if(searchstring.includes("near%20me")){
+		nearflag = true;
+		usermarker.setMap(map);
+		searchstring = searchstring.replace("near%20me","");
+	}
+	else{
+		usermarker.setMap(null);
+	}
 	//if search not empty
 	if(searchstring!=""){
 		searchInProgress = true;
@@ -401,8 +438,11 @@ function searchClicked(){
 		//clear search, display all markers with the right state
 		searchInProgress = false;
 		searchedStores = [];
-		displaySearched();
 		filterByState();
+                displaySearched();
+		if(nearflag==true){
+			displayNear();
+		}
 		return;
 	}
 
@@ -448,6 +488,20 @@ function searchClicked(){
 	if(state=='historical'){ showHistorical();}
 	if(state=='all') { showAll();}
 	displaySearched();
+	if(nearflag==true){
+		displayNear();
+	}
+}
+
+function displayNear(){
+	
+
+	for(let x = 0; x<markers.length;x++){
+		if(getDistance(parseFloat(lat[x]),parseFloat(lng[x]),userlat,userlng)>=5.0){
+			markers[x].setMap(null);
+		}
+	}
+	
 }
 
 function getVariations(word){
@@ -483,6 +537,10 @@ function getVariations(word){
 
 
 function displaySearched(){
+	if(searchedStores.length==0){
+		filterByState();
+		return;
+	}
 	for(let x = 0; x<markers.length;x++){
 		if(markers[x].getVisible()){
 			if(searchedStores.includes(markers[x])==false){
@@ -531,6 +589,9 @@ function checkState(){
 	if(searchInProgress){
 		displaySearched();
 	}
+	if(nearflag==true){
+	displayNear();
+}
 }
 
 function showLiveOnly(){
