@@ -6,6 +6,7 @@
 	position: fixed;
 	top: 10%;
 	left: 1%;
+	width: 0;
 	z-index: 500;
 	bottom: 0; /* make the div stretch to the bottom of the screen */
 	-webkit-user-select: none;

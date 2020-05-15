@@ -5,10 +5,11 @@
         <title>Sponsors: GrocerCheck</title>
         <link rel='icon' type=image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
-        <link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
+        	<link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
         <link rel='stylesheet' href = "{% static 'css/infopage.css' %}">
         <link rel='stylesheet' href = "{% static 'css/sponsors.css' %}">
         <link rel='stylesheet' href = "{% static 'css/contactlist.css' %}">
+<link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
 
         <style>
     
@@ -25,6 +26,28 @@
     </head>
 
     <body>
+
+
+	    <!-- hamburger menu -->
+		<nav role="navigation">
+			<div id="navtoggle">
+				<input type="checkbox" id="hamburgerbutton"/>
+				<div id='spansquare'>	</div>
+				<span></span>
+				<span></span>
+				<span></span>
+
+
+				<ul id="navmenu">
+					<a href="{% url 'index' %}"><li>Home</li></a>
+					<a href="{% url 'about' %}"><li>About Us</li></a>
+					<a href="{% url 'blog' %}"><li>Blog</li></a>
+					<a href="{% url 'sponsors' %}"><li>Sponsors</li></a>
+					<a href="{% url 'contact' %}"><li>Contact Us</li></a>
+
+				</ul>
+			</div>
+		</nav>
         
         <div id="horizontalnav">
             <a href="{% url 'index' %}">
