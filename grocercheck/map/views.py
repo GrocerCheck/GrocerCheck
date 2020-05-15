@@ -116,3 +116,20 @@ def contact(request):
 def media(request):
     return render(request, 'media.html')
 
+def article(request, articleid):
+    #id, title, author_name, author_blurb, date, content
+    conn = sqlite3.connect(os.path.join(settings.BASE_DIR,'db1.sqlite3'))
+    curr = conn.cursor()
+    context = []
+    with conn:
+        curr.execute("SELECT id,title,author_name,author_blurb,date,content FROM map_blog_entry WHERE id=?", (articleid,))
+        art = curr.fetchall()[0]
+        context['title'] = json.dumps(art[1])
+        context['author_name'] = json.dumps(art[2])
+        context['author_blurb'] = json.dumps(art[3])
+        context['date'] = json.dumps(art[4])
+        context['content'] = json.dumps(art[5])
+
+
+    return render(request, 'article.html', context=context)
+
