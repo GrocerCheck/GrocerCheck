@@ -4,7 +4,10 @@
 <html>
 	<head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>GrocerCheck: Your Local Supermarket Social Distancing Search Engine</title>
+		<title>GrocerCheck</title>
+		<meta name="description" content="Your Local Supermarket Social Distancing Search Engine" />
+		<meta name="robots" content="index,follow" />
+		<link rel="canonical" href="https://grocercheck.ca" /> 		
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
         <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
@@ -229,7 +232,7 @@ function initMap() {
 			s='grey';
 		}
 //return formatted html of infowindow
-		return '<div id="content">' +
+		return '<div id="content">' +<link rel="canonical" href="http://example.com/" />
 			'<h1 style="color:'+s+';"> '+names[x]+' </h1>' +
 			'<div id="body"'+
 			'<p> '+address[x]+' </p>'+
