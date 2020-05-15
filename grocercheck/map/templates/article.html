@@ -51,17 +51,20 @@
         <div id="spacer">
         </div>
         <h1 id="article_title">{{title|slice:"1:-1"}}</h1>
-        <img src= {% static 'static/covidwatch/{{title|slice: "1:-1"}}.jpeg' %}>
+        <img id="article_image" src = >
         <p id="author_name">{{author_name|slice:"1:-1"}}</p>
         <p id="author_blurb">{{author_blurb|slice:"1:-1"}}</p>
         <p id="article_date">{{date|slice:"1:-1"}}</p>
         <p id="article_content">{{content|slice:"1:-1"}}</p>
+<!--
         
         <script>
-            var img = document.getElementById("article_title");
+            var imgtitle = document.getElementById("article_title");
             var staticdir = "{% static 'images/covidwatch/'}";
             var imgdir = staticdir + img + ".jpeg";
+            document.getElementById("article_image").src=imgdir;
         </script>
+-->
         
     </body>
 </html>
