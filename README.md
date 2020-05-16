@@ -13,7 +13,7 @@ A website to help people reduce contact at grocery stores and essential services
     - Search by street, location, or neighbourhood - e.g. `"broadway, main, 41st avenue, Vancouver, kerrisdale"`
     - Search by category with keywords - e.g. `"Asian grocery, supermarket, bulk"`
     - Search by proximity with "near me" term (Location **must** be on for this to work)
-    - Or a combination!
+    - Or a combination of the above!
         - `"asian grocery near me"`
         - `"bulk on kingsway"`
         - `"kerrisdale grocery on broadway"`
