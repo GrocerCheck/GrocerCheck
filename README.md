@@ -29,7 +29,7 @@ COVID Watch works as a dynamic gallery of links to an article template populated
 We would be thrilled to see you contribute!
 
 ## How can I support GrocerCheck?
-GrocerCheck Foundation is a registered non-profit organization run by high-school and incoming university students. A small donation can go a long way to help us pay for operational costs. Donate to us <a style="font-weight: bold;" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CTEMURSS3HR94&source=url">here</a>
+GrocerCheck Foundation is a registered non-profit organization run by high-school and incoming university students. A small donation can go a long way to help us pay for operational costs. Donate to us <a style="font-weight: bold;" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CTEMURSS3HR94&source=url">here.</a> All excess funds go towards the Vancouver General Hospital COVID-19 relief fund!
 
 ## Let's get in touch.
 #### Want to work with us? Want to write for COVID-Watch? Want to help translate GrocerCheck?
