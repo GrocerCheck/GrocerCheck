@@ -22,11 +22,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
+#SECRET_KEY = '$*7$lu*br%(vzw%o$d289!5236)6%5(lz_3s((36-9=4^8w$@p'
+
 SECRET_KEY = open(expanduser("~")+"/keys/djangokey.txt").readline()
 
 
+
+
 # SECURITY WARNING: don't run with debug turned on in production
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca','grocercheck.ca', 'home.grocercheck.ca', 'test.grocercheck.ca', 'vancouver.grocercheck.ca','52.10.195.42','127.0.0.1']
 
