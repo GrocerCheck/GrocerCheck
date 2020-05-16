@@ -24,6 +24,13 @@ GrocerCheck is built on the <a href="https://github.com/django/django">Django</a
 Blog and content pages are run-of-the-mill css dynamic galleries.
 COVID Watch works as a dynamic gallery of links to an article template populated as per their sql id in the url.
 
+## Is GrocerCheck open-source?
+#### **You bet it is!** 
+We would be thrilled to see you contribute!
+
+## How can I support GrocerCheck?
+GrocerCheck Foundation is a registered non-profit organization run by high-school and incoming university students. A small donation can go a long way to help us pay for operational costs. Donate to us <a style="font-weight: bold;" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CTEMURSS3HR94&source=url">here</a>
+
 ## Let's get in touch.
 #### Want to work with us? Want to write for COVID-Watch? Want to help translate GrocerCheck?
 - Talk to Brian: brian@grocercheck.ca
@@ -33,13 +40,6 @@ COVID Watch works as a dynamic gallery of links to an article template populated
 - Talk to Andy: andy@grocercheck.ca
 #### Want to just say hi? or anything else, really
 - Talk to us at info@grocercheck.ca
-
-## How can I support GrocerCheck?
-GrocerCheck Foundation is a registered non-profit organization run by high-school and incoming university students. A small donation can go a long way to help us pay for operational costs. Donate to us <a style="font-weight: bold;" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CTEMURSS3HR94&source=url">here</a>
-
-## Is GrocerCheck open-source?
-#### **You bet it is!** 
-We would be thrilled to see you contribute!
 
 ## Screenshots
 - ### Help Screenshot
