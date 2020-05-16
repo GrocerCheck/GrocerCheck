@@ -61,6 +61,13 @@
 			</div>
 		</div>
 
+		<div id="nearmemodaldiv" class="modal">
+			<div class="modal-content">
+				<span id="nearmeclose" class="close">&times;</span>
+				<p>Please enable location in your browser to search for "near me."</p>
+			</div>
+		</div>
+
 		<script>
 			//callback function for helpbutton clicked
 			document.getElementById("helpbutton").onclick = function(){
@@ -80,7 +87,15 @@
 					//close modal
 					document.getElementById("modaldiv").style.display = "none";
 				}
+				if(event.target == document.getElementById("nearmemodaldiv")){
+					document.getElementById("nearmemodaldiv").style.display = "none";
+				}
 			}
+			document.getElementById("nearmeclose").onclick = function(){
+				document.getElementById("nearmemodaldiv").style.display = "none";
+			}
+			
+			
 
 		</script>
 
@@ -198,6 +213,7 @@ var userlng;
 var usermarker;
 var lat = [];
 var lng = [];
+var hasloc = false;
 function initMap() {
 
 //create map
@@ -217,6 +233,7 @@ function initMap() {
 			userlng = position.coords.longitude;
 
 			map.setCenter(userpos);
+			hasloc = true;
 			usermarker = new google.maps.Marker({clickable:true,icon:{url:"{% static 'images/GrocerCheckFavicon.png' %}",scaledSize: new google.maps.Size(40,40)},map:null,position:userpos});
 
 
@@ -422,11 +439,17 @@ function searchClicked(){
 	nearflag = false;
 	var searchstring = encodeURI(document.getElementById('searchtextfield').value).toLowerCase();
 	if(searchstring.includes("near%20me")){
+
+		if(hasloc==false){
+			document.getElementById("nearmemodaldiv").style.display = "block";
+		}
+		else{
 		nearflag = true;
 		usermarker.setMap(map);
 		searchstring = searchstring.replace("near%20me","");
+		}
 	}
-	else{
+	else if (hasloc==true){
 		usermarker.setMap(null);
 	}
 	//if search not empty
