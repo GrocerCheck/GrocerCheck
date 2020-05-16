@@ -8,7 +8,7 @@ A website to help people reduce contact at grocery stores and essential services
 - **Live and Historical:** Shows live busyness as well as estimated busyness from past trends
 - **All stores:** Show stores even if no live data can be found for them
 - **Show closed stores:** Show stores that are currently closed
-- # **Search:**
+- **Search:**
     - Search by name - e.g. `"Costco, Superstore, Costco London"`
     - Search by street, location, or neighbourhood - e.g. `"broadway, main, 41st avenue, Vancouver, kerrisdale"`
     - Search by category with keywords - e.g. `"Asian grocery, supermarket, bulk"`
