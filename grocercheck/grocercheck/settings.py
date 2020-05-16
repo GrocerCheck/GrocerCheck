@@ -30,7 +30,7 @@ SECRET_KEY = open(expanduser("~")+"/keys/djangokey.txt").readline()
 
 
 # SECURITY WARNING: don't run with debug turned on in production
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca', 'vancouver.grocercheck.ca','52.10.195.42','127.0.0.1']
 
