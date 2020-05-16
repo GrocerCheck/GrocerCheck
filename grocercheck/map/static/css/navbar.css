@@ -142,7 +142,16 @@ margin: -200px 0 0 -50px;
     background-color: #35CE8D;
 }
 
-
+@media screen and (max-width: 650px) {
+	#paypalbutton{
+		width: 80%;
+	}
+}
+@media screen and (min-width:650px) and (max-width:1300px){
+	#paypalbutton{
+		width: 60%;
+	}
+}
 /* the list item in the nav bar corresponding to the current page has this class to make the background a different colour */
 
 
