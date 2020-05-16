@@ -21,16 +21,25 @@ A website to help people reduce contact at grocery stores and essential services
 ## How it works
 GrocerCheck is built on the <a href="https://github.com/django/django">Django</a> web framework and <a href="https://github.com/apache">Apache2</a> http web server. The scraper runs on our <a href="https://github.com/GrocerCheck/LivePopularTimes">LivePopularTimes</a> python module, which is scheduled with celery to aggregate live populartimes for stores with live data every 10 minutes. Requests are routed through <a href="https://luminati.io/?affiliate=ref_5eaf77edc7669177ab3b82b5">Luminati.io</a> data collection networks to ensure reliable retrieval and server security; the last thing we want is our IP blocked! Data is stored in a standard sqlite3 database, from which markers are generated and placed on a map rendered by <a href="https://cloud.google.com/maps-platform/">Google Maps Javascript</a> API.
 
-Blog and content pages are run-of-the-mill css dynamic galleries
+Blog and content pages are run-of-the-mill css dynamic galleries.
+COVID Watch works as a dynamic gallery of links to an article template populated as per their sql id in the url.
 
+## Let's get in touch.
+#### Want to work with us? Want to write for COVID-Watch? Want to help translate GrocerCheck?
+- Talk to Brian: brian@grocercheck.ca
+#### Want to find out about sponsorship opportunities?
+- Talk to Preston: preston@grocercheck.ca
+#### Want to help expand GrocerCheck?
+- Talk to Andy: andy@grocercheck.ca
+#### Want to just say hi? or anything else, really
+- Talk to us at info@grocercheck.ca
 
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick" />
-<input type="hidden" name="hosted_button_id" value="CTEMURSS3HR94" />
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-<img alt="" border="0" src="https://www.paypal.com/en_CA/i/scr/pixel.gif" width="1" height="1" />
-</form>
+## How can I support GrocerCheck?
+GrocerCheck Foundation is a registered non-profit organization run by high-school and incoming university students. A small donation can go a long way to help us pay for operational costs. Donate to us <a style="font-weight: bold;" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CTEMURSS3HR94&source=url">here</a>
 
+## Is GrocerCheck open-source?
+#### **You bet it is!** 
+We would be thrilled to see you contribute!
 
 ## Screenshots
 - ### Help Screenshot
@@ -48,8 +57,3 @@ Blog and content pages are run-of-the-mill css dynamic galleries
 - ### With Infowindow
     - <img src = "https://raw.githubusercontent.com/GrocerCheck/GrocerCheck/master/content/livewithinfowindow.png">
 
-## About Us
-
-GrocerCheck Foundation is a registered non-profit organization run by high-school and incoming university students. 
-
-L
