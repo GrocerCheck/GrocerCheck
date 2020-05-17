@@ -150,12 +150,21 @@ CELERY_TIMEZONE = 'America/Vancouver'
 
 
 CELERY_BEAT_SCHEDULE = {
-    'UPDATE_POPULARITY':{
+    'UPDATE_VANCOUVER_POPULARITY':{
     'task': 'update_current_popularity',
-        'schedule': crontab(minute="*/10"), #every 15 min, 24/7
-        'args': ("Canada", False, False, p, 16), #arguments to pass to the function goes here
+        'schedule': crontab(minute="0-59/10"), #every 10 min, 24/7
+        'args': ("Canada", "vancouver", False, False, p, 16), #arguments to pass to the function goes here
 # Country, doBackup, doLog, proxy, num_processe
     },
+
+    'UPDATE_SEATTLE_POPULARITY':{
+    'task': 'update_current_popularity',
+        'schedule': crontab(minute="5-59/10"), #every 10 min, 24/7: offset by 5 min to avoid starting tasks at same time
+        'args': ("", "seattle", False, False, p, 16), #US address include country
+
+# Country, doBackup, doLog, proxy, num_processe
+    },
+
 }
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env/python
 import sqlite3
-
+import time
 import livepopulartimes as lpt
 import json
 import sys
@@ -12,11 +12,11 @@ from multiprocessing.dummy import Pool #for compatability w/ celery
 
 #--------GLOBAL VAR---------------#
 
-#BACKUP = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_raw_data.json", "a+")
-#LOG = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_log.txt", "a+")
+BACKUP = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_raw_data.json", "a+")
+LOG = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_log.txt", "a+")
 
-BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/backup.json", "a+")
-LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/LOG.txt", "a+")
+# BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/backup.json", "a+")
+# LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/LOG.txt", "a+")
 
 def create_connection(db_file):
     conn = None
@@ -166,18 +166,19 @@ def update_current_popularity(addr_and_id, conn, doBackup, doLog, proxy, num_pro
         for ind in range(len(formatted_address_list)):
             place_data[ind] = pool.apply_async(lpt.get_populartimes_by_formatted_address, args=(formatted_address_list[ind], proxy,))
 
-        print(place_data[0].get())
-        # for ind in range(len(formatted_address_list)):
-        #     try:
-        #         place_data[ind] = place_data[ind].get()
-        #     except:
-        #         try:
-        #             place_data[ind] = place_data[ind].get()
-        #         except:
-        #             continue #nest tries twice to catch bs
+        pool.close()
+        for ind in range(len(formatted_address_list)):
+            try:
+                place_data[ind] = place_data[ind].get()
+            except:
+                try:
+                    place_data[ind] = place_data[ind].get()
+                except:
+                    continue #nest tries twice to catch bs
 
         for ind in range(len(formatted_address_list)):
             log = update_row(conn, place_data[ind], open_ids[ind])
+            print("updated store iD ", open_ids[ind])
             if doBackup == True:
                 BACKUP.write(json.dumps(place_data, indent=4))
                 BACKUP.write("\r\n")
@@ -201,8 +202,7 @@ def run_scraper(country, city, doBackup = False, doLog = False, proxy = False, n
     :param num_processes (optional) number of threads to run, default = None
     """
     global LOG
-    #conn = create_connection("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3")
-    conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/GrocerCheck/grocercheck/db1.sqlite3")
+    conn = create_connection("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3")
 
     try:
         update_current_popularity(get_formatted_addresses(country, city, conn), conn, doBackup, doLog, proxy, num_processes)

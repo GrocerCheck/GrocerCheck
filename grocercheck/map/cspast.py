@@ -12,11 +12,11 @@ from multiprocessing.dummy import Pool #for compatability w/ celery
 
 #--------GLOBAL VAR---------------#
 
-#BACKUP = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_raw_data.json", "a+")
-#LOG = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_log.txt", "a+")
+BACKUP = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_raw_data.json", "a+")
+LOG = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_log.txt", "a+")
 
-BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/backup.json", "a+")
-LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/LOG.txt", "a+")
+#BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/backup.json", "a+")
+#LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/LOG.txt", "a+")
 
 def create_connection(db_file):
     conn = None
