@@ -27,6 +27,7 @@ def gen_coords(border, spacing):
     output: list of tuples, as per example border input
     """
     
+    
     out_coords = []
     for bound in border:
         bottomleft = bound[0]
@@ -40,12 +41,16 @@ def gen_coords(border, spacing):
         
         diffx = haversine(bottomright[0], bottomright[1], bottomleft[0], bottomleft[1])
         diffy = haversine(topleft[0], topleft[1], bottomleft[0], bottomleft[1])
-
+        
+        if (diffx < spacing) or (diffy < spacing):
+            spacing = min(diffx, diffy)
+        
         numx = int(diffx//spacing)
         numy = int(diffy//spacing)
-        
+    
         deltax = abs((bottomright[0]-bottomleft[0]))/numx
         deltay = abs((topleft[1]-bottomleft[1]))/numy
+        
         #~ deltax = 1
         #~ deltay = 1
 
@@ -56,7 +61,7 @@ def gen_coords(border, spacing):
             cy = bottomleft[1]
             cx = cx + deltax
             
-        #~ print(" numx ", numx, " numy ", numy, "deltax", deltax, "deltay", deltay, "diffx", diffx, "diffy", diffy)
+        print(" numx ", numx, " numy ", numy, "deltax", deltax, "deltay", deltay, "diffx", diffx, "diffy", diffy)
     return out_coords
 
 

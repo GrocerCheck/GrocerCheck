@@ -41,27 +41,25 @@ def create_connection(db_file):
     return conn
 
 def insert_store(conn, store):
-    sql = ''' INSERT INTO map_store(name,lat,lng,place_id,keywords)
-              VALUES(?,?,?,?,?) '''
+    sql = ''' INSERT INTO map_store(id,name,lat,lng,place_id,keywords, city)
+              VALUES(?,?,?,?,?,?,?) '''
     cur = conn.cursor()
     cur.execute(sql, store)
     return cur.lastrowid
 
-def getplaces(API_KEY, coords, database_dir):
+def getplaces(API_KEY, coords, database_dir, city):
     added = set()
 
     conn = create_connection(database_dir)
 
-    if len(coords) < 1:
-        first_id = "ERROR NO COORDS"
+    prev_last_id = conn.cursor().execute("SELECT MAX(id) FROM map_store").fetchall()[0][0] 
+    counter = prev_last_id+1
 
-    else:
-        first_id = conn.cursor().execute("SELECT MAX(id) FROM map_store").fetchall()[0][0] + 1
 
     for line in coords:
         clat = line[0]
         clng = line[1]
-        r = 3000
+        r = 800
 
         nextpage = ''
         flag = True
@@ -79,22 +77,24 @@ def getplaces(API_KEY, coords, database_dir):
             address = output[3]
             placeID = output[4]
             types=output[5]
+            
+            print("num-stores: ", len(name))
 
             for i in range(len(name)):
                 with conn:
                     if(placeID[i] in added):
                         continue
                     added.add(placeID[i])
-                    store = (name[i],lat[i],lng[i],placeID[i],types[i])
+                    store = (counter, name[i],lat[i],lng[i],placeID[i],types[i], city)
                     storeid = insert_store(conn,store)
+                    counter = counter + 1
                     print("appended store id ", storeid)
             if('next_page_token' in data):
                 nextpage = data['next_page_token']
             else:
                 flag = False
-
-    print('finished '+str(len(added)))
-    return(first_id)
+    print('finished, num_added: '+str(len(added)))
+    return(prev_last_id)
 
 
 
