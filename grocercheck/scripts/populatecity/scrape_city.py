@@ -8,7 +8,7 @@ import sqlite3
 #Bounds must be given as a list of list of tuples (lat, lng) in the format
     #[(bottom,left), (top, right)
 
-bounds = [
+seattle_bounds = [
 # CENTRAL SEATTLE
         [
         (47.48290687, -122.39343805),
@@ -60,6 +60,7 @@ bounds = [
         (47.58009247, -122.06147627), #sammamish
         (47.63771709, -122.0016913), 
             ],
+        #add everest and tacoma later
         
 ]
 
@@ -70,18 +71,17 @@ DATABASE_DIR = os.path.dirname(os.path.dirname(os.getcwd())) + "/db1.sqlite3"
 CITY = "seattle"
 
 print("DATABASE DIR: ", DATABASE_DIR)
-coord_list = gencoords.gen_coords(bounds, 1.4)
+coord_list = gencoords.gen_coords(seattle_bounds, 1.4)
 
 print("NUM COORDS: ", len(coord_list))
 x, y= np.array(coord_list).T
 plt.scatter(x,y)
 #~ plt.show()
 
-#~ prev_last_id = get_places.getplaces(API_KEY, coord_list, DATABASE_DIR, CITY)
+first_id = get_places.getplaces(API_KEY, coord_list, DATABASE_DIR, CITY) + 1
 
 #add place detail will have to start at the id after starting (starting is the id of the last element)
 
-first_id = 862
 
 add_place_detail.populate_populartimes(API_KEY, first_id+1, DATABASE_DIR)
 
