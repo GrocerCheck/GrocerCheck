@@ -120,13 +120,13 @@ def populate_populartimes(API_KEY, start_id, database_dir):
     place_id_list = [pid[0] for pid in place_id_list]
 
     CURRENT_DIRECTORY = os.getcwd()
-    BACKUP = open(CURRENT_DIRECTORY+"db_backup.json", "a+")
-    LOG = open(CURRENT_DIRECTORY"populate_given_id_log.txt", "a+")
-
+    BACKUP = open(CURRENT_DIRECTORY+ "db_backup.json", "a+")
+    LOG = open(CURRENT_DIRECTORY + "populate_given_id_log.txt", "a+")
 
     for ind in range(start_id, last_id+1):
         place_data = lpt.get_populartimes_by_place_id(API_KEY, place_id_list[ind-1])
-        log = update_row(conn, place_data, ind) #sql id starts at 1
+        log = update_row(conn, place_data, ind)
+        print("add detail for id ", ind)
         BACKUP.write(json.dumps(place_data, indent=4))
         BACKUP.write("\r\n")
         for entry in log:

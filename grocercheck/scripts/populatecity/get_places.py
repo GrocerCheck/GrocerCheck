@@ -47,10 +47,16 @@ def insert_store(conn, store):
     cur.execute(sql, store)
     return cur.lastrowid
 
-def getplaces(coords, API_KEY, database_dir):
+def getplaces(API_KEY, coords, database_dir):
     added = set()
 
     conn = create_connection(database_dir)
+
+    if len(coords) < 1:
+        first_id = "ERROR NO COORDS"
+
+    else:
+        first_id = conn.cursor().execute("SELECT MAX(id) FROM map_store").fetchall()[0][0] + 1
 
     for line in coords:
         clat = line[0]
@@ -78,7 +84,6 @@ def getplaces(coords, API_KEY, database_dir):
                 with conn:
                     if(placeID[i] in added):
                         continue
-
                     added.add(placeID[i])
                     store = (name[i],lat[i],lng[i],placeID[i],types[i])
                     storeid = insert_store(conn,store)
@@ -89,11 +94,7 @@ def getplaces(coords, API_KEY, database_dir):
                 flag = False
 
     print('finished '+str(len(added)))
-
-
-
-
-
+    return(first_id)
 
 
 
