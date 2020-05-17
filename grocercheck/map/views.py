@@ -8,7 +8,9 @@ import os
 from map.models import Store
 import json
 
-def index(request):
+
+
+def index(request, city="vancouver"):
     days = ['mon','tue','wed','thu','fri','sat','sun']
     t = time.localtime()
     day = days[t[6]]
@@ -32,7 +34,7 @@ def index(request):
     context['keywords'] = []
     conn = sqlite3.connect(os.path.join(settings.BASE_DIR,'db1.sqlite3'))
     cur = conn.cursor()
-    for s in Store.objects.all():
+    for s in Store.objects.filter(city__exact=city):
         with conn:
             context['name'].append(s.name)
             context['place_id'].append(s.place_id)
