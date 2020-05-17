@@ -35,6 +35,7 @@ if("bitnami" in BASE_DIR):
 else:
     DEBUG = True
 
+
 ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca', 'vancouver.grocercheck.ca','52.10.195.42','127.0.0.1']
 
 
