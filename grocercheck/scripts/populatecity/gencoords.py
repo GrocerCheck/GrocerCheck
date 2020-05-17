@@ -18,7 +18,7 @@ def haversine(lat1, lon1, lat2, lon2):
     return c * r * 1000
 
 
-def gen_coords(border, hotspots, spacing, hotspot_spacing):
+def gen_coords(border, spacing):
     """
     :param border: list of list of coordinates in tuples outlining a rectangular area for which coords are to be generated.
     :param hotspots: list of tuples for areas in which more coordinates are to be generated
@@ -49,4 +49,10 @@ def gen_coords(border, hotspots, spacing, hotspot_spacing):
             for y in range(numy):
                 cy = cy + deltay
                 out_coords.append((cx, cy))
-;
+    return out_coords
+
+
+
+
+
+

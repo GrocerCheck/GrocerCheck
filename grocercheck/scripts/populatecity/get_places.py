@@ -2,14 +2,29 @@ import json
 import requests
 import sqlite3
 from sqlite3 import Error
-import scripts
-from scripts import loadjson
 import time
 
 import sys
 
-def makerequest(lat,lng,radius,nextpage=''):
-    global API_KEY
+def readData(data):
+    name = []
+    lat = []
+    lng = []
+    address = []
+    placeID = []
+    types = []
+    for store in data['results']:
+        name.append(store['name'])
+        lat.append(store['geometry']['location']['lat'])
+        lng.append(store['geometry']['location']['lng'])
+        address.append(store['vicinity'])
+        placeID.append(store['place_id'])
+        typestr =  " ".join(store['types'])
+        types.append(typestr)
+    output = [name,lat,lng,address,placeID,types]
+    return output
+
+def makerequest(API_KEY, lat,lng,radius,nextpage=''):
     if(nextpage!=''):
         nextpage = 'pagetoken='+nextpage
 
@@ -25,78 +40,55 @@ def create_connection(db_file):
         print(e)
     return conn
 
-
-def create_store(conn, store):
-    sql = ''' INSERT INTO map_store(id,name,lat,lng,place_id)
+def insert_store(conn, store):
+    sql = ''' INSERT INTO map_store(name,lat,lng,place_id,keywords)
               VALUES(?,?,?,?,?) '''
     cur = conn.cursor()
     cur.execute(sql, store)
     return cur.lastrowid
 
-def get_rows(conn):
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM map_store")
-    rows = cur.fetchall()
-    return rows
+def getplaces(coords, API_KEY, database_dir):
+    added = set()
 
+    conn = create_connection(database_dir)
 
-API_KEY = 'AIzaSyBqwU_hVg2OJ3zB7FOORGzGIdsWnXdXT-w'
+    for line in coords:
+        clat = line[0]
+        clng = line[1]
+        r = 3000
 
+        nextpage = ''
+        flag = True
 
-db = 'db1.sqlite3'
-conn = create_connection(db)
-counter = int(input("number of existing stores: "))+1
+        while flag:
+            time.sleep(3)
+            response = makerequest(API_KEY, clat,clng,r,nextpage)
+            data = response.json()
+            #print(json.dumps(data,indent=4))
 
-added = set()
+            output = readData(data)
+            name = output[0]
+            lat = output[1]
+            lng = output[2]
+            address = output[3]
+            placeID = output[4]
+            types=output[5]
 
-rows = get_rows(conn)
+            for i in range(len(name)):
+                with conn:
+                    if(placeID[i] in added):
+                        continue
 
-for row in rows:
-    added.add(row[6])
+                    added.add(placeID[i])
+                    store = (name[i],lat[i],lng[i],placeID[i],types[i])
+                    storeid = insert_store(conn,store)
+                    print("appended store id ", storeid)
+            if('next_page_token' in data):
+                nextpage = data['next_page_token']
+            else:
+                flag = False
 
-
-
-coords = open(input("enter filename: "), encoding = 'utf-8')
-
-for line in coords:
-    spl = line.split(", ")
-    clat = spl[0]
-    clng = spl[1]
-    r = 3000
-    if(len(spl)>3):
-        r = int(spl[3])
-
-
-    nextpage = ''
-    flag = True
-
-    while flag:
-        time.sleep(3)
-        response = makerequest(clat,clng,r,nextpage)
-        data = response.json()
-        #print(json.dumps(data,indent=4))
-
-        output = loadjson.readData(data)
-        name = output[0]
-        lat = output[1]
-        lng = output[2]
-        address = output[3]
-        placeID = output[4]
-
-        print(spl[2]+" "+str(len(name)))
-
-        for i in range(len(name)):
-            with conn:
-                if(placeID[i] in added):
-                    continue
-                added.add(placeID[i])
-                store = (counter,name[i],lat[i],lng[i],placeID[i])
-                storeid = create_store(conn,store)
-                counter+=1
-        if('next_page_token' in data):
-            nextpage = data['next_page_token']
-        else:
-            flag = False
+    print('finished '+str(len(added)))
 
 
 
@@ -104,6 +96,8 @@ for line in coords:
 
 
 
-coords.close()
-print('finished '+str(len(added)))
+
+
+
+
 

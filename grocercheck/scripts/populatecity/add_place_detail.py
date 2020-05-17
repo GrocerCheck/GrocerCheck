@@ -36,6 +36,18 @@ def update_row(conn, data, row_id):
         log.append("NAME KEYERROR FOR STORE id "+str(row_id))
 
     try:
+        if (data['categories'] is None) == False:
+            types = cur.execute("SELECT keywords FROM map_store WHERE id=?", (row_id,)).fetchall()[0][0]
+            keys= " ".join(data['categories'])
+            keys = keys + " " + types
+            cur.execute("UPDATE map_store SET keywords=? WHERE id=?", (keys, row_id))
+        else:
+            #cur.execute("UPDATE map_store SET keywords=NULL WHERE id=?", (row_id)) #if no live busyness, set to null (clean up!)
+            log.append("CANNOT RETRIEVE CATEGORIES FOR STORE id"+str(row_id))
+    except:
+        log.append("CATEGORIES KEY ERROR FOR STORE id"+str(row_id))
+
+    try:
         if (data['coordinates'] is None) == False:
             cur.execute("UPDATE map_store SET lat=? WHERE id=?", (data['coordinates']['lat'], row_id))
             cur.execute("UPDATE map_store SET lng=? WHERE id=?", (data['coordinates']['lng'], row_id))
@@ -92,57 +104,33 @@ def update_row(conn, data, row_id):
 
 
 
+def get_last_id(conn):
+    cur = conn.cursor()
+    return cur.execute("SELECT MAX(id) FROM map_store").fetchall()[0][0]
+
+
 #-------------------MAIN-----------------------------------#
 
-conn = create_connection("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3")
+def populate_populartimes(API_KEY, start_id, database_dir):
+    log = []
+    conn = create_connection(database_dir)
+    last_id = get_last_id(conn)
+
+    place_id_list = get_columns(conn, "place_id")
+    place_id_list = [pid[0] for pid in place_id_list]
+
+    CURRENT_DIRECTORY = os.getcwd()
+    BACKUP = open(CURRENT_DIRECTORY+"db_backup.json", "a+")
+    LOG = open(CURRENT_DIRECTORY"populate_given_id_log.txt", "a+")
 
 
-API_KEY = open("/home/bitnami/gmapkey.txt", "r").readline()
-BACKUP = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/populate_given_id/db_backup.json", "a+")
-LOG = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/populate_given_id/populate_given_id_log.txt", "a+")
-
-place_id_list = get_columns(conn, "place_id")
-place_id_list = [pid[0] for pid in place_id_list]
-
-log = []
-
-args = sys.argv
-
-if len(args) == 1:
-    print("Please specify an option\nUse --help for help")
-    sys.exit()
-
-elif len(args) == 2:
-    if args[1] == "--help":
-        print("Options: \n--help: help\n--all: run for all entries in database\ni y (i == y == int) run for id i to id y in database, inclusive\nExampe usage: python3 populate_given_id_and_range.py 5 10\n")
-        sys.exit()
-    elif args[1] =="--all":
-        r = range(1, (len(place_id_list)+1))
-    else:
-        print("Invalid entry\nUse --help for help")
-        sys.exit()
-elif len(args) == 3:
-    try:
-        i = int(args[1])
-        y = int(args[2])+1
-        r = range(i, y)
-    except:
-        print("Error! Double check your arguments!\nTry --help for help")
-        sys.exit()
-
-else:
-    print("Too many arguments!\nUse --help for help")
-    sys.exit()
-
-
-for ind in r:
-    place_data = lpt.get_populartimes_by_place_id(API_KEY, place_id_list[ind-1])
-    log = update_row(conn, place_data, ind) #sql id starts at 1
-    BACKUP.write(json.dumps(place_data, indent=4))
-    BACKUP.write("\r\n")
-    for entry in log:
-        LOG.write(entry)
-        LOG.write("\r\n")
-
+    for ind in range(start_id, last_id+1):
+        place_data = lpt.get_populartimes_by_place_id(API_KEY, place_id_list[ind-1])
+        log = update_row(conn, place_data, ind) #sql id starts at 1
+        BACKUP.write(json.dumps(place_data, indent=4))
+        BACKUP.write("\r\n")
+        for entry in log:
+            LOG.write(entry)
+            LOG.write("\r\n")
 
 
