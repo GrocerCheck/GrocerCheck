@@ -84,10 +84,8 @@ def get_open_closed_ids(conn, city):
                 oh, om = int(hours[0].split(':')[0]), int(hours[0].split(':')[1][:2]) #opening hour, opening minute
                 ch, cm = int(hours[1].split(':')[0]), int(hours[1].split(':')[1][:2]) #opening hour, opening minute
 
-#create open "range", and check if current time is within that open range.
-
 #                print(oh, om, ch, cm, " | ", localhour, localminute)
-                #change to 24h format
+
                 if hours[0][-2:] == "PM":
                     oh += 12
                 if hours[1][-2:] == "PM":
@@ -95,23 +93,15 @@ def get_open_closed_ids(conn, city):
                     ch += 12
 #                print(oh, om, ch, cm, " | ", localhour, localminute)
 
-                if ((hours[1][-2:] == "AM") and (ch < oh)): #check if the store closes after midnight
-                    flag = True
-                    if (localhour > ch):
-                        if (localhour < (ch+24)): #"the next day"
-                            open_ids.append(i) #ch = 1, local hour is 14, ch < 24+1
-                    if (localhour < ch):
-                        open_ids.append(i)
 
+                if (localhour > oh and localhour < ch):
+                    open_ids.append(i)
+                elif (localhour == oh and localminute >= om):
+                    open_ids.append(i)
+                elif (localhour==ch and localminute <= cm):
+                    open_ids.append(i)
                 else:
-                    if (localhour > oh and localhour < ch):
-                        open_ids.append(i)
-                    elif (localhour == oh and localminute >= om):
-                        open_ids.append(i)
-                    elif (localhour==ch and localminute <= cm):
-                        open_ids.append(i)
-                    else:
-                        closed_ids.append(i)
+                    closed_ids.append(i)
 
     return (open_ids, closed_ids)
 
