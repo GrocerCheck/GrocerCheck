@@ -63,18 +63,15 @@ def index(request, city="vancouver"):
             if(hourstring==None):
                 context['openn'].append(0)
             else:
-                spl = hourstring.split(": ")[1]
+                hours = hourstring.split(": ")[1]
                 if (' 24' in spl):
                     context['openn'].append(1)
                 elif ('–' not in spl):
                     context['openn'].append(0)
                 else:
-                    hours = spl.split(' – ')
-                    o, c = hours[0],hours[1]
-                    oh = int(o.split(':')[0])
-                    om = int(o.split(':')[1][:2])
-                    ch = int(c.split(':')[0])
-                    cm = int(c.split(':')[1][:2])
+                    hours = hours.split(" – ")
+                    oh, om = int(hours[0].split(':')[0]), int(hours[0].split(':')[1][:2]) #opening hour, opening minute
+                    ch, cm = int(hours[1].split(':')[0]), int(hours[1].split(':')[1][:2]) #closing hour, closing minute
 
                     if ((hours[0][-2:] == "PM") and (oh != 12)):
                         oh += 12
