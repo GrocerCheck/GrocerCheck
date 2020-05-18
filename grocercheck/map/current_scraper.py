@@ -178,7 +178,7 @@ def update_current_popularity(addr_and_id, conn, doBackup, doLog, proxy, num_pro
 
         for ind in range(len(formatted_address_list)):
             log = update_row(conn, place_data[ind], open_ids[ind])
-            print("updated store iD ", open_ids[ind])
+            #print("updated store iD ", open_ids[ind])
             if doBackup == True:
                 BACKUP.write(json.dumps(place_data, indent=4))
                 BACKUP.write("\r\n")
