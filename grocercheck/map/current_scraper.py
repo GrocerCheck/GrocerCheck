@@ -100,7 +100,6 @@ def get_open_closed_ids(conn, city):
                 localhour = 23
                 localminute = 0
 
-                print(i , oh, ch, hours, localhour, localminute)
                 #everything in 24h format from this point on
                 if ((hours[1][-2:] == "AM") and (ch < oh)) or ((hours[1][-2:] == "AM") and (ch == 24)): #check if the store closes after midnight or at midnight
                     if (ch == 24):
@@ -109,7 +108,13 @@ def get_open_closed_ids(conn, city):
                         else:
                             closed_ids.append(i)
                     else:
-                        if (localhour >= oh):
+                        #if closing hour is after midnight and is not midnight, 
+                        # e.g. oh 7 ch 3, lt 2
+                        # if the local time is lesser than the closing time, within the span of midnight - closing, the store is open
+                        # e.g. oh 7 ch 3 lt 14
+                        # if the local time is greater than the opening time in a situation where the closing time is in the AM and lesser than the opening time,
+                        # the store is open
+                        if (localhour >= oh): 
                             open_ids.append(i)
                         if (localhour < ch):
                             open_ids.append(i)

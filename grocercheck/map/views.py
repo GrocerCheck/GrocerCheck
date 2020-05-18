@@ -64,29 +64,50 @@ def index(request, city="vancouver"):
                 context['openn'].append(0)
             else:
                 spl = hourstring.split(": ")[1]
-                if ('24' in spl):
+                if (' 24' in spl):
                     context['openn'].append(1)
                 elif ('–' not in spl):
                     context['openn'].append(0)
                 else:
-                    spl = spl.split(' – ')
-                    o, c = spl[0],spl[1]
+                    hours = spl.split(' – ')
+                    o, c = hours[0],hours[1]
                     oh = int(o.split(':')[0])
                     om = int(o.split(':')[1][:2])
                     ch = int(c.split(':')[0])
                     cm = int(c.split(':')[1][:2])
-                    if(o[-2:]=='PM'):
-                        oh+=12
-                    if(c[-2:]=='PM'):
-                        ch+=12
-                    if(rawhour>oh and rawhour<ch):
-                        context['openn'].append(1)
-                    elif(rawhour==oh and minute>=om):
-                        context['openn'].append(1)
-                    elif(rawhour==ch and minute<cm):
-                        context['openn'].append(1)
+
+                    if ((hours[0][-2:] == "PM") and (oh != 12)):
+                        oh += 12
+                    if ((hours[1][-2:] == "PM") and (ch !=12)): #12PM is noon, 12AM is midnight
+                        ch += 12
+                    if ((hours[0][-2:] == "AM") and (oh == 12)):
+                        oh = 0 #if it opens at midnight, set to 0 for comparison
+                    if ((hours[1][-2:] == "AM") and (ch == 12)):
+                        ch = 24
+
+                    if ((hours[1][-2:] == "AM") and (ch < oh)) or ((hours[1][-2:] == "AM") and (ch == 24)): #check if the store closes after midnight or at midnight
+                        if (ch == 24):
+                            if ((localhour < ch) and (localhour > oh)):
+                                context['openn'].append(1)
+                            else:
+                                context['openn'].append(0)
+                        else:
+                            if (localhour >= oh):
+                                context['openn'].append(1)
+                            if (localhour < ch):
+                                context['openn'].append(1)
+
+                            elif (localhour == ch and localminute < cm):
+                                open_ids.append(i)
                     else:
-                        context['openn'].append(0)
+                            if(rawhour>oh and rawhour<ch):
+                                context['openn'].append(1)
+                            elif(rawhour==oh and minute>=om):
+                                context['openn'].append(1)
+                            elif(rawhour==ch and minute<cm):
+                                context['openn'].append(1)
+                            else:
+                                context['openn'].append(0)
 
 
 
