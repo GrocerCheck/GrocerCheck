@@ -24,12 +24,15 @@ def readData(data):
     output = [name,lat,lng,address,placeID,types]
     return output
 
-def makerequest(API_KEY, lat,lng,radius,nextpage=''):
+def makerequest(API_KEY, lat,lng,radius, keyword, nextpage=''):
     if(nextpage!=''):
         nextpage = 'pagetoken='+nextpage
 
     print('request nextpage: '+nextpage)
-    response = requests.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?key='+API_KEY+'&location='+str(lat)+','+str(lng)+'&radius='+str(radius)+'&keyword=grocery&'+nextpage)
+    response = requests.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?key='+API_KEY+'&location='+str(lat)+','+str(lng)+'&radius='+str(radius)+'&keyword='+keyword+'&'+nextpage) #change keyword depending on what is being scraped for
+#-- to include things like costco, use "department store",
+# scrape each city thrice - once with "grocery", "department", and "mall"
+
     return response
 
 def create_connection(db_file):
@@ -47,14 +50,21 @@ def insert_store(conn, store):
     cur.execute(sql, store)
     return cur.lastrowid
 
-def getplaces(API_KEY, coords, database_dir, city):
-    added = set()
+def get_added(conn, city):
+    cur = conn.cursor()
+    sql = "SELECT place_id FROM map_store WHERE city=?"
+    existing = cur.execute(sql, (city,)).fetchall()
+    existing = [i[0] for i in existing]
+    existing = set(existing)
+    return existing
 
+
+def getplaces(API_KEY, coords, database_dir, city, keyword):
     conn = create_connection(database_dir)
+    added = get_added(conn, city)
 
-    prev_last_id = conn.cursor().execute("SELECT MAX(id) FROM map_store").fetchall()[0][0] 
+    prev_last_id = conn.cursor().execute("SELECT MAX(id) FROM map_store").fetchall()[0][0]
     counter = prev_last_id+1
-
 
     for line in coords:
         clat = line[0]
@@ -66,7 +76,7 @@ def getplaces(API_KEY, coords, database_dir, city):
 
         while flag:
             time.sleep(3)
-            response = makerequest(API_KEY, clat,clng,r,nextpage)
+            response = makerequest(API_KEY, clat,clng,r, keyword, nextpage)
             data = response.json()
             #print(json.dumps(data,indent=4))
 
@@ -77,7 +87,7 @@ def getplaces(API_KEY, coords, database_dir, city):
             address = output[3]
             placeID = output[4]
             types=output[5]
-            
+
             print("num-stores: ", len(name))
 
             for i in range(len(name)):
@@ -93,6 +103,7 @@ def getplaces(API_KEY, coords, database_dir, city):
                 nextpage = data['next_page_token']
             else:
                 flag = False
+
     print('finished, num_added: '+str(len(added)))
     return(prev_last_id)
 
