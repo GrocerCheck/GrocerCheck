@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Sponsors: GrocerCheck</title>
+        <title>Partners: GrocerCheck</title>
         <link rel='shortcut icon' type=image/png' href="{% static 'favicon.ico' %}" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
@@ -53,7 +53,7 @@
 					<a href="{% url 'index' %}"><li>Home</li></a>
 					<a href="{% url 'about' %}"><li>About Us</li></a>
 					<a href="{% url 'covidwatch' %}"><li>COVID Watch</li></a>
-					<a href="{% url 'sponsors' %}"><li>Sponsors</li></a>
+					<a href="{% url 'partners' %}"><li>Partners</li></a>
 					<a href="{% url 'contact' %}"><li>Contact Us</li></a>
 
 				</ul>
@@ -68,7 +68,7 @@
                 <li><a href="{% url 'index' %}">Home</a></li>
                 <li><a href="{% url 'about' %}">About Us</a></li>
                 <li><a href="{% url 'covidwatch' %}">COVID Watch</a></li>
-            <li class="currentpage"><a href="{% url 'sponsors' %}">Sponsors</a></li>
+            <li class="currentpage"><a href="{% url 'partners' %}">Partners</a></li>
                     <li><a href="{% url 'contact' %}">Contact Us</a></li>
                     	
             </ul>
@@ -115,10 +115,52 @@
                 </div>
             </div>
 
+        </div>
 
+
+
+	<div id="our_partners">
+			<h1 style="text-align: center; font-size: 80px;">Our Partners</h1>
+            <p style="text-align: center; font-size: 25px">GrocerCheck thanks the support of our partners. Go (<i>Grocer</i> )Check them out!</p>
+            <br>
+            <br>
+		</div>
+
+        <div style = "display: inline-block;"id = "sponsors">
+            <div id="luminati" class = "responsive">
+                <div class = "sponsorprofiles">
+                    <a target="_blank" href = "{% static 'images/GrocerCheckFavicon.png' %}">
+                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/GrocerCheckFavicon.png' %}" alt = "Luminati.io">
+                    </a>
+                    <div class="sponsor_name">FeedingOurFrontlines</div>
+                    <div class="sponsor_rank_gold">Partner</div>
+                    <div class="blurb">
+                        <p>PLACEHOLDER_TEXT</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="this_could_be_you" class = "responsive">
+                <div class = "sponsorprofiles">
+                    <a target="_blank" href = "mailto:preston@grocercheck.ca?subject=GrocerCheck%20Sponsorship%20Inquiry">
+                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px; background-color: white;" src = "{% static 'images/GrocerCheckFavicon.png' %}" alt = "This could be you">
+                    </a>
+                    <div class="sponsor_name">Work with GrocerCheck</div>
+                    <div class="sponsor_rank_gold">Partner</div>
+                    <div class="blurb">
+                        <p>Interested in becoming a GrocerCheck Partner?</p>
+                        <p>Let's build each other up. Contact Preston (preston@grocercheck.ca) to get started.</p>
+                    </div>
+                </div>
+            </div>
 
         </div>
-            
+
+
+
+
+
+
         <div id="paypalbutton">
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                 <input type="hidden" name="cmd" value="_s-xclick" />

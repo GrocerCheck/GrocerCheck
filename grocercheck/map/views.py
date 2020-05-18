@@ -127,7 +127,7 @@ def about(request):
 def covidwatch(request):
     return render(request, 'covidwatch.html')
 
-def sponsors(request):
+def partners(request):
     return render(request, 'sponsors.html')
 
 def contact(request):
