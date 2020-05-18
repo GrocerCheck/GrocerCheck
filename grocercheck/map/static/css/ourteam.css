@@ -47,8 +47,35 @@ div.member_title{
 .responsive {
     padding: 10px 6px 0;
     float: left;
-    width: 33.33333%;
+    --screenwidth: calc(100vw - 16px); /* 100% viewport width minus native margins of browser: 8px on each side */
     box-sizing: border-box;
     z-index: 3;
+    display: block;
+    
 }
 
+#jason {
+	float: right;
+}
+#luke {
+	float: right;
+}
+#joe{
+	float: right;
+}
+
+@media screen and (min-width:1600px){
+	.responsive{
+		width: calc(var(--screenwidth) / 6);
+	}
+}
+@media screen and (min-width: 750px) and (max-width: 1600px){
+	.responsive{
+		width: calc(var(--screenwidth) / 3);
+	}
+}
+@media screen and (max-width: 750px){
+	.responsive{
+		width: var(--screenwidth);
+	}
+}

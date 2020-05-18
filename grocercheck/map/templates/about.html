@@ -7,12 +7,12 @@
         <link rel='shortcut icon' type='image/png' href="{% static 'favicon.ico' %}">
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito'>      
 		<link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel='stylesheet' href = "{% static 'css/ourteam.css' %}">
+        
         <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
         <link rel='stylesheet' href = "{% static 'css/infopage.css' %}">
         <link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
         <link rel='stylesheet' href = "{% static 'css/socialicons.css' %}">
-
+<link rel='stylesheet' href = "{% static 'css/ourteam.css' %}">
 
         <style>
             /* div for who are we */
@@ -125,7 +125,7 @@
         
         
         <div id = "teammembers">
-            <div id="brian" class = "responsive">
+            <div id="brian" class = "responsive responsivetop">
                 <div class = "teamprofiles">
                     <a target="_blank" href = "https://linkedin.com/in/brianchen28914">
                         <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/brian.jpg' %}" alt = "Brian Chen">
@@ -136,7 +136,7 @@
                 </div>
             </div>
 
-             <div id="andy" class = "responsive">
+             <div id="andy" class = "responsive responsivetop">
                 <div class = "teamprofiles">
                     <a target="_blank" href = "https://linkedin.com/in/andy-liang-5b53941a7">
                         <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/andy.jpg' %}" alt = "Andy Liang">
@@ -148,7 +148,7 @@
                 </div>
             </div>
             
-            <div id="preston" class = "responsive">
+            <div id="preston" class = "responsive responsivetop">
                 <div class = "teamprofiles">
                     <a target="_blank" href = "https://linkedin.com/in/preston-lai">
                         <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/preston.png' %}" alt = "Preston Lai">
@@ -160,31 +160,9 @@
                 </div>
             </div>
             
-            <div id="jason" class = "responsive">
-                <div class = "teamprofiles">
-                    <a target="_blank" href = "https://linkedin.com/in/jason-yu-95b3a6192">
-                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/jason.jpeg' %}" alt = "Jason Yu">
-                    </a>
-                    <div class="member_name">Jason Yu</div>
-                    <div class="member_title">Chief Marketing Officer</div>
- 
-                    <div class="desc">Hey! My name is Jason Yu and I’m currently a Year 1 IB student at Sir Winston Churchill Secondary. During these stressful times, I picked up cooking as a hobby to take advantage of this pandemic for some well-needed family time. From old recipes passed down from grandparents to new dishes that maybe didn’t taste the best, I realised that the common denominator were the ingredients. Understanding the implication of COVID-19 on Grocers and shopping, I was delighted when I had the opportunity to bridge my passions of art and cooking as GrocerCheck’s Social Media and Marketing Manager! I look forward to making safe spaces for people to shop for food to feed families, enabling fun family dinners while promoting social distancing! I look forward to the relationships GrocerCheck can strengthen healthily, after all, food brings people together!</div>
-                </div>
-            
-            </div>        
-                <div id="luke" class = "responsive">
-                <div class = "teamprofiles">
-                    <a target="_blank" href = "https://linkedin.com/in/lukekdunn">
-                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px; " src = "{% static 'images/luke.jpg' %}" alt = "Luke Dunn">
-                    </a>
-                    <div class="member_name">Luke Dunn</div>
-                    <div class="member_title">Chief Experience Officer</div>
- 
-                    <div class="desc">Hi! I’m Luke, and while I was trying to figure out what to do with myself during the Covid-19 pandemic I was invited to join the GrocerCheck team and in the process make a difference in my community. What an opportunity! In my spare time I work on my own design based projects and fantasize about being outside.
-                    </div>
-                </div> 
-            </div>        
-                <div id="joe" class = "responsive">
+                    
+                        
+                <div id="joe" class = "responsive responsivebottom">
                 <div class = "teamprofiles">
                     <a target="_blank" href = "">
                         <img style="border-top-right-radius: 10px; border-top-left-radius: 10px; " src = "{% static 'images/GrocerCheckFavicon.png' %}" alt = "Joe Salmon">
@@ -198,7 +176,32 @@
         </div>
 
         
-        
+        <div id="luke" class = "responsive responsivebottom">
+                <div class = "teamprofiles">
+                    <a target="_blank" href = "https://linkedin.com/in/lukekdunn">
+                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px; " src = "{% static 'images/luke.jpg' %}" alt = "Luke Dunn">
+                    </a>
+                    <div class="member_name">Luke Dunn</div>
+                    <div class="member_title">Chief Experience Officer</div>
+ 
+                    <div class="desc">Hi! I’m Luke, and while I was trying to figure out what to do with myself during the Covid-19 pandemic I was invited to join the GrocerCheck team and in the process make a difference in my community. What an opportunity! In my spare time I work on my own design based projects and fantasize about being outside.
+                    </div>
+                </div> 
+            </div>
+
+
+	<div id="jason" class = "responsive responsivebottom">
+                <div class = "teamprofiles">
+                    <a target="_blank" href = "https://linkedin.com/in/jason-yu-95b3a6192">
+                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/jason.jpeg' %}" alt = "Jason Yu">
+                    </a>
+                    <div class="member_name">Jason Yu</div>
+                    <div class="member_title">Chief Marketing Officer</div>
+ 
+                    <div class="desc">Hey! My name is Jason Yu and I’m currently a Year 1 IB student at Sir Winston Churchill Secondary. During these stressful times, I picked up cooking as a hobby to take advantage of this pandemic for some well-needed family time. From old recipes passed down from grandparents to new dishes that maybe didn’t taste the best, I realised that the common denominator were the ingredients. Understanding the implication of COVID-19 on Grocers and shopping, I was delighted when I had the opportunity to bridge my passions of art and cooking as GrocerCheck’s Social Media and Marketing Manager! I look forward to making safe spaces for people to shop for food to feed families, enabling fun family dinners while promoting social distancing! I look forward to the relationships GrocerCheck can strengthen healthily, after all, food brings people together!</div>
+                </div>
+            
+            </div>
         
         
         </div>
