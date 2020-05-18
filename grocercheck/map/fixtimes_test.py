@@ -12,11 +12,11 @@ from multiprocessing.dummy import Pool #for compatability w/ celery
 
 #--------GLOBAL VAR---------------#
 
-BACKUP = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_raw_data.json", "a+")
-LOG = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_log.txt", "a+")
+#BACKUP = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_raw_data.json", "a+")
+#LOG = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_log.txt", "a+")
 
-# BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/backup.json", "a+")
-# LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/LOG.txt", "a+")
+BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/backup.json", "a+")
+LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/LOG.txt", "a+")
 
 def create_connection(db_file):
     conn = None
@@ -87,22 +87,39 @@ def get_open_closed_ids(conn, city):
 #create open "range", and check if current time is within that open range.
 
 #                print(oh, om, ch, cm, " | ", localhour, localminute)
-                #change to 24h format
-                if hours[0][-2:] == "PM":
+                # convert to 24h format
+                if ((hours[0][-2:] == "PM") and (oh != 12)):
                     oh += 12
-                if hours[1][-2:] == "PM":
+                if ((hours[1][-2:] == "PM") and (ch !=12)): #12PM is noon, 12AM is midnight
  #                   print(hours[1][-2])
                     ch += 12
 #                print(oh, om, ch, cm, " | ", localhour, localminute)
+                if ((hours[1][-2:] == "AM") and (oh == 12)):
+                    oh = 24
+                if ((hours[1][-2:] == "AM") and (ch == 12)):
+                    ch = 24
 
-                if ((hours[1][-2:] == "AM") and (ch < oh)): #check if the store closes after midnight
-                    flag = True
-                    if (localhour > ch):
-                        if (localhour < (ch+24)): #"the next day"
-                            open_ids.append(i) #ch = 1, local hour is 14, ch < 24+1
-                    if (localhour < ch):
-                        open_ids.append(i)
+                localhour = 1
+                localminute = 0
+                print(i , oh, ch, hours, localhour, localminute)
+                #everything in 24h format from this point on
+                if ((hours[1][-2:] == "AM") and (ch < oh)) or ((hours[1][-2:] == "AM") and (ch == 24)): #check if the store closes after midnight or at midnight
+                    if (ch == 24):
+                        if ((localhour < ch) and :
+                            print("---------", i, hours)
+                            open_ids.append(i)
+                        else:
+                            closed_ids.append(i)
+                    else:
+                        if (localhour >= oh):
+                            open_ids.append(i)
+                        #oh 3:30 closing 3 localhour 2
+                        #let's say if it's 3am closing and the user is coming in at 2am
+                        if (localhour < ch):
+                            open_ids.append(i)
 
+                        elif (localhour == ch and localminute < cm):
+                            open_ids.append(i)
                 else:
                     if (localhour > oh and localhour < ch):
                         open_ids.append(i)
@@ -112,6 +129,12 @@ def get_open_closed_ids(conn, city):
                         open_ids.append(i)
                     else:
                         closed_ids.append(i)
+    for i in open_ids:
+        print("open", i, (cur.execute("SELECT name, sunhours FROM map_store WHERE id=?", (i,)).fetchall()))
+    print("closed")
+    for i in closed_ids:
+        print("open", i, (cur.execute("SELECT name, sunhours FROM map_store WHERE id=?", (i,)).fetchall()))
+
 
     return (open_ids, closed_ids)
 
@@ -172,35 +195,35 @@ def update_current_popularity(addr_and_id, conn, doBackup, doLog, proxy, num_pro
     else:
         pool = Pool(num_processes)
         place_data = {}
+        ##for ind in range(len(formatted_address_list)):
         #for ind in range(len(formatted_address_list)):
-        for ind in range(len(formatted_address_list)):
-            place_data[ind] = pool.apply_async(lpt.get_populartimes_by_formatted_address, args=(formatted_address_list[ind], proxy,))
+        #    place_data[ind] = pool.apply_async(lpt.get_populartimes_by_formatted_address, args=(formatted_address_list[ind], proxy,))
 
-        pool.close()
-        for ind in range(len(formatted_address_list)):
-            try:
-                place_data[ind] = place_data[ind].get()
-            except:
-                try:
-                    place_data[ind] = place_data[ind].get()
-                except:
-                    continue #nest tries twice to catch bs
+        #pool.close()
+        #for ind in range(len(formatted_address_list)):
+        #    try:
+        #        place_data[ind] = place_data[ind].get()
+        #    except:
+        #        try:
+        #            place_data[ind] = place_data[ind].get()
+        #        except:
+        #            continue #nest tries twice to catch bs
 
-        for ind in range(len(formatted_address_list)):
-            log = update_row(conn, place_data[ind], open_ids[ind])
-            #print("updated store iD ", open_ids[ind])
-            if doBackup == True:
-                BACKUP.write(json.dumps(place_data, indent=4))
-                BACKUP.write("\r\n")
-            if doLog == True:
-                for entry in log:
-                    LOG.write(entry)
-                    LOG.write("\r\n")
+        #for ind in range(len(formatted_address_list)):
+        #    log = update_row(conn, place_data[ind], open_ids[ind])
+        #    #print("updated store iD ", open_ids[ind])
+        #    if doBackup == True:
+        #        BACKUP.write(json.dumps(place_data, indent=4))
+        #        BACKUP.write("\r\n")
+        #    if doLog == True:
+        #        for entry in log:
+        #            LOG.write(entry)
+        #            LOG.write("\r\n")
 
         #clean up closed stores
-        cur = conn.cursor()
-        cur.execute("UPDATE map_store SET live_busyness=NULL WHERE id IN {closed}".format(closed=tuple(closed_ids)))
-        conn.commit()
+        # cur = conn.cursor()
+        # cur.execute("UPDATE map_store SET live_busyness=NULL WHERE id IN {closed}".format(closed=tuple(closed_ids)))
+        # conn.commit()
         return
 
 def run_scraper(country, city, doBackup = False, doLog = False, proxy = False, num_processes = None):
@@ -212,7 +235,8 @@ def run_scraper(country, city, doBackup = False, doLog = False, proxy = False, n
     :param num_processes (optional) number of threads to run, default = None
     """
     global LOG
-    conn = create_connection("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3")
+    #conn = create_connection("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3")
+    conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/db1.sqlite3")
 
     try:
         update_current_popularity(get_formatted_addresses(country, city, conn), conn, doBackup, doLog, proxy, num_processes)
@@ -221,3 +245,5 @@ def run_scraper(country, city, doBackup = False, doLog = False, proxy = False, n
     except:
         print("error in update_current_popularity")
         LOG.write("ERROR IN update_current_popularity\r\n")
+
+run_scraper("", 'seattle', num_processes = 8)
