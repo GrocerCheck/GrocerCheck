@@ -15,8 +15,8 @@ def index(request, city="vancouver"):
     t = time.localtime()
     day = days[t[6]]
     hour = t[3]
-    rawhour = t[3]
-    minute = t[4]
+    localhour = t[3]
+    localminute = t[4]
 
     if(hour<10):
         hour = '0'+str(hour)
@@ -64,9 +64,9 @@ def index(request, city="vancouver"):
                 context['openn'].append(0)
             else:
                 hours = hourstring.split(": ")[1]
-                if (' 24' in spl):
+                if (' 24' in hours):
                     context['openn'].append(1)
-                elif ('–' not in spl):
+                elif ('–' not in hours):
                     context['openn'].append(0)
                 else:
                     hours = hours.split(" – ")
@@ -97,11 +97,11 @@ def index(request, city="vancouver"):
                             elif (localhour == ch and localminute < cm):
                                 open_ids.append(i)
                     else:
-                            if(rawhour>oh and rawhour<ch):
+                            if(localhour>oh and localhour<ch):
                                 context['openn'].append(1)
-                            elif(rawhour==oh and minute>=om):
+                            elif(localhour==oh and localminute>=om):
                                 context['openn'].append(1)
-                            elif(rawhour==ch and minute<cm):
+                            elif(localhour==ch and localminute<cm):
                                 context['openn'].append(1)
                             else:
                                 context['openn'].append(0)

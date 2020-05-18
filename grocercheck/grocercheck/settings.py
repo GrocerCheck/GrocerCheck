@@ -31,7 +31,7 @@ SECRET_KEY = open(expanduser("~")+"/keys/djangokey.txt").readline()
 
 # SECURITY WARNING: don't run with debug turned on in production
 if("bitnami" in BASE_DIR):
-    DEBUG = False
+    DEBUG = True
 else:
     DEBUG = True
 
