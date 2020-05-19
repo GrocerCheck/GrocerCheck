@@ -62,6 +62,14 @@ div.sponsor_rank_bronze{
     text-align: center;
 }
 
+div.partner_rank{
+    color: #F9ECCC;
+    font-weight: bold;
+    padding: 5px;
+    text-align: center;
+}
+
+
 .responsive {
     padding: 6px;
     float: left;
