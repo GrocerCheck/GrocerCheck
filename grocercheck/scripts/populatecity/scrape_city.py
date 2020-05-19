@@ -12,17 +12,37 @@ victoria_bounds = [
 [
 (48.41047131, -123.54010495), #langford
 (48.46919384, -123.46151526),
-],
+    ],
 
-[
+    [
 (48.41420075, -123.43426794), #viewroyal to victoria to oakbay to sannich
 (48.50419563, -123.31444827),
-],
+    ],
 
 [
 (48.49803351, -123.38871523), #little vertical strip around royal oak burial park
 (48.53263927, -123.36726535),
-],
+    ],
+
+[
+    (48.40794158, -123.32520833),
+    (48.42659849, -123.29530412), #little protrusion by south oak bay
+    ],
+
+[
+    (48.43556249, -123.32759598), #little protrusion by uplands park
+    (48.45409697, -123.30010674),
+    ],
+
+[
+(48.45067071, -123.31039082),
+(48.47625147, -123.2678188), #protrusion by 10 mile point
+    ],
+
+[
+(48.45974731, -123.32111184),
+(48.4965039, -123.30514734), #ring road & university
+    ],
 
 ]
 
@@ -86,7 +106,7 @@ seattle_bounds = [
 API_KEY = open("/home/ihasdapie/keys/gmapkey.txt").readline()
 
 DATABASE_DIR = os.path.dirname(os.path.dirname(os.getcwd())) + "/db1.sqlite3"
-KEYWORD = "grocery"
+KEYWORD = "department store"
 
 #SCRAPE THREE TIMES W/ keywords: "department store", "grocery", "mall"
 # consider implementing filter on index.html for grocery only (& costco for whatever godforsaken reason)
