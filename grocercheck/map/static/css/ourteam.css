@@ -47,7 +47,7 @@ div.member_title{
 .responsive {
     padding: 10px 6px 0;
     float: left;
-    --screenwidth: calc(100vw - 16px); /* 100% viewport width minus native margins of browser: 8px on each side */
+    --screenwidth: calc(100vw - 41px); /* 100% viewport width minus native margins of browser: 8px on each side */
     box-sizing: border-box;
     z-index: 3;
     display: block;
