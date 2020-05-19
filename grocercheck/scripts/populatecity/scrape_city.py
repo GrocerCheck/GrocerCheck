@@ -8,6 +8,25 @@ import sqlite3
 #Bounds must be given as a list of list of tuples (lat, lng) in the format
     #[(bottom,left), (top, right)
 
+victoria_bounds = [
+[
+(48.41047131, -123.54010495), #langford
+(48.46919384, -123.46151526),
+],
+
+[
+(48.41420075, -123.43426794), #viewroyal to victoria to oakbay to sannich
+(48.50419563, -123.31444827),
+],
+
+[
+(48.49803351, -123.38871523), #little vertical strip around royal oak burial park
+(48.53263927, -123.36726535),
+],
+
+]
+
+
 seattle_bounds = [
 # CENTRAL SEATTLE
         [
@@ -67,22 +86,23 @@ seattle_bounds = [
 API_KEY = open("/home/ihasdapie/keys/gmapkey.txt").readline()
 
 DATABASE_DIR = os.path.dirname(os.path.dirname(os.getcwd())) + "/db1.sqlite3"
-KEYWORD = "department store"
+KEYWORD = "grocery"
 
 #SCRAPE THREE TIMES W/ keywords: "department store", "grocery", "mall"
 # consider implementing filter on index.html for grocery only (& costco for whatever godforsaken reason)
 
-CITY = "seattle"
+CITY = "victoria"
 
 print("DATABASE DIR: ", DATABASE_DIR)
-coord_list = gencoords.gen_coords(seattle_bounds, 1.4)
+coord_list = gencoords.gen_coords(victoria_bounds, 1.4)
 
 print("NUM COORDS: ", len(coord_list))
+print("CITY ", CITY, " KEYWORd ", KEYWORD )
 x, y= np.array(coord_list).T
 plt.scatter(x,y)
-#~ plt.show()
+plt.show()
 
-first_id = get_places.getplaces(API_KEY, coord_list, DATABASE_DIR, CITY) + 1
+first_id = get_places.getplaces(API_KEY, coord_list, DATABASE_DIR, CITY, KEYWORD) + 1
 
 #add place detail will have to start on the index of the first added by getplaces: this is the lastid from getplaces + 1
 
