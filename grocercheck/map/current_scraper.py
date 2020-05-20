@@ -12,11 +12,11 @@ from multiprocessing.dummy import Pool #for compatability w/ celery
 
 #--------GLOBAL VAR---------------#
 
-#BACKUP = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_raw_data.json", "a+")
-#LOG = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_log.txt", "a+")
+BACKUP = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_raw_data.json", "a+")
+LOG = open("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/scripts/logs/current_scraper_log.txt", "a+")
 
-BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/backup.json", "a+")
-LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/LOG.txt", "a+")
+#BACKUP = open("/home/ihasdapie/Grocer_Check_Project/Org/backup.json", "a+")
+#LOG = open("/home/ihasdapie/Grocer_Check_Project/Org/LOG.txt", "a+")
 
 def create_connection(db_file):
     conn = None
@@ -55,6 +55,7 @@ def get_open_closed_ids(conn, city):
     vancouver_time = datetime.datetime.now(vancouver_timezone)
     localhour = vancouver_time.hour
     localminute = vancouver_time.minute
+    print('preshit: ', vancouver_time, localhour, localminute)
     weekday = vancouver_time.weekday()
     days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
     cur = conn.cursor()
@@ -84,21 +85,19 @@ def get_open_closed_ids(conn, city):
                 oh, om = int(hours[0].split(':')[0]), int(hours[0].split(':')[1][:2]) #opening hour, opening minute
                 ch, cm = int(hours[1].split(':')[0]), int(hours[1].split(':')[1][:2]) #closing hour, closing minute
 
-#                print(oh, om, ch, cm, " | ", localhour, localminute)
+                # print(oh, om, ch, cm, " | ", localhour, localminute)
                 # convert to 24h format
                 if ((hours[0][-2:] == "PM") and (oh != 12)):
                     oh += 12
                 if ((hours[1][-2:] == "PM") and (ch !=12)): #12PM is noon, 12AM is midnight
- #                   print(hours[1][-2])
+                    # print(hours[1][-2])
                     ch += 12
-#                print(oh, om, ch, cm, " | ", localhour, localminute)
+                # print(oh, om, ch, cm, " | ", localhour, localminute)
+
                 if ((hours[0][-2:] == "AM") and (oh == 12)):
                     oh = 0 #if it opens at midnight, set to 0 for comparison
                 if ((hours[1][-2:] == "AM") and (ch == 12)):
                     ch = 24
-
-                localhour = 23
-                localminute = 0
 
                 #everything in 24h format from this point on
                 if ((hours[1][-2:] == "AM") and (ch < oh)) or ((hours[1][-2:] == "AM") and (ch == 24)): #check if the store closes after midnight or at midnight
@@ -108,13 +107,13 @@ def get_open_closed_ids(conn, city):
                         else:
                             closed_ids.append(i)
                     else:
-                        #if closing hour is after midnight and is not midnight, 
+                        #if closing hour is after midnight and is not midnight,
                         # e.g. oh 7 ch 3, lt 2
                         # if the local time is lesser than the closing time, within the span of midnight - closing, the store is open
                         # e.g. oh 7 ch 3 lt 14
                         # if the local time is greater than the opening time in a situation where the closing time is in the AM and lesser than the opening time,
                         # the store is open
-                        if (localhour >= oh): 
+                        if (localhour >= oh):
                             open_ids.append(i)
                         if (localhour < ch):
                             open_ids.append(i)
@@ -130,11 +129,14 @@ def get_open_closed_ids(conn, city):
                         open_ids.append(i)
                     else:
                         closed_ids.append(i)
-    for i in open_ids:
-        print("open", i, (cur.execute("SELECT name, sunhours FROM map_store WHERE id=?", (i,)).fetchall()))
-    for i in closed_ids:
-        print("closed", i, (cur.execute("SELECT name, sunhours FROM map_store WHERE id=?", (i,)).fetchall()))
-
+#    print("localtime" +  str(localhour) + " " + str(localminute))
+#    print("-----------------------")
+#    for i in open_ids:
+#        print("open", i, (cur.execute("SELECT name, sunhours FROM map_store WHERE id=?", (i,)).fetchall()))
+#        print("-----------------------")
+#    for i in closed_ids:
+#        print("closed", i, (cur.execute("SELECT name, sunhours FROM map_store WHERE id=?", (i,)).fetchall()))
+#        print("------------------------")
 
     return (open_ids, closed_ids)
 
@@ -186,8 +188,9 @@ def update_current_popularity(addr_and_id, conn, doBackup, doLog, proxy, num_pro
                 for entry in log:
                     LOG.write(entry)
                     LOG.write("\r\n")
+
         cur = conn.cursor()
-#clean up closed stores
+        #clean up closed stores
         cur.execute("UPDATE map_store SET live_busyness=NULL WHERE id IN {closed}".format(closed=tuple(closed_ids)))
         cur.commit()
 
@@ -220,10 +223,10 @@ def update_current_popularity(addr_and_id, conn, doBackup, doLog, proxy, num_pro
                     LOG.write(entry)
                     LOG.write("\r\n")
 
-        clean up closed stores
-         cur = conn.cursor()
-         cur.execute("UPDATE map_store SET live_busyness=NULL WHERE id IN {closed}".format(closed=tuple(closed_ids)))
-         conn.commit()
+        #clean up closed stores
+        cur = conn.cursor()
+        cur.execute("UPDATE map_store SET live_busyness=NULL WHERE id IN {closed}".format(closed=tuple(closed_ids)))
+        conn.commit()
         return
 
 def run_scraper(country, city, doBackup = False, doLog = False, proxy = False, num_processes = None):
@@ -235,8 +238,8 @@ def run_scraper(country, city, doBackup = False, doLog = False, proxy = False, n
     :param num_processes (optional) number of threads to run, default = None
     """
     global LOG
-    #conn = create_connection("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3")
-    conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/db1.sqlite3")
+    conn = create_connection("/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3")
+    #conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/db1.sqlite3")
 
     try:
         update_current_popularity(get_formatted_addresses(country, city, conn), conn, doBackup, doLog, proxy, num_processes)
@@ -245,4 +248,3 @@ def run_scraper(country, city, doBackup = False, doLog = False, proxy = False, n
     except:
         print("error in update_current_popularity")
         LOG.write("ERROR IN update_current_popularity\r\n")
-

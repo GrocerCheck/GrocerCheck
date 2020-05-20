@@ -4,7 +4,7 @@ from celery.signals import worker_process_init
 
 from .current_scraper import run_scraper
 from .hardcode_scrape import scrape
-from multiprocessing import current_process
+#from multiprocessing import current_process
 #attempted fix for config error w/ multiprocessing
 #@worker_process_init.connect
 #def fix_multiprocessing(**kwargs):
