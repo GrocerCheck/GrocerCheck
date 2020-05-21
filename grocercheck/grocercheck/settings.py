@@ -158,22 +158,23 @@ CELERY_BEAT_SCHEDULE = {
 # Country, doBackup, doLog, proxy, num_processe
     },
 
-    'UPDATE_SEATTLE_POPULARITY':{
-    'task': 'update_current_popularity',
-        'schedule': crontab(minute="3-59/10"), #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
-        'args': ("", "seattle", False, False, p, 16), #US address include country
+    # 'UPDATE_SEATTLE_POPULARITY':{
+    # 'task': 'update_current_popularity',
+    #     'schedule': crontab(minute="3-59/10"), #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
+    #     '
+    #     rgs': ("", "seattle", False, False, p, 16), #US address include country
 
-# Country, doBackup, doLog, proxy, num_processe
-    },
+# # Country, doBackup, doLog, proxy, num_processe
+    # },
 
 
-    'UPDATE_VICTORIA_POPULARITY':{
-    'task': 'update_current_popularity',
-        'schedule': crontab(minute="3-59/10"), #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
-        'args': ("Canada", "victoria", False, False, p, 16), #US address include country
+#     'UPDATE_VICTORIA_POPULARITY':{
+#     'task': 'update_current_popularity',
+#         'schedule': crontab(minute="3-59/10"), #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
+#         'args': ("Canada", "victoria", False, False, p, 16), #US address include country
 
-# Country, doBackup, doLog, proxy, num_processe
-    },
+# # Country, doBackup, doLog, proxy, num_processe
+#     },
 
 
 
