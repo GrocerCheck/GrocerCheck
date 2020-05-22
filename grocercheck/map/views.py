@@ -8,13 +8,15 @@ import os
 from map.models import Store
 import json
 
-def index(request):
+
+
+def index(request, city="vancouver"):
     days = ['mon','tue','wed','thu','fri','sat','sun']
     t = time.localtime()
     day = days[t[6]]
     hour = t[3]
-    rawhour = t[3]
-    minute = t[4]
+    localhour = t[3]
+    localminute = t[4]
 
     if(hour<10):
         hour = '0'+str(hour)
@@ -32,7 +34,7 @@ def index(request):
     context['keywords'] = []
     conn = sqlite3.connect(os.path.join(settings.BASE_DIR,'db1.sqlite3'))
     cur = conn.cursor()
-    for s in Store.objects.all():
+    for s in Store.objects.filter(city__exact=city):
         with conn:
             context['name'].append(s.name)
             context['place_id'].append(s.place_id)
@@ -61,30 +63,48 @@ def index(request):
             if(hourstring==None):
                 context['openn'].append(0)
             else:
-                spl = hourstring.split(": ")[1]
-                if ('24' in spl):
+                hours = hourstring.split(": ")[1]
+                if (' 24' in hours):
                     context['openn'].append(1)
-                elif ('–' not in spl):
+                elif ('–' not in hours):
                     context['openn'].append(0)
                 else:
-                    spl = spl.split(' – ')
-                    o, c = spl[0],spl[1]
-                    oh = int(o.split(':')[0])
-                    om = int(o.split(':')[1][:2])
-                    ch = int(c.split(':')[0])
-                    cm = int(c.split(':')[1][:2])
-                    if(o[-2:]=='PM'):
-                        oh+=12
-                    if(c[-2:]=='PM'):
-                        ch+=12
-                    if(rawhour>oh and rawhour<ch):
-                        context['openn'].append(1)
-                    elif(rawhour==oh and minute>=om):
-                        context['openn'].append(1)
-                    elif(rawhour==ch and minute<cm):
-                        context['openn'].append(1)
+                    hours = hours.split(" – ")
+                    oh, om = int(hours[0].split(':')[0]), int(hours[0].split(':')[1][:2]) #opening hour, opening minute
+                    ch, cm = int(hours[1].split(':')[0]), int(hours[1].split(':')[1][:2]) #closing hour, closing minute
+
+                    if ((hours[0][-2:] == "PM") and (oh != 12)):
+                        oh += 12
+                    if ((hours[1][-2:] == "PM") and (ch !=12)): #12PM is noon, 12AM is midnight
+                        ch += 12
+                    if ((hours[0][-2:] == "AM") and (oh == 12)):
+                        oh = 0 #if it opens at midnight, set to 0 for comparison
+                    if ((hours[1][-2:] == "AM") and (ch == 12)):
+                        ch = 24
+
+                    if ((hours[1][-2:] == "AM") and (ch < oh)) or ((hours[1][-2:] == "AM") and (ch == 24)): #check if the store closes after midnight or at midnight
+                        if (ch == 24):
+                            if ((localhour < ch) and (localhour > oh)):
+                                context['openn'].append(1)
+                            else:
+                                context['openn'].append(0)
+                        else:
+                            if (localhour >= oh):
+                                context['openn'].append(1)
+                            if (localhour < ch):
+                                context['openn'].append(1)
+
+                            elif (localhour == ch and localminute < cm):
+                                open_ids.append(i)
                     else:
-                        context['openn'].append(0)
+                            if(localhour>oh and localhour<ch):
+                                context['openn'].append(1)
+                            elif(localhour==oh and localminute>=om):
+                                context['openn'].append(1)
+                            elif(localhour==ch and localminute<cm):
+                                context['openn'].append(1)
+                            else:
+                                context['openn'].append(0)
 
 
 
@@ -107,7 +127,7 @@ def about(request):
 def covidwatch(request):
     return render(request, 'covidwatch.html')
 
-def sponsors(request):
+def partners(request):
     return render(request, 'sponsors.html')
 
 def contact(request):

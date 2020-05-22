@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Sponsors: GrocerCheck</title>
-        <link rel='icon' type=image.png' href="{% static 'images/GrocerCheckFavicon.png' %}" />
+        <title>Partners: GrocerCheck</title>
+        <link rel='shortcut icon' type=image/png' href="{% static 'favicon.ico' %}" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
         <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
@@ -17,9 +17,11 @@
                 text-align: center;
                 text-decoration: none;
                 position: relative;
-                width: 70%;
-                left: 15%;
-            }
+                width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+		
+                            }
             
             #sponsor_inq{
                 color: white;
@@ -53,7 +55,7 @@
 					<a href="{% url 'index' %}"><li>Home</li></a>
 					<a href="{% url 'about' %}"><li>About Us</li></a>
 					<a href="{% url 'covidwatch' %}"><li>COVID Watch</li></a>
-					<a href="{% url 'sponsors' %}"><li>Sponsors</li></a>
+					<a href="{% url 'partners' %}"><li>Partners</li></a>
 					<a href="{% url 'contact' %}"><li>Contact Us</li></a>
 
 				</ul>
@@ -68,7 +70,7 @@
                 <li><a href="{% url 'index' %}">Home</a></li>
                 <li><a href="{% url 'about' %}">About Us</a></li>
                 <li><a href="{% url 'covidwatch' %}">COVID Watch</a></li>
-            <li class="currentpage"><a href="{% url 'sponsors' %}">Sponsors</a></li>
+            <li class="currentpage"><a href="{% url 'partners' %}">Partners</a></li>
                     <li><a href="{% url 'contact' %}">Contact Us</a></li>
                     	
             </ul>
@@ -115,16 +117,59 @@
                 </div>
             </div>
 
+        </div>
 
+
+
+	<div id="our_partners">
+			<h1 style="text-align: center; font-size: 80px;">Our Partners</h1>
+            <p style="text-align: center; font-size: 25px">GrocerCheck thanks the support of our partners. Go (<i>Grocer</i> )Check them out!</p>
+            <br>
+            <br>
+		</div>
+
+        <div style = "display: inline-block;"id = "sponsors">
+            <div id="luminati" class = "responsive">
+                <div class = "sponsorprofiles">
+                    <a target="_blank" href = "https://feedingourfrontlines.ca/#donate">
+                        <img style="padding-bottom: 10px; padding-top: 10px; border-top-right-radius: 10px; border-top-left-radius: 10px; background-color: white;" src = "{% static 'images/feedingourfrontlines.png' %}" alt = "Luminati.io">
+                    </a>
+                    <div class="sponsor_name">FeedingOurFrontlines</div>
+                    <div class="partner_rank">Partner</div>
+                    <div class="blurb">
+                        <p>Feeding Our Frontlines is stimulating our economy, helping local restaurants emerge triumphant from the COVID-19 pandemic, and supporting our healthcare heros who are putting their lives on the line for us all. Through their secure platform, anyone can buy a meal for their frontline workers from their favourite local restaurants</p>
+                        <a style="color: white;" href="https://feedingourfrontlines.ca/#donate">feedingourfrontlines.ca/#donate</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="this_could_be_you" class = "responsive">
+                <div class = "sponsorprofiles">
+                    <a target="_blank" href = "mailto:brian@grocercheck.ca?subject=GrocerCheck%20Partner%20Inquiry">
+                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px; background-color: white;" src = "{% static 'images/GrocerCheckFavicon.png' %}" alt = "This could be you">
+                    </a>
+                    <div class="sponsor_name">Work with GrocerCheck</div>
+                    <div class="partner_rank">Partner</div>
+                    <div class="blurb">
+                        <p>Interested in becoming a GrocerCheck Partner?</p>
+                        <p>Let's build each other up. Contact Brian (brian@grocercheck.ca) to work with us.</p>
+                    </div>
+                </div>
+            </div>
 
         </div>
-            
+
+
+
+
+
+
         <div id="paypalbutton">
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                 <input type="hidden" name="cmd" value="_s-xclick" />
                 <input type="hidden" name="hosted_button_id" value="KGS4K4PLBS6ES" />
-                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="Donate to GrocerCheck with PayPal!" alt="Donate with PayPal button" />
-                <img alt="PayPal Donate Image" border="0" src="https://www.paypal.com/en_CA/i/scr/pixel.gif" width="1" height="1" />
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="Donate to GrocerCheck with PayPal!" alt="" />
+                <img alt="" border="0" src="https://www.paypal.com/en_CA/i/scr/pixel.gif" width="1" height="1" />
                 <p>GrocerCheck is a student-run nonprofit that relies on donations to keep our service running. We will donate all excess proceeds to the Vancouver General Hospital COVID-19 relief fund</p>
             </form>
         </div>
