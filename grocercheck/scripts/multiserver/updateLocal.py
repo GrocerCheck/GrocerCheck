@@ -327,7 +327,7 @@ def updateLocalRowFromRemoteBlog(remote_conn, local_conn):
 
 
 
-
+#TODO add backup function
 
         
 #----------variables------------
