@@ -14,6 +14,10 @@ import os
 from os.path import expanduser
 import json
 from celery.schedules import crontab
+import psycopg2
+import sqlite3
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -148,10 +152,34 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'America/Vancouver'
 
+def create_pgsql_connection(dbname, user, password, host, port):
+    conn = None
+    try:
+        conn = psycopg2.connect(dbname=dbname, user=user, password=password, host=host, port=port)
+    except Error as e:
+        print(e)
+    return conn
+
+def create_sqlite3_connection(db_file):
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+    except Error as e:
+        print(e)
+    return conn
+
+
+pg_creds = json.load(open('/home/bitnami/keys/postgreDB.json'))
+l3_dir = "/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3"
+
+pg_conn = create_pgsql_connection(pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port'])
+
+l3_conn = create_sqlite3_connection(l3_dir)
+
 
 CELERY_BEAT_SCHEDULE = {
     'UPDATE_VANCOUVER_POPULARITY':{
-    'task': 'update_current_popularity',
+        'task': 'update_current_popularity',
         #'schedule': 20, #for debug
         'schedule': crontab(minute="0-59/10"), #every 10 min, 24/7
         'args': ("Canada", "vancouver", False, False, p, 16), #arguments to pass to the function goes here
@@ -159,8 +187,8 @@ CELERY_BEAT_SCHEDULE = {
     },
 
     'UPDATE_SEATTLE_POPULARITY':{
-    'task': 'update_current_popularity',
-        'schedule': crontab(minute="3-59/10"), #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
+        'task': 'update_current_popularity',
+        'schedule': crontab(minute="1-59/10"), #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
         'args': ("", "seattle", False, False, p, 16), #US address include country
 
 # Country, doBackup, doLog, proxy, num_processe
@@ -168,14 +196,18 @@ CELERY_BEAT_SCHEDULE = {
 
 
     'UPDATE_VICTORIA_POPULARITY':{
-    'task': 'update_current_popularity',
-        'schedule': crontab(minute="3-59/10"), #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
+        'task': 'update_current_popularity',
+        'schedule': crontab(minute="2-59/10"), #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
         'args': ("Canada", "victoria", False, False, p, 16), #US address include country
 
 # Country, doBackup, doLog, proxy, num_processe
     },
 
-
+    'UPDATE_REMOTE_FROM_LOCAL':{
+        'task': 'upload_lpt',
+        'schedule': crontab(minute="0-59/3"),
+        'args' : (pg_conn, l3_conn),
+    },
 
 }
 

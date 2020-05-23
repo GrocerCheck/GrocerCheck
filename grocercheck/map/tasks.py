@@ -4,6 +4,8 @@ from celery.signals import worker_process_init
 
 from .current_scraper import run_scraper
 from .hardcode_scrape import scrape
+from .updateDBscripts import *
+
 #from multiprocessing import current_process
 #attempted fix for config error w/ multiprocessing
 #@worker_process_init.connect
@@ -12,6 +14,13 @@ from .hardcode_scrape import scrape
 #        current_process()._config
 #    except AttributeError:
 #        current_process()._config ={'semprefix':'/mp'}
+
+
+@task(name="upload_lpt", max_retries=3, default_retry_delay = 10, time_limit = 60)
+def upload_lpt(remote_conn, local_conn):
+    updateDBscripts.updateRemoteDump(remote_conn, local_conn)
+    updateDBscripts.updateFromDump(remote_conn, local_conn)
+
 
 
 @task(name="update_current_popularity", max_retries = 2, default_retry_delay = 20, time_limit = 420)

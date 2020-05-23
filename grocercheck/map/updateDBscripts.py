@@ -1,9 +1,9 @@
 import time
-
 import psycopg2
 import psycopg2.extras
 import sqlite3
 import json
+
 def create_pgsql_connection(dbname, user, password, host, port):
     conn = None
     try:
@@ -121,11 +121,6 @@ def updateFromDump(remote_conn):
     pg_cur.execute(cmd)
     remote_conn.commit()
 
-def updateRow(remote_conn):
-    pg_cur = remote_conn.cursor()
-
-
-
 
 def updateRemoteRowFromLocalMap(remote_conn, local_conn):
     """
@@ -170,15 +165,11 @@ def updateRemoteRowFromLocalMap(remote_conn, local_conn):
         remote_conn.commit()
         print("UPDATE REMOTE MAP DATABASE FROM LOCAL COMPLETE")
     if (remote_last_id > local_last_id):
-        print("REMOTE IS AHEAD OF LOCAL; NO CHANGES")
-        # CALL updateLocalFromRemote  from here?
+        print("REMOTE IS AHEAD OF LOCAL; UPDATELOCALFROMREMOTE")
+        updateLocalRowFromRemoteMap(remote_conn, local_conn)
 
     else:
         print("LOCAL IS EVEN WITH REMOTE")
-
-
-
-
 
 
 
@@ -235,7 +226,7 @@ def updateLocalRowFromRemoteMap(remote_conn, local_conn):
 
 
 
-def updateRemoteRowFromLocalBlog(remote_conn, local_conn):
+def updateBlogStore(remote_conn, local_conn):
     """
 
     local(data) -> remote(data)
@@ -272,8 +263,8 @@ def updateRemoteRowFromLocalBlog(remote_conn, local_conn):
         print("UPDATE REMOTE BLOG FROM LOCAL COMPLETE")
 
     if (remote_last_id > local_last_id):
-        print("REMOTE IS AHEAD OF LOCAL; NO CHANGES")
-        # CALL updateLocalFromRemote  from here?
+        print("REMOTE IS AHEAD OF LOCAL; UPDATELOCALROWFROMREMOTEBLOG")
+        updateLocalRowFromRemoteBlog(remote_conn, local_conn)
     else:
         print("LOCAL IS EVEN WITH REMOTE")
 
@@ -342,15 +333,13 @@ def updateBackup(remote_conn):
 
 
 #----------variables------------
-pg_creds = json.load(open('/home/bitnami/keys/postgreDB.json'))
-l3_dir = "/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3"
+# pg_creds = json.load(open('/home/bitnami/keys/postgreDB.json'))
+# l3_dir = "/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3"
 
-pg_conn = create_pgsql_connection(pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port'])
+# pg_conn = create_pgsql_connection(pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port'])
 
-l3_conn = create_sqlite3_connection(l3_dir)
+# l3_conn = create_sqlite3_connection(l3_dir)
 
 #----------main----------------
 
-
-updateBackup(pg_conn)
 
