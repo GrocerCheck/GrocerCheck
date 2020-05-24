@@ -32,15 +32,12 @@ def updateLocal(remote_conn, local_conn):
     try:
         pg_cur = remote_conn.cursor()
         l3_cur = local_conn.cursor()
-
         pg_cur.execute("SELECT live_busyness, id FROM public.map_store")
         remote_data = pg_cur.fetchall() #[(live_busyness, id), ]
-        print(remote_data)
         for pair in remote_data:
             l3_cur.execute("UPDATE map_store SET live_busyness=? WHERE id=?", pair)
-            print("execute, ", pair)
         local_conn.commit()
-        print("updateLocal complete")
+        print("updateLOCAL complete")
     except:
         print("ERROR in updateLocal")
 
