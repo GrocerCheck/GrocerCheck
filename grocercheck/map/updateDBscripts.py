@@ -35,10 +35,10 @@ def updateLocal(remote_conn, local_conn):
 
         pg_cur.execute("SELECT live_busyness, id FROM public.map_store")
         remote_data = pg_cur.fetchall() #[(live_busyness, id), ]
-
+        print(remote_data)
         for pair in remote_data:
             l3_cur.execute("UPDATE map_store SET live_busyness=? WHERE id=?", pair)
-
+            print("execute, ", pair)
         local_conn.commit()
         print("updateLocal complete")
     except:
@@ -62,7 +62,6 @@ def updateRemoteLoop(remote_conn, local_conn):
         local_data = l3_cur.fetchall() #[(live_busyness, id), ]
 
         for pair in local_data:
-            print(pair)
             pg_cur.execute("UPDATE public.map_store SET live_busyness=%s WHERE id=%s", pair)
         remote_conn.commit()
         print("updateRemote Complete")
@@ -78,6 +77,8 @@ def updateRemoteDump(remote_conn, local_conn):
 
     Creates json dump, updates in remote, runs SQL script to apply update
     """
+    remote_creds = remote_conn
+    local_creds = local_conn
     remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
     local_conn = create_sqlite3_connection(local_conn)
     try:
@@ -87,18 +88,15 @@ def updateRemoteDump(remote_conn, local_conn):
         l3_cur.execute("SELECT live_busyness, id FROM map_store")
         local_data = l3_cur.fetchall()
         local_data_dump = {}
-        print(local_data_dump)
         for pair in local_data:
             local_data_dump[int(pair[1])] = pair[0] #map live_busyness to id key
         local_data_dump = json.dumps(local_data_dump)
         pg_cur.execute("UPDATE public.lpt_buffer SET lpt_dump=%s WHERE public.lpt_buffer.id=1", (local_data_dump,))
-        print("post_pg_execute")
         remote_conn.commit()
-        updateFromDump(remote_conn)
+        updateFromDump(remote_creds)
 
     except:
         print("ERROR IN UPDATE REMOTE DUMP")
-
 
 def updateFromDump(remote_conn):
     """
@@ -135,11 +133,11 @@ def updateFromDump(remote_conn):
         """
         pg_cur.execute(cmd)
         remote_conn.commit()
-
+        print("UPDATEFROMDUMP COMPLETE")
     except:
         print("ERROR IN UPDATEFROMDUMP")
 
-def updateRemoteRowFromLocalMap(remote_conn, local_conn):
+def updateMapStore(remote_conn, local_conn):
     """
 
     local(data) -> remote(data)
@@ -150,6 +148,8 @@ def updateRemoteRowFromLocalMap(remote_conn, local_conn):
     Checks if there are rows in local not found on remote. If so, add those rows to remote.
 
     """
+    remote_creds = remote_conn
+    local_creds = local_conn
     remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
     local_conn = create_sqlite3_connection(local_conn)
 
@@ -185,7 +185,7 @@ def updateRemoteRowFromLocalMap(remote_conn, local_conn):
         print("UPDATE REMOTE MAP DATABASE FROM LOCAL COMPLETE")
     if (remote_last_id > local_last_id):
         print("REMOTE IS AHEAD OF LOCAL; UPDATELOCALFROMREMOTE")
-        updateLocalRowFromRemoteMap(remote_conn, local_conn)
+        updateLocalRowFromRemoteMap(remote_creds, local_creds)
 
     else:
         print("LOCAL IS EVEN WITH REMOTE")
@@ -259,6 +259,8 @@ def updateBlogStore(remote_conn, local_conn):
     Checks if there are rows in local not found on remote. If so, add those rows to remote.
 
     """
+    remote_creds = remote_conn
+    local_creds = local_conn
     remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
     local_conn = create_sqlite3_connection(local_conn)
 
@@ -288,7 +290,7 @@ def updateBlogStore(remote_conn, local_conn):
 
     if (remote_last_id > local_last_id):
         print("REMOTE IS AHEAD OF LOCAL; UPDATELOCALROWFROMREMOTEBLOG")
-        updateLocalRowFromRemoteBlog(remote_conn, local_conn)
+        updateLocalRowFromRemoteBlog(remote_creds, local_creds)
     else:
         print("LOCAL IS EVEN WITH REMOTE")
 

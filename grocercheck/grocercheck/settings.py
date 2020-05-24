@@ -156,33 +156,33 @@ pg_creds = (pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds
 
 
 CELERY_BEAT_SCHEDULE = {
-    'UPDATE_VANCOUVER_POPULARITY':{
-        'task': 'update_current_popularity',
-        #'schedule': 20, #for debug
-        'schedule': crontab(minute="0-59/10"), #every 10 min, 24/7
-        'args': ("Canada", "vancouver", False, False, p, 16), #arguments to pass to the function goes here
-# Country, doBackup, doLog, proxy, num_processe
-    },
+    #'UPDATE_VANCOUVER_POPULARITY':{
+    #    'task': 'update_current_popularity',
+    #    #'schedule': 20, #for debug
+    #    'schedule': crontab(minute="0-59/10"), #every 10 min, 24/7
+    #    'args': ("Canada", "vancouver", False, False, p, 16), #arguments to pass to the function goes here
+## Country, doBackup, doLog, proxy, num_processe
+    #},
 
-    'UPDATE_SEATTLE_POPULARITY':{
-        'task': 'update_current_popularity',
-        'schedule': crontab(minute="1-59/10"), #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
-        'args': ("", "seattle", False, False, p, 16), #US address include country
+    #'UPDATE_SEATTLE_POPULARITY':{
+    #    'task': 'update_current_popularity',
+    #    'schedule': crontab(minute="1-59/10"), #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
+    #    'args': ("", "seattle", False, False, p, 16), #US address include country
 
-# Country, doBackup, doLog, proxy, num_processe
-    },
+## Country, doBackup, doLog, proxy, num_processe
+    #},
 
 
-    'UPDATE_VICTORIA_POPULARITY':{
-        'task': 'update_current_popularity',
-        'schedule': crontab(minute="2-59/10"), #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
-        'args': ("Canada", "victoria", False, False, p, 16), #US address include country
+    #'UPDATE_VICTORIA_POPULARITY':{
+    #    'task': 'update_current_popularity',
+    #    'schedule': crontab(minute="2-59/10"), #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
+    #    'args': ("Canada", "victoria", False, False, p, 16), #US address include country
 
-# Country, doBackup, doLog, proxy, num_processe
-    },
+## Country, doBackup, doLog, proxy, num_processe
+    #},
 
-    'UPDATE_REMOTE_FROM_LOCAL':{
-        'task': 'upload_lpt',
+    'testDownloadLpt':{
+        'task': 'download_lpt',
         'schedule': 30,
         'args' : (pg_creds, l3_dir),
     },
