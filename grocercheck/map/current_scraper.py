@@ -48,18 +48,15 @@ def update_row(conn, data, row_id):
         log.append("CURRENT POPULARITY KEY ERROR FOR STORE id"+str(row_id))
     return(log)
 
-def get_open_closed_ids(conn, city):
+def get_open_closed_ids(conn, city, timezone):
     #TODO: support more timezones
-
-    vancouver_timezone = pytz.timezone('America/Vancouver')
-    vancouver_time = datetime.datetime.now(vancouver_timezone)
-    localhour = vancouver_time.hour
-    localminute = vancouver_time.minute
-    print('preshit: ', vancouver_time, localhour, localminute)
-    weekday = vancouver_time.weekday()
+    local_timezone = pytz.timezone(timezone)
+    local_time = datetime.datetime.now(local_timezone)
+    localhour = local_time.hour
+    localminute = local_time.minute
+    weekday = local_time.weekday()
     days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
     cur = conn.cursor()
-
     sql_query = "SELECT id, {day}hours FROM map_store where address IS NOT NULL AND name IS NOT NULL AND fri00 IS NOT NULL AND {day}hours IS NOT NULL AND city=?".format(day=days[weekday])
     cur.execute(sql_query, (city,))
 
@@ -148,10 +145,10 @@ def get_valid_ids(conn):
     ids = cur.fetchall()
     return ids
 
-def get_formatted_addresses(country, city, conn):
+def get_formatted_addresses(country, city, conn, timezone):
     #returns formatted addresses in open ids
     #no point multi-processing this: memory concerns & it's fast enough anyways (for now)
-    ids = get_open_closed_ids(conn, city)
+    ids = get_open_closed_ids(conn, city, timezone)
     open_ids = ids[0]
     formatted_address_list = []
     if (country == ""):
@@ -229,7 +226,7 @@ def update_current_popularity(addr_and_id, conn, doBackup, doLog, proxy, num_pro
         conn.commit()
         return
 
-def run_scraper(country, city, doBackup = False, doLog = False, proxy = False, num_processes = None):
+def run_scraper(country, city, timezone, doBackup = False, doLog = False, proxy = False, num_processes = None):
     """
     :param country: country to append to formatted address
     :param doBackup:  (optional) backup raw json data, default = False
@@ -242,9 +239,20 @@ def run_scraper(country, city, doBackup = False, doLog = False, proxy = False, n
     #conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/db1.sqlite3")
 
     try:
-        update_current_popularity(get_formatted_addresses(country, city, conn), conn, doBackup, doLog, proxy, num_processes)
+        update_current_popularity(get_formatted_addresses(country, city, conn, timezone), conn, doBackup, doLog, proxy, num_processes)
         conn.commit()
-        print("complete update")
+        print("COMPLETE UPDATE")
     except:
         print("error in update_current_popularity")
         LOG.write("ERROR IN update_current_popularity\r\n")
+
+
+
+
+
+
+
+
+
+
+

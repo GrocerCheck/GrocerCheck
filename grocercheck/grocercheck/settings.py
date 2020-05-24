@@ -155,30 +155,24 @@ l3_dir = "/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.
 pg_creds = [pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port']]
 
 CELERY_BEAT_SCHEDULE = {
-    #'UPDATE_VANCOUVER_POPULARITY':{
-    #    'task': 'update_current_popularity',
-    #    #'schedule': 20, #for debug
-    #    'schedule': crontab(minute="0-59/10"), #every 10 min, 24/7
-    #    'args': ("Canada", "vancouver", False, False, p, 16), #arguments to pass to the function goes here
-## Country, doBackup, doLog, proxy, num_processe
-    #},
+# Country, city, timezone, doBackup, doLog, proxy, num_processes
+    'UPDATE_VANCOUVER_POPULARITY':{
+        'task': 'update_current_popularity',
+        'schedule': crontab(minute="0-59/10"),
+        'args': ("Canada", "vancouver", 'America/Vancouver', False, False, p, 16), #arguments to pass to the function goes here
+   },
 
-    #'UPDATE_SEATTLE_POPULARITY':{
-    #    'task': 'update_current_popularity',
-    #    'schedule': crontab(minute="1-59/10"), #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
-    #    'args': ("", "seattle", False, False, p, 16), #US address include country
-
-## Country, doBackup, doLog, proxy, num_processe
-    #},
-
+    'UPDATE_SEATTLE_POPULARITY':{
+        'task': 'update_current_popularity',
+        'schedule': crontab(minute="1-59/10"),
+        'args': ("", "seattle", 'America/Vancouver', False, False, p, 16), #US address include country
+    },
 
     'UPDATE_VICTORIA_POPULARITY':{
         'task': 'update_current_popularity',
-        'schedule': crontab(minute='1,2,3,4,5, 29,30,31,32,33,34,35,36'), #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
-        'args': ("Canada", "victoria", False, False, p, 16), #US address include country
-
-# Country, doBackup, doLog, proxy, num_processe
-    },
+        'schedule': crontab(minute='2-59/10'),
+        'args': ("Canada", "victoria", "America/Vancouver", False, False, p, 16), #US address include country
+   },
 
 #     'testDownloadLpt':{
 #         'task': 'log_lpt',
@@ -189,11 +183,36 @@ CELERY_BEAT_SCHEDULE = {
 }
 
 
+"""
+
+# Country, city, timezone, doBackup, doLog, proxy, num_processes
+    'UPDATE_VANCOUVER_POPULARITY':{
+        'task': 'update_current_popularity',
+        'schedule': crontab(minute="0-59/10"),
+        'args': ("Canada", "vancouver", 'America/Vancouver', False, False, p, 16), #arguments to pass to the function goes here
+   },
+
+    'UPDATE_SEATTLE_POPULARITY':{
+        'task': 'update_current_popularity',
+        'schedule': crontab(minute="1-59/10"),
+        'args': ("", "seattle", 'America/Vancouver', False, False, p, 16), #US address include country
+    },
+
+    'UPDATE_VICTORIA_POPULARITY':{
+        'task': 'update_current_popularity',
+        'schedule': crontab(minute='2-59/10'),
+        'args': ("Canada", "victoria", "America/Vancouver", False, False, p, 16), #US address include country
+   },
+
+
+"""
 
 
 
-
-
-
+"""
+TIMEZONES:
+'America/Vancouver': Seattle, Victoria, Portland, Los Angeles, San Franciso, San Diego,
+'America/Toronto' : New York, Toronto/GTA
+"""
 
 

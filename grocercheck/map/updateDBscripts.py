@@ -294,10 +294,6 @@ def updateBlogStore(remote_conn, local_conn):
         print("LOCAL IS EVEN WITH REMOTE")
 
 
-
-
-
-
 def updateLocalRowFromRemoteBlog(remote_conn, local_conn):
     """
 
@@ -344,17 +340,14 @@ def updateLocalRowFromRemoteBlog(remote_conn, local_conn):
     else:
         print("LOCAL IS EVEN WITH REMOTE")
 
-
-#TODO add backup function
-
 def updateBackup(remote_conn):
 
     remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
     pg_cur = remote_conn.cursor()
 
     sql = """
-    insert into public.lpt_backup(row_id, place_id, name, lat, lng, live_busyness, city, timezone, timestamp)
-    select id, place_id, name, lat, lng, live_busyness, city, 'America/Vancouver', now()
+    insert into public.lpt_backup(row_id, place_id, name, lat, lng, live_busyness, city, timestamp)
+    select id, place_id, name, lat, lng, live_busyness, city, now()
     from public.map_store where live_busyness is not null
     """
     pg_cur.execute(sql)
