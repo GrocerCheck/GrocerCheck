@@ -20,7 +20,7 @@ div.post:hover {
 
 div.post img {
     width: 100%;
-    height: calc(calc(100vw - 16px) / 5);
+    height: calc(calc(100vw - 41px) / 5);
     height: auto;
     object-fit: cover;
     height: auto;
