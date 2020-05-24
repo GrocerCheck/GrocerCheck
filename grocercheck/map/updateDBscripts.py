@@ -161,6 +161,8 @@ def updateMapStore(remote_conn, local_conn):
     remote_last_id = pg_cur.fetchall()[0][0]
     local_last_id = l3_cur.fetchall()[0][0]
 
+    print("REMOTE LAST", remote_last_id, "LOCAL LAST", local_last_id)
+
     if (remote_last_id < local_last_id):
         ids_to_update = "("+", ".join([str(i) for i in range(remote_last_id+1, local_last_id+1)])+")"  #do not update local last id, be inclusive of upper bound
         l3_cur.execute("SELECT * FROM map_store WHERE map_store.id IN {row_ids}".format(row_ids=ids_to_update,))
@@ -188,7 +190,6 @@ def updateMapStore(remote_conn, local_conn):
         print("LOCAL IS EVEN WITH REMOTE")
 
 
-
 def updateLocalRowFromRemoteMap(remote_conn, local_conn):
     """
 
@@ -200,6 +201,7 @@ def updateLocalRowFromRemoteMap(remote_conn, local_conn):
     Checks if there are rows in remote not found on local. If so, add those rows to local.
 
     """
+    print("CALLED updateLocalRowFromRemoteMap")
     remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
     local_conn = create_sqlite3_connection(local_conn)
 
@@ -341,7 +343,6 @@ def updateLocalRowFromRemoteBlog(remote_conn, local_conn):
 
     else:
         print("LOCAL IS EVEN WITH REMOTE")
-
 
 
 #TODO add backup function
