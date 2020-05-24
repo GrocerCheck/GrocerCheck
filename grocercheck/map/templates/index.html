@@ -153,7 +153,17 @@ for (i = 0; i < x.length; i++) {
 			</div>
 		</div>
 
+		<div id="disclaimermodaldiv" class="modal">
+			<div class="modal-content">
+				<span id="disclaimerclose" class="close">&times;</span>
+				<p>The data presented by GrocerCheck Foundation is to be used as a guideline, and cannot be a replacement for common sense and the user's best judgement. GrocerCheck is but one tool with which you may make the best decisions for your health and safety. Although every step has been taken to ensure the information displayed is accurate and reliable, GrocerCheck Foundation is not responsible for any errors or omissions, or for the results obtained from the use of this information. All information in this site is provided "as is", with no guarantee of completeness, accuracy, timeliness or of the results obtained from the use of this information.</p>
+			</div>
+		</div>
+
 		<script>
+			document.getElementById("disclaimermodaldiv").style.display = "block";
+
+		
 			//callback function for helpbutton clicked
 			document.getElementById("helpbutton").onclick = function(){
 				//display modal
@@ -175,11 +185,16 @@ for (i = 0; i < x.length; i++) {
 				if(event.target == document.getElementById("nearmemodaldiv")){
 					document.getElementById("nearmemodaldiv").style.display = "none";
 				}
+				if(event.target == document.getElementById("disclaimermodaldiv")){
+					document.getElementById("disclaimermodaldiv").style.display = "none";
+				}
 			}
 			document.getElementById("nearmeclose").onclick = function(){
 				document.getElementById("nearmemodaldiv").style.display = "none";
 			}
-			
+document.getElementById("disclaimerclose").onclick = function(){
+		document.getElementById("disclaimermodaldiv").style.display = "none";
+}
 			
 
 		</script>
