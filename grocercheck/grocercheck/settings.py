@@ -174,7 +174,7 @@ CELERY_BEAT_SCHEDULE = {
 
     'UPDATE_VICTORIA_POPULARITY':{
         'task': 'update_current_popularity',
-        'schedule': 20, #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
+        'schedule': crontab(minute='1,2,3,4,5, 29,30,31,32,33,34,35,36'), #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
         'args': ("Canada", "victoria", False, False, p, 16), #US address include country
 
 # Country, doBackup, doLog, proxy, num_processe

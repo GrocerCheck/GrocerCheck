@@ -348,8 +348,8 @@ def updateLocalRowFromRemoteBlog(remote_conn, local_conn):
 #TODO add backup function
 
 def updateBackup(remote_conn):
-    remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
 
+    remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
     pg_cur = remote_conn.cursor()
 
     sql = """
