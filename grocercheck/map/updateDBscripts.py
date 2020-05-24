@@ -90,6 +90,7 @@ def updateRemoteDump(remote_conn, local_conn):
         local_data_dump = json.dumps(local_data_dump)
         pg_cur.execute("UPDATE public.lpt_buffer SET lpt_dump=%s WHERE public.lpt_buffer.id=1", (local_data_dump,))
         remote_conn.commit()
+        print("UPDATE REMOTE DUMP COMPLETE, calling updateFromDump")
         updateFromDump(remote_creds)
 
     except:

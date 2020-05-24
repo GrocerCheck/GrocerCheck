@@ -151,36 +151,92 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'America/Vancouver'
 
 pg_creds = json.load(open('/home/bitnami/keys/postgreDB.json'))
-l3_dir = "/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3"
 pg_creds = [pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port']]
+l3_dir = "/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3"
 
-CELERY_BEAT_SCHEDULE = {
+# -----ALL TASKS-----
+# upload_lpt
+# download_lpt
+# update_map_rows
+# update_blog_rows
+# log_lpt
+# update_current_popularity
+# hardcoded_scrape #debug
+# testruntast #debug
+
+try:
+    servername = open(expanduser("~")+"/keys/servername.txt").readline()
+except:
+    print("ERROR: SERVERNAME NOT FOUND")
+    CELERY_BEAT_SCHEDULE = {}
+
+if ("BS" in servername):
+    CELERY_BEAT_SCHEDULE = {
 # Country, city, timezone, doBackup, doLog, proxy, num_processes
-    'UPDATE_VANCOUVER_POPULARITY':{
-        'task': 'update_current_popularity',
-        'schedule': crontab(minute="0-59/10"),
-        'args': ("Canada", "vancouver", 'America/Vancouver', False, False, p, 16), #arguments to pass to the function goes here
-   },
+        'UPDATE_VANCOUVER_POPULARITY':{
+            'task': 'update_current_popularity',
+            'schedule': crontab(minute="0-59/10"),
+            'args': ("Canada", "vancouver", 'America/Vancouver', False, False, p, 16), #arguments to pass to the function goes here
+        },
 
-    'UPDATE_SEATTLE_POPULARITY':{
-        'task': 'update_current_popularity',
-        'schedule': crontab(minute="1-59/10"),
-        'args': ("", "seattle", 'America/Vancouver', False, False, p, 16), #US address include country
-    },
+        'UPDATE_SEATTLE_POPULARITY':{
+            'task': 'update_current_popularity',
+            'schedule': crontab(minute="1-59/10"),
+            'args': ("", "seattle", 'America/Vancouver', False, False, p, 16), #US address include country
+        },
 
-    'UPDATE_VICTORIA_POPULARITY':{
-        'task': 'update_current_popularity',
-        'schedule': crontab(minute='2-59/10'),
-        'args': ("Canada", "victoria", "America/Vancouver", False, False, p, 16), #US address include country
-   },
+        'UPDATE_VICTORIA_POPULARITY':{
+            'task': 'update_current_popularity',
+            'schedule': crontab(minute='2-59/10'),
+            'args': ("Canada", "victoria", "America/Vancouver", False, False, p, 16), #US address include country
+        },
 
-#     'testDownloadLpt':{
-#         'task': 'log_lpt',
-#         'schedule': 60,
-#         'args' : (pg_creds,),
-#     },
+        'LOG_LPT':{
+            'task': 'log_lpt',
+            'schedule': crontab(minute='5-59/10'),
+            'args' : (pg_creds,),
+        },
 
-}
+        'UPLOAD_LPT': {
+            'task': 'upload_lpt',
+            'schedule': crontab(minute='*/5'),
+            'args': (pg_creds, l3_dir),
+        },
+
+        'UPDATE_BLOG_ROWS': {
+            'task': 'update_blog_rows',
+            'schedule': crontab(minute='0'),
+            'args': (pg_creds, l3_dir),
+        },
+
+        'UPDATE_MAP_ROWS': {
+            'task': 'update_map_rows',
+            'schedule': crontab(minute='1'),
+            'args': (pg_creds, l3_dir),
+        },
+    }
+
+else:
+    CELERY_BEAT_SCHEDULE = {
+# Country, city, timezone, doBackup, doLog, proxy, num_processes
+        'DOWNLOAD_LPT':{
+            'task': 'download_lpt',
+            'schedule': crontab(minute="*/5"),
+            'args': (pg_creds, l3_dir), #arguments to pass to the function goes here
+        },
+
+        'UPDATE_BLOG_ROWS': {
+            'task': 'update_blog_rows',
+            'schedule': crontab(minute='0'),
+            'args': (pg_creds, l3_dir),
+        },
+
+        'UPDATE_MAP_ROWS': {
+            'task': 'update_map_rows',
+            'schedule': crontab(minute='1'),
+            'args': (pg_creds, l3_dir),
+        },
+    }
 
 
 """

@@ -49,7 +49,6 @@ def update_row(conn, data, row_id):
     return(log)
 
 def get_open_closed_ids(conn, city, timezone):
-    #TODO: support more timezones
     local_timezone = pytz.timezone(timezone)
     local_time = datetime.datetime.now(local_timezone)
     localhour = local_time.hour
