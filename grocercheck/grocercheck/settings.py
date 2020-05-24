@@ -152,8 +152,7 @@ CELERY_TIMEZONE = 'America/Vancouver'
 
 pg_creds = json.load(open('/home/bitnami/keys/postgreDB.json'))
 l3_dir = "/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3"
-pg_creds = (pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port'])
-
+pg_creds = [pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port']]
 
 CELERY_BEAT_SCHEDULE = {
     #'UPDATE_VANCOUVER_POPULARITY':{
@@ -173,19 +172,19 @@ CELERY_BEAT_SCHEDULE = {
     #},
 
 
-    #'UPDATE_VICTORIA_POPULARITY':{
-    #    'task': 'update_current_popularity',
-    #    'schedule': crontab(minute="2-59/10"), #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
-    #    'args': ("Canada", "victoria", False, False, p, 16), #US address include country
+    'UPDATE_VICTORIA_POPULARITY':{
+        'task': 'update_current_popularity',
+        'schedule': 20, #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
+        'args': ("Canada", "victoria", False, False, p, 16), #US address include country
 
-## Country, doBackup, doLog, proxy, num_processe
-    #},
-
-    'testDownloadLpt':{
-        'task': 'download_lpt',
-        'schedule': 30,
-        'args' : (pg_creds, l3_dir),
+# Country, doBackup, doLog, proxy, num_processe
     },
+
+#     'testDownloadLpt':{
+#         'task': 'log_lpt',
+#         'schedule': 60,
+#         'args' : (pg_creds,),
+#     },
 
 }
 
