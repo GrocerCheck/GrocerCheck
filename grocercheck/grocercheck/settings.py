@@ -14,8 +14,6 @@ import os
 from os.path import expanduser
 import json
 from celery.schedules import crontab
-import psycopg2
-import sqlite3
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -152,29 +150,9 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'America/Vancouver'
 
-def create_pgsql_connection(dbname, user, password, host, port):
-    conn = None
-    try:
-        conn = psycopg2.connect(dbname=dbname, user=user, password=password, host=host, port=port)
-    except Error as e:
-        print(e)
-    return conn
-
-def create_sqlite3_connection(db_file):
-    conn = None
-    try:
-        conn = sqlite3.connect(db_file)
-    except Error as e:
-        print(e)
-    return conn
-
-
 pg_creds = json.load(open('/home/bitnami/keys/postgreDB.json'))
 l3_dir = "/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3"
-
-pg_conn = create_pgsql_connection(pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port'])
-
-l3_conn = create_sqlite3_connection(l3_dir)
+pg_creds = (pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port'])
 
 
 CELERY_BEAT_SCHEDULE = {
@@ -205,8 +183,8 @@ CELERY_BEAT_SCHEDULE = {
 
     'UPDATE_REMOTE_FROM_LOCAL':{
         'task': 'upload_lpt',
-        'schedule': crontab(minute="0-59/3"),
-        'args' : (pg_conn, l3_conn),
+        'schedule': 30,
+        'args' : (pg_creds, l3_dir),
     },
 
 }

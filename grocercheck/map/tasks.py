@@ -18,9 +18,8 @@ from .updateDBscripts import *
 
 @task(name="upload_lpt", max_retries=3, default_retry_delay = 10, time_limit = 60)
 def upload_lpt(remote_conn, local_conn):
-    updateDBscripts.updateRemoteDump(remote_conn, local_conn)
-    updateDBscripts.updateFromDump(remote_conn, local_conn)
-
+    updateRemoteDump(remote_conn, local_conn)
+    updateFromDump(remote_conn)
 
 
 @task(name="update_current_popularity", max_retries = 2, default_retry_delay = 20, time_limit = 420)

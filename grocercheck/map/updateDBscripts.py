@@ -27,6 +27,8 @@ def updateLocal(remote_conn, local_conn):
 
     Updates local lpt from remote master
     """
+    remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
+    local_conn = create_sqlite3_connection(local_conn)
     try:
         pg_cur = remote_conn.cursor()
         l3_cur = local_conn.cursor()
@@ -50,6 +52,8 @@ def updateRemoteLoop(remote_conn, local_conn):
     updates live_busyness param via loop (slow bc multiple calls,  but no server-side caching of lpt)
 
     """
+    remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
+    local_conn = create_sqlite3_connection(local_conn)
     try:
         pg_cur = remote_conn.cursor()
         l3_cur = local_conn.cursor()
@@ -74,18 +78,27 @@ def updateRemoteDump(remote_conn, local_conn):
 
     Creates json dump, updates in remote, runs SQL script to apply update
     """
-    pg_cur = remote_conn.cursor()
-    l3_cur = local_conn.cursor()
+    remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
+    local_conn = create_sqlite3_connection(local_conn)
+    try:
+        pg_cur = remote_conn.cursor()
+        l3_cur = local_conn.cursor()
 
-    l3_cur.execute("SELECT live_busyness, id FROM map_store")
-    local_data = l3_cur.fetchall()
-    local_data_dump = {}
-    for pair in local_data:
-        local_data_dump[int(pair[1])] = pair[0] #map live_busyness to id key
-    local_data_dump = json.dumps(local_data_dump)
-    pg_cur.execute("UPDATE public.lpt_buffer SET lpt_dump=%s WHERE public.lpt_buffer.id=1", (local_data_dump,))
-    remote_conn.commit()
-    updateFromDump(remote_conn)
+        l3_cur.execute("SELECT live_busyness, id FROM map_store")
+        local_data = l3_cur.fetchall()
+        local_data_dump = {}
+        print(local_data_dump)
+        for pair in local_data:
+            local_data_dump[int(pair[1])] = pair[0] #map live_busyness to id key
+        local_data_dump = json.dumps(local_data_dump)
+        pg_cur.execute("UPDATE public.lpt_buffer SET lpt_dump=%s WHERE public.lpt_buffer.id=1", (local_data_dump,))
+        print("post_pg_execute")
+        remote_conn.commit()
+        updateFromDump(remote_conn)
+
+    except:
+        print("ERROR IN UPDATE REMOTE DUMP")
+
 
 def updateFromDump(remote_conn):
     """
@@ -95,32 +108,36 @@ def updateFromDump(remote_conn):
     Parses json dump in remote, applies json to live_busyness
 
     """
-    pg_cur = remote_conn.cursor()
-    cmd = """
-            create or replace function unpackData(
-                    n INTEGER DEFAULT 10
-            )
-            returns VOID as $$
-            declare
-                    rid RECORD;
-                    lpt_value INTEGER;
-                    lpt_dump JSON;
-            begin
-                    select public.lpt_buffer.lpt_dump into lpt_dump from public.lpt_buffer;
-                    for rid in select public.map_store.id from public.map_store
-                    loop
-                            update public.map_store
-                            set live_busyness=CAST(lpt_dump->>CAST(rid.id AS TEXT) AS INTEGER)
-                            where public.map_store.id = rid.id;
-                    end loop;
-            end;
+    remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
+    try:
+        pg_cur = remote_conn.cursor()
+        cmd = """
+                create or replace function unpackData(
+                        n INTEGER DEFAULT 10
+                )
+                returns VOID as $$
+                declare
+                        rid RECORD;
+                        lpt_value INTEGER;
+                        lpt_dump JSON;
+                begin
+                        select public.lpt_buffer.lpt_dump into lpt_dump from public.lpt_buffer;
+                        for rid in select public.map_store.id from public.map_store
+                        loop
+                                update public.map_store
+                                set live_busyness=CAST(lpt_dump->>CAST(rid.id AS TEXT) AS INTEGER)
+                                where public.map_store.id = rid.id;
+                        end loop;
+                end;
 
-            $$ LANGUAGE plpgsql;
-            select unpackData(0);
-    """
-    pg_cur.execute(cmd)
-    remote_conn.commit()
+                $$ LANGUAGE plpgsql;
+                select unpackData(0);
+        """
+        pg_cur.execute(cmd)
+        remote_conn.commit()
 
+    except:
+        print("ERROR IN UPDATEFROMDUMP")
 
 def updateRemoteRowFromLocalMap(remote_conn, local_conn):
     """
@@ -133,6 +150,8 @@ def updateRemoteRowFromLocalMap(remote_conn, local_conn):
     Checks if there are rows in local not found on remote. If so, add those rows to remote.
 
     """
+    remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
+    local_conn = create_sqlite3_connection(local_conn)
 
     local_conn.row_factory = sqlite3.Row
 
@@ -184,6 +203,9 @@ def updateLocalRowFromRemoteMap(remote_conn, local_conn):
     Checks if there are rows in remote not found on local. If so, add those rows to local.
 
     """
+    remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
+    local_conn = create_sqlite3_connection(local_conn)
+
     pg_dict_cur = remote_conn.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
     pg_cur = remote_conn.cursor()
     l3_cur = local_conn.cursor()
@@ -237,6 +259,8 @@ def updateBlogStore(remote_conn, local_conn):
     Checks if there are rows in local not found on remote. If so, add those rows to remote.
 
     """
+    remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
+    local_conn = create_sqlite3_connection(local_conn)
 
     local_conn.row_factory = sqlite3.Row
 
@@ -284,6 +308,9 @@ def updateLocalRowFromRemoteBlog(remote_conn, local_conn):
     Checks if there are rows in remote not found on local. If so, add those rows to local.
 
     """
+    remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
+    local_conn = create_sqlite3_connection(local_conn)
+
     pg_dict_cur = remote_conn.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
     pg_cur = remote_conn.cursor()
     l3_cur = local_conn.cursor()
@@ -321,6 +348,8 @@ def updateLocalRowFromRemoteBlog(remote_conn, local_conn):
 #TODO add backup function
 
 def updateBackup(remote_conn):
+    remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
+
     pg_cur = remote_conn.cursor()
 
     sql = """
