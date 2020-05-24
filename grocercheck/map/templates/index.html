@@ -139,7 +139,45 @@ for (i = 0; i < x.length; i++) {
     });
 }
 </script>
+<style>
+.tutorialimg{
+	position: absolute;
+width: 50%;
+margin-left: 25%;
+}
 
+			#nextbutton{
+				position: absolute;
+				text-decoration: none;
+				right: 25%;
+				top: 40%;
+				
+				z-index: 3000;
+background-color: #3AB64B;
+			padding: 5px 10px;
+			font-size: 30px;
+			}
+			#prevbutton{
+				position: absolute;
+				text-decoration: none;
+				left: 25%;
+				top: 40%;
+				
+				z-index: 3000;
+				background-color: #3AB64B;
+				padding: 5px 10px;
+				font-size: 30px;
+			}
+			#gallerydiv{
+				position: relative;
+				height: 0;
+				width: 90%;
+				padding-bottom: 45%;
+				z-index: 2000;
+				
+			}
+
+</style>
 
 		<div id="helpbuttondiv">
 			<button id="helpbutton"><i class="fa fa-question"></i></button>
@@ -148,7 +186,14 @@ for (i = 0; i < x.length; i++) {
 		<div id="modaldiv" class="modal">
 			<div class="modal-content">
 				<span class="close" id="close">&times;</span>
-				<img alt="grocercheck tutorial help" style="width: 100%"src="{% static 'images/tutorial.png' %}">
+				<div id="gallerydiv">
+					<img alt="grocercheck tutorial help 1" id="tutorialimage1" class="tutorialimg" src="{% static 'images/HowToGrocerCheck1.png' %}">
+					<img alt="grocercheck tutorial help 2" id="tutorialimage2" class="tutorialimg" src="{% static 'images/HowToGrocerCheck2.png' %}">
+					<img alt="grocercheck tutorial help 3" id="tutorialimage3" class="tutorialimg" src="{% static 'images/HowToGrocerCheck3.png' %}">
+				
+				<a href="#" onclick='nextimage()' id="nextbutton">&#8250;</a>
+				<a href="#" onclick='previmage()' id="prevbutton">&#8249;</a>
+				</div>
 			</div>
 		</div>
 
@@ -162,10 +207,44 @@ for (i = 0; i < x.length; i++) {
 		<div id="disclaimermodaldiv" class="modal">
 			<div class="modal-content" id="disclaimercontent">
 				<span id="disclaimerclose" class="close">&times;</span>
-				<img alt="GrocerCheck logo" style="text-align: center;width: 50%; left: 25%; " src="{% static 'images/GrocerCheck-01.png' %}">
+				<img alt="GrocerCheck logo" style="text-align: center;width: 50%; margin-left: 25%; " src="{% static 'images/GrocerCheck-01.png' %}">
 				<p>The data presented by GrocerCheck Foundation is to be used as a guideline, and cannot be a replacement for common sense and the user's best judgement. GrocerCheck is but one tool with which you may make the best decisions for your health and safety. Although every step has been taken to ensure the information displayed is accurate and reliable, GrocerCheck Foundation is not responsible for any errors or omissions, or for the results obtained from the use of this information. All information in this site is provided "as is", with no guarantee of completeness, accuracy, timeliness or of the results obtained from the use of this information.</p>
 			</div>
 		</div>
+
+	<script>
+		var imageindex = 1;
+		function nextimage(){
+			
+			if(imageindex<3){
+				imageindex++;
+			}
+			showImage(imageindex);
+		}
+		function previmage(){
+			if(imageindex>1){
+				imageindex--;
+			}
+			showImage(imageindex);
+		}
+		function showImage(imageindex){
+			let idbegin = "tutorialimage";
+
+			for(let x = 1; x<4;x++){
+				
+				if(x==imageindex){
+
+					document.getElementById(idbegin+x).style.opacity = 100;
+
+
+				}
+				else{
+
+					document.getElementById(idbegin+x).style.opacity = 0;
+				}
+			}
+		}
+	</script>
 
 		<script>
 			document.getElementById("disclaimermodaldiv").style.display = "block";
