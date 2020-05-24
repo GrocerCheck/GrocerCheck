@@ -182,8 +182,8 @@ CELERY_BEAT_SCHEDULE = {
     #},
 
     'testDownloadLpt':{
-        'task': 'download_lpt',
-        'schedule': 30,
+        'task': 'update_map_rows',
+        'schedule': 60,
         'args' : (pg_creds, l3_dir),
     },
 
