@@ -38,7 +38,7 @@ else:
     DEBUG = True
 
 
-ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca', 'vancouver.grocercheck.ca','52.13.81.19', '52.10.195.42','127.0.0.1']
+ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca', 'vancouver.grocercheck.ca','52.13.81.19', '44.230.40.10', '52.10.195.42','127.0.0.1']
 
 
 # Application definition
@@ -101,6 +101,10 @@ ADMINS = (
     ('Andy Liang', 'andy@grocercheck.ca'),
 )
 
+MANAGERS = (
+    ('Brian Chen', 'brian@grocercheck.ca'),
+    ('Andy Liang', 'andy@grocercheck.ca'),
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
