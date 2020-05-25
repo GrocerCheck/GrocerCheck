@@ -1,7 +1,20 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-	<head> <!-- title is the text in the tab at the top -->
+	<head> 
+			
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-167491754-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-167491754-1');
+</script>
+
+
+		<!-- title is the text in the tab at the top -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>CovidWatch: {{title|slice:"1:-1"}}</title>
@@ -27,8 +40,8 @@
 				<ul id="navmenu">
 					<a href="{% url 'index' %}"><li>Home</li></a>
 					<a href="{% url 'about' %}"><li>About Us</li></a>
-					<a href="{% url 'covidwatch' %}"><li>COVID Watch</li></a>
-					<a href="{% url 'sponsors' %}"><li>Sponsors</li></a>
+					<a href="{% url 'covidwatch' %}"><li>CovidWatch</li></a>
+					<a href="{% url 'partners' %}"><li>Partners</li></a>
 					<a href="{% url 'contact' %}"><li>Contact Us</li></a>
 
 				</ul>
@@ -42,8 +55,8 @@
             <ul id="navbarlist">
                 <li><a href="{% url 'index' %}">Home</a></li>
                 <li><a href="{% url 'about' %}">About Us</a></li>
-                <li class="currentpage"><a href="{% url 'covidwatch' %}">COVID Watch</a></li>
-				<li><a href="{% url 'sponsors' %}">Sponsors</a></li>
+                <li class="currentpage"><a href="{% url 'covidwatch' %}">CovidWatch</a></li>
+				<li><a href="{% url 'partners' %}">Partners</a></li>
                 <li><a href="{% url 'contact' %}">Contact Us</a></li>
             </ul>
         </div>

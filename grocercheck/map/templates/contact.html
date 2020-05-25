@@ -2,7 +2,19 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Contact Us: GrocerCheck</title>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-167491754-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-167491754-1');
+</script>
+
+
+	    <title>Contact Us: GrocerCheck</title>
         <link rel='shortcut icon' type=image/png' href="{% static 'favicon.ico' %}" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href = 'https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
@@ -53,8 +65,8 @@
 				<ul id="navmenu">
 					<a href="{% url 'index' %}"><li>Home</li></a>
 					<a href="{% url 'about' %}"><li>About Us</li></a>
-					<a href="{% url 'covidwatch' %}"><li>COVID Watch</li></a>
-					<a href="{% url 'sponsors' %}"><li>Sponsors</li></a>
+					<a href="{% url 'covidwatch' %}"><li>CovidWatch</li></a>
+					<a href="{% url 'partners' %}"><li>Partners</li></a>
 					<a href="{% url 'contact' %}"><li>Contact Us</li></a>
 
 				</ul>
@@ -69,8 +81,8 @@
             <ul id="navbarlist">
                 <li><a href="{% url 'index' %}">Home</a></li>
                 <li><a href="{% url 'about' %}">About Us</a></li>
-                <li><a href="{% url 'covidwatch' %}">COVID Watch</a></li>
-                <li><a href="{% url 'sponsors' %}">Sponsors</a></li>
+                <li><a href="{% url 'covidwatch' %}">CovidWatch</a></li>
+                <li><a href="{% url 'partners' %}">Partners</a></li>
                 <li class="currentpage"><a href="{% url 'contact' %}">Contact Us</a></li>
                                 </ul>
         </div>
@@ -111,18 +123,32 @@
             </a>
 
 
-            <a target="_blank" href="mailto:preston@grocercheck.ca?subject=GrocerCheck%20Media%20Inquiry">
+            <a target="_blank" href="mailto:joe@grocercheck.ca?subject=GrocerCheck%20Media%20Inquiry">
                 <div id = "general_inq" class = "responsive">
                     <div class="contacts">
-                        <div class="contact_desc">Want to learn out more about us? For media or sponsorship inquiries,</div>
+                        <div class="contact_desc">Want to learn out more about us? For media inquiries,</div>
                         
-                        <div class='contact_talk'>Reach Preston via his email:</div>
+                        <div class='contact_talk'>Reach Joe via his email:</div>
 
-                        <div class='contact_email'>preston@grocercheck.ca</div>
+                        <div class='contact_email'>joe@grocercheck.ca</div>
                         <br>
                     </div>
                 </div>
             </a>
+
+            <a target="_blank" href="mailto:preston@grocercheck.ca?subject=GrocerCheck%20Media%20Inquiry">
+                <div id = "general_inq" class = "responsive">
+                    <div class="contacts">
+                        <div class="contact_desc">Want to support GrocerCheck? For sponsorship inquiries,</div>
+                        
+                        <div class='contact_talk'>Reach Preston via his email:</div>
+
+                        <div class='contact_email'>Preston@grocercheck.ca</div>
+                        <br>
+                    </div>
+                </div>
+            </a>
+
 
         </div>
             

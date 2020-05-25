@@ -1,60 +1,87 @@
 {% load static %}
 <!DOCTYPE HTML>
 <html>
-	<head> <!-- title is the text in the tab at the top -->
+	<head> 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-167491754-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-167491754-1');
+</script>
+
+
+		<!-- title is the text in the tab at the top -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>About Us: GrocerCheck</title>
-        <link rel='shortcut icon' type='image/png' href="{% static 'favicon.ico' %}">
-        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito'>      
+		<title>About Us: GrocerCheck</title>
+		<link rel='shortcut icon' type='image/png' href="{% static 'favicon.ico' %}">
+		<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito'>
 		<link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel='stylesheet' href = "{% static 'css/ourteam.css' %}">
-        <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
-        <link rel='stylesheet' href = "{% static 'css/infopage.css' %}">
-        <link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
-        <link rel='stylesheet' href = "{% static 'css/socialicons.css' %}">
+
+		<link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
+		<link rel='stylesheet' href = "{% static 'css/infopage.css' %}">
+		<link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
+		<link rel='stylesheet' href = "{% static 'css/socialicons.css' %}">
+		<link rel='stylesheet' href = "{% static 'css/ourteam.css' %}">
+
+		<style>
 
 
-        <style>
-            /* div for who are we */
-            #whoarewe{
-                text-decoration: none;
-                position: relative;
-                width: auto;
-                left: auto;
-                padding: 0;
-                padding-left: 10%;
-                padding-right: 10%;
-                text-align: center;
-            }
 
-            #our_team{
-                text-align: center;
-                text-decoration: none;
-                position: relative;
-                width: 50%;
-                left: 25%;
-                margin-top: 20px;
-            }
+/* div for who are we */
+#whoarewe{
+	text-decoration: none;
+	position: relative;
+	width: auto;
+	left: auto;
+	padding: 0;
+	padding-left: 10%;
+	padding-right: 10%;
+	text-align: center;
+}
 
-            #forkus{
-                color: #00120B;
-                text-align: center;
-                text-decoration: none;
-                position: relative;
-                width: 70%;
-                left: 15%;
-                border: none;
-                padding-top: 200px;
-                display: flex;
-            }
+	    #our_team{
+		    text-align: center;
+		    text-decoration: none;
+		    position: relative;
+		    width: 50%;
+		    left: 25%;
+		    margin-top: 20px;
+	    }
+
+	    #forkus{
+		    color: #00120B;
+		    text-align: center;
+		    text-decoration: none;
+		    position: relative;
+		    width: 70%;
+		    margin: 0;
+		    margin-left: auto;
+		    margin-right: auto;
+		    border: none;
+		    padding-top: 200px;
+		    display: flex;
+	    }
+	    #forkus a{
+		    width: auto;
+		    margin-left: auto;
+
+	    }
+	    #forkus img{
+		    float: right;
+	    }
+
 		</style>
 
 	</head>
 
-    
+
 	<body>
 
-	 <!-- hamburger menu -->
+		<!-- hamburger menu -->
 		<nav role="navigation">
 			<div id="navtoggle">
 				<input type="checkbox" id="hamburgerbutton"/>
@@ -67,38 +94,38 @@
 				<ul id="navmenu">
 					<a href="{% url 'index' %}"><li>Home</li></a>
 					<a href="{% url 'about' %}"><li>About Us</li></a>
-					<a href="{% url 'covidwatch' %}"><li>COVID Watch</li></a>
-					<a href="{% url 'sponsors' %}"><li>Sponsors</li></a>
+					<a href="{% url 'covidwatch' %}"><li>CovidWatch</li></a>
+					<a href="{% url 'partners' %}"><li>Partners</li></a>
 					<a href="{% url 'contact' %}"><li>Contact Us</li></a>
 
 				</ul>
 			</div>
 		</nav>
-        <div id="horizontalnav">
-            <a href="{% url 'index' %}">
-                <img src="{% static 'images/GrocerCheck-01.png' %}" alt="GrocerCheck Logo" >
-            </a>
-            <ul id="navbarlist">
-                <li><a href="{% url 'index' %}">Home</a></li>
-            <li class="currentpage"><a href="{% url 'about' %}">About Us</a></li>
-                <li><a href="{% url 'covidwatch' %}">COVID Watch</a></li>
-				<li><a href="{% url 'sponsors' %}">Sponsors</a></li>
-                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
-                    
-            </ul>
-        </div>
+		<div id="horizontalnav">
+			<a href="{% url 'index' %}">
+				<img src="{% static 'images/GrocerCheck-01.png' %}" alt="GrocerCheck Logo" >
+			</a>
+				<ul id="navbarlist">
+					<li><a href="{% url 'index' %}">Home</a></li>
+					<li class="currentpage"><a href="{% url 'about' %}">About Us</a></li>
+					<li><a href="{% url 'covidwatch' %}">CovidWatch</a></li>
+					<li><a href="{% url 'partners' %}">Partners</a></li>
+					<li><a href="{% url 'contact' %}">Contact Us</a></li>
 
-        <div id="spacer">
-        </div>
+				</ul>
+		</div>
+
+		<div id="spacer">
+		</div>
 
 		<div id="whoarewe">
 			<h1 style="font-size: 80px;">Who are we?</h1>
 			<p style="font-size: 20px;">Grocercheck Foundation is a registered non profit organization centered around a web application, grocercheck.ca, that makes accessible live grocery business data to help consumers follow social distancing guidelines during the COVID-19 pandemic.</p>
-            <h1 style= "font-size: 50px;">Connect with us on social media</h1>
-        <br>
+			<h1 style= "font-size: 50px;">Connect with us on social media</h1>
+			<br>
 		</div>
 
-        <div id="socialmedia">
+		<div id="socialmedia">
 			<ul id="socialmedialist">
 				<li><a href="https://www.facebook.com/GrocerCheck-102588141447791/" target="_blank" class="fa fa-facebook"></a></li>
 				<li><a href="https://www.instagram.com/grocercheck/" target="_blank" class="fa fa-instagram"></a></li>
@@ -106,100 +133,134 @@
 				<li><a href="https://github.com/grocercheck/" target="_blank" class="fa fa-github"></a></li>
 			</ul>
 		</div>
-        <br>
-        <div id="our_team">
-            <h1 style="font-size: 50px;">Meet our team.</h1>
-            <p style="font-size: 20px">We are a team of passionate students looking to help make a difference</p>
-        </div>
-        
-        
-        <div id = "teammembers">
-            <div id="brian" class = "responsive">
-                <div class = "teamprofiles">
-                    <a target="_blank" href = "https://linkedin.com/in/brianchen28914">
-                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/brian.jpg' %}" alt = "Brian Chen">
-                    </a>
-                    <div class="member_name">Brian Chen</div>
-                    <div class="member_title">CEO &amp; Co-Founder, VP Development</div>
-                    <div class="desc">Hi! I’m Brian, and I’m an incoming freshman at the University of Toronto. The idea for GrocerCheck came about when I had to buy eggs for a quarantine loaf I was baking, and couldn’t figure out which one was the best choice: do I go to Costco and risk a long line, or face the same fate at the ethnic grocery store five blocks away? I’m super passionate about identifying problems in the world around me, and developing solutions for them. I believe GrocerCheck is a genuinely useful tool, and am beyond excited to see it come to life. In my spare time, I enjoy playing badminton and desperately trying to bake a half-decent sourdough.</div>
-                </div>
-            </div>
-
-             <div id="andy" class = "responsive">
-                <div class = "teamprofiles">
-                    <a target="_blank" href = "https://linkedin.com/in/andy-liang-5b53941a7">
-                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/andy.jpg' %}" alt = "Andy Liang">
-                    </a>
-                    <div class="member_name">Andy Liang</div>
-                    <div class="member_title">COO &amp; Co-Founder, VP Development</div>
-                    <div class="desc">Hey! My name is Andy and I am a grade 11 student at Eric Hamber Secondary. I started GrocerCheck with the goal of helping myself and others practice social distancing during this crucial time. I wanted to be able to see a map of the city and where I could go to get groceries without exposing myself to the potentially infectious crowds. I am very passionate about finding problems that I can solve or existing things that I can improve on, and I love getting my hands dirty and working on building solutions. I was so glad to see Grocercheck take shape, bit by bit, and I believe that it will be an important website for everybody to visit.
-                    </div>
-                </div>
-            </div>
-            
-            <div id="preston" class = "responsive">
-                <div class = "teamprofiles">
-                    <a target="_blank" href = "https://linkedin.com/in/preston-lai">
-                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/preston.png' %}" alt = "Preston Lai">
-                    </a>
-                    <div class="member_name">Preston Lai</div>
-		            <div class="member_title">Chief Information Officer<br>  </br> </div>
-                    <div class="desc">Hi there! My name is Preston and I’m an incoming freshman at the University of British Columbia. Throughout my life I have always been passionate about getting involved with projects to create social differences around my community. So when I had the opportunity to join the GrocerCheck team, a group of amazing individuals working towards a common goal of making the world a safer place, I couldn’t resist! Now after working with this team for a few months, I look forward to building lifelong networks, creating solutions to make a difference in the world, and challenging the status quo.                     
-                    </div>
-                </div>
-            </div>
-            
-            <div id="jason" class = "responsive">
-                <div class = "teamprofiles">
-                    <a target="_blank" href = "https://linkedin.com/in/jason-yu-95b3a6192">
-                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/jason.jpeg' %}" alt = "Jason Yu">
-                    </a>
-                    <div class="member_name">Jason Yu</div>
-                    <div class="member_title">Chief Marketing Officer</div>
- 
-                    <div class="desc">Hey! My name is Jason Yu and I’m currently a Year 1 IB student at Sir Winston Churchill Secondary. During these stressful times, I picked up cooking as a hobby to take advantage of this pandemic for some well-needed family time. From old recipes passed down from grandparents to new dishes that maybe didn’t taste the best, I realised that the common denominator were the ingredients. Understanding the implication of COVID-19 on Grocers and shopping, I was delighted when I had the opportunity to bridge my passions of art and cooking as GrocerCheck’s Social Media and Marketing Manager! I look forward to making safe spaces for people to shop for food to feed families, enabling fun family dinners while promoting social distancing! I look forward to the relationships GrocerCheck can strengthen healthily, after all, food brings people together!</div>
-                </div>
-            
-            </div>        
-                <div id="luke" class = "responsive">
-                <div class = "teamprofiles">
-                    <a target="_blank" href = "https://linkedin.com/in/lukekdunn">
-                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px; " src = "{% static 'images/luke.jpg' %}" alt = "Luke Dunn">
-                    </a>
-                    <div class="member_name">Luke Dunn</div>
-                    <div class="member_title">Chief Experience Officer</div>
- 
-                    <div class="desc">Hi! I’m Luke, and while I was trying to figure out what to do with myself during the Covid-19 pandemic I was invited to join the GrocerCheck team and in the process make a difference in my community. What an opportunity! In my spare time I work on my own design based projects and fantasize about being outside.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        
-
-        <div id="forkus">
-            <a target="_blank" href = "https://github.com/GrocerCheck">
-                <img style="vertical-align: bottom; margin-right: 5px; display: block;" src="{% static 'images/github.png' %}" width=30px, height = 30px>
-            </a>
-            <a style="margin: 0; color: #00120B; font-size: 20px;" href="https://github.com/GrocerCheck" target="_blank">GrocerCheck is an open source project. Fork us on GitHub!<a>
-        </div>
-
-        <br>
-        <br>
+		<br>
+		<div id="our_team">
+			<h1 style="font-size: 50px;">Meet our team.</h1>
+			<p style="font-size: 20px">We are a team of passionate students looking to help make a difference</p>
+		</div>
 
 
-        <div id="paypalbutton">
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                <input type="hidden" name="cmd" value="_s-xclick" />
-                <input type="hidden" name="hosted_button_id" value="KGS4K4PLBS6ES" />
-                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="Donate to GrocerCheck with PayPal!" alt="Donate with PayPal button" />
-                <img alt="" border="0" src="https://www.paypal.com/en_CA/i/scr/pixel.gif" width="1" height="1" />
-                <p>GrocerCheck is a student-run nonprofit that relies on donations to keep our service running. We will donate all excess proceeds to the Vancouver General Hospital COVID-19 relief fund</p>
-            </form>
-        </div>
+		<div id = "teammembers">
+			<div id="brian" class = "responsive responsivetop">
+				<div class = "teamprofiles">
+					<a target="_blank" href = "https://linkedin.com/in/brianchen28914">
+						<img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/brian.jpg' %}" alt = "Brian Chen">
+					</a>
+					<div class="member_name">Brian Chen</div>
+					<div class="member_title">CEO &amp; Co-Founder, VP Development</div>
+					<div class="desc">Hi! I’m Brian, and I’m an incoming freshman at the University of Toronto. The idea for GrocerCheck came about when I had to buy eggs for a quarantine loaf I was baking, and couldn’t figure out which one was the best choice: do I go to Costco and risk a long line, or face the same fate at the ethnic grocery store five blocks away? I’m super passionate about identifying problems in the world around me, and developing solutions for them. I believe GrocerCheck is a genuinely useful tool, and am beyond excited to see it come to life. In my spare time, I enjoy playing badminton and desperately trying to bake a half-decent sourdough.</div>
+				</div>
+			</div>
+
+			<div id="andy" class = "responsive responsivetop">
+				<div class = "teamprofiles">
+					<a target="_blank" href = "https://linkedin.com/in/andy-liang-5b53941a7">
+						<img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/andy.jpg' %}" alt = "Andy Liang">
+					</a>
+					<div class="member_name">Andy Liang</div>
+					<div class="member_title">COO &amp; Co-Founder, VP Development</div>
+					<div class="desc">Hey! My name is Andy and I am a grade 11 student at Eric Hamber Secondary. I started GrocerCheck with the goal of helping myself and others practice social distancing during this crucial time. I wanted to be able to see a map of the city and where I could go to get groceries without exposing myself to the potentially infectious crowds. I am very passionate about finding problems that I can solve or existing things that I can improve on, and I love getting my hands dirty and working on building solutions. I was so glad to see Grocercheck take shape, bit by bit, and I believe that it will be an important website for everybody to visit.
+					</div>
+				</div>
+			</div>
+
+			<div id="preston" class = "responsive responsivetop">
+				<div class = "teamprofiles">
+					<a target="_blank" href = "https://linkedin.com/in/preston-lai">
+						<img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/preston.png' %}" alt = "Preston Lai">
+					</a>
+					<div class="member_name">Preston Lai</div>
+					<div class="member_title">Chief Information Officer<br>  </br> </div>
+					<div class="desc">Hi there! My name is Preston and I’m an incoming freshman at the University of British Columbia. Throughout my life I have always been passionate about getting involved with projects to create social differences around my community. So when I had the opportunity to join the GrocerCheck team, a group of amazing individuals working towards a common goal of making the world a safer place, I couldn’t resist! Now after working with this team for a few months, I look forward to building lifelong networks, creating solutions to make a difference in the world, and challenging the status quo.
+					</div>
+				</div>
+			</div>
+
+			<div id="joe" class = "responsive responsivebottom">
+				<div class = "teamprofiles">
+					<a target="_blank" href = "https://linkedin.com/in/jjoesalmon">
+						<img style="border-top-right-radius: 10px; border-top-left-radius: 10px; " src = "{% static 'images/joe.png' %}" alt = "Joe Salmon">
+					</a>
+					<div class="member_name">Joe Salmon</div>
+					<div class="member_title">Chief Media Officer and Editor in Chief - COVID-Watch</div>
+
+					<div class="desc">Hi, I’m Joe, an incoming freshman at the University of British Columbia hoping to major in art history. I control the public relations and press side of Grocercheck, including the social media page, and I work on putting together Covidwatch, an offshoot blog developed for the purpose of keeping people informed on everything COVID-19. In my spare time, you can find me reading, producing music, and otherwise hanging out. I’m very grateful to have the opportunity to work on this project, and I hope it helps you stay safe and social distance effectively.</div>
+				</div>
+			</div>
 
 
 
-	</div>		
+
+
+			<div id="luke" class = "responsive responsivebottom">
+				<div class = "teamprofiles">
+					<a target="_blank" href = "https://linkedin.com/in/lukekdunn">
+						<img style="border-top-right-radius: 10px; border-top-left-radius: 10px; " src = "{% static 'images/luke.jpg' %}" alt = "Luke Dunn">
+					</a>
+					<div class="member_name">Luke Dunn</div>
+					<div class="member_title">Chief Experience Officer</div>
+
+					<div class="desc">Hi! I’m Luke, and while I was trying to figure out what to do with myself during the Covid-19 pandemic I was invited to join the GrocerCheck team and in the process make a difference in my community. What an opportunity! In my spare time I work on my own design based projects and fantasize about being outside.
+					</div>
+				</div>
+			</div>
+
+
+			<div id="jason" class = "responsive responsivebottom">
+				<div class = "teamprofiles">
+					<a target="_blank" href = "https://linkedin.com/in/jason-yu-95b3a6192">
+						<img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/jason.jpeg' %}" alt = "Jason Yu">
+					</a>
+					<div class="member_name">Jason Yu</div>
+					<div class="member_title">Chief Marketing Officer</div>
+
+					<div class="desc">Hey! My name is Jason Yu and I’m currently a Year 1 IB student at Sir Winston Churchill Secondary. During these stressful times, I picked up cooking as a hobby to take advantage of this pandemic for some well-needed family time. From old recipes passed down from grandparents to new dishes that maybe didn’t taste the best, I realised that the common denominator were the ingredients. Understanding the implication of COVID-19 on Grocers and shopping, I was delighted when I had the opportunity to bridge my passions of art and cooking as GrocerCheck’s Social Media and Marketing Manager! I look forward to making safe spaces for people to shop for food to feed families, enabling fun family dinners while promoting social distancing! I look forward to the relationships GrocerCheck can strengthen healthily, after all, food brings people together!</div>
+				</div>
+
+			</div>
+
+			<div id="topher" class = "responsive responsivebottom">
+				<div class = "teamprofiles">
+					<a target="_blank" href = "https://www.linkedin.com/in/topher-so-82005a172">
+						<img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/topher.jpg' %}" alt = "Topher So">
+					</a>
+					<div class="member_name">Topher So</div>
+					<div class="member_title">Chief Financial Officer</div>
+
+					<div class="desc">Hello! I’m Topher, and I’m an incoming student at UBC’s Sauder School of Business. I am in charge of the finances behind GrocerCheck. I am extremely passionate about finance, so having the opportunity to be GrocerCheck’s CFO was one I couldn’t pass up. In my spare time, I enjoy watching sports, playing badminton, and listening to music. I look forward to working with the GrocerCheck team, and I hope GrocerCheck continues to help people social distance safely!</div>
+				</div>
+
+			</div>
+
+
+
+
+
+		</div>
+
+		<div id="forkus">
+			<a target="_blank" href = "https://github.com/GrocerCheck">
+				<img style="vertical-align: bottom; margin:0; display: block;" src="{% static 'images/github.png' %}" width=30px, height = 30px>
+			</a>
+			<a style="margin: 0; color: #00120B; font-size: 20px;" href="https://github.com/GrocerCheck" target="_blank">GrocerCheck is an open source project. Fork us on GitHub!<a>
+		</div>
+
+		<br>
+		<br>
+
+
+		<div id="paypalbutton">
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+				<input type="hidden" name="cmd" value="_s-xclick" />
+				<input type="hidden" name="hosted_button_id" value="KGS4K4PLBS6ES" />
+				<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="Donate to GrocerCheck with PayPal!" alt="Donate with PayPal button" />
+				<img alt="" border="0" src="https://www.paypal.com/en_CA/i/scr/pixel.gif" width="1" height="1" />
+				<p>GrocerCheck is a student-run nonprofit that relies on donations to keep our service running. We will donate all excess proceeds to the Vancouver General Hospital COVID-19 relief fund</p>
+			</form>
+		</div>
+
+
+
+		</div>
 	</body>
 </html>
