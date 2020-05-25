@@ -33,7 +33,7 @@ SECRET_KEY = open(expanduser("~")+"/keys/djangokey.txt").readline()
 
 # SECURITY WARNING: don't run with debug turned on in production
 if("bitnami" in BASE_DIR):
-    DEBUG = True
+    DEBUG = False
 else:
     DEBUG = True
 
@@ -94,6 +94,12 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db1.sqlite3'),
     }
 }
+
+
+ADMINS = (
+    ('Brian Chen', 'brian@grocercheck.ca'),
+    ('Andy Liang', 'andy@grocercheck.ca'),
+)
 
 
 # Password validation
