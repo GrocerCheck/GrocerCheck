@@ -38,11 +38,7 @@ else:
     DEBUG = True
 
 
-<<<<<<< HEAD
-ALLOWED_HOSTS = ['www.grocercheck.ca', 'grocercheck.ca', '52.10.195.42','127.0.0.1']
-=======
 ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca', 'vancouver.grocercheck.ca','52.13.81.19', '44.230.40.10', '52.10.195.42','127.0.0.1']
->>>>>>> 1aa24cc319e7e431177da60eb1349e05f1b54759
 
 
 # Application definition
