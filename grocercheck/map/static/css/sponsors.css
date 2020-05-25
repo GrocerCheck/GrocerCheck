@@ -20,7 +20,7 @@ div.sponsorprofiles:hover {
 
 div.sponsorprofiles img {
     width: 100%;
-    height: calc(calc(100vw - 16px) / 5);
+    height: calc(calc(100vw - 41px) / 5);
     height: auto;
     object-fit: cover;
     height: auto;
@@ -61,6 +61,14 @@ div.sponsor_rank_bronze{
     padding: 5px;
     text-align: center;
 }
+
+div.partner_rank{
+    color: #F9ECCC;
+    font-weight: bold;
+    padding: 5px;
+    text-align: center;
+}
+
 
 .responsive {
     padding: 6px;
