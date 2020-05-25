@@ -201,6 +201,13 @@ if ("BS" in servername):
             'args': ("Canada", "victoria", "America/Vancouver", False, False, p, 16), #US address include country
         },
 
+        'UPDATE_GTA_POPULARITY':{
+            'task': 'update_current_popularity',
+            'schedule': crontab(minute='4-59/10'),
+            'args': ("Canada", "toronto", "America/Vancouver", False, False, p, 16), #US address include country
+        },
+
+
         'LOG_LPT':{
             'task': 'log_lpt',
             'schedule': crontab(minute='5-59/10'),
