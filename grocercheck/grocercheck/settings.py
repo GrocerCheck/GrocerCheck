@@ -160,9 +160,11 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'America/Vancouver'
 
-pg_creds = json.load(open('/home/bitnami/keys/postgreDB.json'))
+pg_creds = json.load(open(expanduser('~')+'/keys/postgreDB.json'))
+
 pg_creds = [pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port']]
-l3_dir = "/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3"
+
+l3_dir = os.path.dirname(os.getcwd()) + "/db1.sqlite3"
 
 # -----ALL TASKS-----
 # upload_lpt
