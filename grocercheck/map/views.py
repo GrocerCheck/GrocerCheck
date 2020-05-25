@@ -1,22 +1,27 @@
 from django.shortcuts import render
 import time
 import sqlite3
-# Create your views here.
 from django.conf import settings
 import os
-
+import datetime
+import pytz
 from map.models import Store
 import json
 
 
-
 def index(request, city="vancouver"):
+    city2tz = {'vancouver': 'America/Vancouver', 'los_angeles':  'America/Vancouver', 'san_francisco': 'America/Vancouver',
+               'san_diego':  'America/Vancouver', 'portland': 'America/Vancouver', 'seattle': 'America/Vancouver',
+               'new_york': 'America/Toronto', 'toronto': 'America/Toronto', 'victoria': 'America/Vancouver'}
+
+    timezone = pytz.timezone(city2tz[city])
     days = ['mon','tue','wed','thu','fri','sat','sun']
-    t = time.localtime()
-    day = days[t[6]]
-    hour = t[3]
-    localhour = t[3]
-    localminute = t[4]
+
+    t = datetime.datetime.now(timezone)
+    day = days[t.weekday()]
+    hour = t.hour
+    localhour = t.hour
+    localminute = t.minute
 
     if(hour<10):
         hour = '0'+str(hour)
@@ -95,7 +100,7 @@ def index(request, city="vancouver"):
                                 context['openn'].append(1)
 
                             elif (localhour == ch and localminute < cm):
-                                open_ids.append(i)
+                                context['openn'].append(1)
                     else:
                             if(localhour>oh and localhour<ch):
                                 context['openn'].append(1)

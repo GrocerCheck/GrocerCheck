@@ -33,13 +33,12 @@ SECRET_KEY = open(expanduser("~")+"/keys/djangokey.txt").readline()
 
 # SECURITY WARNING: don't run with debug turned on in production
 if("bitnami" in BASE_DIR):
-    DEBUG = True
+    DEBUG = False
 else:
     DEBUG = True
 
 
-ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca', 'vancouver.grocercheck.ca','52.10.195.42','127.0.0.1']
-
+ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca', 'vancouver.grocercheck.ca','52.13.81.19', '44.230.40.10', '52.10.195.42','127.0.0.1', '172.26.0.205', '172.26.28.120', '172.26.11.143', '172.26.1.22', ]
 
 # Application definition
 
@@ -96,6 +95,16 @@ DATABASES = {
 }
 
 
+ADMINS = (
+    ('Brian Chen', 'brian@grocercheck.ca'),
+    ('Andy Liang', 'andy@grocercheck.ca'),
+)
+
+MANAGERS = (
+    ('Brian Chen', 'brian@grocercheck.ca'),
+    ('Andy Liang', 'andy@grocercheck.ca'),
+)
+
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -150,50 +159,134 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'America/Vancouver'
 
-pg_creds = json.load(open('/home/bitnami/keys/postgreDB.json'))
-l3_dir = "/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3"
+pg_creds = json.load(open(expanduser('~')+'/keys/postgreDB.json'))
+
 pg_creds = [pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port']]
 
-CELERY_BEAT_SCHEDULE = {
-    #'UPDATE_VANCOUVER_POPULARITY':{
-    #    'task': 'update_current_popularity',
-    #    #'schedule': 20, #for debug
-    #    'schedule': crontab(minute="0-59/10"), #every 10 min, 24/7
-    #    'args': ("Canada", "vancouver", False, False, p, 16), #arguments to pass to the function goes here
-## Country, doBackup, doLog, proxy, num_processe
-    #},
+l3_dir = os.path.dirname(os.getcwd()) + "/db1.sqlite3"
 
-    #'UPDATE_SEATTLE_POPULARITY':{
-    #    'task': 'update_current_popularity',
-    #    'schedule': crontab(minute="1-59/10"), #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
-    #    'args': ("", "seattle", False, False, p, 16), #US address include country
+# -----ALL TASKS-----
+# upload_lpt
+# download_lpt
+# update_map_rows
+# update_blog_rows
+# log_lpt
+# update_current_popularity
+# hardcoded_scrape #debug
+# testruntast #debug
 
-## Country, doBackup, doLog, proxy, num_processe
-    #},
+try:
+    servername = open(expanduser("~")+"/keys/servername.txt").readline()
+except:
+    print("ERROR: SERVERNAME NOT FOUND")
+    CELERY_BEAT_SCHEDULE = {}
 
+if ("BS" in servername):
+    CELERY_BEAT_SCHEDULE = {
+# Country, city, timezone, doBackup, doLog, proxy, num_processes
+        'UPDATE_VANCOUVER_POPULARITY':{
+            'task': 'update_current_popularity',
+            'schedule': crontab(minute="0-59/10"),
+            'args': ("Canada", "vancouver", 'America/Vancouver', False, False, p, 16), #arguments to pass to the function goes here
+        },
+
+        'UPDATE_SEATTLE_POPULARITY':{
+            'task': 'update_current_popularity',
+            'schedule': crontab(minute="1-59/10"),
+            'args': ("", "seattle", 'America/Vancouver', False, False, p, 16), #US address include country
+        },
+
+        'UPDATE_VICTORIA_POPULARITY':{
+            'task': 'update_current_popularity',
+            'schedule': crontab(minute='2-59/10'),
+            'args': ("Canada", "victoria", "America/Vancouver", False, False, p, 16), #US address include country
+        },
+
+        'UPDATE_GTA_POPULARITY':{
+            'task': 'update_current_popularity',
+            'schedule': crontab(minute='4-59/10'),
+            'args': ("Canada", "toronto", "America/Vancouver", False, False, p, 16), #US address include country
+        },
+
+
+        'LOG_LPT':{
+            'task': 'log_lpt',
+            'schedule': crontab(minute='5-59/10'),
+            'args' : (pg_creds,),
+        },
+
+        'UPLOAD_LPT': {
+            'task': 'upload_lpt',
+            'schedule': crontab(minute='*/5'),
+            'args': (pg_creds, l3_dir),
+        },
+
+        'UPDATE_BLOG_ROWS': {
+            'task': 'update_blog_rows',
+            'schedule': crontab(minute='0'),
+            'args': (pg_creds, l3_dir),
+        },
+
+        'UPDATE_MAP_ROWS': {
+            'task': 'update_map_rows',
+            'schedule': crontab(minute='1'),
+            'args': (pg_creds, l3_dir),
+        },
+    }
+
+else:
+    CELERY_BEAT_SCHEDULE = {
+# Country, city, timezone, doBackup, doLog, proxy, num_processes
+        'DOWNLOAD_LPT':{
+            'task': 'download_lpt',
+            'schedule': crontab(minute="*/5"),
+            'args': (pg_creds, l3_dir), #arguments to pass to the function goes here
+        },
+
+        'UPDATE_BLOG_ROWS': {
+            'task': 'update_blog_rows',
+            'schedule': crontab(minute='0'),
+            'args': (pg_creds, l3_dir),
+        },
+
+        'UPDATE_MAP_ROWS': {
+            'task': 'update_map_rows',
+            'schedule': crontab(minute='1'),
+            'args': (pg_creds, l3_dir),
+        },
+    }
+
+
+"""
+
+# Country, city, timezone, doBackup, doLog, proxy, num_processes
+    'UPDATE_VANCOUVER_POPULARITY':{
+        'task': 'update_current_popularity',
+        'schedule': crontab(minute="0-59/10"),
+        'args': ("Canada", "vancouver", 'America/Vancouver', False, False, p, 16), #arguments to pass to the function goes here
+   },
+
+    'UPDATE_SEATTLE_POPULARITY':{
+        'task': 'update_current_popularity',
+        'schedule': crontab(minute="1-59/10"),
+        'args': ("", "seattle", 'America/Vancouver', False, False, p, 16), #US address include country
+    },
 
     'UPDATE_VICTORIA_POPULARITY':{
         'task': 'update_current_popularity',
-        'schedule': 20, #every 10 min, 24/7: offset by 3 min to avoid starting tasks at same time
-        'args': ("Canada", "victoria", False, False, p, 16), #US address include country
+        'schedule': crontab(minute='2-59/10'),
+        'args': ("Canada", "victoria", "America/Vancouver", False, False, p, 16), #US address include country
+   },
 
-# Country, doBackup, doLog, proxy, num_processe
-    },
 
-#     'testDownloadLpt':{
-#         'task': 'log_lpt',
-#         'schedule': 60,
-#         'args' : (pg_creds,),
-#     },
-
-}
+"""
 
 
 
-
-
-
-
-
+"""
+TIMEZONES:
+'America/Vancouver': Seattle, Victoria, Portland, Los Angeles, San Franciso, San Diego,
+'America/Toronto' : New York, Toronto/GTA
+"""
 
 
