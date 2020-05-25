@@ -69,7 +69,7 @@ def getplaces(API_KEY, coords, database_dir, city, keyword):
     for line in coords:
         clat = line[0]
         clng = line[1]
-        r = 800
+        r = 1200
 
         nextpage = ''
         flag = True

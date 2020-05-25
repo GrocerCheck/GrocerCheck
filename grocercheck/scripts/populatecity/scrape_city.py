@@ -1,3 +1,5 @@
+import time
+
 import get_places
 import gencoords
 import add_place_detail
@@ -103,28 +105,66 @@ seattle_bounds = [
 
 ]
 
+
+toronto_bounds = [
+        [
+            (43.39401704, -80.5920202),
+            (43.50305426, -80.42472839), #waterloo/kitchner
+            ],
+        [
+            (43.16165444, -79.95749735),
+            (43.60244289, -79.75412543), #hamilton , milton, left of oakville/missasage
+            ],
+        [
+            (43.34441333, -79.76835765),
+            (43.60488413, -79.49619642), #oakville, bottom missisauga
+            ],
+        [
+            (43.5955699, -79.80081732),
+            (43.91218304, -79.20705621), #toronto, richmond hill, markham,
+            ],
+        [
+            (43.87129567, -79.47740725),
+            (44.0791503, -79.41760664), #newmarket
+            ],
+
+        [
+            (43.65936614, -79.31030273),
+            (43.93098516, -79.14001456), #scarborough, pickering
+            ],
+        [
+            (43.80405359, -79.14226184),
+            (43.97626272, -78.61766467), #ajax, oshawa, bowmanville
+            ],
+        ]
+
+
 API_KEY = open("/home/ihasdapie/keys/gmapkey.txt").readline()
 
 DATABASE_DIR = os.path.dirname(os.path.dirname(os.getcwd())) + "/db1.sqlite3"
-KEYWORD = "department store"
+KEYWORD = "grocery"
 
 #SCRAPE THREE TIMES W/ keywords: "department store", "grocery", "mall"
 # consider implementing filter on index.html for grocery only (& costco for whatever godforsaken reason)
 
-CITY = "victoria"
+CITY = "toronto"
 
 print("DATABASE DIR: ", DATABASE_DIR)
-coord_list = gencoords.gen_coords(victoria_bounds, 1.4)
+coord_list = gencoords.gen_coords(toronto_bounds, 1.68)
+
 
 print("NUM COORDS: ", len(coord_list))
 print("CITY ", CITY, " KEYWORd ", KEYWORD )
+
+
+
 x, y= np.array(coord_list).T
 plt.scatter(x,y)
 plt.show()
+time.sleep(5)
 
-#first_id = get_places.getplaces(API_KEY, coord_list, DATABASE_DIR, CITY, KEYWORD) + 1
+first_id = get_places.getplaces(API_KEY, coord_list, DATABASE_DIR, CITY, KEYWORD) + 1
 
-first_id = 1963
 #add place detail will have to start on the index of the first added by getplaces: this is the lastid from getplaces + 1
 
 add_place_detail.populate_populartimes(API_KEY, first_id, DATABASE_DIR)
