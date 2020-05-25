@@ -100,7 +100,7 @@ def index(request, city="vancouver"):
                                 context['openn'].append(1)
 
                             elif (localhour == ch and localminute < cm):
-                                open_ids.append(i)
+                                context['openn'].append(1)
                     else:
                             if(localhour>oh and localhour<ch):
                                 context['openn'].append(1)
