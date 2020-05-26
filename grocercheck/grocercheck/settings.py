@@ -169,7 +169,10 @@ except:
 
 pg_creds = [pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port']]
 
-l3_dir = os.path.dirname(os.getcwd()) + "/db1.sqlite3"
+try:
+    l3_dir ="/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3"
+except:
+    l3_dir = os.path.dirname(os.getcwd()) + "/db1.sqlite3"
 
 # -----ALL TASKS-----
 # upload_lpt
