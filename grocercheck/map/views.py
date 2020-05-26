@@ -9,10 +9,15 @@ from map.models import Store
 import json
 
 
-def index(request, city="vancouver"):
+def index(request, city="nocity"):
     city2tz = {'vancouver': 'America/Vancouver', 'los_angeles':  'America/Vancouver', 'san_francisco': 'America/Vancouver',
                'san_diego':  'America/Vancouver', 'portland': 'America/Vancouver', 'seattle': 'America/Vancouver',
                'new_york': 'America/Toronto', 'toronto': 'America/Toronto', 'victoria': 'America/Vancouver'}
+    popupflag = False
+    if(city=="nocity"):
+        popupflag = True
+        city = "vancouver"
+
 
     timezone = pytz.timezone(city2tz[city])
     days = ['mon','tue','wed','thu','fri','sat','sun']
@@ -37,6 +42,11 @@ def index(request, city="vancouver"):
     context['busyness'] = []
     context['openn'] = []
     context['keywords'] = []
+    context['popupflag'] = []
+    if(popupflag):
+        context['popupflag'].append("yes")
+    else:
+        context['popupflag'].append("no")
     conn = sqlite3.connect(os.path.join(settings.BASE_DIR,'db1.sqlite3'))
     cur = conn.cursor()
     for s in Store.objects.filter(city__exact=city):

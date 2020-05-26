@@ -243,12 +243,22 @@ background-color: #3AB64B;
 					document.getElementById(idbegin+x).style.opacity = 0;
 				}
 			}
+
 		}
+
+        showImage(1);
+
 	</script>
 
 		<script>
-			document.getElementById("disclaimermodaldiv").style.display = "block";
 
+            var popupflag = {{popupflag|safe}}[0]
+            if(popupflag=="yes"){
+			    document.getElementById("disclaimermodaldiv").style.display = "block";
+            }
+else{
+    document.getElementById("disclaimermodaldiv").style.display = "none";
+}
 		
 			//callback function for helpbutton clicked
 			document.getElementById("helpbutton").onclick = function(){
