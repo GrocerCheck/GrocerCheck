@@ -26,7 +26,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 #SECRET_KEY = '$*7$lu*br%(vzw%o$d289!5236)6%5(lz_3s((36-9=4^8w$@p'
 
-SECRET_KEY = open(expanduser("~")+"/keys/djangokey.txt").readline()
+try:
+    SECRET_KEY = open("/home/bitnami/keys/djangokey.txt").readline()
+except:
+    SECRET_KEY = open(expanduser("~")+"/keys/djangokey.txt").readline()
 
 
 
@@ -159,7 +162,11 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'America/Vancouver'
 
-pg_creds = json.load(open(expanduser('~')+'/keys/postgreDB.json'))
+try:
+    pg_creds = json.load(open("/home/bitnami/keys/postgreDB.json"))
+
+except:
+    pg_creds = json.load(open(expanduser('~')+'/keys/postgreDB.json'))
 
 pg_creds = [pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port']]
 
@@ -176,10 +183,14 @@ l3_dir = os.path.dirname(os.getcwd()) + "/db1.sqlite3"
 # testruntast #debug
 
 try:
-    servername = open(expanduser("~")+"/keys/servername.txt").readline()
+    servername = open("/home/bitnami/keys/servername.txt").readline()
 except:
-    print("ERROR: SERVERNAME NOT FOUND")
-    CELERY_BEAT_SCHEDULE = {}
+    try:
+        servername = open(expanduser("~")+"/keys/servername.txt").readline()
+
+    except:
+        print("ERROR: SERVERNAME NOT FOUND")
+        CELERY_BEAT_SCHEDULE = {}
 
 if ("BS" in servername):
     CELERY_BEAT_SCHEDULE = {
