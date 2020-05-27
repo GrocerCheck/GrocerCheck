@@ -10,6 +10,36 @@ import sqlite3
 #Bounds must be given as a list of list of tuples (lat, lng) in the format
     #[(bottom,left), (top, right)
 
+newYork_bounds = [
+
+
+        ]
+
+lasVegas_bounds = [
+        [
+            (35.94807615, -115.34795587),
+            (36.32517175, -115.0224859),
+            ],
+        [
+            (35.96808527, -115.03347223),
+            (36.0713858, -114.9304754)
+            ],
+
+        ]
+
+
+
+longIsland_bounds = [
+
+
+        ]
+
+
+
+
+
+
+
 victoria_bounds = [
 [
 (48.41047131, -123.54010495), #langford
@@ -147,10 +177,10 @@ KEYWORD = "grocery"
 #SCRAPE THREE TIMES W/ keywords: "department store", "grocery", "mall"
 # consider implementing filter on index.html for grocery only (& costco for whatever godforsaken reason)
 
-CITY = "toronto"
+CITY = "las_vegas"
 
 print("DATABASE DIR: ", DATABASE_DIR)
-coord_list = gencoords.gen_coords(toronto_bounds, 1.68)
+coord_list = gencoords.gen_coords(lasVegas_bounds, 1.68)
 
 
 print("NUM COORDS: ", len(coord_list))
@@ -161,10 +191,10 @@ print("CITY ", CITY, " KEYWORd ", KEYWORD )
 x, y= np.array(coord_list).T
 plt.scatter(x,y)
 plt.show()
-time.sleep(5)
+#time.sleep(100)
 
-#first_id = get_places.getplaces(API_KEY, coord_list, DATABASE_DIR, CITY, KEYWORD) + 1
-first_id = 4050
+first_id = get_places.getplaces(API_KEY, coord_list, DATABASE_DIR, CITY, KEYWORD) + 1
+#first_id = 4050
 #add place detail will have to start on the index of the first added by getplaces: this is the lastid from getplaces + 1
 
 add_place_detail.populate_populartimes(API_KEY, first_id, DATABASE_DIR)
