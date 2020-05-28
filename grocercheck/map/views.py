@@ -10,8 +10,8 @@ import json
 
 
 def index(request, city="nocity"):
-    city2tz = {'vancouver': 'America/Vancouver', 'los_angeles':  'America/Vancouver', 'san_francisco': 'America/Vancouver',
-               'san_diego':  'America/Vancouver', 'portland': 'America/Vancouver', 'seattle': 'America/Vancouver',
+    city2tz = {'vancouver': 'America/Vancouver', 'los_angeles':  'America/Vancouver', 'silicon_valley': 'America/Vancouver',
+                'portland': 'America/Vancouver', 'seattle': 'America/Vancouver',
                'new_york': 'America/Toronto', 'toronto': 'America/Toronto', 'victoria': 'America/Vancouver'}
     popupflag = False
     if(city=="nocity"):

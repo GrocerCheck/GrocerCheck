@@ -10,6 +10,69 @@ import sqlite3
 #Bounds must be given as a list of list of tuples (lat, lng) in the format
     #[(bottom,left), (top, right)
 
+
+#or
+
+#[
+#[(bottom, left), (bottom, right), (top, left), (top, right)],
+#]
+
+silconValley_bounds =[
+[
+        (37.56823139, -122.51447506), #san fran
+        (37.81136208, -122.38210851),
+        ],
+
+[
+        (37.49984665, -122.40351938), #san mateo
+        (37.62728434, -122.25298799),
+        ],
+[
+        (37.43194446, -122.32805082), #redwood city, menlo park, east palo alto
+        (37.53576703, -122.09855523),
+        ],
+
+[
+        (37.36584107, -122.26675207), #stanford, mountain view partially
+        (37.45989559, -122.07758122),
+        ],
+
+[
+        (37.33577026, -122.15061534), #little gap where foothill college is
+        (37.43643022, -122.06269351),
+        ],
+
+[
+        (37.19950721, -122.07371094), #san jose big block
+        (37.44562387, -121.74586889),
+        ],
+
+[
+        (37.43784277, -121.94056418), #little bit between san jose and fremont
+        (37.48689519, -121.87876608),
+        ],
+
+[
+        (37.47877153, -122.09618305),
+        (37.60733322, -121.90660651), #up to union city
+        ],
+
+[
+        (37.59934637, -122.17989142),
+        (37.70249147, -122.01959096), #up to castro valley
+        ],
+[
+        (37.69216859, -122.31391214),
+        (37.90569205, -122.191065), #berkley, el cerrito
+        ],
+[
+        (37.91135585, -122.40729593),
+        (38.01996779, -122.27121523), #richmond & co
+        ],
+]
+
+
+
 newYork_bounds = [
 
 
@@ -29,11 +92,14 @@ lasVegas_bounds = [
 
 
 
-longIsland_bounds = [
 
+longIsland_bounds = [
+        [
+            (40.57031532, -73.97644026),
+            (41.15720738, -72.13822788),
+            ]
 
         ]
-
 
 
 
@@ -177,10 +243,10 @@ KEYWORD = "grocery"
 #SCRAPE THREE TIMES W/ keywords: "department store", "grocery", "mall"
 # consider implementing filter on index.html for grocery only (& costco for whatever godforsaken reason)
 
-CITY = "las_vegas"
+CITY = "silicon_valley"
 
 print("DATABASE DIR: ", DATABASE_DIR)
-coord_list = gencoords.gen_coords(lasVegas_bounds, 1.68)
+coord_list = gencoords.gen_coords(silconValley_bounds, 1.67)
 
 
 print("NUM COORDS: ", len(coord_list))
@@ -193,8 +259,8 @@ plt.scatter(x,y)
 plt.show()
 #time.sleep(100)
 
-first_id = get_places.getplaces(API_KEY, coord_list, DATABASE_DIR, CITY, KEYWORD) + 1
-#first_id = 4050
+#first_id = get_places.getplaces(API_KEY, coord_list, DATABASE_DIR, CITY, KEYWORD) + 1
+first_id = 6630
 #add place detail will have to start on the index of the first added by getplaces: this is the lastid from getplaces + 1
 
 add_place_detail.populate_populartimes(API_KEY, first_id, DATABASE_DIR)
