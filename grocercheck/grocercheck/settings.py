@@ -165,10 +165,14 @@ try:
     pg_creds = json.load(open("/home/bitnami/keys/postgreDB.json"))
 
 except:
-    pg_creds = json.load(open(expanduser('~')+'/keys/postgreDB.json'))
-
-pg_creds = [pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port']]
-
+    try:
+        pg_creds = json.load(open(expanduser('~')+'/keys/postgreDB.json'))
+    except:
+        pg_creds = []
+try:
+    pg_creds = [pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port']]
+except:
+    pg_creds = []
 try:
     l3_dir ="/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3"
 except:

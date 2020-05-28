@@ -545,25 +545,55 @@ function initMap() {
 	}
 
 	//loading static images of markers
-	var green = "{% static 'images/greenmarker.png' %}"
-	var yellow = "{% static 'images/yellowmarker.png' %}"
-	var red = "{% static 'images/redmarker.png' %}"
-	var grey = "{% static 'images/greymarker.png' %}"
+	
 
 
+	var markericons = [];
+	for(let x = 1; x<22;x++){
+		
+		markericons.push("/static/images/markers/"+x+".png");
+	}
 
-	var icon = null;
+	markericons.push("{% static 'images/greymarker.png' %}"); //index 21 grey
+	markericons.push("{% static 'images/purplemarker.png' %}"); //index 22 purple
 
+	
+
+	function getMarkerIconsIndex(x){
+			
+		if(openn[x]==0){
+			return 21;
+		}
+
+		let b = busyness[x];
+		if(busyness[x]>=1000){
+			b-=1000;
+		}
+		if(b>=0){
+			if(b>100){
+				return 22;
+			}
+			else if(b>=80){
+				return 20;
+			}
+			else{
+
+				return Math.floor(b/4);
+
+			}
+		}
+		else{
+			return 21;
+		}
+
+
+	}
+
+	
 
 //build marker
-	function buildMarker(color,radius,position){
-		if(color=="grey"){//if grey, use static image instead of vector for efficiency
-			return new google.maps.Marker({icon:{url:grey, scaledSize:new google.maps.Size(radius*2, radius*2)}, clickable:true, position:position, map:map});
-		}
-		//build vector path of circle with radius=radius 
-		let pathstring = "M-"+radius+",0a"+radius+","+radius+" 0 1,0 "+(radius*2)+",0a"+radius+","+radius+" 0 1,0 -"+(radius*2)+",0";
-		return new google.maps.Marker({icon:{path:pathstring,fillColor:color, fillOpacity:0.6, strokeWeight:0},clickable:true,position:position,map:map});
-
+	function buildMarker(markericonsindex,radius,position){
+		return new google.maps.Marker({icon:{url:markericons[markericonsindex], scaledSize:new google.maps.Size(radius*2, radius*2)}, opacity:0.6,  clickable:true, position:position, map:map});
 	}
 
 	function openInfoWindow(i){
@@ -592,14 +622,14 @@ function initMap() {
 			if(b>100){
 				return "rgb(255,0,255)";
 			}
-			else if(b>=70){
+			else if(b>=80){
 				return "rgb(255, 0, 0)";
 			}
-			else if(b>=35){
-				return "rgb(255, "+Math.round((70-b)*(255/35))+", 0)";
+			else if(b>=40){
+				return "rgb(255, "+Math.round((80-b)*(255/40))+", 0)";
 			}
 			else{
-				return "rgb("+Math.round((b)*(255/35))+", 255, 0)";
+				return "rgb("+Math.round((b)*(255/40))+", 255, 0)";
 			}
 		}
 		else{
@@ -612,7 +642,7 @@ function initMap() {
 
 		if(busyness[x]==-1){
 			//No data available
-			var temp = buildMarker(getIcon(x),10,positions[x])
+			var temp = buildMarker(getMarkerIconsIndex(x),10,positions[x])
 			markers.push(temp)
 			allstores.push(temp);
 
@@ -621,14 +651,14 @@ function initMap() {
 			//live data available
 			var busy = busyness[x]-1000;
 
-			var temp = buildMarker(getIcon(x),15,positions[x]);
+			var temp = buildMarker(getMarkerIconsIndex(x),15,positions[x]);
 			markers.push(temp);
 			livemarkers.push(temp);
 		}
 
 		else{
 			//only historical data available
-			var temp = buildMarker(getIcon(x),10,positions[x])
+			var temp = buildMarker(getMarkerIconsIndex(x),10,positions[x])
 			markers.push(temp)
 			historicalmarkers.push(temp)
 		}
