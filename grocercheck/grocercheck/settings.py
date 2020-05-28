@@ -221,6 +221,18 @@ if ("BS" in servername):
             'args': ("Canada", "toronto", "America/Vancouver", False, False, p, 16), #US address include country
         },
 
+        'UPDATE_SILICON_VALLEY_POPULARITY':{
+            'task': 'update_current_popularity',
+            'schedule': crontab(minute='4-59/10'),
+            'args': ("", "silicon_valley", "America/Vancouver", False, False, p, 16), #US address include country
+        },
+
+        'UPDATE_LAS_VEGAS_POPULARITY':{
+            'task': 'update_current_popularity',
+            'schedule': crontab(minute='4-59/10'),
+            'args': ("", "las_vegas", "America/Vancouver", False, False, p, 16), #US address include country
+        },
+
 
         'LOG_LPT':{
             'task': 'log_lpt',
@@ -242,7 +254,7 @@ if ("BS" in servername):
 
         'UPDATE_MAP_ROWS': {
             'task': 'update_map_rows',
-            'schedule': crontab(minute='1'),
+            'schedule': crontab(minute='*/15'),
             'args': (pg_creds, l3_dir),
         },
     }
@@ -252,7 +264,7 @@ else:
 # Country, city, timezone, doBackup, doLog, proxy, num_processes
         'DOWNLOAD_LPT':{
             'task': 'download_lpt',
-            'schedule': crontab(minute="*/5"),
+            'schedule': crontab(minute="*/3"),
             'args': (pg_creds, l3_dir), #arguments to pass to the function goes here
         },
 
@@ -264,7 +276,7 @@ else:
 
         'UPDATE_MAP_ROWS': {
             'task': 'update_map_rows',
-            'schedule': crontab(minute='1'),
+            'schedule': crontab(minute='*/15'),
             'args': (pg_creds, l3_dir),
         },
     }
