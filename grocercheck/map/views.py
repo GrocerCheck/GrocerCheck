@@ -12,7 +12,7 @@ import json
 def index(request, city="nocity"):
     city2tz = {'vancouver': 'America/Vancouver', 'los_angeles':  'America/Vancouver', 'silicon_valley': 'America/Vancouver',
                 'portland': 'America/Vancouver', 'seattle': 'America/Vancouver',
-               'new_york': 'America/Toronto', 'toronto': 'America/Toronto', 'victoria': 'America/Vancouver', 'las_vegas': 'America/Vancouver'}
+               'new_york': 'America/Toronto', 'toronto': 'America/Toronto', 'victoria': 'America/Vancouver', 'las_vegas': 'Europe/Madrid'}
     popupflag = False
     if(city=="nocity"):
         popupflag = True
@@ -43,6 +43,8 @@ def index(request, city="nocity"):
     context['openn'] = []
     context['keywords'] = []
     context['popupflag'] = []
+    context['city'] = []
+    context['city'].append(city)
     if(popupflag):
         context['popupflag'].append("yes")
     else:
