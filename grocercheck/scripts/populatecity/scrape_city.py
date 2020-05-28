@@ -260,7 +260,7 @@ plt.show()
 #time.sleep(100)
 
 #first_id = get_places.getplaces(API_KEY, coord_list, DATABASE_DIR, CITY, KEYWORD) + 1
-first_id = 6630
+first_id = 6650
 #add place detail will have to start on the index of the first added by getplaces: this is the lastid from getplaces + 1
 
 add_place_detail.populate_populartimes(API_KEY, first_id, DATABASE_DIR)
