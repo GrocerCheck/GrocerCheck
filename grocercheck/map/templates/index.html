@@ -423,14 +423,17 @@ function initMap() {
 
     var cityname = {{city|safe}}[0];
 
-    var zoom = {'vancouver': 12, "seattle": 11, 'victoria': 12, "toronto": 10, "las_vegas": 11, "silicon_valley": 10}
+    var zoom = {'vancouver': 12, "seattle": 11, 'victoria': 13, "toronto": 11, "las_vegas": 11, "silicon_valley": 10};
+	var centerpositions = {'vancouver': {lat:49.2577143,lng:-123.0939433}, 'seattle': {lat:47.6129432,lng:-122.382146}, 'victoria': {lat:48.4262038,lng:-123.3642418}, 'toronto': {lat:43.7181557,lng:-79.51814}, 'las_vegas': {lat:36.1249185,lng:-115.2150827}, 'silicon_valley': {lat:37.502473,lng:-122.3212771}}
 
     var zoomlevel = zoom[cityname];
+	var centerposition = centerpositions[cityname];
+
 
 
 //create map
 	map = new google.maps.Map(
-		document.getElementById('map'), {zoom: zoomlevel, center: {lat:49.2399,lng:-123.1251}});
+		document.getElementById('map'), {zoom: zoomlevel, center: centerposition});
 
 	// if geolocation is available
 	if(navigator.geolocation){
@@ -444,7 +447,6 @@ function initMap() {
 			userlat = position.coords.latitude;
 			userlng = position.coords.longitude;
 
-			map.setCenter(userpos);
 			hasloc = true;
 			usermarker = new google.maps.Marker({clickable:true,icon:{url:"{% static 'images/GrocerCheckFavicon.png' %}",scaledSize: new google.maps.Size(40,40)},map:null,position:userpos});
 
@@ -482,10 +484,7 @@ function initMap() {
 		positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lng[x])})
 	}
 
-	if(hasloc==false){
-		map.setCenter(positions[parseInt(positions.length/2)]);
-	}
-
+	
 
 	function buildInfoWindowString(names,address,hours,busyness,x){
 		var s = '';//text color
