@@ -85,6 +85,7 @@
 
 	function switchCity(city){
 		city = city.split(",")[0].toLowerCase();
+		city = city.replace(" ","_");
 		window.location.replace("https://grocercheck.ca/map/"+city);
 	}
 
