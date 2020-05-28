@@ -151,6 +151,16 @@ def contact(request):
 def media(request):
     return render(request, 'media.html')
 
+def terms(request):
+    return render(request, 'terms.html')
+
+def privacy(request):
+    return render(request, 'privacy.html')
+
+def cookies(request):
+    return render(request, 'cookies.html')
+
+
 def article(request, articleid):
     #id, title, author_name, author_blurb, date, content
     conn = sqlite3.connect(os.path.join(settings.BASE_DIR,'db1.sqlite3'))

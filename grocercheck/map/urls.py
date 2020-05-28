@@ -10,6 +10,10 @@ urlpatterns = [
         path('partners/', views.partners, name='partners'),
         path('contact/', views.contact, name='contact'),
         path('media/', views.media, name='media'),
+        path('terms/', views.terms, name='terms'),
+        path('privacy/', views.privacy, name='privacy'),
+        path('cookies/', views.cookies, name='cookies'),
         path('<str:city>/', views.index),
         path('', views.index, name='index'),
+        
                 ]
