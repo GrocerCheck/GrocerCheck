@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cookie Policy: GrocerCheck</title>
+	<meta name='viewport' content="width=device-width, initial-scale=1.0">
+	<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+	<link rel='stylesheet' href="{% static 'css/hamburger.css' %}">
+	<link rel='stylesheet' href="{% static 'css/navbar.css' %}">
+	<link rel="stylesheet" href="{% static 'css/infopage.css' %}">
+	<link rel='shortcut icon' type='image/png' href="{% static 'favicon.ico' %}" />
+
+<style>
+
+
+</style>
+
+
+</head>
+
+<body>
+
+	<!-- hamburger menu -->
+		<nav role="navigation">
+			<div id="navtoggle">
+				<input type="checkbox" id="hamburgerbutton"/>
+				<div id='spansquare'>	</div>
+				<span></span>
+				<span></span>
+				<span></span>
+
+
+				<ul id="navmenu">
+					<a href="{% url 'index' %}"><li>Home</li></a>
+					<a href="{% url 'about' %}"><li>About Us</li></a>
+					<a href="{% url 'covidwatch' %}"><li>CovidWatch</li></a>
+					<a href="{% url 'partners' %}"><li>Partners</li></a>
+					<a href="{% url 'contact' %}"><li>Contact Us</li></a>
+
+				</ul>
+			</div>
+		</nav>
+
+        <div id="horizontalnav">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'images/GrocerCheck-01.png' %}" alt="GrocerCheck Logo" >
+            </a>
+            <ul id="navbarlist">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About Us</a></li>
+                <li><a href="{% url 'covidwatch' %}">CovidWatch</a></li>
+            <li class="currentpage"><a href="{% url 'partners' %}">Partners</a></li>
+                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+
+            </ul>
+        </div>
+
+        <div id="spacer">
+        </div>
+
+	<div id="heading" style="text-align: center;">
+		<h1 style="font-size: 80px; width: 80%; margin-left: auto; margin-right: auto;">Cookie Policy</h1>
+		<p style="font-size: 16px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at justo eget augue accumsan efficitur eget quis nunc. Donec vehicula metus arcu, quis ultrices justo ornare id. Maecenas in sodales lorem. Pellentesque felis sem, vehicula et massa nec, euismod tempor ante. Maecenas scelerisque nec lectus sit amet sodales. Etiam faucibus facilisis arcu, a viverra lectus suscipit eget. Suspendisse ut augue eget dui commodo auctor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce ut efficitur arcu, in fermentum tortor. Sed nisi nisi, cursus eget posuere ac, elementum sed lorem. Phasellus sit amet nisi non diam ullamcorper cursus et non turpis. Mauris quis ipsum sollicitudin, luctus ligula sit amet, fermentum justo. Nunc imperdiet iaculis venenatis. Quisque finibus risus eros, vitae vulputate augue rhoncus ac.
+
+Sed non lorem mattis, egestas tellus vitae, bibendum nunc. Praesent pretium maximus nunc quis consectetur. Ut ut sollicitudin felis. Morbi sit amet aliquet velit. Vivamus mi lorem, pulvinar eget enim in, scelerisque porttitor velit. Vestibulum rutrum viverra nulla vel venenatis. Nulla facilisi. Quisque sit amet massa rhoncus, imperdiet sem volutpat, vulputate nulla. Proin fermentum quam sit amet metus convallis scelerisque. Sed condimentum lacus urna, sit amet suscipit magna interdum ac. Sed arcu ligula, accumsan quis eros sed, dictum sagittis est. Sed tempus leo sit amet felis vestibulum, quis venenatis ligula consequat. Sed tempus mollis nulla. Cras vel placerat lectus. Cras dictum eleifend urna et malesuada.
+
+Sed venenatis hendrerit consequat. Cras et dolor purus. Ut ultricies sodales leo, et condimentum justo pretium eleifend. Nam finibus quis eros ac fringilla. Vivamus iaculis quam sit amet posuere interdum. Aliquam et ligula quis nibh feugiat dictum ut eu metus. Suspendisse potenti. Proin sit amet scelerisque eros. Maecenas vel justo et leo scelerisque gravida. Fusce felis leo, sodales at efficitur quis, scelerisque sollicitudin eros. Morbi auctor elit id odio tristique bibendum.
+
+Etiam porta lobortis felis. Donec in ligula ut nisi sodales fermentum. Etiam molestie eros nec massa auctor, ut commodo sapien vulputate. Proin ultricies orci ipsum, id auctor velit mollis eu. Nullam malesuada erat in metus mattis, vel rhoncus eros egestas. In hac habitasse platea dictumst. Aenean finibus facilisis egestas. Suspendisse laoreet tellus ac sollicitudin elementum.
+
+Nullam vehicula urna eu euismod accumsan. Suspendisse eget est vel lacus ultrices venenatis vitae in massa. Vivamus in nisl ornare, imperdiet justo nec, egestas ante. Aenean magna magna, hendrerit a auctor nec, laoreet ut orci. Donec a semper arcu. Praesent laoreet maximus lobortis. Duis vehicula nulla et nisl vestibulum tempor. Etiam ac sem ac lorem egestas feugiat. Nunc et neque leo. Proin rutrum nisl ut odio pellentesque, et ultricies nisi rhoncus. Aenean at risus suscipit ex dictum suscipit. Cras et libero at urna bibendum tempus.</p>
+	</div>
+	</div>
+
+
+</body>
+</html>

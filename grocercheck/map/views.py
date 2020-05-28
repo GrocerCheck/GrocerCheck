@@ -10,9 +10,9 @@ import json
 
 
 def index(request, city="nocity"):
-    city2tz = {'vancouver': 'America/Vancouver', 'los_angeles':  'America/Vancouver', 'san_francisco': 'America/Vancouver',
-               'san_diego':  'America/Vancouver', 'portland': 'America/Vancouver', 'seattle': 'America/Vancouver',
-               'new_york': 'America/Toronto', 'toronto': 'America/Toronto', 'victoria': 'America/Vancouver'}
+    city2tz = {'vancouver': 'America/Vancouver', 'los_angeles':  'America/Vancouver', 'silicon_valley': 'America/Vancouver',
+                'portland': 'America/Vancouver', 'seattle': 'America/Vancouver',
+               'new_york': 'America/Toronto', 'toronto': 'America/Toronto', 'victoria': 'America/Vancouver', 'las_vegas': 'America/Vancouver'}
     popupflag = False
     if(city=="nocity"):
         popupflag = True
@@ -150,6 +150,16 @@ def contact(request):
 
 def media(request):
     return render(request, 'media.html')
+
+def terms(request):
+    return render(request, 'terms.html')
+
+def privacy(request):
+    return render(request, 'privacy.html')
+
+def cookies(request):
+    return render(request, 'cookies.html')
+
 
 def article(request, articleid):
     #id, title, author_name, author_blurb, date, content

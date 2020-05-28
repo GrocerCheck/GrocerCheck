@@ -66,16 +66,17 @@ def getplaces(API_KEY, coords, database_dir, city, keyword):
     prev_last_id = conn.cursor().execute("SELECT MAX(id) FROM map_store").fetchall()[0][0]
     counter = prev_last_id+1
 
-    for line in coords:
-        clat = line[0]
-        clng = line[1]
+    for line in range(len(coords)):
+        print("coord", line, " of ", len(coords))
+        clat = coords[line][0]
+        clng = coords[line][1]
         r = 1200
 
         nextpage = ''
         flag = True
 
         while flag:
-            time.sleep(3)
+            time.sleep(1.5)
             response = makerequest(API_KEY, clat,clng,r, keyword, nextpage)
             data = response.json()
             #print(json.dumps(data,indent=4))
