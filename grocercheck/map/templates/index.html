@@ -336,12 +336,12 @@ document.getElementById("disclaimerclose").onclick = function(){
 		<div id="floating_menu">
 
 			<label class="container" id="livecontainer" for="livebutton">Live Only
-				<input id="livebutton" type="radio" checked="checked" onclick="showLiveOnly()" name="radio">
+				<input id="livebutton" type="radio"  onclick="showLiveOnly()" name="radio">
 			</label>
 
 			<label class="container" id="histcontainer" for="histbutton">
 				Live and Historical
-				<input id="histbutton" type="radio" onclick="showHistorical()" name="radio">
+				<input id="histbutton" type="radio" checked = "checked" onclick="showHistorical()" name="radio">
 			</label>
 
 			<label class="container" id="allcontainer" for="allbutton">
@@ -650,7 +650,7 @@ function initMap() {
 			//live data available
 			var busy = busyness[x]-1000;
 
-			var temp = buildMarker(getMarkerIconsIndex(x),15,positions[x]);
+			var temp = buildMarker(getMarkerIconsIndex(x),12,positions[x]);
 			markers.push(temp);
 			livemarkers.push(temp);
 		}
@@ -675,7 +675,7 @@ function initMap() {
 
 
 
-	showLiveOnly();//default view on site visit is live only
+	showHistorical();//default view on site visit is live only
 	toggleStores();//toggle on and off, starts as show closed = true, toggle to set it to false immediately so it displays properly
 }
 var nearflag = false;
