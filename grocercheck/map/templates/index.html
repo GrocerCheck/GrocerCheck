@@ -420,9 +420,17 @@ var lng = [];
 var hasloc = false;
 function initMap() {
 
+
+    var cityname = {{city|safe}}[0];
+
+    var zoom = {'vancouver': 12, "seattle": 11, 'victoria': 12, "toronto": 10, "las_vegas": 11, "silicon_valley": 10}
+
+    var zoomlevel = zoom[cityname];
+
+
 //create map
 	map = new google.maps.Map(
-		document.getElementById('map'), {zoom: 12, center: {lat:49.2399,lng:-123.1251}});
+		document.getElementById('map'), {zoom: zoomlevel, center: {lat:49.2399,lng:-123.1251}});
 
 	// if geolocation is available
 	if(navigator.geolocation){
