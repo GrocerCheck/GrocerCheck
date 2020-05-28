@@ -548,20 +548,20 @@ function initMap() {
 
 
 	var markericons = [];
-	for(let x = 1; x<22;x++){
+	for(let x = 1; x<16;x++){
 		
 		markericons.push("/static/images/markers/"+x+".png");
 	}
 
-	markericons.push("{% static 'images/greymarker.png' %}"); //index 21 grey
-	markericons.push("{% static 'images/purplemarker.png' %}"); //index 22 purple
+	markericons.push("{% static 'images/greymarker.png' %}"); //index 15 grey
+	markericons.push("{% static 'images/purplemarker.png' %}"); //index 16 purple
 
 	
 
 	function getMarkerIconsIndex(x){
 			
 		if(openn[x]==0){
-			return 21;
+			return 15;
 		}
 
 		let b = busyness[x];
@@ -570,19 +570,19 @@ function initMap() {
 		}
 		if(b>=0){
 			if(b>100){
-				return 22;
+				return 16;
 			}
-			else if(b>=80){
-				return 20;
+			else if(b>=84){
+				return 14;
 			}
 			else{
 
-				return Math.floor(b/4);
+				return Math.floor(b/6);
 
 			}
 		}
 		else{
-			return 21;
+			return 15;
 		}
 
 
