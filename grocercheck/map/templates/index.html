@@ -153,20 +153,32 @@ z-index: 1999;
 
 					#gallerydiv{
 				position: relative;
-				left: calc(calc(100vw - 80vh) / 2);
+				--tutorialwidth: calc(calc(717 / 1057) * 80vh);
+				left: calc(calc(100vw - var(--tutorialwidth)) / 2);
 				display: block;
 				height: 80vh;
-				width: 80vh;
+				width: var(--tutorialwidth);
 				z-index: 2000;
+				margin: 0;
 				
 			}
 					#tutorialclosediv{
 						z-index: 3000;
 					position: absolute;	
-						right: calc(calc(100vw - 80vh)/2);
+						right: calc(calc(calc(100vw - calc(calc(717 / 1057) * 80vh))/2) + 20px);
+						top: 0;
 						height: 30px;
 						width: 30px;
 						margin: 0;
+					}
+
+					#close{
+						font-size: 70px;
+						top: 0;
+						position: absolute;
+						height: 30px;
+						float: none;
+						color: #000
 					}
 
 </style>
@@ -191,6 +203,8 @@ z-index: 1999;
 					<img alt="grocercheck tutorial help 1" id="tutorialimage1" class="tutorialimg" src="{% static 'images/HowToGrocerCheck1.png' %}">
 					<img alt="grocercheck tutorial help 2" id="tutorialimage2" class="tutorialimg" src="{% static 'images/HowToGrocerCheck2.png' %}">
 					<img alt="grocercheck tutorial help 3" id="tutorialimage3" class="tutorialimg" src="{% static 'images/HowToGrocerCheck3.png' %}">
+					<img alt="grocercheck tutorial help 4" id="tutorialimage4" class="tutorialimg" src="{% static 'images/HowToGrocerCheck4.png' %}">
+					<img alt="grocercheck tutorial help 5" id="tutorialimage5" class="tutorialimg" src="{% static 'images/HowToGrocerCheck5.png' %}">
 					
 				
 				</div>
@@ -218,13 +232,13 @@ z-index: 1999;
 	<script>
 		var imageindex = 0;
 		function nextimage(){
-			imageindex = (imageindex+1)%3
+			imageindex = (imageindex+1)%5
 			showImage(imageindex+1);
 		}
 		function showImage(imageindex){
 			let idbegin = "tutorialimage";
 
-			for(let x = 1; x<4;x++){
+			for(let x = 1; x<6;x++){
 				
 				if(x==imageindex){
 
