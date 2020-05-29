@@ -167,18 +167,24 @@ z-index: 1999;
 					position: absolute;	
 						right: calc(calc(calc(100vw - calc(calc(717 / 1057) * 70vh))/2) + 20px);
 						top: 0;
-						height: 30px;
-						width: 30px;
+						
+						
 						margin: 0;
 					}
 
 					#close{
-						font-size: 70px;
-						top: 0;
+						font-size: 50px;
+						top: 10px;
 						position: absolute;
-						height: 30px;
-						float: none;
-						color: #000
+						right: -20px;	
+						padding: 0 10px;
+						color: #fff;
+						background-color: #3AB64B;
+						border: none;
+					
+					}
+					#close:hover, #close:focus{
+						cursor: pointer;
 					}
 
 </style>
@@ -195,7 +201,7 @@ z-index: 1999;
 
 		<div id="modaldiv" class="modal">
 			<div id="tutorialclosediv">
-			<span class="close" id="close">&times;</span>
+				<button id="close"><i id="tutorialcloselabel" class="fas fa-times"></i></button>	
 			</div>
 				<div id="gallerydiv" onclick="nextimage()">
 
