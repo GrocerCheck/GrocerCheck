@@ -146,38 +146,17 @@ for (i = 0; i < x.length; i++) {
 </script>
 <style>
 .tutorialimg{
-	position: absolute;
-width: 50%;
-margin-left: 25%;
+position: absolute;	
+height: 90vh;
+
 }
 
-			#nextbutton{
-				position: absolute;
-				text-decoration: none;
-				right: 25%;
-				top: 40%;
-				
-				z-index: 3000;
-background-color: #3AB64B;
-			padding: 5px 10px;
-			font-size: 30px;
-			}
-			#prevbutton{
-				position: absolute;
-				text-decoration: none;
-				left: 25%;
-				top: 40%;
-				
-				z-index: 3000;
-				background-color: #3AB64B;
-				padding: 5px 10px;
-				font-size: 30px;
-			}
-			#gallerydiv{
+					#gallerydiv{
 				position: relative;
-				height: 0;
-				width: 90%;
-				padding-bottom: 45%;
+				left: calc(calc(100vw - 90vh) / 2);
+				display: block;
+				height: 90vh;
+				width: 90vh;
 				z-index: 2000;
 				
 			}
@@ -195,17 +174,16 @@ background-color: #3AB64B;
 
 
 		<div id="modaldiv" class="modal">
-			<div class="modal-content">
+			
 				<span class="close" id="close">&times;</span>
-				<div id="gallerydiv">
+				<div id="gallerydiv" onclick="nextimage()"><p>
 					<img alt="grocercheck tutorial help 1" id="tutorialimage1" class="tutorialimg" src="{% static 'images/HowToGrocerCheck1.png' %}">
 					<img alt="grocercheck tutorial help 2" id="tutorialimage2" class="tutorialimg" src="{% static 'images/HowToGrocerCheck2.png' %}">
 					<img alt="grocercheck tutorial help 3" id="tutorialimage3" class="tutorialimg" src="{% static 'images/HowToGrocerCheck3.png' %}">
+					</p>
 				
-				<a href="#" onclick='nextimage()' id="nextbutton">&#8250;</a>
-				<a href="#" onclick='previmage()' id="prevbutton">&#8249;</a>
 				</div>
-			</div>
+			
 		</div>
 
 		<div id="nearmemodaldiv" class="modal">
@@ -227,19 +205,10 @@ background-color: #3AB64B;
 		</div>
 
 	<script>
-		var imageindex = 1;
+		var imageindex = 0;
 		function nextimage(){
-			
-			if(imageindex<3){
-				imageindex++;
-			}
-			showImage(imageindex);
-		}
-		function previmage(){
-			if(imageindex>1){
-				imageindex--;
-			}
-			showImage(imageindex);
+			imageindex = (imageindex+1)%3
+			showImage(imageindex+1);
 		}
 		function showImage(imageindex){
 			let idbegin = "tutorialimage";
