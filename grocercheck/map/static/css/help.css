@@ -34,3 +34,31 @@
     background-color: #35CE8D;
 
 }
+
+#viewdiv{
+border-radius: 10px;
+border: none;
+position: absolute;
+top: calc(20% + 60px);
+left: 1%;
+width: 55px;
+z-index: 499;
+}
+
+#viewbutton{
+border-radius: 10px;
+background-color: #3AB64B;
+border: none;
+color: white;
+font-size: 40px;
+cursor: pointer;
+padding: 0;
+height: 100%;
+width: 100%;
+
+}
+#viewbutton:hover{
+    background-color: #35CE8D;
+
+}
+

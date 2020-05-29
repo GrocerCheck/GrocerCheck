@@ -18,7 +18,9 @@
 		<meta name="description" content="GrocerCheck: Your Local Grocery and Supermarket Social Distancing Search Engine" />
 		<meta name="robots" content="index,follow" />
 		<link rel="canonical" href="https://grocercheck.ca" /> 		
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+		<script src="https://kit.fontawesome.com/530a9c0639.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
         <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
         <link rel='stylesheet' href = "{% static 'css/floatingmenu.css' %}">
@@ -186,6 +188,12 @@ background-color: #3AB64B;
 			<button id="helpbutton"><i class="fa fa-question"></i></button>
 		</div>
 
+
+		<div id="viewdiv">
+			<button id="viewbutton"><i id="viewbuttonlabel" class="fas fa-chevron-down"></i></button>
+		</div>
+
+
 		<div id="modaldiv" class="modal">
 			<div class="modal-content">
 				<span class="close" id="close">&times;</span>
@@ -350,15 +358,28 @@ document.getElementById("disclaimerclose").onclick = function(){
 			</label>
 		</div>
 
-		<div id="toggle">
-			<label class="switch">
-				<input onclick="toggleStores()" type=checkbox>
-				<span class="slider round"></span>
-				<p style="color:forestgreen; margin-top:0;border-radius: 0 0 10px 10px; margin-bottom: 0; border: none;padding-top: 20px; text-align:center; background-color:#fff;"><b>Show Closed Stores</b></p>
 
-			</label>
-		</div>
+		<script>
+			var floatingvisible = false;
+			document.getElementById("floating_menu").style.display = "none";
+	document.getElementById("viewbutton").onclick = function(){
+		
+	if(floatingvisible==false){
 
+		document.getElementById("floating_menu").style.display = "block";
+		document.getElementById("viewbuttonlabel").className = "fas fa-chevron-up";
+		floatingvisible = true;
+	}
+	else{
+		document.getElementById("viewbuttonlabel").className = "fas fa-chevron-down";
+		document.getElementById("floating_menu").style.display = "none";
+		floatingvisible = false;
+	}
+}
+		</script>
+
+
+		
         <div id="paypalbutton">
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                 <input type="hidden" name="cmd" value="_s-xclick" />
@@ -850,20 +871,7 @@ function filterOpen(){
 	}
 }
 
-function checkState(){
-	if(flag==false){
-		filterOpen();
-	}
-	if(flag==true && state=="live"){
-		filterOpen();
-	}
-	if(searchInProgress){
-		displaySearched();
-	}
-	if(nearflag==true){
-	displayNear();
-}
-}
+
 
 function showLiveOnly(){
 	document.getElementById("livecontainer").style.background = "#3AB64B";
@@ -879,7 +887,7 @@ function showLiveOnly(){
 		allstores[x].setMap(null);
 	}
 	state = "live";
-	checkState();
+	filterOpen();	
 
 }
 
@@ -903,8 +911,7 @@ function showHistorical(){
 		allstores[x].setMap(null);
 	}
 	state = "historical";
-	checkState();
-
+	filterOpen();
 
 }
 
@@ -923,45 +930,10 @@ function showAll(){
 		allstores[x].setMap(map);
 	}
 	state = "all";
-	checkState();
+	
 
 }
 
-function toggleStores(){
-
-	if(flag){
-		//hide closed stores
-
-		for(let x = 0; x<markers.length;x++){
-			if(openn[x]==0){
-				markers[x].setMap(null);
-			}
-		}
-		flag = false;
-	}
-	else{
-		//show closed stores
-
-		for(let x = 0; x<markers.length;x++){
-
-			if(openn[x]==0){
-				markers[x].setMap(map);
-			}
-		}
-		flag = true
-		if(state=="live"){
-			showLiveOnly();
-		}
-		if(state=="historical"){
-			showHistorical();
-		}
-		if(state=="all"){
-			showAll();
-		}
-
-	}
-
-}
 
 		</script>
 		<!--Load the API from the specified URL
