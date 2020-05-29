@@ -41,7 +41,7 @@ else:
     DEBUG = True
 
 
-ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca', 'vancouver.grocercheck.ca','52.13.81.19', '44.230.40.10', '52.10.195.42','127.0.0.1', '172.26.0.205', '172.26.28.120', '172.26.11.143', '172.26.1.22', '172.26.10.238', '172.26.3.142']
+ALLOWED_HOSTS = ['www.grocercheck.ca', 'www.dev.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca', 'www.grocercheck.com', 'grocercheck.com' '52.13.81.19', '44.230.40.10', '54.188.229.231','127.0.0.1', '172.26.0.205', '172.26.10.238',  '172.26.13.17', ]
 # Application definition
 
 INSTALLED_APPS = [
@@ -165,10 +165,14 @@ try:
     pg_creds = json.load(open("/home/bitnami/keys/postgreDB.json"))
 
 except:
-    pg_creds = json.load(open(expanduser('~')+'/keys/postgreDB.json'))
-
-pg_creds = [pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port']]
-
+    try:
+        pg_creds = json.load(open(expanduser('~')+'/keys/postgreDB.json'))
+    except:
+        pg_creds = []
+try:
+    pg_creds = [pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port']]
+except:
+    pg_creds = []
 try:
     l3_dir ="/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3"
 except:

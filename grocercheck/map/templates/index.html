@@ -18,7 +18,9 @@
 		<meta name="description" content="GrocerCheck: Your Local Grocery and Supermarket Social Distancing Search Engine" />
 		<meta name="robots" content="index,follow" />
 		<link rel="canonical" href="https://grocercheck.ca" /> 		
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+		<script src="https://kit.fontawesome.com/530a9c0639.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
         <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
         <link rel='stylesheet' href = "{% static 'css/floatingmenu.css' %}">
@@ -144,41 +146,47 @@ for (i = 0; i < x.length; i++) {
 </script>
 <style>
 .tutorialimg{
-	position: absolute;
-width: 50%;
-margin-left: 25%;
+position: absolute;	
+height: 100%;
+z-index: 1999;
 }
 
-			#nextbutton{
-				position: absolute;
-				text-decoration: none;
-				right: 25%;
-				top: 40%;
-				
-				z-index: 3000;
-background-color: #3AB64B;
-			padding: 5px 10px;
-			font-size: 30px;
-			}
-			#prevbutton{
-				position: absolute;
-				text-decoration: none;
-				left: 25%;
-				top: 40%;
-				
-				z-index: 3000;
-				background-color: #3AB64B;
-				padding: 5px 10px;
-				font-size: 30px;
-			}
-			#gallerydiv{
+					#gallerydiv{
 				position: relative;
-				height: 0;
-				width: 90%;
-				padding-bottom: 45%;
+				--tutorialwidth: calc(calc(717 / 1057) * 70vh);
+				left: calc(calc(100vw - var(--tutorialwidth)) / 2);
+				display: block;
+				height: 70vh;
+				width: var(--tutorialwidth);
 				z-index: 2000;
+				margin: 0;
 				
 			}
+					#tutorialclosediv{
+						z-index: 3000;
+					position: absolute;	
+						right: calc(calc(calc(100vw - calc(calc(717 / 1057) * 70vh))/2) + 20px);
+						top: 0;
+						
+						
+						margin: 0;
+					}
+
+					#close{
+						font-size: 50px;
+						top: 10px;
+						position: absolute;
+						right: -20px;	
+						padding: 0 10px;
+						color: #fff;
+						background-color: #35605A;
+						border: none;
+					
+					}
+					#close:hover, #close:focus{
+						cursor: pointer;
+						background-color: #3AB64B;
+					}
 
 </style>
 
@@ -186,18 +194,28 @@ background-color: #3AB64B;
 			<button id="helpbutton"><i class="fa fa-question"></i></button>
 		</div>
 
+
+		<div id="viewdiv">
+			<button id="viewbutton"><i id="viewbuttonlabel" class="fas fa-chevron-down"></i></button>
+		</div>
+
+
 		<div id="modaldiv" class="modal">
-			<div class="modal-content">
-				<span class="close" id="close">&times;</span>
-				<div id="gallerydiv">
-					<img alt="grocercheck tutorial help 1" id="tutorialimage1" class="tutorialimg" src="{% static 'images/HowToGrocerCheck1.png' %}">
-					<img alt="grocercheck tutorial help 2" id="tutorialimage2" class="tutorialimg" src="{% static 'images/HowToGrocerCheck2.png' %}">
-					<img alt="grocercheck tutorial help 3" id="tutorialimage3" class="tutorialimg" src="{% static 'images/HowToGrocerCheck3.png' %}">
-				
-				<a href="#" onclick='nextimage()' id="nextbutton">&#8250;</a>
-				<a href="#" onclick='previmage()' id="prevbutton">&#8249;</a>
-				</div>
+			<div id="tutorialclosediv">
+				<button id="close"><i id="tutorialcloselabel" class="fas fa-times"></i></button>	
 			</div>
+				<div id="gallerydiv" onclick="nextimage()">
+
+
+					<img alt="grocercheck tutorial help 1" id="tutorialimage1" class="tutorialimg" src="{% static 'images/HowTo1.png' %}">
+					<img alt="grocercheck tutorial help 2" id="tutorialimage2" class="tutorialimg" src="{% static 'images/HowTo2.png' %}">
+					<img alt="grocercheck tutorial help 3" id="tutorialimage3" class="tutorialimg" src="{% static 'images/HowTo3.png' %}">
+					<img alt="grocercheck tutorial help 4" id="tutorialimage4" class="tutorialimg" src="{% static 'images/HowTo4.png' %}">
+					<img alt="grocercheck tutorial help 5" id="tutorialimage5" class="tutorialimg" src="{% static 'images/HowTo5.png' %}">
+					
+				
+				</div>
+			
 		</div>
 
 		<div id="nearmemodaldiv" class="modal">
@@ -219,24 +237,15 @@ background-color: #3AB64B;
 		</div>
 
 	<script>
-		var imageindex = 1;
+		var imageindex = 0;
 		function nextimage(){
-			
-			if(imageindex<3){
-				imageindex++;
-			}
-			showImage(imageindex);
-		}
-		function previmage(){
-			if(imageindex>1){
-				imageindex--;
-			}
-			showImage(imageindex);
+			imageindex = (imageindex+1)%5
+			showImage(imageindex+1);
 		}
 		function showImage(imageindex){
 			let idbegin = "tutorialimage";
 
-			for(let x = 1; x<4;x++){
+			for(let x = 1; x<6;x++){
 				
 				if(x==imageindex){
 
@@ -336,12 +345,12 @@ document.getElementById("disclaimerclose").onclick = function(){
 		<div id="floating_menu">
 
 			<label class="container" id="livecontainer" for="livebutton">Live Only
-				<input id="livebutton" type="radio" checked="checked" onclick="showLiveOnly()" name="radio">
+				<input id="livebutton" type="radio"  onclick="showLiveOnly()" name="radio">
 			</label>
 
 			<label class="container" id="histcontainer" for="histbutton">
 				Live and Historical
-				<input id="histbutton" type="radio" onclick="showHistorical()" name="radio">
+				<input id="histbutton" type="radio" checked = "checked" onclick="showHistorical()" name="radio">
 			</label>
 
 			<label class="container" id="allcontainer" for="allbutton">
@@ -350,15 +359,28 @@ document.getElementById("disclaimerclose").onclick = function(){
 			</label>
 		</div>
 
-		<div id="toggle">
-			<label class="switch">
-				<input onclick="toggleStores()" type=checkbox>
-				<span class="slider round"></span>
-				<p style="color:forestgreen; margin-top:0;border-radius: 0 0 10px 10px; margin-bottom: 0; border: none;padding-top: 20px; text-align:center; background-color:#fff;"><b>Show Closed Stores</b></p>
 
-			</label>
-		</div>
+		<script>
+			var floatingvisible = false;
+			document.getElementById("floating_menu").style.display = "none";
+	document.getElementById("viewbutton").onclick = function(){
+		
+	if(floatingvisible==false){
 
+		document.getElementById("floating_menu").style.display = "block";
+		document.getElementById("viewbuttonlabel").className = "fas fa-chevron-up";
+		floatingvisible = true;
+	}
+	else{
+		document.getElementById("viewbuttonlabel").className = "fas fa-chevron-down";
+		document.getElementById("floating_menu").style.display = "none";
+		floatingvisible = false;
+	}
+}
+		</script>
+
+
+		
         <div id="paypalbutton">
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                 <input type="hidden" name="cmd" value="_s-xclick" />
@@ -423,14 +445,17 @@ function initMap() {
 
     var cityname = {{city|safe}}[0];
 
-    var zoom = {'vancouver': 12, "seattle": 11, 'victoria': 12, "toronto": 10, "las_vegas": 11, "silicon_valley": 10}
+    var zoom = {'vancouver': 12, "seattle": 11, 'victoria': 13, "toronto": 11, "las_vegas": 11, "silicon_valley": 10};
+	var centerpositions = {'vancouver': {lat:49.2577143,lng:-123.0939433}, 'seattle': {lat:47.6129432,lng:-122.382146}, 'victoria': {lat:48.4262038,lng:-123.3642418}, 'toronto': {lat:43.7181557,lng:-79.51814}, 'las_vegas': {lat:36.1249185,lng:-115.2150827}, 'silicon_valley': {lat:37.502473,lng:-122.3212771}}
 
     var zoomlevel = zoom[cityname];
+	var centerposition = centerpositions[cityname];
+
 
 
 //create map
 	map = new google.maps.Map(
-		document.getElementById('map'), {zoom: zoomlevel, center: {lat:49.2399,lng:-123.1251}});
+		document.getElementById('map'), {zoom: zoomlevel, center: centerposition});
 
 	// if geolocation is available
 	if(navigator.geolocation){
@@ -444,7 +469,6 @@ function initMap() {
 			userlat = position.coords.latitude;
 			userlng = position.coords.longitude;
 
-			map.setCenter(userpos);
 			hasloc = true;
 			usermarker = new google.maps.Marker({clickable:true,icon:{url:"{% static 'images/GrocerCheckFavicon.png' %}",scaledSize: new google.maps.Size(40,40)},map:null,position:userpos});
 
@@ -482,10 +506,7 @@ function initMap() {
 		positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lng[x])})
 	}
 
-	if(hasloc==false){
-		map.setCenter(positions[parseInt(positions.length/2)]);
-	}
-
+	
 
 	function buildInfoWindowString(names,address,hours,busyness,x){
 		var s = '';//text color
@@ -545,25 +566,55 @@ function initMap() {
 	}
 
 	//loading static images of markers
-	var green = "{% static 'images/greenmarker.png' %}"
-	var yellow = "{% static 'images/yellowmarker.png' %}"
-	var red = "{% static 'images/redmarker.png' %}"
-	var grey = "{% static 'images/greymarker.png' %}"
+	
 
 
+	var markericons = [];
+	for(let x = 1; x<16;x++){
+		
+		markericons.push("/static/images/markers/"+x+".png");
+	}
 
-	var icon = null;
+	markericons.push("{% static 'images/greymarker.png' %}"); //index 15 grey
+	markericons.push("{% static 'images/purplemarker.png' %}"); //index 16 purple
 
+	
+
+	function getMarkerIconsIndex(x){
+			
+		if(openn[x]==0){
+			return 15;
+		}
+
+		let b = busyness[x];
+		if(busyness[x]>=1000){
+			b-=1000;
+		}
+		if(b>=0){
+			if(b>100){
+				return 16;
+			}
+			else if(b>=84){
+				return 14;
+			}
+			else{
+
+				return Math.floor(b/6);
+
+			}
+		}
+		else{
+			return 15;
+		}
+
+
+	}
+
+	
 
 //build marker
-	function buildMarker(color,radius,position){
-		if(color=="grey"){//if grey, use static image instead of vector for efficiency
-			return new google.maps.Marker({icon:{url:grey, scaledSize:new google.maps.Size(radius*2, radius*2)}, clickable:true, position:position, map:map});
-		}
-		//build vector path of circle with radius=radius 
-		let pathstring = "M-"+radius+",0a"+radius+","+radius+" 0 1,0 "+(radius*2)+",0a"+radius+","+radius+" 0 1,0 -"+(radius*2)+",0";
-		return new google.maps.Marker({icon:{path:pathstring,fillColor:color, fillOpacity:0.6, strokeWeight:0},clickable:true,position:position,map:map});
-
+	function buildMarker(markericonsindex,radius,position){
+		return new google.maps.Marker({icon:{url:markericons[markericonsindex], scaledSize:new google.maps.Size(radius*2, radius*2)}, opacity:0.6,  clickable:true, position:position, map:map});
 	}
 
 	function openInfoWindow(i){
@@ -592,14 +643,14 @@ function initMap() {
 			if(b>100){
 				return "rgb(255,0,255)";
 			}
-			else if(b>=70){
+			else if(b>=80){
 				return "rgb(255, 0, 0)";
 			}
-			else if(b>=35){
-				return "rgb(255, "+Math.round((70-b)*(255/35))+", 0)";
+			else if(b>=40){
+				return "rgb(255, "+Math.round((80-b)*(255/40))+", 0)";
 			}
 			else{
-				return "rgb("+Math.round((b)*(255/35))+", 255, 0)";
+				return "rgb("+Math.round((b)*(255/40))+", 255, 0)";
 			}
 		}
 		else{
@@ -612,7 +663,7 @@ function initMap() {
 
 		if(busyness[x]==-1){
 			//No data available
-			var temp = buildMarker(getIcon(x),10,positions[x])
+			var temp = buildMarker(getMarkerIconsIndex(x),10,positions[x])
 			markers.push(temp)
 			allstores.push(temp);
 
@@ -621,14 +672,14 @@ function initMap() {
 			//live data available
 			var busy = busyness[x]-1000;
 
-			var temp = buildMarker(getIcon(x),15,positions[x]);
+			var temp = buildMarker(getMarkerIconsIndex(x),12,positions[x]);
 			markers.push(temp);
 			livemarkers.push(temp);
 		}
 
 		else{
 			//only historical data available
-			var temp = buildMarker(getIcon(x),10,positions[x])
+			var temp = buildMarker(getMarkerIconsIndex(x),10,positions[x])
 			markers.push(temp)
 			historicalmarkers.push(temp)
 		}
@@ -646,7 +697,7 @@ function initMap() {
 
 
 
-	showLiveOnly();//default view on site visit is live only
+	showHistorical();//default view on site visit is live only
 	toggleStores();//toggle on and off, starts as show closed = true, toggle to set it to false immediately so it displays properly
 }
 var nearflag = false;
@@ -821,20 +872,7 @@ function filterOpen(){
 	}
 }
 
-function checkState(){
-	if(flag==false){
-		filterOpen();
-	}
-	if(flag==true && state=="live"){
-		filterOpen();
-	}
-	if(searchInProgress){
-		displaySearched();
-	}
-	if(nearflag==true){
-	displayNear();
-}
-}
+
 
 function showLiveOnly(){
 	document.getElementById("livecontainer").style.background = "#3AB64B";
@@ -850,7 +888,7 @@ function showLiveOnly(){
 		allstores[x].setMap(null);
 	}
 	state = "live";
-	checkState();
+	filterOpen();	
 
 }
 
@@ -874,8 +912,7 @@ function showHistorical(){
 		allstores[x].setMap(null);
 	}
 	state = "historical";
-	checkState();
-
+	filterOpen();
 
 }
 
@@ -894,45 +931,10 @@ function showAll(){
 		allstores[x].setMap(map);
 	}
 	state = "all";
-	checkState();
+	
 
 }
 
-function toggleStores(){
-
-	if(flag){
-		//hide closed stores
-
-		for(let x = 0; x<markers.length;x++){
-			if(openn[x]==0){
-				markers[x].setMap(null);
-			}
-		}
-		flag = false;
-	}
-	else{
-		//show closed stores
-
-		for(let x = 0; x<markers.length;x++){
-
-			if(openn[x]==0){
-				markers[x].setMap(map);
-			}
-		}
-		flag = true
-		if(state=="live"){
-			showLiveOnly();
-		}
-		if(state=="historical"){
-			showHistorical();
-		}
-		if(state=="all"){
-			showAll();
-		}
-
-	}
-
-}
 
 		</script>
 		<!--Load the API from the specified URL
