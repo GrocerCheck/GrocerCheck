@@ -147,19 +147,27 @@ for (i = 0; i < x.length; i++) {
 <style>
 .tutorialimg{
 position: absolute;	
-height: 90vh;
-
+height: 100%;
+z-index: 1999;
 }
 
 					#gallerydiv{
 				position: relative;
-				left: calc(calc(100vw - 90vh) / 2);
+				left: calc(calc(100vw - 80vh) / 2);
 				display: block;
-				height: 90vh;
-				width: 90vh;
+				height: 80vh;
+				width: 80vh;
 				z-index: 2000;
 				
 			}
+					#tutorialclosediv{
+						z-index: 3000;
+					position: absolute;	
+						right: calc(calc(100vw - 80vh)/2);
+						height: 30px;
+						width: 30px;
+						margin: 0;
+					}
 
 </style>
 
@@ -174,13 +182,16 @@ height: 90vh;
 
 
 		<div id="modaldiv" class="modal">
-			
-				<span class="close" id="close">&times;</span>
-				<div id="gallerydiv" onclick="nextimage()"><p>
+			<div id="tutorialclosediv">
+			<span class="close" id="close">&times;</span>
+			</div>
+				<div id="gallerydiv" onclick="nextimage()">
+
+
 					<img alt="grocercheck tutorial help 1" id="tutorialimage1" class="tutorialimg" src="{% static 'images/HowToGrocerCheck1.png' %}">
 					<img alt="grocercheck tutorial help 2" id="tutorialimage2" class="tutorialimg" src="{% static 'images/HowToGrocerCheck2.png' %}">
 					<img alt="grocercheck tutorial help 3" id="tutorialimage3" class="tutorialimg" src="{% static 'images/HowToGrocerCheck3.png' %}">
-					</p>
+					
 				
 				</div>
 			

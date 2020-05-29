@@ -19,7 +19,7 @@
 	/* div for modal content */
 	.modal-content {
 		background-color: #fefefe;
-		
+		width: 80%;	
 		margin: auto;
 		padding: 5px;
 		border: none;
