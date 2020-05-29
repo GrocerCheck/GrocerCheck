@@ -193,7 +193,6 @@ try:
 except:
     try:
         servername = open(expanduser("~")+"/keys/servername.txt").readline()
-
     except:
         print("ERROR: SERVERNAME NOT FOUND")
         CELERY_BEAT_SCHEDULE = {}
@@ -221,7 +220,7 @@ if ("BS" in servername):
 
         'UPDATE_GTA_POPULARITY':{
             'task': 'update_current_popularity',
-            'schedule': crontab(minute='4-59/10'),
+            'schedule': crontab(minute='3-59/10'),
             'args': ("Canada", "toronto", "America/Vancouver", False, False, p, 16), #US address include country
         },
 
@@ -233,7 +232,7 @@ if ("BS" in servername):
 
         'UPDATE_LAS_VEGAS_POPULARITY':{
             'task': 'update_current_popularity',
-            'schedule': crontab(minute='4-59/10'),
+            'schedule': crontab(minute='5-59/10'),
             'args': ("", "las_vegas", "America/Vancouver", False, False, p, 16), #US address include country
         },
 
