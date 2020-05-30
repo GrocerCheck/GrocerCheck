@@ -890,7 +890,7 @@ function showLiveOnly(){
 	}
 	state = "live";
 	filterOpen();	
-
+	displaySearched();
 }
 
 
@@ -914,6 +914,7 @@ function showHistorical(){
 	}
 	state = "historical";
 	filterOpen();
+	displaySearched();
 
 }
 
@@ -932,7 +933,7 @@ function showAll(){
 		allstores[x].setMap(map);
 	}
 	state = "all";
-	
+	displaySearched();
 
 }
 
