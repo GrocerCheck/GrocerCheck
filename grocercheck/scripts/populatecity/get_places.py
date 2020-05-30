@@ -28,7 +28,7 @@ def makerequest(API_KEY, lat,lng,radius, keyword, nextpage=''):
     if(nextpage!=''):
         nextpage = 'pagetoken='+nextpage
 
-    print('request nextpage: '+nextpage)
+    print('*###request nextpage: '+nextpage)
     response = requests.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?key='+API_KEY+'&location='+str(lat)+','+str(lng)+'&radius='+str(radius)+'&keyword='+keyword+'&'+nextpage) #change keyword depending on what is being scraped for
 #-- to include things like costco, use "department store",
 # scrape each city thrice - once with "grocery", "department", and "mall"
@@ -67,6 +67,7 @@ def getplaces(API_KEY, coords, database_dir, city, keyword):
     counter = prev_last_id+1
 
     for line in range(len(coords)):
+        print("----------------------------")
         print("coord", line, " of ", len(coords))
         clat = coords[line][0]
         clng = coords[line][1]
@@ -75,7 +76,9 @@ def getplaces(API_KEY, coords, database_dir, city, keyword):
         nextpage = ''
         flag = True
 
+        utct = 0
         while flag:
+            utct = utct+1
             time.sleep(1.5)
             response = makerequest(API_KEY, clat,clng,r, keyword, nextpage)
             data = response.json()
@@ -89,8 +92,9 @@ def getplaces(API_KEY, coords, database_dir, city, keyword):
             placeID = output[4]
             types=output[5]
 
-            print("num-stores: ", len(name))
+            print("Page ", utct, "num-stores: ", len(name))
 
+            num_added = 0;
             for i in range(len(name)):
                 with conn:
                     if(placeID[i] in added):
@@ -99,7 +103,9 @@ def getplaces(API_KEY, coords, database_dir, city, keyword):
                     store = (counter, name[i],lat[i],lng[i],placeID[i],types[i], city)
                     storeid = insert_store(conn,store)
                     counter = counter + 1
-                    print("appended store id ", storeid)
+                    num_added = num_added + 1
+                    print("Appended store id ", storeid)
+            print("num_added: ", num_added)
             if('next_page_token' in data):
                 nextpage = data['next_page_token']
             else:
