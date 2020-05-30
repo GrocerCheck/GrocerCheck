@@ -40,6 +40,7 @@ except:
 
     except:
         print("ERROR: SERVERNAME NOT FOUND")
+        servername = ''
         CELERY_BEAT_SCHEDULE = {}
 
 
