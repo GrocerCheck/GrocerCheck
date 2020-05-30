@@ -40,6 +40,7 @@ except:
 
     except:
         print("ERROR: SERVERNAME NOT FOUND")
+        servername = ''
         CELERY_BEAT_SCHEDULE = {}
 
 
@@ -54,8 +55,12 @@ elif (("dev" in servername) or ("DEV" in servername)):
 else:
     DEBUG = True
 
+DEBUG = True
 
-ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca', 'vancouver.grocercheck.ca','52.13.81.19', '44.230.40.10', '52.10.195.42','127.0.0.1', '172.26.0.205', '172.26.28.120', '172.26.11.143', '172.26.1.22', '172.26.10.238', '172.26.3.142']
+
+ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca',
+                 '52.13.81.19', '44.230.40.10', '52.10.195.42',  '54.188.229.231', '172.26.13.17', '127.0.0.1', '172.26.0.205',
+                 '172.26.28.120', '172.26.11.143', '172.26.1.22', '172.26.10.238', '172.26.3.142']
 # Application definition
 
 INSTALLED_APPS = [
