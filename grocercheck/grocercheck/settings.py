@@ -32,13 +32,29 @@ except:
     SECRET_KEY = open(expanduser("~")+"/keys/djangokey.txt").readline()
 
 
+try:
+    servername = open("/home/bitnami/keys/servername.txt").readline()
+except:
+    try:
+        servername = open(expanduser("~")+"/keys/servername.txt").readline()
+
+    except:
+        print("ERROR: SERVERNAME NOT FOUND")
+        CELERY_BEAT_SCHEDULE = {}
+
+
 
 
 # SECURITY WARNING: don't run with debug turned on in production
+
 if("bitnami" in BASE_DIR):
     DEBUG = False
+elif (("dev" in servername) or ("DEV" in servername)):
+    DEBUG = True
 else:
     DEBUG = True
+
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca', 'vancouver.grocercheck.ca','52.13.81.19', '44.230.40.10', '52.10.195.42','127.0.0.1', '172.26.0.205', '172.26.28.120', '172.26.11.143', '172.26.1.22', '172.26.10.238', '172.26.3.142']
@@ -188,15 +204,6 @@ except:
 # hardcoded_scrape #debug
 # testruntast #debug
 
-try:
-    servername = open("/home/bitnami/keys/servername.txt").readline()
-except:
-    try:
-        servername = open(expanduser("~")+"/keys/servername.txt").readline()
-
-    except:
-        print("ERROR: SERVERNAME NOT FOUND")
-        CELERY_BEAT_SCHEDULE = {}
 servername = ""
 if ("BS" in servername):
     CELERY_BEAT_SCHEDULE = {

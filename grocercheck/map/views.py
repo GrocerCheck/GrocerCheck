@@ -163,6 +163,10 @@ def cookies(request):
     return render(request, 'cookies.html')
 
 
+
+
+
+
 def article(request, articleid):
     #id, title, author_name, author_blurb, date, content
     conn = sqlite3.connect(os.path.join(settings.BASE_DIR,'db1.sqlite3'))
