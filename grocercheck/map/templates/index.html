@@ -363,6 +363,7 @@ document.getElementById("disclaimerclose").onclick = function(){
 
 
 		<script>
+			
 			var floatingvisible = false;
 			document.getElementById("floating_menu").style.display = "none";
 	document.getElementById("viewbutton").onclick = function(){
@@ -442,8 +443,10 @@ var usermarker;
 var lat = [];
 var lng = [];
 var hasloc = false;
+
 function initMap() {
 
+	
 
     var cityname = {{city|safe}}[0];
 
@@ -946,7 +949,8 @@ function showAll(){
 	  * The callback parameter executes the initMap() function
 		-->
 		<script async defer
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqwU_hVg2OJ3zB7FOORGzGIdsWnXdXT-w&callback=initMap">
+			src="https://maps.googleapis.com/maps/api/js?key={{ apikey }}&callback=initMap">
+
 		</script>
 
         

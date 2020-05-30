@@ -7,6 +7,8 @@ import datetime
 import pytz
 from map.models import Store
 import json
+import os
+from os.path import expanduser
 
 
 def index(request, city="nocity"):
@@ -45,6 +47,7 @@ def index(request, city="nocity"):
     context['popupflag'] = []
     context['city'] = []
     context['city'].append(city)
+    
     if(popupflag):
         context['popupflag'].append("yes")
     else:
@@ -123,7 +126,8 @@ def index(request, city="nocity"):
                             else:
                                 context['openn'].append(0)
 
-
+    
+    
 
 
     finalcontext = {}
@@ -133,7 +137,12 @@ def index(request, city="nocity"):
 
     finalcontext['size'] = json.dumps([len(context['busyness'])])
 
-
+    
+    try:
+        finalcontext['apikey'] = open("/home/bitnami/keys/gmapjs.txt").readline().strip()
+    except:
+        finalcontext['apikey'] = open(expanduser('~')+"/keys/gmapjs.txt").readline().strip()
+        
 
 
     return render(request,'index.html',context=finalcontext)
