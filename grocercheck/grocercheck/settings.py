@@ -32,16 +32,30 @@ except:
     SECRET_KEY = open(expanduser("~")+"/keys/djangokey.txt").readline()
 
 
+try:
+    servername = open("/home/bitnami/keys/servername.txt").readline()
+except:
+    try:
+        servername = open(expanduser("~")+"/keys/servername.txt").readline()
+
+    except:
+        print("ERROR: SERVERNAME NOT FOUND")
+        CELERY_BEAT_SCHEDULE = {}
+
+
 
 
 # SECURITY WARNING: don't run with debug turned on in production
+
 if("bitnami" in BASE_DIR):
     DEBUG = False
+elif (("dev" in servername) or ("DEV" in servername)):
+    DEBUG = True
 else:
     DEBUG = True
 
 
-ALLOWED_HOSTS = ['www.grocercheck.ca', 'www.dev.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca', 'www.grocercheck.com', 'grocercheck.com' '52.13.81.19', '44.230.40.10', '54.188.229.231','127.0.0.1', '172.26.0.205', '172.26.10.238',  '172.26.13.17', ]
+ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca', 'vancouver.grocercheck.ca','52.13.81.19', '44.230.40.10', '52.10.195.42','127.0.0.1', '172.26.0.205', '172.26.28.120', '172.26.11.143', '172.26.1.22', '172.26.10.238', '172.26.3.142']
 # Application definition
 
 INSTALLED_APPS = [
@@ -193,10 +207,11 @@ try:
 except:
     try:
         servername = open(expanduser("~")+"/keys/servername.txt").readline()
+
     except:
         print("ERROR: SERVERNAME NOT FOUND")
         CELERY_BEAT_SCHEDULE = {}
-
+servername = ""
 if ("BS" in servername):
     CELERY_BEAT_SCHEDULE = {
 # Country, city, timezone, doBackup, doLog, proxy, num_processes
@@ -220,7 +235,7 @@ if ("BS" in servername):
 
         'UPDATE_GTA_POPULARITY':{
             'task': 'update_current_popularity',
-            'schedule': crontab(minute='3-59/10'),
+            'schedule': crontab(minute='4-59/10'),
             'args': ("Canada", "toronto", "America/Vancouver", False, False, p, 16), #US address include country
         },
 
@@ -232,7 +247,7 @@ if ("BS" in servername):
 
         'UPDATE_LAS_VEGAS_POPULARITY':{
             'task': 'update_current_popularity',
-            'schedule': crontab(minute='5-59/10'),
+            'schedule': crontab(minute='4-59/10'),
             'args': ("", "las_vegas", "America/Vancouver", False, False, p, 16), #US address include country
         },
 
