@@ -40,6 +40,7 @@ except:
 
     except:
         print("ERROR: SERVERNAME NOT FOUND")
+        servername = ''
         CELERY_BEAT_SCHEDULE = {}
 
 
@@ -53,6 +54,8 @@ elif (("dev" in servername) or ("DEV" in servername)):
     DEBUG = True
 else:
     DEBUG = True
+
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca',

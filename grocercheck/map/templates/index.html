@@ -5,6 +5,8 @@
 	<head>
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167491754-1"></script>
+
+
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -12,7 +14,7 @@
 
   gtag('config', 'UA-167491754-1');
 </script>
-
+<script data-ad-client="ca-pub-8362595471467364" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>GrocerCheck</title>
 		<meta name="description" content="GrocerCheck: Your Local Grocery and Supermarket Social Distancing Search Engine" />
@@ -361,6 +363,7 @@ document.getElementById("disclaimerclose").onclick = function(){
 
 
 		<script>
+			
 			var floatingvisible = false;
 			document.getElementById("floating_menu").style.display = "none";
 	document.getElementById("viewbutton").onclick = function(){
@@ -440,8 +443,10 @@ var usermarker;
 var lat = [];
 var lng = [];
 var hasloc = false;
+
 function initMap() {
 
+	
 
     var cityname = {{city|safe}}[0];
 
@@ -944,7 +949,8 @@ function showAll(){
 	  * The callback parameter executes the initMap() function
 		-->
 		<script async defer
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqwU_hVg2OJ3zB7FOORGzGIdsWnXdXT-w&callback=initMap">
+			src="https://maps.googleapis.com/maps/api/js?key={{ apikey }}&callback=initMap">
+
 		</script>
 
         
