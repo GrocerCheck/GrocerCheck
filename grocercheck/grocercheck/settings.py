@@ -211,7 +211,8 @@ except:
     except:
         print("ERROR: SERVERNAME NOT FOUND")
         CELERY_BEAT_SCHEDULE = {}
-servername = ""
+
+
 if ("BS" in servername):
     CELERY_BEAT_SCHEDULE = {
 # Country, city, timezone, doBackup, doLog, proxy, num_processes
