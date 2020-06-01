@@ -55,7 +55,6 @@ elif (("dev" in servername) or ("DEV" in servername)):
 else:
     DEBUG = True
 
-DEBUG = True
 
 
 ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca',
