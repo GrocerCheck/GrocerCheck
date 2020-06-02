@@ -255,6 +255,13 @@ if ("BS" in servername):
             'args': ("", "las_vegas", "America/Vancouver", False, False, p, 16), #US address include country
         },
 
+        'UPDATE_NEW_YORK_POPULARITY':{
+            'task': 'update_current_popularity',
+            'schedule': crontab(minute='5-59/10'),
+            'args': ("", "new_york", "America/Toronto", False, False, p, 16), #US address include country
+        },
+
+
 
         'LOG_LPT':{
             'task': 'log_lpt',

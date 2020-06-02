@@ -74,9 +74,28 @@ silconValley_bounds =[
 
 
 newYork_bounds = [
-
+        [
+            (40.50103108, -74.35654554), #staten island, woodbridge township
+            (40.65183645, -74.05654387), #hudson county/new york/yorkbay x-section
+            ],
+        [
+            (40.65240824, -74.27912621), #bottom left of elizabeth
+            (40.95000005, -74.0436068),  #above paramus, directly in line with previous x-section on vertical axis
+            ],
+        [
+            (40.54997004, -74.05041087),
+            (40.94322173, -73.78171402), #big block across new york, brooklyn, manhatten, bronx, yonkers
+            ],
+        [
+            (40.58815184, -73.80265667),
+            (40.84053667, -73.73405457), #queens
+            ]
 
         ]
+
+
+
+
 
 lasVegas_bounds = [
         [
@@ -243,10 +262,10 @@ KEYWORD = "grocery"
 #SCRAPE THREE TIMES W/ keywords: "department store", "grocery", "mall"
 # consider implementing filter on index.html for grocery only (& costco for whatever godforsaken reason)
 
-CITY = "silicon_valley"
+CITY = "new_york"
 
 print("DATABASE DIR: ", DATABASE_DIR)
-coord_list = gencoords.gen_coords(silconValley_bounds, 1.67)
+coord_list = gencoords.gen_coords(newYork_bounds, 1.67)
 
 
 print("NUM COORDS: ", len(coord_list))
@@ -257,10 +276,11 @@ print("CITY ", CITY, " KEYWORd ", KEYWORD )
 x, y= np.array(coord_list).T
 plt.scatter(x,y)
 plt.show()
+
 #time.sleep(100)
 
 #first_id = get_places.getplaces(API_KEY, coord_list, DATABASE_DIR, CITY, KEYWORD) + 1
-first_id = 6650
+first_id = 12443
 #add place detail will have to start on the index of the first added by getplaces: this is the lastid from getplaces + 1
 
 add_place_detail.populate_populartimes(API_KEY, first_id, DATABASE_DIR)
