@@ -13,7 +13,7 @@ from os.path import expanduser
 
 def index(request, city="nocity"):
     city2tz = {'vancouver': 'America/Vancouver', 'los_angeles':  'America/Vancouver', 'silicon_valley': 'America/Vancouver',
-                'portland': 'America/Vancouver', 'seattle': 'America/Vancouver',
+            'portland': 'America/Vancouver', 'seattle': 'America/Vancouver', 'montreal': 'America/Montreal',
                'new_york': 'America/Toronto', 'toronto': 'America/Toronto', 'victoria': 'America/Vancouver', 'las_vegas': 'America/Vancouver'}
     popupflag = False
     if(city=="nocity"):
