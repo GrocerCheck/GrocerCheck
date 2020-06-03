@@ -265,17 +265,21 @@ montreal_bounds = [
             ],
         ]
 
+#-------------variables----------
 API_KEY = open("/home/ihasdapie/keys/gmapkey.txt").readline()
 
 DATABASE_DIR = os.path.dirname(os.path.dirname(os.getcwd())) + "/db1.sqlite3"
-KEYWORD = "costco"
+KEYWORD = "grocery"
 
-#SCRAPE THREE TIMES W/ keywords: "department store", "grocery", "mall"
+#SCRAPE THREE TIMES W/ keywords: "department store", "grocery", "mall", "costco"
 # consider implementing filter on index.html for grocery only (& costco for whatever godforsaken reason)
+
 RADIUS = 10000 #in meters
 SPACING = ((2*RADIUS)/(2**(0.5)))/1000
 
-print(RADIUS, SPACING)
+#-------------------------------
+
+print("radius, ", RADIUS,"spacing, ", SPACING)
 CITY = "montreal"
 
 print("DATABASE DIR: ", DATABASE_DIR)
