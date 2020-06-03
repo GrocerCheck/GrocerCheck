@@ -559,9 +559,9 @@ function initMap() {
 			s='grey';
 		}
 //return formatted html of infowindow
-		return '<div id="content">' + 
-			'<h1 style="color:'+s+';"> '+names[x]+' </h1>' +
-			'<div id="body"'+
+		return '<div style: "display: inline-block" id="content">' + 
+			'<h1 style="margin-top: -3px; margin-bottom: -4px; padding: 5px 5px 10px 5px; border-radius: 10px 10px 0px 0px; background-color: #35605A; color: '+s+'"> '+names[x]+'</h1>' +
+			'<div style = "margin-bottom: -4px; padding: 10px 5px 5px 5px; color: white; background-color: #35CE8D; border-radius: 0px 0px 10px 10px;" id="body"'+
 			'<p> '+address[x]+' </p>'+
 			'<p> '+hours[x]+' </p>'+
 			'<p> '+statusstring+' </p>'+
