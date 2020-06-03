@@ -74,9 +74,28 @@ silconValley_bounds =[
 
 
 newYork_bounds = [
-
+        [
+            (40.50103108, -74.35654554), #staten island, woodbridge township
+            (40.65183645, -74.05654387), #hudson county/new york/yorkbay x-section
+            ],
+        [
+            (40.65240824, -74.27912621), #bottom left of elizabeth
+            (40.95000005, -74.0436068),  #above paramus, directly in line with previous x-section on vertical axis
+            ],
+        [
+            (40.54997004, -74.05041087),
+            (40.94322173, -73.78171402), #big block across new york, brooklyn, manhatten, bronx, yonkers
+            ],
+        [
+            (40.58815184, -73.80265667),
+            (40.84053667, -73.73405457), #queens
+            ]
 
         ]
+
+
+
+
 
 lasVegas_bounds = [
         [
@@ -235,18 +254,36 @@ toronto_bounds = [
         ]
 
 
+montreal_bounds = [
+        [
+            (45.68078868, -73.57781145),
+            (45.7938922, -73.28804704),
+            ],
+        [
+            (45.35527313, -74.01639059),
+            (45.69202982, -73.34897116),
+            ],
+        ]
+
+#-------------variables----------
 API_KEY = open("/home/ihasdapie/keys/gmapkey.txt").readline()
 
 DATABASE_DIR = os.path.dirname(os.path.dirname(os.getcwd())) + "/db1.sqlite3"
 KEYWORD = "grocery"
 
-#SCRAPE THREE TIMES W/ keywords: "department store", "grocery", "mall"
+#SCRAPE THREE TIMES W/ keywords: "department store", "grocery", "mall", "costco"
 # consider implementing filter on index.html for grocery only (& costco for whatever godforsaken reason)
 
-CITY = "silicon_valley"
+RADIUS = 10000 #in meters
+SPACING = ((2*RADIUS)/(2**(0.5)))/1000
+
+#-------------------------------
+
+print("radius, ", RADIUS,"spacing, ", SPACING)
+CITY = "montreal"
 
 print("DATABASE DIR: ", DATABASE_DIR)
-coord_list = gencoords.gen_coords(silconValley_bounds, 1.67)
+coord_list = gencoords.gen_coords(montreal_bounds, SPACING)
 
 
 print("NUM COORDS: ", len(coord_list))
@@ -257,10 +294,10 @@ print("CITY ", CITY, " KEYWORd ", KEYWORD )
 x, y= np.array(coord_list).T
 plt.scatter(x,y)
 plt.show()
-#time.sleep(100)
 
-#first_id = get_places.getplaces(API_KEY, coord_list, DATABASE_DIR, CITY, KEYWORD) + 1
-first_id = 6650
+
+first_id = get_places.getplaces(API_KEY, coord_list, DATABASE_DIR, CITY, KEYWORD, RADIUS) + 1
+
 #add place detail will have to start on the index of the first added by getplaces: this is the lastid from getplaces + 1
 
 add_place_detail.populate_populartimes(API_KEY, first_id, DATABASE_DIR)
