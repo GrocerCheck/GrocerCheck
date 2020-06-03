@@ -59,7 +59,7 @@ def get_added(conn, city):
     return existing
 
 
-def getplaces(API_KEY, coords, database_dir, city, keyword):
+def getplaces(API_KEY, coords, database_dir, city, keyword, radius):
     conn = create_connection(database_dir)
     added = get_added(conn, city)
 
@@ -71,7 +71,7 @@ def getplaces(API_KEY, coords, database_dir, city, keyword):
         print("coord", line, " of ", len(coords))
         clat = coords[line][0]
         clng = coords[line][1]
-        r = 1200
+        r = radius
 
         nextpage = ''
         flag = True

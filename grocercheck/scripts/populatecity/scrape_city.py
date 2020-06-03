@@ -254,18 +254,32 @@ toronto_bounds = [
         ]
 
 
+montreal_bounds = [
+        [
+            (45.68078868, -73.57781145),
+            (45.7938922, -73.28804704),
+            ],
+        [
+            (45.35527313, -74.01639059),
+            (45.69202982, -73.34897116),
+            ],
+        ]
+
 API_KEY = open("/home/ihasdapie/keys/gmapkey.txt").readline()
 
 DATABASE_DIR = os.path.dirname(os.path.dirname(os.getcwd())) + "/db1.sqlite3"
-KEYWORD = "grocery"
+KEYWORD = "costco"
 
 #SCRAPE THREE TIMES W/ keywords: "department store", "grocery", "mall"
 # consider implementing filter on index.html for grocery only (& costco for whatever godforsaken reason)
+RADIUS = 10000 #in meters
+SPACING = ((2*RADIUS)/(2**(0.5)))/1000
 
-CITY = "new_york"
+print(RADIUS, SPACING)
+CITY = "montreal"
 
 print("DATABASE DIR: ", DATABASE_DIR)
-coord_list = gencoords.gen_coords(newYork_bounds, 1.67)
+coord_list = gencoords.gen_coords(montreal_bounds, SPACING)
 
 
 print("NUM COORDS: ", len(coord_list))
@@ -277,10 +291,9 @@ x, y= np.array(coord_list).T
 plt.scatter(x,y)
 plt.show()
 
-#time.sleep(100)
 
-#first_id = get_places.getplaces(API_KEY, coord_list, DATABASE_DIR, CITY, KEYWORD) + 1
-first_id = 12443
+first_id = get_places.getplaces(API_KEY, coord_list, DATABASE_DIR, CITY, KEYWORD, RADIUS) + 1
+
 #add place detail will have to start on the index of the first added by getplaces: this is the lastid from getplaces + 1
 
 add_place_detail.populate_populartimes(API_KEY, first_id, DATABASE_DIR)
