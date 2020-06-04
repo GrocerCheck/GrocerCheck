@@ -55,10 +55,11 @@ elif (("dev" in servername) or ("DEV" in servername)):
 else:
     DEBUG = True
 
-DEBUG = True
 
 
-ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca', 'vancouver.grocercheck.ca','52.13.81.19', '44.230.40.10', '52.10.195.42','127.0.0.1', '172.26.0.205', '172.26.28.120', '172.26.11.143', '172.26.1.22', '172.26.10.238', '172.26.3.142']
+ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca',
+                 '52.13.81.19', '44.230.40.10', '52.10.195.42',  '54.188.229.231', '172.26.13.17', '127.0.0.1', '172.26.0.205',
+                 '172.26.28.120', '172.26.11.143', '172.26.1.22', '172.26.10.238', '172.26.3.142']
 # Application definition
 
 INSTALLED_APPS = [
@@ -262,11 +263,11 @@ if ("BS" in servername):
         # },
 
 
-#         'UPDATE_MONTREAL_POPULARITY':{
-#             'task': 'update_current_popularity',
-#             'schedule': crontab(minute='4-59/10'),
-#             'args': ("", "montreal", "America/Montreal", False, False, p, 16), #US address include country
-#         },
+        'UPDATE_MONTREAL_POPULARITY':{
+            'task': 'update_current_popularity',
+            'schedule': crontab(minute='4-59/10'),
+            'args': ("Canada", "montreal", "America/Montreal", False, False, p, 16), #US address include country
+        },
 
 
 

@@ -2,27 +2,25 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167491754-1"></script>
-
-
-        <script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-gtag('config', 'UA-167491754-1');
-        </script>
+	<head>
         <script data-ad-client="ca-pub-8362595471467364" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>GrocerCheck</title>
-        <meta name="description" content="GrocerCheck: Your Local Grocery and Supermarket Social Distancing Search Engine" />
-        <meta name="robots" content="index,follow" />
-        <link rel="canonical" href="https://grocercheck.ca" /> 		
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-167491754-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-        <script src="https://kit.fontawesome.com/530a9c0639.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  gtag('config', 'UA-167491754-1');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>GrocerCheck</title>
+		<meta name="description" content="GrocerCheck: Your Local Grocery and Supermarket Social Distancing Search Engine" />
+		<meta name="robots" content="index,follow" />
+		<link rel="canonical" href="https://grocercheck.ca" /> 		
+		
+		<script src="https://kit.fontawesome.com/530a9c0639.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
         <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
         <link rel='stylesheet' href = "{% static 'css/floatingmenu.css' %}">
@@ -30,26 +28,26 @@ gtag('config', 'UA-167491754-1');
         <link rel='stylesheet' href = "{% static 'css/help.css' %}">
         <link rel='stylesheet' href = "{% static 'css/modalstyle.css' %}">
         <link rel='stylesheet' href = "{% static 'css/search.css' %}">
-        <link rel='stylesheet' href = "{% static 'css/select.css' %}">
+	<link rel='stylesheet' href = "{% static 'css/select.css' %}">
         <link rel='shortcut icon' type='image/png' href="{% static 'favicon.ico' %}" />
 
         <style>
-/* Set the size of the div element that contains the map */
+            /* Set the size of the div element that contains the map */
 
-body{
-    font-family: 'Nunito';
-}
+            body{
+                font-family: 'Nunito';
+            }
 
             #map {
                 height: 100%;
                 width: 100%;
             }
-            html, body {
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
-
+                html, body {
+                    height: 100%;
+                    margin: 0;
+                    padding: 0;
+                }
+                
             #paypalbutton {
                 position: absolute;
                 width: auto;
@@ -60,32 +58,33 @@ body{
                 padding-bottom: 0;
                 margin-right: 1%;
                 z-index: 502;
-            }
+                }
 
-            #disclaimercontent{
-                top: 30%;
-                margin-top: 100px;
-            }
+	    #disclaimercontent{
+		top: 30%;
+		margin-top: 100px;
+	    }
+	    
 
 
+		</style>    
+	</head>
+	<body>
 
-        </style>    
-    </head>
-    <body>
+		<div id="cityselectdiv" class="custom-select" style="width: 200px;">
 
-        <div id="cityselectdiv" class="custom-select" style="width: 200px;">
+		<select id="cityselect">
+			<option value="0">Select Region...</option>
+			<option value="vancouver">Vancouver, BC</option>
+			<option value="seattle">Seattle, WA</option>
+			<option value="victoria">Victoria, BC</option>
+            <option value="toronto">Toronto, ON</option>
+	        <option value="las_vegas">Las Vegas, NV</option>
+            <option value="silicon_valley">Silicon Valley, CA</option>
+            <option value="montreal">Montreal, QC</option>
+        </select>
 
-            <select id="cityselect">
-                <option value="0">Select Region...</option>
-                <option value="vancouver">Vancouver, BC</option>
-                <option value="seattle">Seattle, WA</option>
-                <option value="victoria">Victoria, BC</option>
-                <option value="toronto">Toronto, ON</option>
-                <option value="las_vegas">Las Vegas, NV</option>
-                <option value="silicon_valley">Silicon Valley, CA</option>
-            </select>
-
-        </div>
+		</div>
 
 <script>
 
@@ -363,7 +362,6 @@ document.getElementById("disclaimerclose").onclick = function(){
 
 
 		<script>
-			
 			var floatingvisible = false;
 			document.getElementById("floating_menu").style.display = "none";
 	document.getElementById("viewbutton").onclick = function(){
@@ -443,16 +441,13 @@ var usermarker;
 var lat = [];
 var lng = [];
 var hasloc = false;
-
 function initMap() {
 
-	
 
     var cityname = {{city|safe}}[0];
 
-    var zoom = {'vancouver': 12, "seattle": 11, 'victoria': 13, "toronto": 11, "las_vegas": 11, "silicon_valley": 10};
-	var centerpositions = {'vancouver': {lat:49.2577143,lng:-123.0939433}, 'seattle': {lat:47.6129432,lng:-122.382146}, 'victoria': {lat:48.4262038,lng:-123.3642418}, 'toronto': {lat:43.7181557,lng:-79.51814}, 'las_vegas': {lat:36.1249185,lng:-115.2150827}, 'silicon_valley': {lat:37.502473,lng:-122.3212771}}
-
+    var zoom = {'vancouver': 12, "seattle": 11, 'victoria': 13, "toronto": 11, "las_vegas": 11, "silicon_valley": 10, "montreal": 10};
+	var centerpositions = {'vancouver': {lat:49.2577143,lng:-123.0939433}, 'seattle': {lat:47.6129432,lng:-122.382146}, 'victoria': {lat:48.4262038,lng:-123.3642418}, 'toronto': {lat:43.7181557,lng:-79.51814}, 'las_vegas': {lat:36.1249185,lng:-115.2150827}, 'silicon_valley': {lat:37.502473,lng:-122.3212771}, 'montreal': {lat:45.534380,lng=-73.628963}}
     var zoomlevel = zoom[cityname];
 	var centerposition = centerpositions[cityname];
 
@@ -949,8 +944,7 @@ function showAll(){
 	  * The callback parameter executes the initMap() function
 		-->
 		<script async defer
-			src="https://maps.googleapis.com/maps/api/js?key={{ apikey }}&callback=initMap">
-
+         src="https://maps.googleapis.com/maps/api/js?key={{ apikey }}&callback=initMap">
 		</script>
 
         
