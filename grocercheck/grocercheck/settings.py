@@ -263,11 +263,11 @@ if ("BS" in servername):
         # },
 
 
-#         'UPDATE_MONTREAL_POPULARITY':{
-#             'task': 'update_current_popularity',
-#             'schedule': crontab(minute='4-59/10'),
-#             'args': ("", "montreal", "America/Montreal", False, False, p, 16), #US address include country
-#         },
+        'UPDATE_MONTREAL_POPULARITY':{
+            'task': 'update_current_popularity',
+            'schedule': crontab(minute='4-59/10'),
+            'args': ("Canada", "montreal", "America/Montreal", False, False, p, 16), #US address include country
+        },
 
 
 
