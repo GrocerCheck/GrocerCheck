@@ -9,6 +9,7 @@ class ad_placement(models.Model):
     # ad_local_img = models.ImageField(storage = FileSystemStorage(location=settings.MEDIA_ROOT))
     ad_link = models.CharField(max_length=1000)
     ad_timestamp = models.DateTimeField()
+    ad_city = models.CharField(max_length=300)
 
 class blog_entry(models.Model):
     title = models.CharField(max_length=500)
