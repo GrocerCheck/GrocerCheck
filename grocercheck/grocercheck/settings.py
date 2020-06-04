@@ -162,8 +162,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/opt/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/map/static/'
+MEDIA_URL = '/media/'
 
+try:
+    MEDIA_ROOT = '/opt/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/map/media/'
+    STATIC_ROOT = '/opt/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/map/static/'
+except:
+#these dirs might be wrong lol but it shouldnt matter because we aren't using them much atm
+    MEDIA_ROOT = os.path.dirname(os.getcwd()) + "/map/media/"
+    STATIC_ROOT = os.path.dirname(os.getcwd()) + "/map/static/"
 
 #--------------------------------PROXY------------------------------
 try:

@@ -1,18 +1,24 @@
 from django.db import models
-
+from django.conf import settings
+# from django.core.files.storage import FileSystemStorage
 # Create your models here.
 
-
+class ad_placement(models.Model):
+    ad_blurb = models.TextField(max_length=10000)
+    ad_img_src = models.CharField(max_length=300)
+    # ad_local_img = models.ImageField(storage = FileSystemStorage(location=settings.MEDIA_ROOT))
+    ad_link = models.CharField(max_length=1000)
+    ad_timestamp = models.DateTimeField()
 
 class blog_entry(models.Model):
     title = models.CharField(max_length=500)
     author_name = models.CharField(max_length=100)
     author_blurb = models.CharField(max_length=200)
     date = models.CharField(max_length=100)
-    content = models.CharField(max_length=40000)
+    content = models.TextField(max_length=40000)
     image_blurb = models.CharField(max_length=500)
     article_sources = models.CharField(max_length=10000)
-
+    article_timestamp = models.DateTimeField()
 
 class Store(models.Model):
     ''' MODEL REPRESENTING A GROCERY STORE '''

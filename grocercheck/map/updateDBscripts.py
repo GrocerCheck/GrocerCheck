@@ -3,6 +3,7 @@ import psycopg2
 import psycopg2.extras
 import sqlite3
 import json
+import datetime
 
 def create_pgsql_connection(dbname, user, password, host, port):
     conn = None
@@ -168,7 +169,12 @@ def updateMapStore(remote_conn, local_conn):
         ids_to_update = "("+", ".join([str(i) for i in range(remote_last_id+1, local_last_id+1)])+")"  #do not update local last id, be inclusive of upper bound
         l3_cur.execute("SELECT * FROM map_store WHERE map_store.id IN {row_ids}".format(row_ids=ids_to_update,))
         local_rows = l3_cur.fetchall()
-        sql = """INSERT INTO public.map_store (id, name, lat, lng, address, frihours, monhours, tuehours, wedhours, thuhours, sathours, sunhours, place_id, live_busyness, city, keywords, fri00, fri01, fri02, fri03, fri04, fri05, fri06, fri07, fri08, fri09, fri10, fri11, fri12, fri13, fri14, fri15, fri16, fri17, fri18, fri19, fri20, fri21, fri22, fri23, mon00, mon01, mon02, mon03, mon04, mon05, mon06, mon07, mon08, mon09, mon10, mon11, mon12, mon13, mon14, mon15, mon16, mon17, mon18, mon19, mon20, mon21, mon22, mon23, sat00, sat01, sat02, sat03, sat04, sat05, sat06, sat07, sat08, sat09, sat10, sat11, sat12, sat13, sat14, sat15, sat16, sat17, sat18, sat19, sat20, sat21, sat22, sat23, sun00, sun01, sun02, sun03, sun04, sun05, sun06, sun07, sun08, sun09, sun10, sun11, sun12, sun13, sun14, sun15, sun16, sun17, sun18, sun19, sun20, sun21, sun22, sun23, thu00, thu01, thu02, thu03, thu04, thu05, thu06, thu07, thu08, thu09, thu10, thu11, thu12, thu13, thu14, thu15, thu16, thu17, thu18, thu19, thu20, thu21, thu22, thu23, tue00, tue01, tue02, tue03, tue04, tue05, tue06, tue07, tue08, tue09, tue10, tue11, tue12, tue13, tue14, tue15, tue16, tue17, tue18, tue19, tue20, tue21, tue22, tue23, wed00, wed01, wed02, wed03, wed04, wed05, wed06, wed07, wed08, wed09, wed10, wed11, wed12, wed13, wed14, wed15, wed16, wed17, wed18, wed19, wed20, wed21, wed22, wed23) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        sql = """INSERT INTO public.map_store (id, name, lat, lng, address, frihours, monhours, tuehours, wedhours, thuhours, sathours, sunhours, place_id, live_busyness, city, keywords, fri00, fri01, fri02, fri03, fri04, fri05, fri06, fri07, fri08, fri09, fri10, fri11, fri12, fri13, fri14, fri15, fri16, fri17, fri18, fri19, fri20, fri21, fri22, fri23, mon00, mon01, mon02, mon03, mon04, mon05, mon06, mon07, mon08, mon09, mon10, mon11, mon12, mon13, mon14, mon15, mon16, mon17, mon18, mon19,
+        mon20, mon21, mon22, mon23, sat00, sat01, sat02, sat03, sat04, sat05, sat06, sat07, sat08, sat09, sat10, sat11, sat12, sat13, sat14, sat15, sat16, sat17, sat18, sat19, sat20, sat21, sat22, sat23, sun00, sun01, sun02, sun03, sun04, sun05, sun06, sun07, sun08, sun09, sun10, sun11, sun12, sun13, sun14, sun15, sun16, sun17, sun18, sun19, sun20, sun21, sun22, sun23, thu00, thu01, thu02, thu03, thu04, thu05, thu06, thu07, thu08, thu09, thu10, thu11, thu12, thu13, thu14, thu15, thu16, thu17,
+        thu18, thu19, thu20, thu21, thu22, thu23, tue00, tue01, tue02, tue03, tue04, tue05, tue06, tue07, tue08, tue09, tue10, tue11, tue12, tue13, tue14, tue15, tue16, tue17, tue18, tue19, tue20, tue21, tue22, tue23, wed00, wed01, wed02, wed03, wed04, wed05, wed06, wed07, wed08, wed09, wed10, wed11, wed12, wed13, wed14, wed15, wed16, wed17, wed18, wed19, wed20, wed21, wed22, wed23) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
+        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
+        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+
         for fetched_row in local_rows:
             data = [fetched_row['id'], fetched_row['name'], fetched_row['lat'], fetched_row['lng'], fetched_row['address'], fetched_row['frihours'], fetched_row['monhours'], fetched_row['tuehours'], fetched_row['wedhours'], fetched_row['thuhours'], fetched_row['sathours'], fetched_row['sunhours'], fetched_row['place_id'], fetched_row['live_busyness'], fetched_row['city'], fetched_row['keywords'], fetched_row['fri00'], fetched_row['fri01'], fetched_row['fri02'], fetched_row['fri03'],
                     fetched_row['fri04'], fetched_row['fri05'], fetched_row['fri06'], fetched_row['fri07'], fetched_row['fri08'], fetched_row['fri09'], fetched_row['fri10'], fetched_row['fri11'], fetched_row['fri12'], fetched_row['fri13'], fetched_row['fri14'], fetched_row['fri15'], fetched_row['fri16'], fetched_row['fri17'], fetched_row['fri18'], fetched_row['fri19'], fetched_row['fri20'], fetched_row['fri21'], fetched_row['fri22'], fetched_row['fri23'], fetched_row['mon00'],
@@ -192,16 +198,7 @@ def updateMapStore(remote_conn, local_conn):
 
 
 def updateLocalRowFromRemoteMap(remote_conn, local_conn):
-    """
 
-    remote(data) --> local(data)
-
-    :param remote_conn: a psycopg2 connection (all remote connections for this task will be postgreSQL)
-    :param local_conn: a sqlite3 connection (all local connections for this task will be sqlite3)
-
-    Checks if there are rows in remote not found on local. If so, add those rows to local.
-
-    """
     print("CALLED updateLocalRowFromRemoteMap")
     remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
     local_conn = create_sqlite3_connection(local_conn)
@@ -219,7 +216,12 @@ def updateLocalRowFromRemoteMap(remote_conn, local_conn):
         ids_to_update = tuple([i for i in range(local_last_id+1, remote_last_id+1)])  #do not update local last id, be inclusive of upper bound
         pg_dict_cur.execute("SELECT * FROM public.map_store WHERE id in %s", (ids_to_update,))
         remote_rows = pg_dict_cur.fetchall()
-        sql = """INSERT INTO map_store (id, name, lat, lng, address, frihours, monhours, tuehours, wedhours, thuhours, sathours, sunhours, place_id, live_busyness, city, keywords, fri00, fri01, fri02, fri03, fri04, fri05, fri06, fri07, fri08, fri09, fri10, fri11, fri12, fri13, fri14, fri15, fri16, fri17, fri18, fri19, fri20, fri21, fri22, fri23, mon00, mon01, mon02, mon03, mon04, mon05, mon06, mon07, mon08, mon09, mon10, mon11, mon12, mon13, mon14, mon15, mon16, mon17, mon18, mon19, mon20, mon21, mon22, mon23, sat00, sat01, sat02, sat03, sat04, sat05, sat06, sat07, sat08, sat09, sat10, sat11, sat12, sat13, sat14, sat15, sat16, sat17, sat18, sat19, sat20, sat21, sat22, sat23, sun00, sun01, sun02, sun03, sun04, sun05, sun06, sun07, sun08, sun09, sun10, sun11, sun12, sun13, sun14, sun15, sun16, sun17, sun18, sun19, sun20, sun21, sun22, sun23, thu00, thu01, thu02, thu03, thu04, thu05, thu06, thu07, thu08, thu09, thu10, thu11, thu12, thu13, thu14, thu15, thu16, thu17, thu18, thu19, thu20, thu21, thu22, thu23, tue00, tue01, tue02, tue03, tue04, tue05, tue06, tue07, tue08, tue09, tue10, tue11, tue12, tue13, tue14, tue15, tue16, tue17, tue18, tue19, tue20, tue21, tue22, tue23, wed00, wed01, wed02, wed03, wed04, wed05, wed06, wed07, wed08, wed09, wed10, wed11, wed12, wed13, wed14, wed15, wed16, wed17, wed18, wed19, wed20, wed21, wed22, wed23) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"""
+        sql = """INSERT INTO map_store (id, name, lat, lng, address, frihours, monhours, tuehours, wedhours, thuhours, sathours, sunhours, place_id, live_busyness, city, keywords, fri00, fri01, fri02, fri03, fri04, fri05, fri06, fri07, fri08, fri09, fri10, fri11, fri12, fri13, fri14, fri15, fri16, fri17, fri18, fri19, fri20, fri21, fri22, fri23, mon00, mon01, mon02, mon03, mon04, mon05, mon06, mon07, mon08, mon09, mon10, mon11, mon12, mon13, mon14, mon15, mon16, mon17, mon18, mon19, mon20,
+        mon21, mon22, mon23, sat00, sat01, sat02, sat03, sat04, sat05, sat06, sat07, sat08, sat09, sat10, sat11, sat12, sat13, sat14, sat15, sat16, sat17, sat18, sat19, sat20, sat21, sat22, sat23, sun00, sun01, sun02, sun03, sun04, sun05, sun06, sun07, sun08, sun09, sun10, sun11, sun12, sun13, sun14, sun15, sun16, sun17, sun18, sun19, sun20, sun21, sun22, sun23, thu00, thu01, thu02, thu03, thu04, thu05, thu06, thu07, thu08, thu09, thu10, thu11, thu12, thu13, thu14, thu15, thu16, thu17, thu18,
+        thu19, thu20, thu21, thu22, thu23, tue00, tue01, tue02, tue03, tue04, tue05, tue06, tue07, tue08, tue09, tue10, tue11, tue12, tue13, tue14, tue15, tue16, tue17, tue18, tue19, tue20, tue21, tue22, tue23, wed00, wed01, wed02, wed03, wed04, wed05, wed06, wed07, wed08, wed09, wed10, wed11, wed12, wed13, wed14, wed15, wed16, wed17, wed18, wed19, wed20, wed21, wed22, wed23) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, i?)"""
+
+
         for fetched_row in remote_rows:
             data = [fetched_row['id'], fetched_row['name'], fetched_row['lat'], fetched_row['lng'], fetched_row['address'], fetched_row['frihours'], fetched_row['monhours'], fetched_row['tuehours'], fetched_row['wedhours'], fetched_row['thuhours'], fetched_row['sathours'], fetched_row['sunhours'], fetched_row['place_id'], fetched_row['live_busyness'], fetched_row['city'], fetched_row['keywords'], fetched_row['fri00'], fetched_row['fri01'], fetched_row['fri02'], fetched_row['fri03'],
                     fetched_row['fri04'], fetched_row['fri05'], fetched_row['fri06'], fetched_row['fri07'], fetched_row['fri08'], fetched_row['fri09'], fetched_row['fri10'], fetched_row['fri11'], fetched_row['fri12'], fetched_row['fri13'], fetched_row['fri14'], fetched_row['fri15'], fetched_row['fri16'], fetched_row['fri17'], fetched_row['fri18'], fetched_row['fri19'], fetched_row['fri20'], fetched_row['fri21'], fetched_row['fri22'], fetched_row['fri23'], fetched_row['mon00'],
@@ -239,6 +241,132 @@ def updateLocalRowFromRemoteMap(remote_conn, local_conn):
 
     else:
         print("LOCAL IS EVEN WITH REMOTE")
+
+
+
+
+#----------------------ADs------------------
+
+def syncAds(remote_conn, local_conn):
+    remote_creds = remote_conn
+    local_creds = local_conn
+
+
+    remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
+    local_conn = create_sqlite3_connection(local_conn)
+
+    local_conn.row_factory = sqlite3.Row
+
+    pg_dict_cur = remote_conn.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
+
+    pg_cur = remote_conn.cursor()
+    l3_cur = local_conn.cursor()
+    # grab latest update from remote and local.
+    # if local latest time < remote latest, update all posts by pulling
+    # if local latest time > remote latest, update all pots by pushing
+    # if the last ids are not in sync, sync em
+
+    pg_cur.execute("SELECT map_ad_placement.id FROM public.map_ad_placement ORDER BY public.map_ad_placement.id DESC LIMIT 1")
+    l3_cur.execute("SELECT map_ad_placement.id FROM map_ad_placement ORDER BY map_ad_placement.id DESC LIMIT 1")
+
+    remote_last_id = pg_cur.fetchall()[0][0]
+    local_last_id = l3_cur.fetchall()[0][0]
+
+
+    if (remote_last_id < local_last_id):
+        updateRemoteFromLocalAd(remote_creds, local_creds)
+    if (remote_last_id > local_last_id):
+        updateLocalRowFromRemoteAd(remote_creds, local_creds)
+
+    # now for the sync
+    pg_cur.execute("SELECT id, ad_timestamp from public.map_ad_placement")
+    l3_cur.execute("SELECT id, ad_timestamp from public.map_ad_placement")
+
+    # [ [id, ad_timestamp], [id, ad_timestamp, ]
+
+    remote_id_timestamps = pg_cur.fetchall()
+    local_id_timestamps = l3_cur.fetchall()
+    remote_id_timestamps = [(x[0], datetime.strptime(x[1])) for x in remote_id_timestamps]
+    local_id_timestamps = [(x[0], datetime.strptime(x[1])) for x in local_id_timestamps]
+
+    for i in range(len(remote_id_timestamps)):
+        if (remote_id_timestamps[i] < local_id_timestamps[i]):
+            #grab local data, update remote with it
+            l3_cur.execute("SELECT id, ad_blurb, ad_img_src, ad_link, ad_timestamp FROM map_ad_placement")
+            data = l3_cur.fetchall()
+            data = [data['ad_blurb'], data['ad_img_src'], data['ad_link'], data['ad_timestamp'], data['id']]
+            pg_cur.execute("UPDATE public.map_ad_placement SET ad_blurb=%s, ad_img_src=%s, ad_link=%s, ad_timestamp=%s WHERE id=%s", data)
+            remote_conn.commit()
+
+        if (remote_id_timestamps[i] > local_id_timestamps[i]):
+            #grab remote data, update local with it
+            pg_dict_cur.execute("SELECT id, ad_blurb, ad_img_src, ad_link, ad_timestamp FROM public.map_ad_placement")
+            data = pg_dict_cur.fetchall()
+            data = [data['ad_blurb'], data['ad_img_src'], data['ad_link'], data['ad_timestamp'], data['id']]
+            l3_cur.execute("UPDATE public.map_ad_placement SET ad_blurb=%s, ad_img_src=%s, ad_link=%s, ad_timestamp=%s WHERE id=%s", data)
+            local_conn.commit()
+
+
+
+
+def updateRemoteFromLocalAd(remote_conn, local_conn):
+    remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
+    local_conn = create_sqlite3_connection(local_conn)
+
+    local_conn.row_factory = sqlite3.Row
+
+    pg_cur = remote_conn.cursor()
+    l3_cur = local_conn.cursor()
+
+    ids_to_update = "("+", ".join([str(i) for i in range(remote_last_id+1, local_last_id+1)])+")"  #do not update local last id, be inclusive of upper bound
+        #turn ids_to_update into a string bc of sqlite3 stuff
+
+    l3_cur.execute("SELECT * FROM map_ad_placement WHERE map_ad_placement.id IN {row_ids}".format(row_ids=ids_to_update,))
+    local_rows = l3_cur.fetchall()
+    sql = "INSERT INTO public.map_ad_placement (id, ad_blurb, ad_img_src, ad_link, ad_timestamp) VALUES (%s, %s, %s, %s, %s)"
+
+    for fetched_row in local_rows:
+        data = [fetched_row['id'], fetched_row['ad_blurb'], fetched_row['ad_img_src'], fetched_row['ad_timestamp']]
+        pg_cur.execute(sql, data)
+    remote_conn.commit()
+
+    print("UPDATE REMOTE AD_PLACEMENT FROM LOCAL COMPLETE")
+
+
+def updateLocalRowFromRemoteAd(remote_conn, local_conn):
+    remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
+    local_conn = create_sqlite3_connection(local_conn)
+
+    pg_dict_cur = remote_conn.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
+    pg_cur = remote_conn.cursor()
+    l3_cur = local_conn.cursor()
+
+    pg_cur.execute("SELECT public.map_blog_entry.id FROM public.map_blog_entry ORDER BY public.map_blog_entry.id DESC LIMIT 1")
+    l3_cur.execute("SELECT map_blog_entry.id FROM map_blog_entry ORDER BY map_blog_entry.id DESC LIMIT 1")
+
+    remote_last_id = pg_cur.fetchall()[0][0]
+    local_last_id = l3_cur.fetchall()[0][0]
+
+
+    ids_to_update = tuple([i for i in range(local_last_id+1, remote_last_id+1)])  #do not update local last id, be inclusive of upper bound
+    pg_dict_cur.execute("SELECT * FROM public.map_ad_placement WHERE id in %s", (ids_to_update,))
+    remote_rows = pg_dict_cur.fetchall()
+
+    sql = "INSERT INTO map_ad_placement (id, ad_blurb, ad_img_src, ad_link, ad_timestamp) VALUES (?, ?, ?, ?, ?)"
+    for fetched_row in remote_rows:
+        data = [fetched_row['id'], fetched_row['ad_blurb'], fetched_row['ad_img_src'], fetched_row['ad_timestamp']]
+        l3_cur.execute(sql, data)
+
+    local_conn.commit()
+
+    print("UPDATE LOCAL AD_PLACEMENT FROM REMOTE COMPLETE")
+
+
+
+
+
+
+
 
 
 
