@@ -29,6 +29,7 @@
         <link rel='stylesheet' href = "{% static 'css/modalstyle.css' %}">
         <link rel='stylesheet' href = "{% static 'css/search.css' %}">
 	<link rel='stylesheet' href = "{% static 'css/select.css' %}">
+	<link rel='stylesheet' href = "{% static 'css/aiya.css' %}">
         <link rel='shortcut icon' type='image/png' href="{% static 'favicon.ico' %}" />
 
         <style>
@@ -194,6 +195,12 @@ z-index: 1999;
 			<button id="helpbutton"><i class="fa fa-question"></i></button>
 		</div>
 
+		<div id="aiya">
+			<a href="{{links|slice:"1:-1"}}" target="_blank">
+			<img alt="aiya image" id="aiyaimage" src="{{images|slice:"1:-1"}}" />
+			<p id="aiyablurb">{{blurbs|slice:"1:-1"}}</p>
+			</a>
+		</div>
 
 		<div id="viewdiv">
 			<button id="viewbutton"><i id="viewbuttonlabel" class="fas fa-chevron-down"></i></button>

@@ -1,0 +1,27 @@
+#aiya{
+	position: absolute;
+	right: 0;
+	width: 15%;
+	z-index: 10000;
+	top: 50%;
+	background-color: #35605A;
+	border-radius: 20px;
+	text-align: center;
+	text-decoration: none;
+}
+#aiya a{
+	text-decoration: none;
+}
+#aiya:hover{
+	background-color: #35CE8D;
+}
+#aiyaimage{
+	position: relative;
+	width: 100%;
+
+}
+
+#aiyablurb{
+	text-decoration: none;
+	color: white;
+}
