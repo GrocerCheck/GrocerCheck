@@ -24,7 +24,7 @@ from django.urls import path
 from .views import submit_view
 
 urlpatterns = [
-        path('admin/', admin.site.urls),
+        path('we-aim-to-please-me/', admin.site.urls),
         path('map/', include('map.urls')),
         path('', RedirectView.as_view(url='map/')),
         path('submit/', submit_view),
