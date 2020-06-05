@@ -48,13 +48,14 @@ except:
 
 # SECURITY WARNING: don't run with debug turned on in production
 
-if("bitnami" in BASE_DIR):
-    DEBUG = False
-elif (("dev" in servername) or ("DEV" in servername)):
-    DEBUG = True
-else:
+if (("dev" in servername) or ("DEV" in servername)):
     DEBUG = True
 
+elif ("bitnami" in BASE_DIR):
+    DEBUG = False
+
+else:
+    DEBUG = True
 
 
 ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca',
@@ -263,11 +264,11 @@ if ("BS" in servername):
         # },
 
 
-#         'UPDATE_MONTREAL_POPULARITY':{
-#             'task': 'update_current_popularity',
-#             'schedule': crontab(minute='4-59/10'),
-#             'args': ("", "montreal", "America/Montreal", False, False, p, 16), #US address include country
-#         },
+        'UPDATE_MONTREAL_POPULARITY':{
+            'task': 'update_current_popularity',
+            'schedule': crontab(minute='4-59/10'),
+            'args': ("Canada", "montreal", "America/Montreal", False, False, p, 16), #US address include country
+        },
 
 
 
