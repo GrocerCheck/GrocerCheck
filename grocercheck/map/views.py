@@ -9,6 +9,7 @@ from map.models import Store
 import json
 import os
 from os.path import expanduser
+import random
 
 
 def index(request, city="nocity"):
@@ -53,6 +54,13 @@ def index(request, city="nocity"):
     else:
         context['popupflag'].append("no")
     conn = sqlite3.connect(os.path.join(settings.BASE_DIR,'db1.sqlite3'))
+    cur = conn.cursor()
+    with conn:
+        cur.execute('''SELECT * FROM map_ad_placement WHERE ad_city LIKE '''+chr(39)+chr(37)+city+chr(37)+chr(39))
+        ad = random.choice(cur.fetchall())
+        context['blurbs'] = ad[1]
+        context['images'] = ad[2]
+        context['links'] = ad[3]
     cur = conn.cursor()
     for s in Store.objects.filter(city__exact=city):
         with conn:
