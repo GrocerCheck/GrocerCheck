@@ -48,10 +48,12 @@ except:
 
 # SECURITY WARNING: don't run with debug turned on in production
 
-if("bitnami" in BASE_DIR):
-    DEBUG = False
-elif (("dev" in servername) or ("DEV" in servername)):
+if (("dev" in servername) or ("DEV" in servername)):
     DEBUG = True
+
+elif ("bitnami" in BASE_DIR):
+    DEBUG = False
+
 else:
     DEBUG = True
 
