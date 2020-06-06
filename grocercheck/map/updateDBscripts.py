@@ -107,29 +107,50 @@ def updateFromDump(remote_conn):
     remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
     try:
         pg_cur = remote_conn.cursor()
-        cmd = """
-                create or replace function unpackData(
-                        n INTEGER DEFAULT 10
-                )
-                returns VOID as $$
-                declare
-                        rid RECORD;
-                        lpt_value INTEGER;
-                        lpt_dump JSON;
-                begin
-                        select public.lpt_buffer.lpt_dump into lpt_dump from public.lpt_buffer;
-                        for rid in select public.map_store.id from public.map_store
-                        loop
-                                update public.map_store
-                                set live_busyness=CAST(lpt_dump->>CAST(rid.id AS TEXT) AS INTEGER)
-                                where public.map_store.id = rid.id;
-                        end loop;
-                end;
+        # cmd = """
+        #         create or replace function unpackData(
+        #                 n INTEGER DEFAULT 10
+        #         )
+        #         returns VOID as $$
+        #         declare
+        #                 rid RECORD;
+        #                 lpt_value INTEGER;
+        #                 lpt_dump JSON;
+        #         begin
+        #                 select public.lpt_buffer.lpt_dump into lpt_dump from public.lpt_buffer;
+        #                 for rid in select public.map_store.id from public.map_store
+        #                 loop
+        #                         update public.map_store
+        #                         set live_busyness=CAST(lpt_dump->>CAST(rid.id AS TEXT) AS INTEGER)
+        #                         where public.map_store.id = rid.id;
+        #                 end loop;
+        #         end;
 
-                $$ LANGUAGE plpgsql;
-                select unpackData(0);
+        #         $$ LANGUAGE plpgsql;
+        #         select unpackData(0);
+        # """
+
+        procedure = """
+        CREATE OR REPLACE PROCEDURE public.unpack()
+            LANGUAGE 'plpgsql'
+        AS $BODY$declare
+            rid RECORD;
+            lpt_dump JSON;
+        begin
+            select public.lpt_buffer.lpt_dump into lpt_dump from public.lpt_buffer;
+            for rid in select public.map_store.id from public.map_store
+            loop
+                update public.map_store
+                set live_busyness=CAST(lpt_dump->>CAST(rid.id as TEXT) AS INTEGER)
+                where public.map_store.id=rid.id;
+            end loop;
+        end;$BODY$;
         """
-        pg_cur.execute(cmd)
+
+        call_procedure = "call unpack();"
+
+
+        pg_cur.execute(call_procedure)
         remote_conn.commit()
         print("UPDATEFROMDUMP COMPLETE")
     except:
