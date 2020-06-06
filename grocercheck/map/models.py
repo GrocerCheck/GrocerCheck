@@ -19,6 +19,7 @@ class blog_entry(models.Model):
     content = models.TextField(max_length=40000)
     image_blurb = models.CharField(max_length=500)
     article_sources = models.CharField(max_length=10000)
+
     article_timestamp = models.DateTimeField()
 
 class Store(models.Model):

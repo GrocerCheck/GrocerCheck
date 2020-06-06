@@ -38,9 +38,16 @@ def updateLocal(remote_conn, local_conn):
         for pair in remote_data:
             l3_cur.execute("UPDATE map_store SET live_busyness=? WHERE id=?", pair)
         local_conn.commit()
+        pg_cur.close()
         print("updateLOCAL complete")
+
     except:
         print("ERROR in updateLocal")
+
+    remote_conn.close()
+
+
+
 
 def updateRemoteLoop(remote_conn, local_conn):
     """
@@ -91,6 +98,9 @@ def updateRemoteDump(remote_conn, local_conn):
         local_data_dump = json.dumps(local_data_dump)
         pg_cur.execute("UPDATE public.lpt_buffer SET lpt_dump=%s WHERE public.lpt_buffer.id=1", (local_data_dump,))
         remote_conn.commit()
+
+        remote_conn.close()
+        pg_cur.close()
         print("UPDATE REMOTE DUMP COMPLETE, calling updateFromDump")
         updateFromDump(remote_creds)
 
@@ -132,6 +142,9 @@ def updateFromDump(remote_conn):
         """
         pg_cur.execute(cmd)
         remote_conn.commit()
+
+        pg_cur.close()
+        remote_conn.close()
         print("UPDATEFROMDUMP COMPLETE")
     except:
         print("ERROR IN UPDATEFROMDUMP")
@@ -188,8 +201,11 @@ def updateMapStore(remote_conn, local_conn):
 
             pg_cur.execute(sql, data)
         remote_conn.commit()
+        pg_cur.close()
+        remote_conn.close()
         print("UPDATE REMOTE MAP DATABASE FROM LOCAL COMPLETE")
-    if (remote_last_id > local_last_id):
+
+        if (remote_last_id > local_last_id):
         print("REMOTE IS AHEAD OF LOCAL; UPDATELOCALFROMREMOTE")
         updateLocalRowFromRemoteMap(remote_creds, local_creds)
 
@@ -235,6 +251,10 @@ def updateLocalRowFromRemoteMap(remote_conn, local_conn):
             l3_cur.execute(sql, data)
         local_conn.commit()
         print("UPDATE LOCAL MAP DATABASE FROM REMOTE COMPLETE")
+        pg_cur.close()
+        pg_dict_cur.close()
+        remote_conn.close()
+
     if (remote_last_id < local_last_id):
         print("REMOTE IS BEHIND LOCAL; NO CHANGES")
         # CALL updateRemoteRowFromLocal bc from here?
@@ -306,6 +326,8 @@ def syncAds(remote_conn, local_conn):
             l3_cur.execute("UPDATE public.map_ad_placement SET ad_blurb=%s, ad_img_src=%s, ad_link=%s, ad_timestamp=%s WHERE id=%s", data)
             local_conn.commit()
 
+    pg_cur.close()
+    remote_conn.close()
 
 
 
@@ -330,6 +352,8 @@ def updateRemoteFromLocalAd(remote_conn, local_conn):
         pg_cur.execute(sql, data)
     remote_conn.commit()
 
+    pg_cur.close()
+    remote_conn.close()
     print("UPDATE REMOTE AD_PLACEMENT FROM LOCAL COMPLETE")
 
 
@@ -358,12 +382,9 @@ def updateLocalRowFromRemoteAd(remote_conn, local_conn):
         l3_cur.execute(sql, data)
 
     local_conn.commit()
-
+    pg_cur.close()
+    remote_conn.close()
     print("UPDATE LOCAL AD_PLACEMENT FROM REMOTE COMPLETE")
-
-
-
-
 
 
 
@@ -415,6 +436,8 @@ def updateBlogStore(remote_conn, local_conn):
             pg_cur.execute(sql, data)
         remote_conn.commit()
         print("UPDATE REMOTE BLOG FROM LOCAL COMPLETE")
+        pg_cur.close()
+        remote_conn.close()
 
     if (remote_last_id > local_last_id):
         print("REMOTE IS AHEAD OF LOCAL; UPDATELOCALROWFROMREMOTEBLOG")
@@ -459,7 +482,8 @@ def updateLocalRowFromRemoteBlog(remote_conn, local_conn):
             l3_cur.execute(sql, data)
 
         local_conn.commit()
-
+        pg_cur.close()
+        remote_conn.close()
         print("UPDATE LOCAL BLOG FROM REMOTE COMPLETE")
 
     if (remote_last_id < local_last_id):
@@ -481,7 +505,8 @@ def updateBackup(remote_conn):
     """
     pg_cur.execute(sql)
     remote_conn.commit()
-
+    pg_cur.close()
+    remote_conn.close()
 
 #----------variables------------
 # pg_creds = json.load(open('/home/bitnami/keys/postgreDB.json'))
