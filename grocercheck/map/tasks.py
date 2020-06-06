@@ -15,11 +15,11 @@ from .updateDBscripts import *
 #        current_process()._config ={'semprefix':'/mp'}
 
 
-@task(name="upload_lpt", max_retries=3, default_retry_delay = 10, time_limit = 60)
+@task(name="upload_lpt", max_retries=3, default_retry_delay = 10, time_limit = 300)
 def upload_lpt(remote_conn, local_conn):
     updateRemoteDump(remote_conn, local_conn)
 
-@task(name="download_lpt", max_retries=3, default_retry_delay = 10, time_limit = 60)
+@task(name="download_lpt", max_retries=3, default_retry_delay = 10, time_limit = 200)
 def upload_lpt(remote_conn, local_conn):
     updateLocal(remote_conn, local_conn)
 
@@ -31,7 +31,7 @@ def update_map_rows(remote_conn, local_conn):
 def update_map_rows(remote_conn, local_conn):
     updateBlogStore(remote_conn, local_conn)
 
-@task(name="log_lpt", max_retries = 2, default_retry_delay = 10, time_limit = 20)
+@task(name="log_lpt", max_retries = 2, default_retry_delay = 10, time_limit = 60)
 def log_lpt(remote_conn):
     updateBackup(remote_conn)
 
