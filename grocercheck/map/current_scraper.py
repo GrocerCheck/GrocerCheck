@@ -221,7 +221,11 @@ def update_current_popularity(addr_and_id, conn, doBackup, doLog, proxy, num_pro
 
         #clean up closed stores
         cur = conn.cursor()
-        cur.execute("UPDATE map_store SET live_busyness=NULL WHERE id IN {closed}".format(closed=tuple(closed_ids)))
+        if len(closed_ids) == 1:
+            clean_closed = "UPDATE map_store SET live_busyness=NULL where id={closed_store}".format(closed_store = closed_ids[0])
+        else:
+            clean_closed = "UPDATE map_store SET live_busyness=NULL WHERE id IN {closed}".format(closed=tuple(closed_ids))
+        cur.execute(clean_closed)
         conn.commit()
         return
 
@@ -241,8 +245,9 @@ def run_scraper(country, city, timezone, doBackup = False, doLog = False, proxy 
         update_current_popularity(get_formatted_addresses(country, city, conn, timezone), conn, doBackup, doLog, proxy, num_processes)
         conn.commit()
         print("COMPLETE UPDATE")
-    except:
-        print("error in update_current_popularity")
+    except Exception as e:
+        print("error in update_current_popularity for " + country + " " + city)
+        print(e, e.args, e.with_traceback)
         LOG.write("ERROR IN update_current_popularity\r\n")
 
 
