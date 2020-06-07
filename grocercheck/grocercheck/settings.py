@@ -226,7 +226,24 @@ except:
         CELERY_BEAT_SCHEDULE = {}
 
 
-if ("BS" in servername):
+
+if ("DEV" in servername):
+    CELERY_BEAT_SCHEDULE = {
+
+            'SYNC_ADS': {
+                'task': 'adSync',
+                'schedule': 15,
+                'args': (pg_creds, l3_dir),
+                },
+
+
+
+
+            }
+
+
+
+elif ("BS" in servername):
     CELERY_BEAT_SCHEDULE = {
 # Country, city, timezone, doBackup, doLog, proxy, num_processes
         'UPDATE_VANCOUVER_POPULARITY':{
@@ -305,7 +322,7 @@ if ("BS" in servername):
         },
     }
 
-else:
+elif ("OS" in servername):
     CELERY_BEAT_SCHEDULE = {
 # Country, city, timezone, doBackup, doLog, proxy, num_processes
         'DOWNLOAD_LPT':{
@@ -326,31 +343,6 @@ else:
             'args': (pg_creds, l3_dir),
         },
     }
-
-
-"""
-
-# Country, city, timezone, doBackup, doLog, proxy, num_processes
-    'UPDATE_VANCOUVER_POPULARITY':{
-        'task': 'update_current_popularity',
-        'schedule': crontab(minute="0-59/10"),
-        'args': ("Canada", "vancouver", 'America/Vancouver', False, False, p, 16), #arguments to pass to the function goes here
-   },
-
-    'UPDATE_SEATTLE_POPULARITY':{
-        'task': 'update_current_popularity',
-        'schedule': crontab(minute="1-59/10"),
-        'args': ("", "seattle", 'America/Vancouver', False, False, p, 16), #US address include country
-    },
-
-    'UPDATE_VICTORIA_POPULARITY':{
-        'task': 'update_current_popularity',
-        'schedule': crontab(minute='2-59/10'),
-        'args': ("Canada", "victoria", "America/Vancouver", False, False, p, 16), #US address include country
-   },
-
-
-"""
 
 
 

@@ -15,6 +15,16 @@ from .updateDBscripts import *
 #        current_process()._config ={'semprefix':'/mp'}
 
 
+
+
+
+@task(name="adSync", max_retries=3, default_retry_delay = 10, time_limit = 60)
+def adSync(remote_conn, local_conn):
+   syncAds(remote_conn, local_conn)
+
+
+
+
 @task(name="upload_lpt", max_retries=3, default_retry_delay = 10, time_limit = 60)
 def upload_lpt(remote_conn, local_conn):
     updateRemoteDump(remote_conn, local_conn)
