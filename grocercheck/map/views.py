@@ -56,11 +56,17 @@ def index(request, city="nocity"):
     conn = sqlite3.connect(os.path.join(settings.BASE_DIR,'db1.sqlite3'))
     cur = conn.cursor()
     with conn:
-        cur.execute('''SELECT * FROM map_ad_placement WHERE ad_city LIKE '''+chr(39)+chr(37)+city+chr(37)+chr(39))
-        ad = random.choice(cur.fetchall())
-        context['blurbs'] = ad[1]
-        context['images'] = ad[2]
-        context['links'] = ad[3]
+        cur.execute("SELECT * FROM map_ad_placement WHERE ad_blurb != '__NO-SHOW__' AND ad_city LIKE "+chr(39)+chr(37)+city+chr(37)+chr(39))
+        ads = cur.fetchall()
+        if len(ads) == 0:
+            context['blurbs'] = "Advertise with GrocerCheck Contact us for details"
+            context['links'] = "mailto:preston@grocercheck.ca?subject=GrocerCheck Advertising Inquiry"
+            context['images'] = "http://drive.google.com/uc?id=1VgMaQckiTGqvmM9MzoBhhjb65SNsr_LF"
+        else:
+            ad = random.choice(ads)
+            context['blurbs'] = ad[1]
+            context['images'] = ad[2]
+            context['links'] = ad[3]
     cur = conn.cursor()
     for s in Store.objects.filter(city__exact=city):
         with conn:

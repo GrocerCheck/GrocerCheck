@@ -301,18 +301,19 @@ def syncAds(remote_conn, local_conn):
         updateLocalRowFromRemoteAd(remote_creds, local_creds)
 
     # now for the timestamp sync
-    pg_cur.execute("SELECT id, ad_timestamp from public.map_ad_placement")
-    l3_cur.execute("SELECT id, ad_timestamp from map_ad_placement")
+    # must order or else chance of mismatch
+    pg_cur.execute("SELECT id, ad_timestamp from public.map_ad_placement ORDER BY id ASC")
+    l3_cur.execute("SELECT id, ad_timestamp from map_ad_placement ORDER BY id ASC")
 
-    # [ [id, ad_timestamp], [id, ad_timestamp, ]
 
     remote_id_timestamps = pg_cur.fetchall()
     local_id_timestamps = l3_cur.fetchall()
     remote_id_timestamps = [(x[0], datetime.datetime.strptime(x[1], "%Y-%m-%d %H:%M:%S")) for x in remote_id_timestamps]
     local_id_timestamps = [(x[0], datetime.datetime.strptime(x[1], "%Y-%m-%d %H:%M:%S")) for x in local_id_timestamps]
+    print(remote_id_timestamps, "asdf", local_id_timestamps)
     for i in range(len(remote_id_timestamps)):
         if (remote_id_timestamps[i][1] < local_id_timestamps[i][1]):
-            print("local is ahead of remote")
+            print("local is ahead of remote for id " + str(remote_id_timestamps[i][0]))
             #grab local data, update remote with it
             l3_cur.execute("SELECT id, ad_blurb, ad_img_src, ad_link, ad_timestamp, ad_city FROM map_ad_placement WHERE id=?", (remote_id_timestamps[i][0],))
             data = l3_cur.fetchall()
@@ -322,12 +323,11 @@ def syncAds(remote_conn, local_conn):
             remote_conn.commit()
 
         if (remote_id_timestamps[i][1] > local_id_timestamps[i][1]):
-            print("remote is ahead of local for id " + str(i))
+            print("remote is ahead of local for id " + str(remote_id_timestamps[i][0]))
             #grab remote data, update local with it
             pg_dict_cur.execute("SELECT id, ad_blurb, ad_img_src, ad_link, ad_timestamp, ad_city FROM public.map_ad_placement WHERE id=%s", (remote_id_timestamps[i][0],))
             data = pg_dict_cur.fetchall()[0]
             data = [data['ad_blurb'], data['ad_img_src'], data['ad_link'], data['ad_timestamp'], data['ad_city'], data['id']]
-            print(data)
             l3_cur.execute("UPDATE map_ad_placement SET ad_blurb=?, ad_img_src=?, ad_link=?, ad_timestamp=?, ad_city=? WHERE id=?", data)
             local_conn.commit()
 
