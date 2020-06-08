@@ -81,7 +81,7 @@ def index(request, city="nocity"):
             context['address'].append(s.address)
             context['lat'].append(s.lat)
             context['lng'].append(s.lng)
-            cur.execute("SELECT"+day+"hours FROM map_store WHERE id=?", (s.id,))
+            cur.execute("SELECT "+day+"hours FROM map_store WHERE id=?", (s.id,))
             hourstring = cur.fetchone()[0]
             context['hours'].append(hourstring)
             if(s.keywords==None):
@@ -206,6 +206,5 @@ def article(request, articleid):
         context['image_blurb'] = json.dumps(art[6], ensure_ascii=False)
         context['article_sources'] = json.dumps(art[7], ensure_ascii=False)
         context['img_src'] = json.dumps(art[8], ensure_ascii=False)
-
     return render(request, 'article.html', context=context)
 
