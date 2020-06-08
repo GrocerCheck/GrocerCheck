@@ -231,7 +231,7 @@ if ("DEV" in servername):
     CELERY_BEAT_SCHEDULE = {
 
             'SYNC_ADS': {
-                'task': 'adSync',
+                'task': 'blogSync',
                 'schedule': 15,
                 'args': (pg_creds, l3_dir),
                 },

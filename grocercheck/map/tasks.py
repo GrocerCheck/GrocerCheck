@@ -17,13 +17,13 @@ from .updateDBscripts import *
 
 
 
+@task(name="blogSync", max_retries=3, default_retry_delay = 10, time_limit = 60)
+def blogSync(remote_conn, local_conn):
+    syncBlog(remote_conn, local_conn)
 
 @task(name="adSync", max_retries=3, default_retry_delay = 10, time_limit = 60)
 def adSync(remote_conn, local_conn):
    syncAds(remote_conn, local_conn)
-
-
-
 
 @task(name="upload_lpt", max_retries=3, default_retry_delay = 10, time_limit = 60)
 def upload_lpt(remote_conn, local_conn):

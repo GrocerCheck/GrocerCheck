@@ -267,7 +267,7 @@ def updateLocalRowFromRemoteMap(remote_conn, local_conn):
 
 #----------------------BLOG------------------
 
-def syncblog(remote_conn, local_conn):
+def syncBlog(remote_conn, local_conn):
     remote_creds = remote_conn
     local_creds = local_conn
 
@@ -295,47 +295,47 @@ def syncblog(remote_conn, local_conn):
 
     if (remote_last_id < local_last_id):
 #could pass the ids from here to reduce redundancy
-        updateRemoteFromLocalAd(remote_creds, local_creds)
+        updateRemoteFromLocalBlog(remote_creds, local_creds)
     if (remote_last_id > local_last_id):
-        updateLocalRowFromRemoteAd(remote_creds, local_creds)
+        updateLocalRowFromRemoteBlog(remote_creds, local_creds)
 
     # now for the timestamp sync
     # must order or else chance of mismatch
-    pg_cur.execute("SELECT id, ad_timestamp from public.map_blog_entry ORDER BY id ASC")
-    l3_cur.execute("SELECT id, ad_timestamp from map_blog_entry ORDER BY id ASC")
-
+    pg_cur.execute("SELECT id, article_timestamp from public.map_blog_entry ORDER BY id ASC")
+    l3_cur.execute("SELECT id, article_timestamp from map_blog_entry ORDER BY id ASC")
 
     remote_id_timestamps = pg_cur.fetchall()
     local_id_timestamps = l3_cur.fetchall()
     remote_id_timestamps = [(x[0], datetime.datetime.strptime(x[1], "%Y-%m-%d %H:%M:%S")) for x in remote_id_timestamps]
     local_id_timestamps = [(x[0], datetime.datetime.strptime(x[1], "%Y-%m-%d %H:%M:%S")) for x in local_id_timestamps]
-    print(remote_id_timestamps, "asdf", local_id_timestamps)
+
+
+
     for i in range(len(remote_id_timestamps)):
         if (remote_id_timestamps[i][1] < local_id_timestamps[i][1]):
-            print("local is ahead of remote for id " + str(remote_id_timestamps[i][0]))
+            print("blog local is ahead of remote for id " + str(remote_id_timestamps[i][0]))
             #grab local data, update remote with it
-            l3_cur.execute("SELECT id, ad_blurb, ad_img_src, ad_link, ad_timestamp, ad_city FROM map_blog_entry WHERE id=?", (remote_id_timestamps[i][0],))
+            l3_cur.execute("SELECT id, title, author_name, author_blurb, date, content, article_sources, article_timestamp, img_src FROM map_blog_entry WHERE id=?", (remote_id_timestamps[i][0],))
             data = l3_cur.fetchall()
             data = data[0]
-            data = [data['ad_blurb'], data['ad_img_src'], data['ad_link'], data['ad_timestamp'], data['ad_city'], data['id']]
-            pg_cur.execute("UPDATE public.map_blog_entry SET ad_blurb=%s, ad_img_src=%s, ad_link=%s, ad_timestamp=%s, ad_city=%s WHERE id=%s", data)
+            data = [data['title'], data['author_name'], data['author_blurb'], data['date'], data['content'], data['article_sources'], data['article_timestamp'], data['img_src'], data['id']]
+            pg_cur.execute("UPDATE public.map_blog_entry SET title=%s, author_name=%s, author_blurb=%s, date=%s, content=%s, article_sources=%s, article_timestamp=%s, img_src=%s WHERE id=%s", data)
             remote_conn.commit()
 
         if (remote_id_timestamps[i][1] > local_id_timestamps[i][1]):
-            print("remote is ahead of local for id " + str(remote_id_timestamps[i][0]))
+            print("blog remote is ahead of local for id " + str(remote_id_timestamps[i][0]))
             #grab remote data, update local with it
-            pg_dict_cur.execute("SELECT id, ad_blurb, ad_img_src, ad_link, ad_timestamp, ad_city FROM public.map_blog_entry WHERE id=%s", (remote_id_timestamps[i][0],))
+            pg_dict_cur.execute("SELECT id, title, author_name, author_blurb, date, content, article_sources, article_timestamp, img_src FROM map_blog_entry WHERE id=%s", (remote_id_timestamps[i][0],))
             data = pg_dict_cur.fetchall()[0]
-            data = [data['ad_blurb'], data['ad_img_src'], data['ad_link'], data['ad_timestamp'], data['ad_city'], data['id']]
-            l3_cur.execute("UPDATE map_blog_entry SET ad_blurb=?, ad_img_src=?, ad_link=?, ad_timestamp=?, ad_city=? WHERE id=?", data)
+            data = [data['title'], data['author_name'], data['author_blurb'], data['date'], data['content'], data['article_sources'], data['article_timestamp'], data['img_src'], data['id']]
+            pg_cur.execute("UPDATE public.map_blog_entry SET title=?, author_name=?, author_blurb=?, date=?, content=?, article_sources=?, article_timestamp=?, img_src=? WHERE id=?", data)
             local_conn.commit()
-
     pg_cur.close()
     remote_conn.close()
 
 
 
-def updateRemoteFromLocalAd(remote_conn, local_conn):
+def updateRemoteFromLocalBlog(remote_conn, local_conn):
     remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
     local_conn = create_sqlite3_connection(local_conn)
 
@@ -349,10 +349,10 @@ def updateRemoteFromLocalAd(remote_conn, local_conn):
 
     l3_cur.execute("SELECT * FROM map_blog_entry WHERE map_blog_entry.id IN {row_ids}".format(row_ids=ids_to_update,))
     local_rows = l3_cur.fetchall()
-    sql = "INSERT INTO public.map_blog_entry (id, ad_blurb, ad_img_src, ad_link, ad_timestamp, ad_city) VALUES (%s, %s, %s, %s, %s, %s)"
+    sql = "INSERT INTO public.map_blog_entry (id, title, author_name, author_blurb, date, content, article_sources, article_timestamp, img_src) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
     for fetched_row in local_rows:
-        data = [fetched_row['id'], fetched_row['ad_blurb'], fetched_row['ad_img_src'], fetched_row['ad_link'], fetched_row['ad_timestamp'], fetched_row['ad_city']]
+        data = [fetched_row['id'], fetched_row['title'], fetched_row['author_name'], fetched_row['author_blurb'], fetched_row['date'], fetched_row['content'], fetched_row['article_sources'], fetched_row['article_timestamp'], fetched_row['img_src']]
         pg_cur.execute(sql, data)
     remote_conn.commit()
 
@@ -361,7 +361,7 @@ def updateRemoteFromLocalAd(remote_conn, local_conn):
     print("UPDATE REMOTE blog_entry FROM LOCAL COMPLETE")
 
 
-def updateLocalRowFromRemoteAd(remote_conn, local_conn):
+def updateLocalRowFromRemoteBlog(remote_conn, local_conn):
     remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
     local_conn = create_sqlite3_connection(local_conn)
 
@@ -380,9 +380,11 @@ def updateLocalRowFromRemoteAd(remote_conn, local_conn):
     pg_dict_cur.execute("SELECT * FROM public.map_blog_entry WHERE id in %s", (ids_to_update,))
     remote_rows = pg_dict_cur.fetchall()
 
-    sql = "INSERT INTO map_blog_entry (id, ad_blurb, ad_img_src, ad_link, ad_timestamp, ad_city) VALUES (?, ?, ?, ?, ?, ?)"
+    sql = "INSERT INTO map_blog_entry (id, title, author_name, author_blurb, date, content, article_sources, article_timestamp, img_src) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+
+
     for fetched_row in remote_rows:
-        data = [fetched_row['id'], fetched_row['ad_blurb'], fetched_row['ad_img_src'], fetched_row['ad_link'], fetched_row['ad_timestamp'], fetched_row['ad_city']]
+        data = [fetched_row['id'], fetched_row['title'], fetched_row['author_name'], fetched_row['author_blurb'], fetched_row['date'], fetched_row['content'], fetched_row['article_sources'], fetched_row['article_timestamp'], fetched_row['img_src']]
         l3_cur.execute(sql, data)
 
     local_conn.commit()
@@ -441,7 +443,7 @@ def syncAds(remote_conn, local_conn):
     print(remote_id_timestamps, "asdf", local_id_timestamps)
     for i in range(len(remote_id_timestamps)):
         if (remote_id_timestamps[i][1] < local_id_timestamps[i][1]):
-            print("local is ahead of remote for id " + str(remote_id_timestamps[i][0]))
+            print("ad local is ahead of remote for id " + str(remote_id_timestamps[i][0]))
             #grab local data, update remote with it
             l3_cur.execute("SELECT id, ad_blurb, ad_img_src, ad_link, ad_timestamp, ad_city FROM map_ad_placement WHERE id=?", (remote_id_timestamps[i][0],))
             data = l3_cur.fetchall()
@@ -451,7 +453,7 @@ def syncAds(remote_conn, local_conn):
             remote_conn.commit()
 
         if (remote_id_timestamps[i][1] > local_id_timestamps[i][1]):
-            print("remote is ahead of local for id " + str(remote_id_timestamps[i][0]))
+            print("ad remote is ahead of local for id " + str(remote_id_timestamps[i][0]))
             #grab remote data, update local with it
             pg_dict_cur.execute("SELECT id, ad_blurb, ad_img_src, ad_link, ad_timestamp, ad_city FROM public.map_ad_placement WHERE id=%s", (remote_id_timestamps[i][0],))
             data = pg_dict_cur.fetchall()[0]
@@ -527,104 +529,110 @@ def updateLocalRowFromRemoteAd(remote_conn, local_conn):
 
 #---------------------------OLD-----BLOG-------------------
 
+# def updateBlogStore(remote_conn, local_conn):
+#     """
+
+#     local(data) -> remote(data)
+
+#     :param remote_conn: a psycopg2 connection (all remote connections for this task will be postgreSQL)
+#     :param local_conn: a sqlite3 connection (all local connections for this task will be sqlite3)
+
+#     Checks if there are rows in local not found on remote. If so, add those rows to remote.
+
+#     """
+#     remote_creds = remote_conn
+#     local_creds = local_conn
+#     remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
+#     local_conn = create_sqlite3_connection(local_conn)
+
+#     local_conn.row_factory = sqlite3.Row
+
+#     pg_cur = remote_conn.cursor()
+#     l3_cur = local_conn.cursor()
+
+#     pg_cur.execute("SELECT map_blog_entry.id FROM public.map_blog_entry ORDER BY public.map_blog_entry.id DESC LIMIT 1")
+#     l3_cur.execute("SELECT map_blog_entry.id FROM map_blog_entry ORDER BY map_blog_entry.id DESC LIMIT 1")
+
+#     remote_last_id = pg_cur.fetchall()[0][0]
+#     local_last_id = l3_cur.fetchall()[0][0]
+
+
+#     if (remote_last_id < local_last_id):
+#         ids_to_update = "("+", ".join([str(i) for i in range(remote_last_id+1, local_last_id+1)])+")"  #do not update local last id, be inclusive of upper bound
+#         l3_cur.execute("SELECT * FROM map_blog_entry WHERE map_blog_entry.id IN {row_ids}".format(row_ids=ids_to_update,))
+#         local_rows = l3_cur.fetchall()
+#         sql = "INSERT INTO public.map_blog_entry (id, title, author_name, author_blurb, date, content, image_blurb, article_sources) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+#         for fetched_row in local_rows:
+#             data = [fetched_row['id'], fetched_row['title'], fetched_row['author_name'], fetched_row['author_blurb'], fetched_row['date'], fetched_row['content'], fetched_row['image_blurb'], fetched_row['article_sources']]
+#             print(len(data))
+#             pg_cur.execute(sql, data)
+#         remote_conn.commit()
+#         print("UPDATE REMOTE BLOG FROM LOCAL COMPLETE")
+#         pg_cur.close()
+#         remote_conn.close()
+
+#     if (remote_last_id > local_last_id):
+#         print("REMOTE IS AHEAD OF LOCAL; UPDATELOCALROWFROMREMOTEBLOG")
+#         updateLocalRowFromRemoteBlog(remote_creds, local_creds)
+#     else:
+#         print("LOCAL IS EVEN WITH REMOTE")
+
+
+# def updateLocalRowFromRemoteBlog(remote_conn, local_conn):
+#     """
+
+#     remote(data) --> local(data)
+
+#     :param remote_conn: a psycopg2 connection (all remote connections for this task will be postgreSQL)
+#     :param local_conn: a sqlite3 connection (all local connections for this task will be sqlite3)
+
+#     Checks if there are rows in remote not found on local. If so, add those rows to local.
+
+#     """
+#     remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
+#     local_conn = create_sqlite3_connection(local_conn)
+
+#     pg_dict_cur = remote_conn.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
+#     pg_cur = remote_conn.cursor()
+#     l3_cur = local_conn.cursor()
+
+#     pg_cur.execute("SELECT public.map_blog_entry.id FROM public.map_blog_entry ORDER BY public.map_blog_entry.id DESC LIMIT 1")
+#     l3_cur.execute("SELECT map_blog_entry.id FROM map_blog_entry ORDER BY map_blog_entry.id DESC LIMIT 1")
+
+#     remote_last_id = pg_cur.fetchall()[0][0]
+#     local_last_id = l3_cur.fetchall()[0][0]
+
+
+#     if (remote_last_id > local_last_id):
+#         ids_to_update = tuple([i for i in range(local_last_id+1, remote_last_id+1)])  #do not update local last id, be inclusive of upper bound
+#         pg_dict_cur.execute("SELECT * FROM public.map_blog_entry WHERE id in %s", (ids_to_update,))
+#         remote_rows = pg_dict_cur.fetchall()
+
+#         sql = "INSERT INTO map_blog_entry (id, title, author_name, author_blurb, date, content, image_blurb, article_sources) VALUES (?,?,?,?,?,?,?,?)"
+#         for fetched_row in remote_rows:
+#             data = [fetched_row['id'], fetched_row['title'], fetched_row['author_name'], fetched_row['author_blurb'], fetched_row['date'], fetched_row['content'], fetched_row['image_blurb'], fetched_row['article_sources']]
+#             l3_cur.execute(sql, data)
+
+#         local_conn.commit()
+#         pg_cur.close()
+#         remote_conn.close()
+#         print("UPDATE LOCAL BLOG FROM REMOTE COMPLETE")
+
+#     if (remote_last_id < local_last_id):
+#         print("REMOTE IS BEHIND LOCAL; NO CHANGES")
+#         # CALL updateRemoteRowFromLocal bc from here?
+
+#     else:
+#         print("LOCAL IS EVEN WITH REMOTE")
+
+
+#--------------------------------------OLD-BLOG-END------------------------------------------
 
 
 
-def updateBlogStore(remote_conn, local_conn):
-    """
-
-    local(data) -> remote(data)
-
-    :param remote_conn: a psycopg2 connection (all remote connections for this task will be postgreSQL)
-    :param local_conn: a sqlite3 connection (all local connections for this task will be sqlite3)
-
-    Checks if there are rows in local not found on remote. If so, add those rows to remote.
-
-    """
-    remote_creds = remote_conn
-    local_creds = local_conn
-    remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
-    local_conn = create_sqlite3_connection(local_conn)
-
-    local_conn.row_factory = sqlite3.Row
-
-    pg_cur = remote_conn.cursor()
-    l3_cur = local_conn.cursor()
-
-    pg_cur.execute("SELECT map_blog_entry.id FROM public.map_blog_entry ORDER BY public.map_blog_entry.id DESC LIMIT 1")
-    l3_cur.execute("SELECT map_blog_entry.id FROM map_blog_entry ORDER BY map_blog_entry.id DESC LIMIT 1")
-
-    remote_last_id = pg_cur.fetchall()[0][0]
-    local_last_id = l3_cur.fetchall()[0][0]
 
 
-    if (remote_last_id < local_last_id):
-        ids_to_update = "("+", ".join([str(i) for i in range(remote_last_id+1, local_last_id+1)])+")"  #do not update local last id, be inclusive of upper bound
-        l3_cur.execute("SELECT * FROM map_blog_entry WHERE map_blog_entry.id IN {row_ids}".format(row_ids=ids_to_update,))
-        local_rows = l3_cur.fetchall()
-        sql = "INSERT INTO public.map_blog_entry (id, title, author_name, author_blurb, date, content, image_blurb, article_sources) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-        for fetched_row in local_rows:
-            data = [fetched_row['id'], fetched_row['title'], fetched_row['author_name'], fetched_row['author_blurb'], fetched_row['date'], fetched_row['content'], fetched_row['image_blurb'], fetched_row['article_sources']]
-            print(len(data))
-            pg_cur.execute(sql, data)
-        remote_conn.commit()
-        print("UPDATE REMOTE BLOG FROM LOCAL COMPLETE")
-        pg_cur.close()
-        remote_conn.close()
 
-    if (remote_last_id > local_last_id):
-        print("REMOTE IS AHEAD OF LOCAL; UPDATELOCALROWFROMREMOTEBLOG")
-        updateLocalRowFromRemoteBlog(remote_creds, local_creds)
-    else:
-        print("LOCAL IS EVEN WITH REMOTE")
-
-
-def updateLocalRowFromRemoteBlog(remote_conn, local_conn):
-    """
-
-    remote(data) --> local(data)
-
-    :param remote_conn: a psycopg2 connection (all remote connections for this task will be postgreSQL)
-    :param local_conn: a sqlite3 connection (all local connections for this task will be sqlite3)
-
-    Checks if there are rows in remote not found on local. If so, add those rows to local.
-
-    """
-    remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
-    local_conn = create_sqlite3_connection(local_conn)
-
-    pg_dict_cur = remote_conn.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
-    pg_cur = remote_conn.cursor()
-    l3_cur = local_conn.cursor()
-
-    pg_cur.execute("SELECT public.map_blog_entry.id FROM public.map_blog_entry ORDER BY public.map_blog_entry.id DESC LIMIT 1")
-    l3_cur.execute("SELECT map_blog_entry.id FROM map_blog_entry ORDER BY map_blog_entry.id DESC LIMIT 1")
-
-    remote_last_id = pg_cur.fetchall()[0][0]
-    local_last_id = l3_cur.fetchall()[0][0]
-
-
-    if (remote_last_id > local_last_id):
-        ids_to_update = tuple([i for i in range(local_last_id+1, remote_last_id+1)])  #do not update local last id, be inclusive of upper bound
-        pg_dict_cur.execute("SELECT * FROM public.map_blog_entry WHERE id in %s", (ids_to_update,))
-        remote_rows = pg_dict_cur.fetchall()
-
-        sql = "INSERT INTO map_blog_entry (id, title, author_name, author_blurb, date, content, image_blurb, article_sources) VALUES (?,?,?,?,?,?,?,?)"
-        for fetched_row in remote_rows:
-            data = [fetched_row['id'], fetched_row['title'], fetched_row['author_name'], fetched_row['author_blurb'], fetched_row['date'], fetched_row['content'], fetched_row['image_blurb'], fetched_row['article_sources']]
-            l3_cur.execute(sql, data)
-
-        local_conn.commit()
-        pg_cur.close()
-        remote_conn.close()
-        print("UPDATE LOCAL BLOG FROM REMOTE COMPLETE")
-
-    if (remote_last_id < local_last_id):
-        print("REMOTE IS BEHIND LOCAL; NO CHANGES")
-        # CALL updateRemoteRowFromLocal bc from here?
-
-    else:
-        print("LOCAL IS EVEN WITH REMOTE")
 
 def updateBackup(remote_conn):
 
