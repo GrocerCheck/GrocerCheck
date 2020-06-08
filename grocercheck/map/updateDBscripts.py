@@ -205,9 +205,9 @@ def updateMapStore(remote_conn, local_conn):
         remote_conn.close()
         print("UPDATE REMOTE MAP DATABASE FROM LOCAL COMPLETE")
 
-        if (remote_last_id > local_last_id):
-        print("REMOTE IS AHEAD OF LOCAL; UPDATELOCALFROMREMOTE")
-        updateLocalRowFromRemoteMap(remote_creds, local_creds)
+    elif (remote_last_id > local_last_id):
+            print("REMOTE IS AHEAD OF LOCAL; UPDATELOCALFROMREMOTE")
+            updateLocalRowFromRemoteMap(remote_creds, local_creds)
 
     else:
         print("LOCAL IS EVEN WITH REMOTE")
@@ -278,9 +278,9 @@ def syncAds(remote_conn, local_conn):
     local_conn.row_factory = sqlite3.Row
 
     pg_dict_cur = remote_conn.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
-
     pg_cur = remote_conn.cursor()
     l3_cur = local_conn.cursor()
+
     # grab latest update from remote and local.
     # if local latest time < remote latest, update all posts by pulling
     # if local latest time > remote latest, update all pots by pushing
@@ -289,41 +289,46 @@ def syncAds(remote_conn, local_conn):
     pg_cur.execute("SELECT map_ad_placement.id FROM public.map_ad_placement ORDER BY public.map_ad_placement.id DESC LIMIT 1")
     l3_cur.execute("SELECT map_ad_placement.id FROM map_ad_placement ORDER BY map_ad_placement.id DESC LIMIT 1")
 
+    #i suppose there's an issue where this fails where there are 0 entries in the database, but that won't happen except during setup...
     remote_last_id = pg_cur.fetchall()[0][0]
     local_last_id = l3_cur.fetchall()[0][0]
 
 
     if (remote_last_id < local_last_id):
+#could pass the ids from here to reduce redundancy
         updateRemoteFromLocalAd(remote_creds, local_creds)
     if (remote_last_id > local_last_id):
         updateLocalRowFromRemoteAd(remote_creds, local_creds)
 
-    # now for the sync
+    # now for the timestamp sync
     pg_cur.execute("SELECT id, ad_timestamp from public.map_ad_placement")
-    l3_cur.execute("SELECT id, ad_timestamp from public.map_ad_placement")
+    l3_cur.execute("SELECT id, ad_timestamp from map_ad_placement")
 
     # [ [id, ad_timestamp], [id, ad_timestamp, ]
 
     remote_id_timestamps = pg_cur.fetchall()
     local_id_timestamps = l3_cur.fetchall()
-    remote_id_timestamps = [(x[0], datetime.strptime(x[1])) for x in remote_id_timestamps]
-    local_id_timestamps = [(x[0], datetime.strptime(x[1])) for x in local_id_timestamps]
-
+    remote_id_timestamps = [(x[0], datetime.datetime.strptime(x[1], "%Y-%m-%d %H:%M:%S")) for x in remote_id_timestamps]
+    local_id_timestamps = [(x[0], datetime.datetime.strptime(x[1], "%Y-%m-%d %H:%M:%S")) for x in local_id_timestamps]
     for i in range(len(remote_id_timestamps)):
-        if (remote_id_timestamps[i] < local_id_timestamps[i]):
+        if (remote_id_timestamps[i][1] < local_id_timestamps[i][1]):
+            print("local is ahead of remote")
             #grab local data, update remote with it
-            l3_cur.execute("SELECT id, ad_blurb, ad_img_src, ad_link, ad_timestamp FROM map_ad_placement")
+            l3_cur.execute("SELECT id, ad_blurb, ad_img_src, ad_link, ad_timestamp, ad_city FROM map_ad_placement WHERE id=?", (remote_id_timestamps[i][0],))
             data = l3_cur.fetchall()
-            data = [data['ad_blurb'], data['ad_img_src'], data['ad_link'], data['ad_timestamp'], data['id']]
-            pg_cur.execute("UPDATE public.map_ad_placement SET ad_blurb=%s, ad_img_src=%s, ad_link=%s, ad_timestamp=%s WHERE id=%s", data)
+            data = data[0]
+            data = [data['ad_blurb'], data['ad_img_src'], data['ad_link'], data['ad_timestamp'], data['ad_city'], data['id']]
+            pg_cur.execute("UPDATE public.map_ad_placement SET ad_blurb=%s, ad_img_src=%s, ad_link=%s, ad_timestamp=%s, ad_city=%s WHERE id=%s", data)
             remote_conn.commit()
 
-        if (remote_id_timestamps[i] > local_id_timestamps[i]):
+        if (remote_id_timestamps[i][1] > local_id_timestamps[i][1]):
+            print("remote is ahead of local for id " + str(i))
             #grab remote data, update local with it
-            pg_dict_cur.execute("SELECT id, ad_blurb, ad_img_src, ad_link, ad_timestamp FROM public.map_ad_placement")
-            data = pg_dict_cur.fetchall()
-            data = [data['ad_blurb'], data['ad_img_src'], data['ad_link'], data['ad_timestamp'], data['id']]
-            l3_cur.execute("UPDATE public.map_ad_placement SET ad_blurb=%s, ad_img_src=%s, ad_link=%s, ad_timestamp=%s WHERE id=%s", data)
+            pg_dict_cur.execute("SELECT id, ad_blurb, ad_img_src, ad_link, ad_timestamp, ad_city FROM public.map_ad_placement WHERE id=%s", (remote_id_timestamps[i][0],))
+            data = pg_dict_cur.fetchall()[0]
+            data = [data['ad_blurb'], data['ad_img_src'], data['ad_link'], data['ad_timestamp'], data['ad_city'], data['id']]
+            print(data)
+            l3_cur.execute("UPDATE map_ad_placement SET ad_blurb=?, ad_img_src=?, ad_link=?, ad_timestamp=?, ad_city=? WHERE id=?", data)
             local_conn.commit()
 
     pg_cur.close()
@@ -345,10 +350,10 @@ def updateRemoteFromLocalAd(remote_conn, local_conn):
 
     l3_cur.execute("SELECT * FROM map_ad_placement WHERE map_ad_placement.id IN {row_ids}".format(row_ids=ids_to_update,))
     local_rows = l3_cur.fetchall()
-    sql = "INSERT INTO public.map_ad_placement (id, ad_blurb, ad_img_src, ad_link, ad_timestamp) VALUES (%s, %s, %s, %s, %s)"
+    sql = "INSERT INTO public.map_ad_placement (id, ad_blurb, ad_img_src, ad_link, ad_timestamp, ad_city) VALUES (%s, %s, %s, %s, %s, %s)"
 
     for fetched_row in local_rows:
-        data = [fetched_row['id'], fetched_row['ad_blurb'], fetched_row['ad_img_src'], fetched_row['ad_timestamp']]
+        data = [fetched_row['id'], fetched_row['ad_blurb'], fetched_row['ad_img_src'], fetched_row['ad_link'], fetched_row['ad_timestamp'], fetched_row['ad_city']]
         pg_cur.execute(sql, data)
     remote_conn.commit()
 
@@ -365,8 +370,8 @@ def updateLocalRowFromRemoteAd(remote_conn, local_conn):
     pg_cur = remote_conn.cursor()
     l3_cur = local_conn.cursor()
 
-    pg_cur.execute("SELECT public.map_blog_entry.id FROM public.map_blog_entry ORDER BY public.map_blog_entry.id DESC LIMIT 1")
-    l3_cur.execute("SELECT map_blog_entry.id FROM map_blog_entry ORDER BY map_blog_entry.id DESC LIMIT 1")
+    pg_cur.execute("SELECT public.map_ad_placement.id FROM public.map_ad_placement ORDER BY public.map_ad_placement.id DESC LIMIT 1")
+    l3_cur.execute("SELECT map_ad_placement.id FROM map_ad_placement ORDER BY map_ad_placement.id DESC LIMIT 1")
 
     remote_last_id = pg_cur.fetchall()[0][0]
     local_last_id = l3_cur.fetchall()[0][0]
@@ -376,9 +381,9 @@ def updateLocalRowFromRemoteAd(remote_conn, local_conn):
     pg_dict_cur.execute("SELECT * FROM public.map_ad_placement WHERE id in %s", (ids_to_update,))
     remote_rows = pg_dict_cur.fetchall()
 
-    sql = "INSERT INTO map_ad_placement (id, ad_blurb, ad_img_src, ad_link, ad_timestamp) VALUES (?, ?, ?, ?, ?)"
+    sql = "INSERT INTO map_ad_placement (id, ad_blurb, ad_img_src, ad_link, ad_timestamp, ad_city) VALUES (?, ?, ?, ?, ?, ?)"
     for fetched_row in remote_rows:
-        data = [fetched_row['id'], fetched_row['ad_blurb'], fetched_row['ad_img_src'], fetched_row['ad_timestamp']]
+        data = [fetched_row['id'], fetched_row['ad_blurb'], fetched_row['ad_img_src'], fetched_row['ad_link'], fetched_row['ad_timestamp'], fetched_row['ad_city']]
         l3_cur.execute(sql, data)
 
     local_conn.commit()
