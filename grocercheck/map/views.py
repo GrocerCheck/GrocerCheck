@@ -13,9 +13,14 @@ import random
 
 
 def index(request, city="nocity"):
-    city2tz = {'vancouver': 'America/Vancouver', 'los_angeles':  'America/Vancouver', 'silicon_valley': 'America/Vancouver',
-            'portland': 'America/Vancouver', 'seattle': 'America/Vancouver', 'montreal': 'America/Montreal',
-               'new_york': 'America/Toronto', 'toronto': 'America/Toronto', 'victoria': 'America/Vancouver', 'las_vegas': 'America/Vancouver'}
+    city2tz = {'vancouver': 'America/Vancouver', 'los_angeles':  'America/Vancouver',
+               'silicon_valley': 'America/Vancouver', 'portland': 'America/Vancouver',
+               'seattle': 'America/Vancouver', 'montreal': 'America/Montreal',
+               'new_york': 'America/Toronto', 'toronto': 'America/Toronto',
+               'victoria': 'America/Vancouver', 'las_vegas': 'America/Vancouver',
+
+
+               }
     popupflag = False
     if(city=="nocity"):
         popupflag = True
@@ -59,7 +64,8 @@ def index(request, city="nocity"):
         cur.execute("SELECT * FROM map_ad_placement WHERE ad_blurb != '__NO-SHOW__' AND ad_city LIKE "+chr(39)+chr(37)+city+chr(37)+chr(39))
         ads = cur.fetchall()
         if len(ads) == 0:
-            context['blurbs'] = "Advertise with GrocerCheck Contact us for details"
+            # context['blurbs'] = datetime.datetime.now(timezone).strftime("%m/%d/%Y, %H:%M:%S")
+            context['blurbs'] = "This could be you! Contact us to advertise with GrocerCheck"
             context['links'] = "mailto:preston@grocercheck.ca?subject=GrocerCheck Advertising Inquiry"
             context['images'] = "http://drive.google.com/uc?id=1VgMaQckiTGqvmM9MzoBhhjb65SNsr_LF"
         else:
@@ -75,25 +81,24 @@ def index(request, city="nocity"):
             context['address'].append(s.address)
             context['lat'].append(s.lat)
             context['lng'].append(s.lng)
-            cur.execute('''SELECT '''+day+'''hours FROM map_store WHERE id=?''', (s.id,))
+            cur.execute("SELECT"+day+"hours FROM map_store WHERE id=?", (s.id,))
             hourstring = cur.fetchone()[0]
             context['hours'].append(hourstring)
             if(s.keywords==None):
                 context['keywords'].append("")
-
             else:
                 context['keywords'].append(s.keywords)
 
             live = s.live_busyness
             if(live==None):
-                cur.execute('''SELECT '''+day+hour+''' FROM map_store WHERE id=?''', (s.id,))
+                cur.execute("SELECT "+day+hour+" FROM map_store WHERE id=?", (s.id,))
                 live = cur.fetchone()[0]
                 if(live==None):
                     live = -1
             else:
                 live+=1000
             context['busyness'].append(live)
-            #Monday: 7:00 AM – 10:00 PM
+
             if(hourstring==None):
                 context['openn'].append(0)
             else:
@@ -141,9 +146,6 @@ def index(request, city="nocity"):
                                 context['openn'].append(0)
 
 
-
-
-
     finalcontext = {}
 
     for key in context.keys():
@@ -156,8 +158,6 @@ def index(request, city="nocity"):
         finalcontext['apikey'] = open("/home/bitnami/keys/gmapjs.txt").readline().strip()
     except:
         finalcontext['apikey'] = open(expanduser('~')+"/keys/gmapjs.txt").readline().strip()
-
-
 
     return render(request,'index.html',context=finalcontext)
 
@@ -196,7 +196,7 @@ def article(request, articleid):
     curr = conn.cursor()
     context = {}
     with conn:
-        curr.execute("SELECT id,title,author_name,author_blurb,date,content,image_blurb,article_sources FROM map_blog_entry WHERE id=?", (articleid,))
+        curr.execute("SELECT id,title,author_name,author_blurb,date,content,image_blurb,article_sources,img_src FROM map_blog_entry WHERE id=?", (articleid,))
         art = curr.fetchall()[0]
         context['title'] = json.dumps(art[1], ensure_ascii=False)
         context['author_name'] = json.dumps(art[2], ensure_ascii=False)
@@ -205,7 +205,7 @@ def article(request, articleid):
         context['content'] = json.dumps(art[5], ensure_ascii=False)
         context['image_blurb'] = json.dumps(art[6], ensure_ascii=False)
         context['article_sources'] = json.dumps(art[7], ensure_ascii=False)
-
+        context['img_src'] = json.dumps(art[8], ensure_ascii=False)
 
     return render(request, 'article.html', context=context)
 

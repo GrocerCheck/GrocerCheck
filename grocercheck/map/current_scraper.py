@@ -125,14 +125,6 @@ def get_open_closed_ids(conn, city, timezone):
                         open_ids.append(i)
                     else:
                         closed_ids.append(i)
-#    print("localtime" +  str(localhour) + " " + str(localminute))
-#    print("-----------------------")
-#    for i in open_ids:
-#        print("open", i, (cur.execute("SELECT name, sunhours FROM map_store WHERE id=?", (i,)).fetchall()))
-#        print("-----------------------")
-#    for i in closed_ids:
-#        print("closed", i, (cur.execute("SELECT name, sunhours FROM map_store WHERE id=?", (i,)).fetchall()))
-#        print("------------------------")
 
     return (open_ids, closed_ids)
 

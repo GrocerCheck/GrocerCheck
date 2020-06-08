@@ -2,25 +2,25 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
+    <head>
         <script data-ad-client="ca-pub-8362595471467364" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-167491754-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167491754-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-167491754-1');
+        </script>
 
-  gtag('config', 'UA-167491754-1');
-</script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>GrocerCheck</title>
-		<meta name="description" content="GrocerCheck: Your Local Grocery and Supermarket Social Distancing Search Engine" />
-		<meta name="robots" content="index,follow" />
-		<link rel="canonical" href="https://grocercheck.ca" /> 		
-		
-		<script src="https://kit.fontawesome.com/530a9c0639.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GrocerCheck</title>
+        <meta name="description" content="GrocerCheck: Your Local Grocery and Supermarket Social Distancing Search Engine" />
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://grocercheck.ca" /> 		
+
+        <script src="https://kit.fontawesome.com/530a9c0639.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
         <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
         <link rel='stylesheet' href = "{% static 'css/floatingmenu.css' %}">
@@ -28,12 +28,12 @@
         <link rel='stylesheet' href = "{% static 'css/help.css' %}">
         <link rel='stylesheet' href = "{% static 'css/modalstyle.css' %}">
         <link rel='stylesheet' href = "{% static 'css/search.css' %}">
-	<link rel='stylesheet' href = "{% static 'css/select.css' %}">
-	<link rel='stylesheet' href = "{% static 'css/aiya.css' %}">
+        <link rel='stylesheet' href = "{% static 'css/select.css' %}">
+        <link rel='stylesheet' href = "{% static 'css/aiya.css' %}">
         <link rel='shortcut icon' type='image/png' href="{% static 'favicon.ico' %}" />
 
         <style>
-            /* Set the size of the div element that contains the map */
+/* Set the size of the div element that contains the map */
 
             body{
                 font-family: 'Nunito';
@@ -43,12 +43,12 @@
                 height: 100%;
                 width: 100%;
             }
-                html, body {
-                    height: 100%;
-                    margin: 0;
-                    padding: 0;
-                }
-                
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
             #paypalbutton {
                 position: absolute;
                 width: auto;
@@ -59,372 +59,372 @@
                 padding-bottom: 0;
                 margin-right: 1%;
                 z-index: 502;
-                }
+            }
 
-	    #disclaimercontent{
-		top: 30%;
-		margin-top: 100px;
-	    }
-	    
+            #disclaimercontent{
+                top: 30%;
+                margin-top: 100px;
+            }
 
 
-		</style>    
-	</head>
-	<body>
 
-		<div id="cityselectdiv" class="custom-select" style="width: 200px;">
+        </style>    
+    </head>
+    <body>
 
-		<select id="cityselect">
-			<option value="0">Select Region...</option>
-			<option value="vancouver">Vancouver, BC</option>
-			<option value="seattle">Seattle, WA</option>
-			<option value="victoria">Victoria, BC</option>
-            <option value="toronto">Toronto, ON</option>
-	        <option value="las_vegas">Las Vegas, NV</option>
-            <option value="silicon_valley">Silicon Valley, CA</option>
-            <option value="montreal">Montreal, QC</option>
-        </select>
+        <div id="cityselectdiv" class="custom-select" style="width: 200px;">
 
-		</div>
+            <select id="cityselect">
+                <option value="0">Select Region...</option>
+                <option value="vancouver">Vancouver, BC</option>
+                <option value="seattle">Seattle, WA</option>
+                <option value="victoria">Victoria, BC</option>
+                <option value="toronto">Toronto, ON</option>
+                <option value="las_vegas">Las Vegas, NV</option>
+                <option value="silicon_valley">Silicon Valley, CA</option>
+                <option value="montreal">Montreal, QC</option>
+            </select>
 
-<script>
+        </div>
 
-	function switchCity(city){
-		city = city.split(",")[0].toLowerCase();
-		city = city.replace(" ","_");
-		window.location.replace("https://grocercheck.ca/map/"+city);
-	}
+        <script>
+
+function switchCity(city){
+    city = city.split(",")[0].toLowerCase();
+    city = city.replace(" ","_");
+    window.location.replace("https://grocercheck.ca/map/"+city);
+}
 
 var x, i, j, selElmnt, a, b, c;
 /*look for any elements with the class "custom-select":*/
 x = document.getElementsByClassName("custom-select");
 for (i = 0; i < x.length; i++) {
-  selElmnt = x[i].getElementsByTagName("select")[0];
-  /*for each element, create a new DIV that will act as the selected item:*/
-  a = document.createElement("DIV");
-  a.setAttribute("class", "select-selected");
-  a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
-  x[i].appendChild(a);
-  /*for each element, create a new DIV that will contain the option list:*/
-  b = document.createElement("DIV");
-  b.setAttribute("class", "select-items select-hide");
-  for (j = 1; j < selElmnt.length; j++) {
-    /*for each option in the original select element,
-    create a new DIV that will act as an option item:*/
-    c = document.createElement("DIV");
-    c.innerHTML = selElmnt.options[j].innerHTML;
-    c.addEventListener("click", function(e) {
-        /*when an item is clicked, update the original select box,
-        and the selected item:*/
-	switchCity(this.innerHTML);
-        var y, i, k, s, h;
-        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-        h = this.parentNode.previousSibling;
-        for (i = 0; i < s.length; i++) {
-          if (s.options[i].innerHTML == this.innerHTML) {
-            s.selectedIndex = i;
-            h.innerHTML = this.innerHTML;
-            y = this.parentNode.getElementsByClassName("same-as-selected");
-            for (k = 0; k < y.length; k++) {
-              y[k].removeAttribute("class");
+    selElmnt = x[i].getElementsByTagName("select")[0];
+    /*for each element, create a new DIV that will act as the selected item:*/
+    a = document.createElement("DIV");
+    a.setAttribute("class", "select-selected");
+    a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+    x[i].appendChild(a);
+    /*for each element, create a new DIV that will contain the option list:*/
+    b = document.createElement("DIV");
+    b.setAttribute("class", "select-items select-hide");
+    for (j = 1; j < selElmnt.length; j++) {
+        /*for each option in the original select element,
+          create a new DIV that will act as an option item:*/
+        c = document.createElement("DIV");
+        c.innerHTML = selElmnt.options[j].innerHTML;
+        c.addEventListener("click", function(e) {
+            /*when an item is clicked, update the original select box,
+              and the selected item:*/
+            switchCity(this.innerHTML);
+            var y, i, k, s, h;
+            s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+            h = this.parentNode.previousSibling;
+            for (i = 0; i < s.length; i++) {
+                if (s.options[i].innerHTML == this.innerHTML) {
+                    s.selectedIndex = i;
+                    h.innerHTML = this.innerHTML;
+                    y = this.parentNode.getElementsByClassName("same-as-selected");
+                    for (k = 0; k < y.length; k++) {
+                        y[k].removeAttribute("class");
+                    }
+                    this.setAttribute("class", "same-as-selected");
+                    break;
+                }
             }
-            this.setAttribute("class", "same-as-selected");
-            break;
-          }
-        }
-        h.click();
-    });
-    b.appendChild(c);
-  }
-  x[i].appendChild(b);
-  a.addEventListener("click", function(e) {
-      /*when the select box is clicked, close any other select boxes,
-      and open/close the current select box:*/
-      e.stopPropagation();
-      this.nextSibling.classList.toggle("select-hide");
-      this.classList.toggle("select-arrow-active");
+            h.click();
+        });
+        b.appendChild(c);
+    }
+    x[i].appendChild(b);
+    a.addEventListener("click", function(e) {
+        /*when the select box is clicked, close any other select boxes,
+          and open/close the current select box:*/
+        e.stopPropagation();
+        this.nextSibling.classList.toggle("select-hide");
+        this.classList.toggle("select-arrow-active");
     });
 }
-</script>
-<style>
+        </script>
+        <style>
 .tutorialimg{
-position: absolute;	
-height: 100%;
-z-index: 1999;
+    position: absolute;	
+    height: 100%;
+    z-index: 1999;
 }
 
-					#gallerydiv{
-				position: relative;
-				--tutorialwidth: calc(calc(717 / 1057) * 70vh);
-				left: calc(calc(100vw - var(--tutorialwidth)) / 2);
-				display: block;
-				height: 70vh;
-				width: var(--tutorialwidth);
-				z-index: 2000;
-				margin: 0;
-				
-			}
-					#tutorialclosediv{
-						z-index: 3000;
-					position: absolute;	
-						right: calc(calc(calc(100vw - calc(calc(717 / 1057) * 70vh))/2) + 20px);
-						top: 0;
-						
-						
-						margin: 0;
-					}
+                    #gallerydiv{
+                        position: relative;
+                        --tutorialwidth: calc(calc(717 / 1057) * 70vh);
+                        left: calc(calc(100vw - var(--tutorialwidth)) / 2);
+                        display: block;
+                        height: 70vh;
+                        width: var(--tutorialwidth);
+                        z-index: 2000;
+                        margin: 0;
 
-					#close{
-						font-size: 50px;
-						top: 10px;
-						position: absolute;
-						right: -20px;	
-						padding: 0 10px;
-						color: #fff;
-						background-color: #35605A;
-						border: none;
-					
-					}
-					#close:hover, #close:focus{
-						cursor: pointer;
-						background-color: #3AB64B;
-					}
-
-</style>
-
-		<div id="helpbuttondiv">
-			<button id="helpbutton"><i class="fa fa-question"></i></button>
-		</div>
-
-		<div id="aiya">
-			<a href="{{links|slice:"1:-1"}}" target="_blank">
-			<img alt="aiya image" id="aiyaimage" src="{{images|slice:"1:-1"}}" />
-			<p id="aiyablurb">{{blurbs|slice:"1:-1"}}</p>
-			</a>
-		</div>
-
-		<div id="viewdiv">
-			<button id="viewbutton"><i id="viewbuttonlabel" class="fas fa-chevron-down"></i></button>
-		</div>
+                    }
+                    #tutorialclosediv{
+                        z-index: 3000;
+                        position: absolute;	
+                        right: calc(calc(calc(100vw - calc(calc(717 / 1057) * 70vh))/2) + 20px);
+                        top: 0;
 
 
-		<div id="modaldiv" class="modal">
-			<div id="tutorialclosediv">
-				<button id="close"><i id="tutorialcloselabel" class="fas fa-times"></i></button>	
-			</div>
-				<div id="gallerydiv" onclick="nextimage()">
+                        margin: 0;
+                    }
+
+                    #close{
+                        font-size: 50px;
+                        top: 10px;
+                        position: absolute;
+                        right: -20px;	
+                        padding: 0 10px;
+                        color: #fff;
+                        background-color: #35605A;
+                        border: none;
+
+                    }
+                    #close:hover, #close:focus{
+                        cursor: pointer;
+                        background-color: #3AB64B;
+                    }
+
+        </style>
+
+        <div id="helpbuttondiv">
+            <button id="helpbutton"><i class="fa fa-question"></i></button>
+        </div>
+
+        <div id="aiya">
+            <a href="{{links|slice:"1:-1"}}" target="_blank">
+                <img alt="aiya image" id="aiyaimage" src="{{images|slice:"1:-1"}}" />
+                <p style="padding-left: 5px; padding-right: 10px; "id="aiyablurb">{{blurbs|slice:"1:-1"}}</p>
+            </a>
+        </div>
+
+        <div id="viewdiv">
+            <button id="viewbutton"><i id="viewbuttonlabel" class="fas fa-chevron-down"></i></button>
+        </div>
 
 
-					<img alt="grocercheck tutorial help 1" id="tutorialimage1" class="tutorialimg" src="{% static 'images/HowTo1.png' %}">
-					<img alt="grocercheck tutorial help 2" id="tutorialimage2" class="tutorialimg" src="{% static 'images/HowTo2.png' %}">
-					<img alt="grocercheck tutorial help 3" id="tutorialimage3" class="tutorialimg" src="{% static 'images/HowTo3.png' %}">
-					<img alt="grocercheck tutorial help 4" id="tutorialimage4" class="tutorialimg" src="{% static 'images/HowTo4.png' %}">
-					<img alt="grocercheck tutorial help 5" id="tutorialimage5" class="tutorialimg" src="{% static 'images/HowTo5.png' %}">
-					
-				
-				</div>
-			
-		</div>
-
-		<div id="nearmemodaldiv" class="modal">
-			<div class="modal-content">
-				<span id="nearmeclose" class="close">&times;</span>
-				<p>Please enable location in your browser to search for "near me."</p>
-			</div>
-		</div>
-
-		<div id="disclaimermodaldiv" class="modal">
-			<div class="modal-content" id="disclaimercontent">
-				<span id="disclaimerclose" class="close">&times;</span>
-				<img alt="GrocerCheck logo" style="text-align: center;width: 50%; margin-left: 25%; " src="{% static 'images/GrocerCheck-01.png' %}">
-				<p>The data presented by GrocerCheck Foundation is to be used as a guideline, and cannot be a replacement for common sense and the user's best judgement. GrocerCheck is but one tool with which you may make the best decisions for your health and safety. Although every step has been taken to ensure the information displayed is accurate and reliable, GrocerCheck Foundation is not responsible for any errors or omissions, or for the results obtained from the use of this information. All information in this site is provided "as is", with no guarantee of completeness, accuracy, timeliness or of the results obtained from the use of this information.</p>
-				<p>
-				We use cookies to improve user experience, and analyze website traffic. For these reasons, we may share your site usage data with our analytics partners. By continuing to the site, you consent to store on your device all the technologies described in our <a href="{% url 'cookies' %}">Cookie Policy</a>. Please read our <a href="{% url 'terms' %}">Terms and Conditions</a> and <a href="{% url 'privacy' %}">Privacy Policy</a> for full details.
-				</p>
-			</div>
-		</div>
-
-	<script>
-		var imageindex = 0;
-		function nextimage(){
-			imageindex = (imageindex+1)%5
-			showImage(imageindex+1);
-		}
-		function showImage(imageindex){
-			let idbegin = "tutorialimage";
-
-			for(let x = 1; x<6;x++){
-				
-				if(x==imageindex){
-
-					document.getElementById(idbegin+x).style.opacity = 100;
+        <div id="modaldiv" class="modal">
+            <div id="tutorialclosediv">
+                <button id="close"><i id="tutorialcloselabel" class="fas fa-times"></i></button>	
+            </div>
+            <div id="gallerydiv" onclick="nextimage()">
 
 
-				}
-				else{
+                <img alt="grocercheck tutorial help 1" id="tutorialimage1" class="tutorialimg" src="{% static 'images/HowTo1.png' %}">
+                <img alt="grocercheck tutorial help 2" id="tutorialimage2" class="tutorialimg" src="{% static 'images/HowTo2.png' %}">
+                <img alt="grocercheck tutorial help 3" id="tutorialimage3" class="tutorialimg" src="{% static 'images/HowTo3.png' %}">
+                <img alt="grocercheck tutorial help 4" id="tutorialimage4" class="tutorialimg" src="{% static 'images/HowTo4.png' %}">
+                <img alt="grocercheck tutorial help 5" id="tutorialimage5" class="tutorialimg" src="{% static 'images/HowTo5.png' %}">
 
-					document.getElementById(idbegin+x).style.opacity = 0;
-				}
-			}
 
-		}
+            </div>
 
-        showImage(1);
+        </div>
 
-	</script>
+        <div id="nearmemodaldiv" class="modal">
+            <div class="modal-content">
+                <span id="nearmeclose" class="close">&times;</span>
+                <p>Please enable location in your browser to search for "near me."</p>
+            </div>
+        </div>
 
-		<script>
+        <div id="disclaimermodaldiv" class="modal">
+            <div class="modal-content" id="disclaimercontent">
+                <span id="disclaimerclose" class="close">&times;</span>
+                <img alt="GrocerCheck logo" style="text-align: center;width: 50%; margin-left: 25%; " src="{% static 'images/GrocerCheck-01.png' %}">
+                <p>The data presented by GrocerCheck Foundation is to be used as a guideline, and cannot be a replacement for common sense and the user's best judgement. GrocerCheck is but one tool with which you may make the best decisions for your health and safety. Although every step has been taken to ensure the information displayed is accurate and reliable, GrocerCheck Foundation is not responsible for any errors or omissions, or for the results obtained from the use of this information. All information in this site is provided "as is", with no guarantee of completeness, accuracy, timeliness or of the results obtained from the use of this information.</p>
+                <p>
+                We use cookies to improve user experience, and analyze website traffic. For these reasons, we may share your site usage data with our analytics partners. By continuing to the site, you consent to store on your device all the technologies described in our <a href="{% url 'cookies' %}">Cookie Policy</a>. Please read our <a href="{% url 'terms' %}">Terms and Conditions</a> and <a href="{% url 'privacy' %}">Privacy Policy</a> for full details.
+                </p>
+            </div>
+        </div>
 
-            var popupflag = {{popupflag|safe}}[0]
-            if(popupflag=="yes"){
-			    document.getElementById("disclaimermodaldiv").style.display = "block";
-            }
+        <script>
+var imageindex = 0;
+function nextimage(){
+    imageindex = (imageindex+1)%5
+        showImage(imageindex+1);
+}
+function showImage(imageindex){
+    let idbegin = "tutorialimage";
+
+    for(let x = 1; x<6;x++){
+
+        if(x==imageindex){
+
+            document.getElementById(idbegin+x).style.opacity = 100;
+
+
+        }
+        else{
+
+            document.getElementById(idbegin+x).style.opacity = 0;
+        }
+    }
+
+}
+
+showImage(1);
+
+        </script>
+
+    <script>
+
+var popupflag = {{popupflag|safe}}[0]
+if(popupflag=="yes"){
+    document.getElementById("disclaimermodaldiv").style.display = "block";
+}
 else{
     document.getElementById("disclaimermodaldiv").style.display = "none";
 }
-		
-			//callback function for helpbutton clicked
-			document.getElementById("helpbutton").onclick = function(){
-				//display modal
-				document.getElementById("modaldiv").style.display = "block";
-			}
 
-			//callback function for close button clicked
-			document.getElementById("close").onclick = function(){
-				//close modal
-				document.getElementById("modaldiv").style.display = "none";
-			}
-			//callback function for click anywhere
-			window.onclick = function(event){
-				//if click target is modal (content and background)
-				if(event.target == document.getElementById("modaldiv")){
-					//close modal
-					document.getElementById("modaldiv").style.display = "none";
-				}
-				if(event.target == document.getElementById("nearmemodaldiv")){
-					document.getElementById("nearmemodaldiv").style.display = "none";
-				}
-				if(event.target == document.getElementById("disclaimermodaldiv")){
-					document.getElementById("disclaimermodaldiv").style.display = "none";
-				}
-			}
-			document.getElementById("nearmeclose").onclick = function(){
-				document.getElementById("nearmemodaldiv").style.display = "none";
-			}
+//callback function for helpbutton clicked
+document.getElementById("helpbutton").onclick = function(){
+    //display modal
+    document.getElementById("modaldiv").style.display = "block";
+}
+
+//callback function for close button clicked
+document.getElementById("close").onclick = function(){
+    //close modal
+    document.getElementById("modaldiv").style.display = "none";
+}
+//callback function for click anywhere
+window.onclick = function(event){
+    //if click target is modal (content and background)
+    if(event.target == document.getElementById("modaldiv")){
+        //close modal
+        document.getElementById("modaldiv").style.display = "none";
+    }
+    if(event.target == document.getElementById("nearmemodaldiv")){
+        document.getElementById("nearmemodaldiv").style.display = "none";
+    }
+    if(event.target == document.getElementById("disclaimermodaldiv")){
+        document.getElementById("disclaimermodaldiv").style.display = "none";
+    }
+}
+document.getElementById("nearmeclose").onclick = function(){
+    document.getElementById("nearmemodaldiv").style.display = "none";
+}
 document.getElementById("disclaimerclose").onclick = function(){
-		document.getElementById("disclaimermodaldiv").style.display = "none";
+    document.getElementById("disclaimermodaldiv").style.display = "none";
 }
-			
-
-		</script>
-
-		<!-- hamburger menu -->
-		<nav role="navigation">
-			<div id="navtoggle">
-				<input type="checkbox" id="hamburgerbutton"/>
-				<div id='spansquare'>	</div>
-				<span></span>
-				<span></span>
-				<span></span>
 
 
-				<ul id="navmenu">
-					<a href="{% url 'index' %}"><li>Home</li></a>
-					<a href="{% url 'about' %}"><li>About Us</li></a>
-					<a href="{% url 'covidwatch' %}"><li>CovidWatch</li></a>
-					<a href="{% url 'partners' %}"><li>Partners</li></a>
-					<a href="{% url 'contact' %}"><li>Contact Us</li></a>
-					
-				</ul>
-			</div>
-		</nav>
+    </script>
+
+    <!-- hamburger menu -->
+    <nav role="navigation">
+        <div id="navtoggle">
+            <input type="checkbox" id="hamburgerbutton"/>
+            <div id='spansquare'>	</div>
+            <span></span>
+            <span></span>
+            <span></span>
 
 
-		<div id="searchbar">
-			<form class="search" onsubmit='return false;'>
-				<input id='searchtextfield' type="text" placeholder='Search GrocerCheck (Try name, street, city, or near me! e.g. "costco", "kingsway", "richmond", "safeway near me")' name="searchfield"></input>
-				<input type="image" onclick='searchClicked()'  src="{% static 'images/searchicon.png' %}"></input>
-			</form>
+            <ul id="navmenu">
+                <a href="{% url 'index' %}"><li>Home</li></a>
+                <a href="{% url 'about' %}"><li>About Us</li></a>
+                <a href="{% url 'covidwatch' %}"><li>CovidWatch</li></a>
+                <a href="{% url 'partners' %}"><li>Partners</li></a>
+                <a href="{% url 'contact' %}"><li>Contact Us</li></a>
 
-		</div>
-
-
-
-		<div id="floating_menu">
-
-			<label class="container" id="livecontainer" for="livebutton">Live Only
-				<input id="livebutton" type="radio"  onclick="showLiveOnly()" name="radio">
-			</label>
-
-			<label class="container" id="histcontainer" for="histbutton">
-				Live and Historical
-				<input id="histbutton" type="radio" checked = "checked" onclick="showHistorical()" name="radio">
-			</label>
-
-			<label class="container" id="allcontainer" for="allbutton">
-				Show All Stores
-				<input id="allbutton" type="radio" onclick="showAll()"  name="radio">
-			</label>
-		</div>
-
-
-		<script>
-			var floatingvisible = false;
-			document.getElementById("floating_menu").style.display = "none";
-	document.getElementById("viewbutton").onclick = function(){
-		
-	if(floatingvisible==false){
-
-		document.getElementById("floating_menu").style.display = "block";
-		document.getElementById("viewbuttonlabel").className = "fas fa-chevron-up";
-		floatingvisible = true;
-	}
-	else{
-		document.getElementById("viewbuttonlabel").className = "fas fa-chevron-down";
-		document.getElementById("floating_menu").style.display = "none";
-		floatingvisible = false;
-	}
-}
-		</script>
-
-
-		
-        <div id="paypalbutton">
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                <input type="hidden" name="cmd" value="_s-xclick" />
-                <input type="hidden" name="hosted_button_id" value="KGS4K4PLBS6ES" />
-                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="Support GrocerCheck by donating via PayPal! All proceeds go towards keeping the site alive, and we'll donate the rest to local charities fighting against COVID-19" alt="Donate with PayPal button" />
-                <img alt="" border="0" src="https://www.paypal.com/en_CA/i/scr/pixel.gif" width="1" height="1" />
-                <p style="font-size: 9px; background-color: #35605A; color: white; border-radius: 10px; padding-right: 10px; padding-left: 10px;">GrocerCheck is a registered student-run nonprofit that relies on donations to stay alive</p>
-		
-			
-		            </form>
+            </ul>
         </div>
+    </nav>
 
-		</div>
 
-		<!--The div element for the map -->
-		<div id="map"></div>
+    <div id="searchbar">
+        <form class="search" onsubmit='return false;'>
+            <input id='searchtextfield' type="text" placeholder='Search GrocerCheck (Try name, street, city, or near me! e.g. "costco", "kingsway", "richmond", "safeway near me")' name="searchfield"></input>
+            <input type="image" onclick='searchClicked()'  src="{% static 'images/searchicon.png' %}"></input>
+        </form>
 
-        <script src="https://cdn.jsdelivr.net/npm/fuzzball@1.3.0/dist/fuzzball.umd.min.js"></script>
-		<script>
+    </div>
+
+
+
+    <div id="floating_menu">
+
+        <label class="container" id="livecontainer" for="livebutton">Live Only
+            <input id="livebutton" type="radio"  onclick="showLiveOnly()" name="radio">
+        </label>
+
+        <label class="container" id="histcontainer" for="histbutton">
+            Live and Historical
+            <input id="histbutton" type="radio" checked = "checked" onclick="showHistorical()" name="radio">
+        </label>
+
+        <label class="container" id="allcontainer" for="allbutton">
+            Show All Stores
+            <input id="allbutton" type="radio" onclick="showAll()"  name="radio">
+        </label>
+    </div>
+
+
+    <script>
+var floatingvisible = false;
+document.getElementById("floating_menu").style.display = "none";
+document.getElementById("viewbutton").onclick = function(){
+
+    if(floatingvisible==false){
+
+        document.getElementById("floating_menu").style.display = "block";
+        document.getElementById("viewbuttonlabel").className = "fas fa-chevron-up";
+        floatingvisible = true;
+    }
+    else{
+        document.getElementById("viewbuttonlabel").className = "fas fa-chevron-down";
+        document.getElementById("floating_menu").style.display = "none";
+        floatingvisible = false;
+    }
+}
+    </script>
+
+
+
+    <div id="paypalbutton">
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick" />
+            <input type="hidden" name="hosted_button_id" value="KGS4K4PLBS6ES" />
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="Support GrocerCheck by donating via PayPal! All proceeds go towards keeping the site alive, and we'll donate the rest to local charities fighting against COVID-19" alt="Donate with PayPal button" />
+            <img alt="" border="0" src="https://www.paypal.com/en_CA/i/scr/pixel.gif" width="1" height="1" />
+            <p style="font-size: 9px; background-color: #35605A; color: white; border-radius: 10px; padding-right: 10px; padding-left: 10px;">GrocerCheck is a registered student-run nonprofit that relies on donations to stay alive</p>
+
+
+        </form>
+    </div>
+
+    </div>
+
+    <!--The div element for the map -->
+    <div id="map"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fuzzball@1.3.0/dist/fuzzball.umd.min.js"></script>
+    <script>
 
 function getDistance(lat1,lon1,lat2,lon2) {
-  var R = 6371; // Radius of the earth in km
-  var dLat = deg2rad(lat2-lat1);  // deg2rad below
-  var dLon = deg2rad(lon2-lon1); 
-  var a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
-    Math.sin(dLon/2) * Math.sin(dLon/2)
-    ; 
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-  var d = R * c; // Distance in km
-  return d;
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+    var dLon = deg2rad(lon2-lon1); 
+    var a = 
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+        Math.sin(dLon/2) * Math.sin(dLon/2)
+        ; 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    var d = R * c; // Distance in km
+    return d;
 }
 
 function deg2rad(deg) {
-  return deg * (Math.PI/180)
+    return deg * (Math.PI/180)
 }
 
 
@@ -454,506 +454,506 @@ function initMap() {
     var cityname = {{city|safe}}[0];
 
     var zoom = {'vancouver': 12, "seattle": 11, 'victoria': 13, "toronto": 11, "las_vegas": 11, "silicon_valley": 10, "montreal": 11};
-	var centerpositions = {'vancouver': {lat:49.2577143,lng:-123.0939433}, 'seattle': {lat:47.6129432,lng:-122.382146}, 'victoria': {lat:48.4262038,lng:-123.3642418}, 'toronto': {lat:43.7181557,lng:-79.51814}, 'las_vegas': {lat:36.1249185,lng:-115.2150827}, 'silicon_valley': {lat:37.502473,lng:-122.3212771}, 'montreal': {lat:45.534380,lng:-73.628963}};
+    var centerpositions = {'vancouver': {lat:49.2577143,lng:-123.0939433}, 'seattle': {lat:47.6129432,lng:-122.382146}, 'victoria': {lat:48.4262038,lng:-123.3642418}, 'toronto': {lat:43.7181557,lng:-79.51814}, 'las_vegas': {lat:36.1249185,lng:-115.2150827}, 'silicon_valley': {lat:37.502473,lng:-122.3212771}, 'montreal': {lat:45.534380,lng:-73.628963}};
     var zoomlevel = zoom[cityname];
-	var centerposition = centerpositions[cityname];
+    var centerposition = centerpositions[cityname];
 
 
 
-//create map
-	map = new google.maps.Map(
-		document.getElementById('map'), {zoom: zoomlevel, center: centerposition});
+    //create map
+    map = new google.maps.Map(
+            document.getElementById('map'), {zoom: zoomlevel, center: centerposition});
 
-	// if geolocation is available
-	if(navigator.geolocation){
-		
-		//get current position
-		navigator.geolocation.getCurrentPosition(function(position) {
-			 var userpos = {
-				lat: position.coords.latitude,
-				lng: position.coords.longitude
-			};
-			userlat = position.coords.latitude;
-			userlng = position.coords.longitude;
+    // if geolocation is available
+    if(navigator.geolocation){
 
-			hasloc = true;
-			usermarker = new google.maps.Marker({clickable:true,icon:{url:"{% static 'images/GrocerCheckFavicon.png' %}",scaledSize: new google.maps.Size(40,40)},map:null,position:userpos});
+        //get current position
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var userpos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            userlat = position.coords.latitude;
+            userlng = position.coords.longitude;
 
-
-		}, function(){ //handle error if location invalid
-			handleLocationError(true,map.getCenter());
-		}
-		);
-
-	}
-	else{ //handle error
-		handleLocationError(false,map.getCenter());
-	}
+            hasloc = true;
+            usermarker = new google.maps.Marker({clickable:true,icon:{url:"{% static 'images/GrocerCheckFavicon.png' %}",scaledSize: new google.maps.Size(40,40)},map:null,position:userpos});
 
 
+        }, function(){ //handle error if location invalid
+            handleLocationError(true,map.getCenter());
+        }
+        );
+
+    }
+    else{ //handle error
+        handleLocationError(false,map.getCenter());
+    }
 
 
 
-//importing from context from views.py
-	names = {{name|safe}}
 
-	var place_id = {{place_id|safe}}
 
-	address = {{address|safe}}
-	lat = {{lat|safe}}
-	lng = {{lng|safe}}
-	var place_id = {{place_id|safe}}
-	var hours = {{hours|safe}}
-	var busyness = {{busyness|safe}}
-	openn = {{openn|safe}}
-	keywords = {{keywords|safe}}
-	var positions = [] //list of all positions as {lat, lng}
-	
-	for(let x = 0;x<lat.length;x++){
-		positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lng[x])})
-	}
+    //importing from context from views.py
+    names = {{name|safe}}
 
-	
+    var place_id = {{place_id|safe}}
 
-	function buildInfoWindowString(names,address,hours,busyness,x){
-		var s = '';//text color
-		var pops = '';//popularity string
-		var busy = busyness[x];
-		var statusstring = '';
-		var t = "true";;
-		if(openn[x]==1){
-			statusstring = 'Open';
-		}
-		else{
-			statusstring = 'Closed';
-		}
-		if(busy==-1){
-			pops = "No Popularity Data Available";
-		}
-		else if(busy>=1000){
-			busy-=1000;
-            pops = "Not very busy right now" + " (" + busy + '%)';
-			if (busy > 33){
-                pops = "A bit busy right now" + " (" + busy + '%)';
-            }if (busy > 55){
-                pops = "Moderately busy right now" + " (" + busy + '%)';
-            }if (busy > 70){
-                pops = "Very busy right now" + " (" + busy + '%)';
-            }if (busy > 100){
-                pops = "Much busier than it ever gets right now" + " (" + busy + '%)';
-            }
-            
-        }else{
-            pops = "Historically not very busy right now" + " (" + busy + '%)';
-			if (busy > 33){
-                pops = "Historically a bit busy right now" + " (" + busy + '%)';
-            }if (busy > 55){
-                pops = "Historically moderately busy right now" + " (" + busy + '%)';
-            }if (busy > 77){
-                pops = "Historically very busy right now" + " (" + busy + '%)';
+    address = {{address|safe}}
+    lat = {{lat|safe}}
+    lng = {{lng|safe}}
+    var place_id = {{place_id|safe}}
+    var hours = {{hours|safe}}
+    var busyness = {{busyness|safe}}
+    openn = {{openn|safe}}
+    keywords = {{keywords|safe}}
+    var positions = [] //list of all positions as {lat, lng}
+
+for(let x = 0;x<lat.length;x++){
+    positions.push({lat:parseFloat(lat[x]), lng:parseFloat(lng[x])})
+}
+
+
+
+function buildInfoWindowString(names,address,hours,busyness,x){
+    var s = '';//text color
+    var pops = '';//popularity string
+    var busy = busyness[x];
+    var statusstring = '';
+    var t = "true";;
+    if(openn[x]==1){
+        statusstring = 'Open';
+    }
+    else{
+        statusstring = 'Closed';
+    }
+    if(busy==-1){
+        pops = "No Popularity Data Available";
+    }
+    else if(busy>=1000){
+        busy-=1000;
+        pops = "Not very busy right now" + " (" + busy + '%)';
+        if (busy > 33){
+            pops = "A bit busy right now" + " (" + busy + '%)';
+        }if (busy > 55){
+            pops = "Moderately busy right now" + " (" + busy + '%)';
+        }if (busy > 70){
+            pops = "Very busy right now" + " (" + busy + '%)';
+        }if (busy > 100){
+            pops = "Much busier than it ever gets right now" + " (" + busy + '%)';
+        }
+
+    }else{
+        pops = "Historically not very busy right now" + " (" + busy + '%)';
+        if (busy > 33){
+            pops = "Historically a bit busy right now" + " (" + busy + '%)';
+        }if (busy > 55){
+            pops = "Historically moderately busy right now" + " (" + busy + '%)';
+        }if (busy > 77){
+            pops = "Historically very busy right now" + " (" + busy + '%)';
         }
     }
-	
-		s = getIcon(x);
 
-		if(openn[x]==0){
-			pops='';
-			s='#dddddd';
-		}
-//return formatted html of infowindow
-		return '<div style: "display: inline-block" id="content">' + 
-			'<h1 style="margin-top: -3px; margin-bottom: -4px; padding: 5px 5px 10px 5px; border-radius: 10px 10px 0px 0px; background-color: #35605A; color: '+s+'"> '+names[x]+'</h1>' +
-			'<div style = "margin-bottom: -4px; padding: 10px 5px 5px 5px; color: white; background-color: #35CE8D; border-radius: 0px 0px 10px 10px;" id="body"'+
-			'<p> '+address[x]+' </p>'+
-			'<p> '+hours[x]+' </p>'+
-			'<p> '+statusstring+' </p>'+
-			'<p> '+pops+' </p> '+
-			'</div>'+
-			'</div>';
-	}
+    s = getIcon(x);
 
-	//loading static images of markers
-	
+    if(openn[x]==0){
+        pops='';
+        s='#dddddd';
+    }
+    //return formatted html of infowindow
+    return '<div style: "display: inline-block" id="content">' + 
+        '<h1 style="margin-top: -3px; margin-bottom: -4px; padding: 5px 5px 10px 5px; border-radius: 10px 10px 0px 0px; background-color: #35605A; color: '+s+'"> '+names[x]+'</h1>' +
+        '<div style = "margin-bottom: -4px; padding: 10px 5px 5px 5px; color: white; background-color: #35CE8D; border-radius: 0px 0px 10px 10px;" id="body"'+
+        '<p> '+address[x]+' </p>'+
+        '<p> '+hours[x]+' </p>'+
+        '<p> '+statusstring+' </p>'+
+        '<p> '+pops+' </p> '+
+        '</div>'+
+        '</div>';
+}
 
-
-	var markericons = [];
-	for(let x = 1; x<16;x++){
-		
-		markericons.push("/static/images/markers/"+x+".png");
-	}
-
-	markericons.push("{% static 'images/greymarker.png' %}"); //index 15 grey
-	markericons.push("{% static 'images/purplemarker.png' %}"); //index 16 purple
-
-	
-
-	function getMarkerIconsIndex(x){
-			
-		if(openn[x]==0){
-			return 15;
-		}
-
-		let b = busyness[x];
-		if(busyness[x]>=1000){
-			b-=1000;
-		}
-		if(b>=0){
-			if(b>100){
-				return 16;
-			}
-			else if(b>=84){
-				return 14;
-			}
-			else{
-
-				return Math.floor(b/6);
-
-			}
-		}
-		else{
-			return 15;
-		}
+//loading static images of markers
 
 
-	}
 
-	
+var markericons = [];
+for(let x = 1; x<16;x++){
+
+    markericons.push("/static/images/markers/"+x+".png");
+}
+
+markericons.push("{% static 'images/greymarker.png' %}"); //index 15 grey
+markericons.push("{% static 'images/purplemarker.png' %}"); //index 16 purple
+
+
+
+function getMarkerIconsIndex(x){
+
+    if(openn[x]==0){
+        return 15;
+    }
+
+    let b = busyness[x];
+    if(busyness[x]>=1000){
+        b-=1000;
+    }
+    if(b>=0){
+        if(b>100){
+            return 16;
+        }
+        else if(b>=84){
+            return 14;
+        }
+        else{
+
+            return Math.floor(b/6);
+
+        }
+    }
+    else{
+        return 15;
+    }
+
+
+}
+
+
 
 //build marker
-	function buildMarker(markericonsindex,radius,position){
-		return new google.maps.Marker({icon:{url:markericons[markericonsindex], scaledSize:new google.maps.Size(radius*2, radius*2)}, opacity:0.6,  clickable:true, position:position, map:map});
-	}
+function buildMarker(markericonsindex,radius,position){
+    return new google.maps.Marker({icon:{url:markericons[markericonsindex], scaledSize:new google.maps.Size(radius*2, radius*2)}, opacity:0.6,  clickable:true, position:position, map:map});
+}
 
-	function openInfoWindow(i){
-		//if infowindow already open, close it
-		if(infowindow){
-			infowindow.close();
-		}
+function openInfoWindow(i){
+    //if infowindow already open, close it
+    if(infowindow){
+        infowindow.close();
+    }
 
-		//open infowindow on new marker with new html content
-		infowindow.setContent(buildInfoWindowString(names,address,hours,busyness,i));
-		infowindow.open(map,temp);
+    //open infowindow on new marker with new html content
+    infowindow.setContent(buildInfoWindowString(names,address,hours,busyness,i));
+    infowindow.open(map,temp);
 
 
-	}
+}
 
 //returns gradient color of marker given x index
-	function getIcon(x){
-		if(openn[x]==0){
-			return "grey";
-		}
-		let b = busyness[x];
-		if(busyness[x]>=1000){
-			b-=1000;
-		}
-		if(b>=0){
-			if(b>100){
-				return "rgb(255,0,255)";
-			}
-			else if(b>=80){
-				return "rgb(255, 0, 0)";
-			}
-			else if(b>=40){
-				return "rgb(255, "+Math.round((80-b)*(255/40))+", 0)";
-			}
-			else{
-				return "rgb("+Math.round((b)*(255/40))+", 255, 0)";
-			}
-		}
-		else{
-			return "grey";
-		}
-	}
+function getIcon(x){
+    if(openn[x]==0){
+        return "grey";
+    }
+    let b = busyness[x];
+    if(busyness[x]>=1000){
+        b-=1000;
+    }
+    if(b>=0){
+        if(b>100){
+            return "rgb(255,0,255)";
+        }
+        else if(b>=80){
+            return "rgb(255, 0, 0)";
+        }
+        else if(b>=40){
+            return "rgb(255, "+Math.round((80-b)*(255/40))+", 0)";
+        }
+        else{
+            return "rgb("+Math.round((b)*(255/40))+", 255, 0)";
+        }
+    }
+    else{
+        return "grey";
+    }
+}
 
-	var infowindow = new google.maps.InfoWindow();
-	for(let x = 0; x<positions.length;x++){
+var infowindow = new google.maps.InfoWindow();
+for(let x = 0; x<positions.length;x++){
 
-		if(busyness[x]==-1){
-			//No data available
-			var temp = buildMarker(getMarkerIconsIndex(x),10,positions[x])
-			markers.push(temp)
-			allstores.push(temp);
+    if(busyness[x]==-1){
+        //No data available
+        var temp = buildMarker(getMarkerIconsIndex(x),10,positions[x])
+            markers.push(temp)
+            allstores.push(temp);
 
-		}
-		else if(busyness[x]>=1000){
-			//live data available
-			var busy = busyness[x]-1000;
+    }
+    else if(busyness[x]>=1000){
+        //live data available
+        var busy = busyness[x]-1000;
 
-			var temp = buildMarker(getMarkerIconsIndex(x),12,positions[x]);
-			markers.push(temp);
-			livemarkers.push(temp);
-		}
+        var temp = buildMarker(getMarkerIconsIndex(x),12,positions[x]);
+        markers.push(temp);
+        livemarkers.push(temp);
+    }
 
-		else{
-			//only historical data available
-			var temp = buildMarker(getMarkerIconsIndex(x),10,positions[x])
-			markers.push(temp)
-			historicalmarkers.push(temp)
-		}
-
-
-
-	}
-	for(let k = 0; k<markers.length;k++){
-		markers[k].addListener('click',function() {
-			infowindow.setContent(buildInfoWindowString(names,address,hours,busyness,k));
-			infowindow.open(map,markers[k]);
-		});
-
-	}
+    else{
+        //only historical data available
+        var temp = buildMarker(getMarkerIconsIndex(x),10,positions[x])
+            markers.push(temp)
+            historicalmarkers.push(temp)
+    }
 
 
 
-	showHistorical();//default view on site visit is live only
-	toggleStores();//toggle on and off, starts as show closed = true, toggle to set it to false immediately so it displays properly
+}
+for(let k = 0; k<markers.length;k++){
+    markers[k].addListener('click',function() {
+        infowindow.setContent(buildInfoWindowString(names,address,hours,busyness,k));
+        infowindow.open(map,markers[k]);
+    });
+
+}
+
+
+
+showHistorical();//default view on site visit is live only
+toggleStores();//toggle on and off, starts as show closed = true, toggle to set it to false immediately so it displays properly
 }
 var nearflag = false;
 //callback function on search button click
 function searchClicked(){
-	searchedStores = [];
-	//grab user input and encode to prevent injection
-	nearflag = false;
-	var searchstring = encodeURI(document.getElementById('searchtextfield').value).toLowerCase();
-	if(searchstring.includes("near%20me") || searchstring.includes("nearby")){
+    searchedStores = [];
+    //grab user input and encode to prevent injection
+    nearflag = false;
+    var searchstring = encodeURI(document.getElementById('searchtextfield').value).toLowerCase();
+    if(searchstring.includes("near%20me") || searchstring.includes("nearby")){
 
-		if(hasloc==false){
-			document.getElementById("nearmemodaldiv").style.display = "block";
-		}
-		else{
-		nearflag = true;
-		usermarker.setMap(map);
-		searchstring = searchstring.replace("near%20me","");
-		searchstring = searchstring.replace("nearby", "");
-		}
-	}
-	else if (hasloc==true){
-		usermarker.setMap(null);
-	}
-	//if search not empty
-	if(searchstring!=""){
-		searchInProgress = true;
+        if(hasloc==false){
+            document.getElementById("nearmemodaldiv").style.display = "block";
+        }
+        else{
+            nearflag = true;
+            usermarker.setMap(map);
+            searchstring = searchstring.replace("near%20me","");
+            searchstring = searchstring.replace("nearby", "");
+        }
+    }
+    else if (hasloc==true){
+        usermarker.setMap(null);
+    }
+    //if search not empty
+    if(searchstring!=""){
+        searchInProgress = true;
 
-	}
-	else{
-		//clear search, display all markers with the right state
-		searchInProgress = false;
-		searchedStores = [];
-		filterByState();
-                displaySearched();
-		if(nearflag==true){
-			displayNear();
-		}
-		return;
-	}
+    }
+    else{
+        //clear search, display all markers with the right state
+        searchInProgress = false;
+        searchedStores = [];
+        filterByState();
+        displaySearched();
+        if(nearflag==true){
+            displayNear();
+        }
+        return;
+    }
 
-	//replace encoded space " " with actual space
-	searchstring = searchstring.replace(/%20/g, " ");
+    //replace encoded space " " with actual space
+    searchstring = searchstring.replace(/%20/g, " ");
 
 
-	var max = 0;
-	var arr = [];
-	let r;
-	let comparestring;
-	if(searchstring.includes("street") || searchstring.includes("avenue") || searchstring.includes("boulevard") || searchstring.includes(" highway") || searchstring.includes("+")  || searchstring.includes("-") || searchstring.includes(" ") || searchstring.includes(" and ")){
-		//account for misspellings
-		let variations = getVariations(searchstring);
-		for(let p = 0; p<variations.length;p++){
-			searchstring += " "+variations[p];
-		}
-	}
+    var max = 0;
+    var arr = [];
+    let r;
+    let comparestring;
+    if(searchstring.includes("street") || searchstring.includes("avenue") || searchstring.includes("boulevard") || searchstring.includes(" highway") || searchstring.includes("+")  || searchstring.includes("-") || searchstring.includes(" ") || searchstring.includes(" and ")){
+        //account for misspellings
+        let variations = getVariations(searchstring);
+        for(let p = 0; p<variations.length;p++){
+            searchstring += " "+variations[p];
+        }
+    }
 
-	if(searchstring.includes("tnt")){
-		searchstring = "t&t "+searchstring;
-	}
+    if(searchstring.includes("tnt")){
+        searchstring = "t&t "+searchstring;
+    }
 
-	for(let x = 0; x<markers.length;x++){
-		comparestring = names[x]+" "+address[x]+" "+keywords[x];
-		//	r = Math.max(fuzzball.token_set_ratio(searchstring, comparestring), fuzzball.ratio(searchstring, comparestring));
-		r = fuzzball.token_set_ratio(searchstring, comparestring)
-		arr.push(r);
-		if(r>max){
-			max = r;
-		}
-	}
+    for(let x = 0; x<markers.length;x++){
+        comparestring = names[x]+" "+address[x]+" "+keywords[x];
+        //	r = Math.max(fuzzball.token_set_ratio(searchstring, comparestring), fuzzball.ratio(searchstring, comparestring));
+        r = fuzzball.token_set_ratio(searchstring, comparestring)
+            arr.push(r);
+        if(r>max){
+            max = r;
+        }
+    }
 
-	for(let x = 0; x<markers.length;x++){
+    for(let x = 0; x<markers.length;x++){
 
-		if(arr[x] > max*0.75){
-			searchedStores.push(markers[x]);
+        if(arr[x] > max*0.75){
+            searchedStores.push(markers[x]);
 
-		}
+        }
 
-	}
-	if(state=='live'){ showLiveOnly();}
-	if(state=='historical'){ showHistorical();}
-	if(state=='all') { showAll();}
-	displaySearched();
-	if(nearflag==true){
-		displayNear();
-	}
+    }
+    if(state=='live'){ showLiveOnly();}
+    if(state=='historical'){ showHistorical();}
+    if(state=='all') { showAll();}
+    displaySearched();
+    if(nearflag==true){
+        displayNear();
+    }
 }
 
 function displayNear(){
-	
 
-	for(let x = 0; x<markers.length;x++){
-		if(getDistance(parseFloat(lat[x]),parseFloat(lng[x]),userlat,userlng)>=5.0){
-			markers[x].setMap(null);
-		}
-	}
-	
+
+    for(let x = 0; x<markers.length;x++){
+        if(getDistance(parseFloat(lat[x]),parseFloat(lng[x]),userlat,userlng)>=5.0){
+            markers[x].setMap(null);
+        }
+    }
+
 }
 
 function getVariations(word){
-	let arr = [];
+    let arr = [];
 
-	if(word.includes("+")){
-		arr.push(word.replace(/\+/g, " and "));
-	}
-	if(word.includes("-")){
-		arr.push(word.replace(/-/g, " "));
-	}
-	if(word.includes(" ")){
-		arr.push(word.replace(/ /g, "-"));
-		arr.push(word.replace(/ /g, ""));
-	}
-	if(word.includes(" and ")){
-		arr.push(word.replace(/ and /g, "&"));
-	}
-	if(word.includes("street")){
-		arr.push(word.replace(/street/g, "st"));
-	}
-	if(word.includes("avenue")){
-		arr.push(word.replace(/avenue/g, "ave"));
-	}
-	if(word.includes("boulevard")){
-		arr.push(word.replace(/boulevard/g, "blvd"));
-	}
-	if(word.includes("highway")){
-		arr.push(word.replace(/highway/g, "hwy"));
-	}
-	return arr;
+    if(word.includes("+")){
+        arr.push(word.replace(/\+/g, " and "));
+    }
+    if(word.includes("-")){
+        arr.push(word.replace(/-/g, " "));
+    }
+    if(word.includes(" ")){
+        arr.push(word.replace(/ /g, "-"));
+        arr.push(word.replace(/ /g, ""));
+    }
+    if(word.includes(" and ")){
+        arr.push(word.replace(/ and /g, "&"));
+    }
+    if(word.includes("street")){
+        arr.push(word.replace(/street/g, "st"));
+    }
+    if(word.includes("avenue")){
+        arr.push(word.replace(/avenue/g, "ave"));
+    }
+    if(word.includes("boulevard")){
+        arr.push(word.replace(/boulevard/g, "blvd"));
+    }
+    if(word.includes("highway")){
+        arr.push(word.replace(/highway/g, "hwy"));
+    }
+    return arr;
 }
 
 
 function displaySearched(){
-	if(searchedStores.length==0){
-		filterByState();
-		return;
-	}
-	for(let x = 0; x<markers.length;x++){
-		if(markers[x].getVisible()){
-			if(searchedStores.includes(markers[x])==false){
-				markers[x].setMap(null);
-			}
-		}
-	}
+    if(searchedStores.length==0){
+        filterByState();
+        return;
+    }
+    for(let x = 0; x<markers.length;x++){
+        if(markers[x].getVisible()){
+            if(searchedStores.includes(markers[x])==false){
+                markers[x].setMap(null);
+            }
+        }
+    }
 }
 
 function filterByState(){
-	if(state=='live'){
-		showLiveOnly();
-	}
-	if(state=='historical'){
-		showHistorical();
-	}
-	if(state=='all'){
-		showAll();
-	}
+    if(state=='live'){
+        showLiveOnly();
+    }
+    if(state=='historical'){
+        showHistorical();
+    }
+    if(state=='all'){
+        showAll();
+    }
 }
 
 function handleLocationError(hasgeo, pos){
-	if(hasgeo){
-		map.setCenter(pos);
-	}
-	else{
-		map.setCenter(pos);
-	}
+    if(hasgeo){
+        map.setCenter(pos);
+    }
+    else{
+        map.setCenter(pos);
+    }
 }
 
 function filterOpen(){
-	for(let x = 0; x<markers.length;x++){
-		if(openn[x]==0){
-			markers[x].setMap(null);
-		}
-	}
+    for(let x = 0; x<markers.length;x++){
+        if(openn[x]==0){
+            markers[x].setMap(null);
+        }
+    }
 }
 
 
 
 function showLiveOnly(){
-	document.getElementById("livecontainer").style.background = "#3AB64B";
-	document.getElementById("histcontainer").style.background = "transparent";
-	document.getElementById("allcontainer").style.background = "transparent";
-	for(let x = 0; x<livemarkers.length;x++){
-		livemarkers[x].setMap(map);
-	}
-	for(let x = 0; x<historicalmarkers.length;x++){
-		historicalmarkers[x].setMap(null);
-	}
-	for(let x = 0; x<allstores.length;x++){
-		allstores[x].setMap(null);
-	}
-	state = "live";
-	filterOpen();	
-	displaySearched();
+    document.getElementById("livecontainer").style.background = "#3AB64B";
+    document.getElementById("histcontainer").style.background = "transparent";
+    document.getElementById("allcontainer").style.background = "transparent";
+    for(let x = 0; x<livemarkers.length;x++){
+        livemarkers[x].setMap(map);
+    }
+    for(let x = 0; x<historicalmarkers.length;x++){
+        historicalmarkers[x].setMap(null);
+    }
+    for(let x = 0; x<allstores.length;x++){
+        allstores[x].setMap(null);
+    }
+    state = "live";
+    filterOpen();	
+    displaySearched();
 }
 
 
 
 function showHistorical(){
-	document.getElementById("livecontainer").style.background = "transparent";
-	document.getElementById("histcontainer").style.background = "#3AB64B";
-	document.getElementById("allcontainer").style.background = "transparent";
+    document.getElementById("livecontainer").style.background = "transparent";
+    document.getElementById("histcontainer").style.background = "#3AB64B";
+    document.getElementById("allcontainer").style.background = "transparent";
 
 
-	for(let x = 0; x<livemarkers.length;x++){
-		livemarkers[x].setMap(map);
-	}
-	for(let x = 0; x<historicalmarkers.length;x++){
+    for(let x = 0; x<livemarkers.length;x++){
+        livemarkers[x].setMap(map);
+    }
+    for(let x = 0; x<historicalmarkers.length;x++){
 
 
-		historicalmarkers[x].setMap(map);
-	}
-	for(let x = 0; x<allstores.length;x++){
-		allstores[x].setMap(null);
-	}
-	state = "historical";
-	filterOpen();
-	displaySearched();
+        historicalmarkers[x].setMap(map);
+    }
+    for(let x = 0; x<allstores.length;x++){
+        allstores[x].setMap(null);
+    }
+    state = "historical";
+    filterOpen();
+    displaySearched();
 
 }
 
 function showAll(){
-	document.getElementById("livecontainer").style.background = "transparent";
-	document.getElementById("histcontainer").style.background = "transparent";
-	document.getElementById("allcontainer").style.background = "#3AB64B";
+    document.getElementById("livecontainer").style.background = "transparent";
+    document.getElementById("histcontainer").style.background = "transparent";
+    document.getElementById("allcontainer").style.background = "#3AB64B";
 
-	for(let x = 0; x<livemarkers.length;x++){
-		livemarkers[x].setMap(map);
-	}
-	for(let x = 0; x<historicalmarkers.length;x++){
-		historicalmarkers[x].setMap(map);
-	}
-	for(let x = 0; x<allstores.length;x++){
-		allstores[x].setMap(map);
-	}
-	state = "all";
-	displaySearched();
+    for(let x = 0; x<livemarkers.length;x++){
+        livemarkers[x].setMap(map);
+    }
+    for(let x = 0; x<historicalmarkers.length;x++){
+        historicalmarkers[x].setMap(map);
+    }
+    for(let x = 0; x<allstores.length;x++){
+        allstores[x].setMap(map);
+    }
+    state = "all";
+    displaySearched();
 
 }
 
 
-		</script>
-		<!--Load the API from the specified URL
-	  * The async attribute allows the browser to render the page while the API loads
-	  * The key parameter will contain your own API key (which is not needed for this tutorial)
-	  * The callback parameter executes the initMap() function
-		-->
-		<script async defer
-         src="https://maps.googleapis.com/maps/api/js?key={{ apikey }}&callback=initMap">
-		</script>
+    </script>
+    <!--Load the API from the specified URL
+        * The async attribute allows the browser to render the page while the API loads
+        * The key parameter will contain your own API key (which is not needed for this tutorial)
+        * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+                                                                                                                                                   src="https://maps.googleapis.com/maps/api/js?key={{ apikey }}&callback=initMap">
+    </script>
 
-        
-	</body>
+
+    </body>
 </html>
