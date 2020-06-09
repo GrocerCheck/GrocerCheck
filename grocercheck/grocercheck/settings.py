@@ -44,6 +44,8 @@ except:
         CELERY_BEAT_SCHEDULE = {}
 
 
+
+
 # SECURITY WARNING: don't run with debug turned on in production
 
 if (("dev" in servername) or ("DEV" in servername)):
@@ -161,7 +163,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+STATIC_ROOT = '/opt/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/map/static/'
 
 try:
     MEDIA_ROOT = '/opt/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/map/media/'
@@ -187,6 +189,7 @@ CELERY_TIMEZONE = 'America/Vancouver'
 
 try:
     pg_creds = json.load(open("/home/bitnami/keys/postgreDB.json"))
+
 except:
     try:
         pg_creds = json.load(open(expanduser('~')+'/keys/postgreDB.json'))
@@ -197,8 +200,6 @@ try:
     pg_creds = [pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port']]
 except:
     pg_creds = []
-
-
 try:
     l3_dir ="/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3"
 except:
@@ -318,9 +319,19 @@ BS_TASKS = {
             'schedule': crontab(minute='*/5'),
             'args': (pg_creds, l3_dir),
         },
+
+        'UPDATE_BLOG_ROWS': {
+            'task': 'update_blog_rows',
+            'schedule': crontab(minute='0'),
+            'args': (pg_creds, l3_dir),
+        },
+
+        'UPDATE_MAP_ROWS': {
+            'task': 'update_map_rows',
+            'schedule': crontab(minute='*/15'),
+            'args': (pg_creds, l3_dir),
+        },
     }
-
-
 
 if ("DEV" in servername):
     CELERY_BEAT_SCHEDULE = {}
