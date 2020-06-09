@@ -15,8 +15,6 @@ from .updateDBscripts import *
 #        current_process()._config ={'semprefix':'/mp'}
 
 
-
-
 @task(name="blogSync", max_retries=3, default_retry_delay = 10, time_limit = 60)
 def blogSync(remote_conn, local_conn):
     syncBlog(remote_conn, local_conn)
@@ -37,9 +35,9 @@ def upload_lpt(remote_conn, local_conn):
 def update_map_rows(remote_conn, local_conn):
     updateMapStore(remote_conn, local_conn)
 
-@task(name="update_blog_rows", max_retries=2, default_retry_delay = 20, time_limit = 1000)
-def update_map_rows(remote_conn, local_conn):
-    updateBlogStore(remote_conn, local_conn)
+# @task(name="update_blog_rows", max_retries=2, default_retry_delay = 20, time_limit = 1000)
+# def update_map_rows(remote_conn, local_conn):
+#     updateBlogStore(remote_conn, local_conn)
 
 @task(name="log_lpt", max_retries = 2, default_retry_delay = 10, time_limit = 20)
 def log_lpt(remote_conn):

@@ -232,7 +232,7 @@ def run_scraper(country, city, timezone, doBackup = False, doLog = False, proxy 
     try:
         update_current_popularity(get_formatted_addresses(country, city, conn, timezone), conn, doBackup, doLog, proxy, num_processes)
         conn.commit()
-        print("COMPLETE UPDATE")
+        print("Updated current popularity successfully for " + city)
     except:
         print("error in update_current_popularity")
         LOG.write("ERROR IN update_current_popularity\r\n")

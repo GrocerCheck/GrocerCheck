@@ -39,10 +39,10 @@ def updateLocal(remote_conn, local_conn):
             l3_cur.execute("UPDATE map_store SET live_busyness=? WHERE id=?", pair)
         local_conn.commit()
         pg_cur.close()
-        print("updateLOCAL complete")
+        print("updateLocal LPT complete")
 
     except:
-        print("ERROR in updateLocal")
+        print("ERROR in updateLocal LPT")
 
     remote_conn.close()
 
@@ -55,7 +55,7 @@ def updateRemoteLoop(remote_conn, local_conn):
     :param local_conn: a sqlite3 connection (all local connections for this task will be sqlite3)
 
     updates live_busyness param via loop (slow bc multiple calls,  but no server-side caching of lpt)
-
+    ***deprecated***
     """
     remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
     local_conn = create_sqlite3_connection(local_conn)
@@ -101,11 +101,11 @@ def updateRemoteDump(remote_conn, local_conn):
 
         remote_conn.close()
         pg_cur.close()
-        print("UPDATE REMOTE DUMP COMPLETE, calling updateFromDump")
+        print("Dumped Local LPT to remote, calling updateFromDump")
         updateFromDump(remote_creds)
 
     except:
-        print("ERROR IN UPDATE REMOTE DUMP")
+        print("ERRUR IN updateRemoteDump")
 
 def updateFromDump(remote_conn):
     """
@@ -115,6 +115,7 @@ def updateFromDump(remote_conn):
     Parses json dump in remote, applies json to live_busyness
 
     """
+    # Make sure this is updated to the current dev version w/ new procedure
     remote_conn = create_pgsql_connection(remote_conn[0], remote_conn[1], remote_conn[2], remote_conn[3], remote_conn[4])
     try:
         pg_cur = remote_conn.cursor()
@@ -145,7 +146,7 @@ def updateFromDump(remote_conn):
 
         pg_cur.close()
         remote_conn.close()
-        print("UPDATEFROMDUMP COMPLETE")
+        print("updateFromDump complete -- data unpacked successfully")
     except:
         print("ERROR IN UPDATEFROMDUMP")
 
@@ -328,7 +329,7 @@ def syncBlog(remote_conn, local_conn):
             pg_dict_cur.execute("SELECT id, title, author_name, author_blurb, date, content, article_sources, article_timestamp, img_src FROM map_blog_entry WHERE id=%s", (remote_id_timestamps[i][0],))
             data = pg_dict_cur.fetchall()[0]
             data = [data['title'], data['author_name'], data['author_blurb'], data['date'], data['content'], data['article_sources'], data['article_timestamp'], data['img_src'], data['id']]
-            pg_cur.execute("UPDATE public.map_blog_entry SET title=?, author_name=?, author_blurb=?, date=?, content=?, article_sources=?, article_timestamp=?, img_src=? WHERE id=?", data)
+            l3_cur.execute("UPDATE map_blog_entry SET title=?, author_name=?, author_blurb=?, date=?, content=?, article_sources=?, article_timestamp=?, img_src=? WHERE id=?", data)
             local_conn.commit()
     pg_cur.close()
     remote_conn.close()

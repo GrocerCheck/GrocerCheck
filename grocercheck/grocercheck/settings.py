@@ -44,8 +44,6 @@ except:
         CELERY_BEAT_SCHEDULE = {}
 
 
-
-
 # SECURITY WARNING: don't run with debug turned on in production
 
 if (("dev" in servername) or ("DEV" in servername)):
@@ -55,15 +53,14 @@ elif ("bitnami" in BASE_DIR):
     DEBUG = False
 
 else:
-    DEBUG = True
-
-DEBUG = True
+    DEBUG = False
 
 ALLOWED_HOSTS = ['www.grocercheck.ca', 'dev.grocercheck.ca', 'grocercheck.ca',
-                 '52.13.81.19', '44.230.40.10', '52.10.195.42',  '54.188.229.231', '172.26.13.17', '127.0.0.1', '172.26.0.205',
-                 '172.26.28.120', '172.26.11.143', '172.26.1.22', '172.26.10.238', '172.26.3.142']
-# Application definition
+                 '52.13.81.19', '44.230.40.10', '52.10.195.42',  '54.188.229.231',
+                 '172.26.13.17', '127.0.0.1', '172.26.0.205', '172.26.28.120',
+                 '172.26.11.143', '172.26.1.22', '172.26.10.238', '172.26.3.142']
 
+#Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -170,7 +167,7 @@ try:
     MEDIA_ROOT = '/opt/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/map/media/'
     STATIC_ROOT = '/opt/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/map/static/'
 except:
-#these dirs might be wrong lol but it shouldnt matter because we aren't using them much atm
+#these dirs might not be exactly where we want them but we aren't using them much atm
     MEDIA_ROOT = os.path.dirname(os.getcwd()) + "/map/media/"
     STATIC_ROOT = os.path.dirname(os.getcwd()) + "/map/static/"
 
@@ -190,16 +187,18 @@ CELERY_TIMEZONE = 'America/Vancouver'
 
 try:
     pg_creds = json.load(open("/home/bitnami/keys/postgreDB.json"))
-
 except:
     try:
         pg_creds = json.load(open(expanduser('~')+'/keys/postgreDB.json'))
     except:
         pg_creds = []
+
 try:
     pg_creds = [pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port']]
 except:
     pg_creds = []
+
+
 try:
     l3_dir ="/home/bitnami/apps/django/django_projects/GrocerCheck/grocercheck/db1.sqlite3"
 except:
@@ -209,7 +208,8 @@ except:
 # upload_lpt
 # download_lpt
 # update_map_rows
-# update_blog_rows
+# blogSync
+# adSync
 # log_lpt
 # update_current_popularity
 # hardcoded_scrape #debug
@@ -227,25 +227,7 @@ except:
 
 
 
-if ("DEV" in servername):
-    CELERY_BEAT_SCHEDULE = {
-
-            'SYNC_ADS': {
-                'task': 'blogSync',
-                'schedule': 15,
-                'args': (pg_creds, l3_dir),
-                },
-
-
-
-
-            }
-
-
-
-elif ("BS" in servername):
-    CELERY_BEAT_SCHEDULE = {
-# Country, city, timezone, doBackup, doLog, proxy, num_processes
+UPDATE_CITY_TASKS = {
         'UPDATE_VANCOUVER_POPULARITY':{
             'task': 'update_current_popularity',
             'schedule': crontab(minute="0-59/10"),
@@ -282,6 +264,12 @@ elif ("BS" in servername):
             'args': ("", "las_vegas", "America/Vancouver", False, False, p, 16), #US address include country
         },
 
+        'UPDATE_MONTREAL_POPULARITY':{
+            'task': 'update_current_popularity',
+            'schedule': crontab(minute='4-59/10'),
+            'args': ("Canada", "montreal", "America/Montreal", False, False, p, 16), #US address include country
+        },
+
         # 'UPDATE_NEW_YORK_POPULARITY':{
         #     'task': 'update_current_popularity',
         #     'schedule': crontab(minute='5-59/10'),
@@ -289,14 +277,36 @@ elif ("BS" in servername):
         # },
 
 
-        'UPDATE_MONTREAL_POPULARITY':{
-            'task': 'update_current_popularity',
-            'schedule': crontab(minute='4-59/10'),
-            'args': ("Canada", "montreal", "America/Montreal", False, False, p, 16), #US address include country
+}
+
+COMMON_TASKS = {
+            'SYNC_BLOG': {
+                'task': 'blogSync',
+                'schedule': crontab(minute='*/10'),
+                'args': (pg_creds, l3_dir),
+                },
+            'SYNC_ADS': {
+                'task': 'adSync',
+                'schedule': crontab(minute='*/10'),
+                'args': (pg_creds, l3_dir),
+                },
+            'UPDATE_MAP_ROWS': {
+                'task': 'update_map_rows',
+                'schedule': crontab(minute='*/15'),
+                'args': (pg_creds, l3_dir),
+            },
+        }
+
+OS_TASKS = {
+        'DOWNLOAD_LPT':{
+            'task': 'download_lpt',
+            'schedule': crontab(minute="*/3"),
+            'args': (pg_creds, l3_dir), #arguments to pass to the function goes here
         },
+}
 
 
-
+BS_TASKS = {
         'LOG_LPT':{
             'task': 'log_lpt',
             'schedule': crontab(minute='5-59/10'),
@@ -308,41 +318,28 @@ elif ("BS" in servername):
             'schedule': crontab(minute='*/5'),
             'args': (pg_creds, l3_dir),
         },
-
-        'UPDATE_BLOG_ROWS': {
-            'task': 'update_blog_rows',
-            'schedule': crontab(minute='0'),
-            'args': (pg_creds, l3_dir),
-        },
-
-        'UPDATE_MAP_ROWS': {
-            'task': 'update_map_rows',
-            'schedule': crontab(minute='*/15'),
-            'args': (pg_creds, l3_dir),
-        },
     }
+
+
+
+if ("DEV" in servername):
+    CELERY_BEAT_SCHEDULE = {}
+
+elif ("BS" in servername):
+    CELERY_BEAT_SCHEDULE = {}
+    CELERY_BEAT_SCHEDULE.update(BS_TASKS)
+    CELERY_BEAT_SCHEDULE.update(COMMON_TASKS)
+    CELERY_BEAT_SCHEDULE.update(UPDATE_CITY_TASKS)
+
 
 elif ("OS" in servername):
-    CELERY_BEAT_SCHEDULE = {
-# Country, city, timezone, doBackup, doLog, proxy, num_processes
-        'DOWNLOAD_LPT':{
-            'task': 'download_lpt',
-            'schedule': crontab(minute="*/3"),
-            'args': (pg_creds, l3_dir), #arguments to pass to the function goes here
-        },
+    CELERY_BEAT_SCHEDULE = {}
+    CELERY_BEAT_SCHEDULE.update(OS_TASKS)
+    CELERY_BEAT_SCHEDULE.update(COMMON_TASKS)
 
-        'UPDATE_BLOG_ROWS': {
-            'task': 'update_blog_rows',
-            'schedule': crontab(minute='0'),
-            'args': (pg_creds, l3_dir),
-        },
-
-        'UPDATE_MAP_ROWS': {
-            'task': 'update_map_rows',
-            'schedule': crontab(minute='*/15'),
-            'args': (pg_creds, l3_dir),
-        },
-    }
+else:
+    print("SEVERNAME NOT FOUND")
+    CELERY_BEAT_SCHEDULE={}
 
 
 
@@ -350,6 +347,9 @@ elif ("OS" in servername):
 TIMEZONES:
 'America/Vancouver': Seattle, Victoria, Portland, Los Angeles, San Franciso, San Diego,
 'America/Toronto' : New York, Toronto/GTA
+'America/Montreal': Montreal
+
+
 """
 
 
