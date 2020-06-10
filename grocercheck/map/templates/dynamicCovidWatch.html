@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <script data-ad-client="ca-pub-8362595471467364" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167491754-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-167491754-1');
+        </script>
+
+
+        <title>CovidWatch: GrocerCheck</title>
+        <link rel='shortcut icon' type=image/png' href="{% static 'favicon.ico' %}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+        <link rel='stylesheet' href = "{% static 'css/hamburger.css' %}">
+        <link rel='stylesheet' href = "{% static 'css/covidwatchposts.css' %}">
+        <link rel='stylesheet' href = "{% static 'css/infopage.css' %}">
+        <link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
+        <link rel='stylesheet' href = "{% static 'css/termslink.css' %}">
+
+        <style>
+            #titletext {
+                text-align: center;
+                text-decoration: none;
+                position: relative;
+                width: 80%;
+                left: 10%;
+            }
+
+        </style>
+    </head>
+
+
+    <body>
+
+
+        <!-- hamburger menu -->
+        <nav role="navigation">
+            <div id="navtoggle">
+                <input type="checkbox" id="hamburgerbutton"/>
+                <div id='spansquare'>	</div>
+                <span></span>
+                <span></span>
+                <span></span>
+
+
+                <ul id="navmenu">
+                    <a href="{% url 'index' %}"><li>Home</li></a>
+                    <a href="{% url 'about' %}"><li>About Us</li></a>
+                    <a href="{% url 'covidwatch' %}"><li>CovidWatch</li></a>
+                    <a href="{% url 'partners' %}"><li>Partners</li></a>
+                    <a href="{% url 'contact' %}"><li>Contact Us</li></a>
+
+                </ul>
+            </div>
+        </nav>
+
+
+
+        <div id="horizontalnav">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'images/GrocerCheck-01.png' %}" alt="GrocerCheck Logo" >
+            </a>
+
+                <ul id="navbarlist">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li class="currentpage"><a href="{% url 'covidwatch' %}">CovidWatch</a></li>
+                    <li><a href="{% url 'partners' %}">Partners</a></li>
+                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                </ul>
+        </div>
+
+        <div id="spacer"></div>
+
+        <div id = "titletext">
+            <h1 style = "font-size: 80px; margin-bottom: 0;">COVID Watch</h1>
+            <p style="font-size:30px">CovidWatch is your source for quality student journalism on COVID-19</p>
+        </div>
+        </div>
+
+
+        <div style = "display: inline-block;"id = "watchposts">
+
+            {% for i in lrange%}
+                
+            <p>{{ urange|slice:"{{forloop.counter0}}:{{forloop.counter}}" }}</p>
+            {% endfor %}
+
+            
+
+
+            <div id="thiscouldbeyou"  class = "responsive">
+                <a target="_blank" style="text-decoration: none;" href = "mailto:joe@grocercheck.ca?subject=GrocerCheck-Interested%20Writer">
+                    <div class = "post">
+                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px; background-color: white;" src = "{% static 'images/GrocerCheckFavicon.png' %}" alt = "This could be you!">
+                        <div class="title">This could be you!</div>
+                        <div class="author_name">Interested in writing for CovidWatch?</div>
+                        <div class="blurb">
+                            <p>Get in touch with us! Email Joe, our Editor in Chief, at joe@grocercheck.ca and we'll help you get published.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+
+        </div>
+
+        <div id="paypalbutton">
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick" />
+                <input type="hidden" name="hosted_button_id" value="KGS4K4PLBS6ES" />
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="Donate to GrocerCheck with PayPal!" alt="Donate with PayPal button" />
+                <img alt="" border="0" src="https://www.paypal.com/en_CA/i/scr/pixel.gif" width="1" height="1" />
+                <p>GrocerCheck is a student-run nonprofit that relies on donations to keep our service running. We will donate all excess proceeds to the Vancouver General Hospital COVID-19 relief fund</p>
+            </form>
+        </div>
+
+        <div id="termsandcond" style="text-align: center;">
+            <p><a href="{% url 'terms' %}">Terms and Conditions</a> &emsp; <a href="{% url 'privacy' %}">Privacy Policy</a> &emsp; <a href="{% url 'cookies' %}">Cookie Policy</a></p>
+        </div>
+
+    </body>
+
+</html>

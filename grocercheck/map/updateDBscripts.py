@@ -441,7 +441,7 @@ def syncAds(remote_conn, local_conn):
     local_id_timestamps = l3_cur.fetchall()
     remote_id_timestamps = [(x[0], datetime.datetime.strptime(x[1], "%Y-%m-%d %H:%M:%S")) for x in remote_id_timestamps]
     local_id_timestamps = [(x[0], datetime.datetime.strptime(x[1], "%Y-%m-%d %H:%M:%S")) for x in local_id_timestamps]
-    print(remote_id_timestamps, "asdf", local_id_timestamps)
+    # print(remote_id_timestamps, "asdf", local_id_timestamps)
     for i in range(len(remote_id_timestamps)):
         if (remote_id_timestamps[i][1] < local_id_timestamps[i][1]):
             print("ad local is ahead of remote for id " + str(remote_id_timestamps[i][0]))

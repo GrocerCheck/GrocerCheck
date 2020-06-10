@@ -1,16 +1,16 @@
 from django.shortcuts import render
+from django.conf import settings
 import time
 import sqlite3
-from django.conf import settings
-import os
 import datetime
 import pytz
-from map.models import Store
 import json
 import os
 from os.path import expanduser
 import random
 
+from map.models import Store
+from map.models import blog_entry
 
 def index(request, city="nocity"):
     city2tz = {'vancouver': 'America/Vancouver', 'los_angeles':  'America/Vancouver',
@@ -61,6 +61,7 @@ def index(request, city="nocity"):
     conn = sqlite3.connect(os.path.join(settings.BASE_DIR,'db1.sqlite3'))
     cur = conn.cursor()
     with conn:
+# I suppose we could be using models for this...
         cur.execute("SELECT * FROM map_ad_placement WHERE ad_blurb != '__NO-SHOW__' AND ad_city LIKE "+chr(39)+chr(37)+city+chr(37)+chr(39))
         ads = cur.fetchall()
         if len(ads) == 0:
@@ -74,6 +75,7 @@ def index(request, city="nocity"):
             context['images'] = ad[2]
             context['links'] = ad[3]
     cur = conn.cursor()
+
     for s in Store.objects.filter(city__exact=city):
         with conn:
             context['name'].append(s.name)
@@ -165,7 +167,32 @@ def about(request):
     return render(request,'about.html')
 
 def covidwatch(request):
-    return render(request, 'covidwatch.html')
+    # return render(request, 'covidwatch.html')
+    context = {}
+    context['id'] = []
+    context['title'] = []
+    context['author_name'] = []
+    context['first_line'] = []
+    context['img_src'] = []
+    context['img_blurb'] = []
+
+    for entry in blog_entry.objects.all():
+        context['id'].append(entry.id)
+        context['title'].append(entry.title)
+        context['author_name'].append(entry.author_name)
+        context['first_line'].append(entry.content.split('.')[0]+'.')
+        context['img_src'].append(entry.img_src)
+        context['img_blurb'].append(entry.image_blurb)
+
+    # finalcontext = {}
+
+    # for key in context.keys():
+    #     finalcontext[key] = json.dumps(context[key])
+    context['lrange'] = list(range(len(context['id'])))
+    context['urange'] = list(range(1, (len(context['id'])+1)))
+
+    return render(request, 'dynamicCovidWatch.html', context=context)
+
 
 def partners(request):
     return render(request, 'sponsors.html')
@@ -184,10 +211,6 @@ def privacy(request):
 
 def cookies(request):
     return render(request, 'cookies.html')
-
-
-
-
 
 
 def article(request, articleid):

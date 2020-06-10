@@ -195,6 +195,7 @@ except:
 
 try:
     pg_creds = [pg_creds['dbname'], pg_creds['user'], pg_creds['password'], pg_creds['host'], pg_creds['port']]
+    # pg_creds = [pg_creds['new_dbname'], pg_creds['new_user'], pg_creds['new_password'], pg_creds['new_host'], pg_creds['new_port']]
 except:
     pg_creds = []
 
@@ -248,7 +249,7 @@ UPDATE_CITY_TASKS = {
 
         'UPDATE_GTA_POPULARITY':{
             'task': 'update_current_popularity',
-            'schedule': crontab(minute='4-59/10'),
+            'schedule': crontab(minute='3-59/10'),
             'args': ("Canada", "toronto", "America/Vancouver", False, False, p, 16), #US address include country
         },
 
@@ -260,19 +261,19 @@ UPDATE_CITY_TASKS = {
 
         'UPDATE_LAS_VEGAS_POPULARITY':{
             'task': 'update_current_popularity',
-            'schedule': crontab(minute='4-59/10'),
+            'schedule': crontab(minute='5-59/10'),
             'args': ("", "las_vegas", "America/Vancouver", False, False, p, 16), #US address include country
         },
 
         'UPDATE_MONTREAL_POPULARITY':{
             'task': 'update_current_popularity',
-            'schedule': crontab(minute='4-59/10'),
+            'schedule': crontab(minute='6-59/10'),
             'args': ("Canada", "montreal", "America/Montreal", False, False, p, 16), #US address include country
         },
 
         # 'UPDATE_NEW_YORK_POPULARITY':{
         #     'task': 'update_current_popularity',
-        #     'schedule': crontab(minute='5-59/10'),
+        #     'schedule': crontab(minute='7-59/10'),
         #     'args': ("", "new_york", "America/Toronto", False, False, p, 16), #US address include country
         # },
 
@@ -282,12 +283,12 @@ UPDATE_CITY_TASKS = {
 COMMON_TASKS = {
             'SYNC_BLOG': {
                 'task': 'blogSync',
-                'schedule': crontab(minute='*/10'),
+                'schedule': crontab(minute='*/15'),
                 'args': (pg_creds, l3_dir),
                 },
             'SYNC_ADS': {
                 'task': 'adSync',
-                'schedule': crontab(minute='*/10'),
+                'schedule': crontab(minute='*/15'),
                 'args': (pg_creds, l3_dir),
                 },
             'UPDATE_MAP_ROWS': {
@@ -324,6 +325,10 @@ BS_TASKS = {
 
 if ("DEV" in servername):
     CELERY_BEAT_SCHEDULE = {}
+    CELERY_BEAT_SCHEDULE.update(COMMON_TASKS)
+    CELERY_BEAT_SCHEDULE.update(UPDATE_CITY_TASKS)
+    print(CELERY_BEAT_SCHEDULE)
+
 
 elif ("BS" in servername):
     CELERY_BEAT_SCHEDULE = {}
