@@ -284,17 +284,17 @@ UPDATE_CITY_TASKS = {
 COMMON_TASKS = {
             'SYNC_BLOG': {
                 'task': 'blogSync',
-                'schedule': crontab(minute='*/15'),
+                'schedule': crontab(minute='*/5'),
                 'args': (pg_creds, l3_dir),
                 },
             'SYNC_ADS': {
                 'task': 'adSync',
-                'schedule': crontab(minute='*/15'),
+                'schedule': crontab(minute='*/5'),
                 'args': (pg_creds, l3_dir),
                 },
             'UPDATE_MAP_ROWS': {
                 'task': 'update_map_rows',
-                'schedule': crontab(minute='*/15'),
+                'schedule': crontab(minute='*/5'),
                 'args': (pg_creds, l3_dir),
             },
         }

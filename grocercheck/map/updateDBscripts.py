@@ -366,15 +366,22 @@ def updateRemoteFromLocalBlog(remote_conn, local_conn):
     pg_cur = remote_conn.cursor()
     l3_cur = local_conn.cursor()
 
+    pg_cur.execute("SELECT public.map_blog_entry.id FROM public.map_blog_entry ORDER BY public.map_blog_entry.id DESC LIMIT 1")
+    l3_cur.execute("SELECT map_blog_entry.id FROM map_blog_entry ORDER BY map_blog_entry.id DESC LIMIT 1")
+
+    remote_last_id = pg_cur.fetchall()[0][0]
+    local_last_id = l3_cur.fetchall()[0][0]
+
+
     ids_to_update = "("+", ".join([str(i) for i in range(remote_last_id+1, local_last_id+1)])+")"  #do not update local last id, be inclusive of upper bound
         #turn ids_to_update into a string bc of sqlite3 stuff
 
     l3_cur.execute("SELECT * FROM map_blog_entry WHERE map_blog_entry.id IN {row_ids}".format(row_ids=ids_to_update,))
     local_rows = l3_cur.fetchall()
-    sql = "INSERT INTO public.map_blog_entry (id, title, author_name, author_blurb, date, content, article_sources, article_timestamp, img_src) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    sql = "INSERT INTO public.map_blog_entry (id, title, author_name, author_blurb, date, content, article_sources, article_timestamp, img_src, image_blurb) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
     for fetched_row in local_rows:
-        data = [fetched_row['id'], fetched_row['title'], fetched_row['author_name'], fetched_row['author_blurb'], fetched_row['date'], fetched_row['content'], fetched_row['article_sources'], fetched_row['article_timestamp'], fetched_row['img_src']]
+        data = [fetched_row['id'], fetched_row['title'], fetched_row['author_name'], fetched_row['author_blurb'], fetched_row['date'], fetched_row['content'], fetched_row['article_sources'], fetched_row['article_timestamp'], fetched_row['img_src'], fetched_row['image_blurb']]
         pg_cur.execute(sql, data)
     remote_conn.commit()
 
@@ -402,11 +409,11 @@ def updateLocalRowFromRemoteBlog(remote_conn, local_conn):
     pg_dict_cur.execute("SELECT * FROM public.map_blog_entry WHERE id in %s", (ids_to_update,))
     remote_rows = pg_dict_cur.fetchall()
 
-    sql = "INSERT INTO map_blog_entry (id, title, author_name, author_blurb, date, content, article_sources, article_timestamp, img_src) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    sql = "INSERT INTO map_blog_entry (id, title, author_name, author_blurb, date, content, article_sources, article_timestamp, img_src, image_blurb) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
 
     for fetched_row in remote_rows:
-        data = [fetched_row['id'], fetched_row['title'], fetched_row['author_name'], fetched_row['author_blurb'], fetched_row['date'], fetched_row['content'], fetched_row['article_sources'], fetched_row['article_timestamp'], fetched_row['img_src']]
+        data = [fetched_row['id'], fetched_row['title'], fetched_row['author_name'], fetched_row['author_blurb'], fetched_row['date'], fetched_row['content'], fetched_row['article_sources'], fetched_row['article_timestamp'], fetched_row['img_src'], fetched_row['image_blurb']]
         l3_cur.execute(sql, data)
 
     local_conn.commit()
