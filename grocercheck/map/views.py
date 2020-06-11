@@ -165,14 +165,17 @@ def covidwatch(request):
     context = {}
     context['blog_entries'] = []
     for entry in blog_entry.objects.all():
-        blog_entries = {}
-        blog_entries['id'] = entry.id
-        blog_entries['title'] = entry.title
-        blog_entries['author_name'] = entry.author_name
-        blog_entries['first_line'] = entry.content.split('.')[0]+'.'
-        blog_entries['img_src'] = entry.img_src
-        blog_entries['img_blurb'] = entry.image_blurb
-        context['blog_entries'].append(blog_entries)
+        if entry.title=="__NO-SHOW__":
+            continue
+        else:
+            blog_entries = {}
+            blog_entries['id'] = entry.id
+            blog_entries['title'] = entry.title
+            blog_entries['author_name'] = entry.author_name
+            blog_entries['first_line'] = entry.content.split('.')[0]+'.'
+            blog_entries['img_src'] = entry.img_src
+            blog_entries['img_blurb'] = entry.image_blurb
+            context['blog_entries'].append(blog_entries)
 
     # finalcontext = {}
     # for key in context.keys():
