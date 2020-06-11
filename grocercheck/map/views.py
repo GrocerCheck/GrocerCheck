@@ -134,7 +134,7 @@ def index(request, city="nocity"):
                         context['openn'].append(1)
                     elif localhour==oh and localminute>=om:
                         context['openn'].append(1)
-                    elif localhour==ch and localminte<ch:
+                    elif localhour==ch and localminute<ch:
                         context['openn'].append(1)
                     else:
                         context['openn'].append(0)

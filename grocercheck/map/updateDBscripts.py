@@ -232,7 +232,7 @@ def updateMapStore(remote_conn, local_conn):
             updateLocalRowFromRemoteMap(remote_creds, local_creds)
 
     else:
-        print("LOCAL IS EVEN WITH REMOTE")
+        print("LOCAL IS EVEN WITH REMOTE FOR updateMapRow")
 
 
 def updateLocalRowFromRemoteMap(remote_conn, local_conn):
@@ -282,7 +282,7 @@ def updateLocalRowFromRemoteMap(remote_conn, local_conn):
         # CALL updateRemoteRowFromLocal bc from here?
 
     else:
-        print("LOCAL IS EVEN WITH REMOTE")
+        print("LOCAL IS EVEN WITH REMOTE FOR updateMapRow")
 
 
 
