@@ -88,14 +88,21 @@
 
 
         <div style = "display: inline-block;"id = "watchposts">
-
-            {% for i in lrange%}
-                
-            <p>{{ urange|slice:"{{forloop.counter0}}:{{forloop.counter}}" }}</p>
-            {% endfor %}
-
             
-
+            {% for entry in blog_entries reversed %} 
+            <div id="blog_entry_{{entry.id}}" class="responsive">
+                <a target="_blank" style="text-decoration: none;" href = "https://grocercheck.ca/map/covidwatch/{{entry.id}}" >
+                        <div class = "post">
+                            <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = {{entry.img_src}} alt = "CovidWatch article image">
+                            <div class="title">{{entry.title}}</div>
+                            <div class="author_name">{{entry.author_name}}</div>
+                            <div class="blurb">
+                                <p>{{entry.first_line}}</p>
+                            </div>
+                        </div>
+                    </a>
+            </div>
+            {% endfor %}
 
             <div id="thiscouldbeyou"  class = "responsive">
                 <a target="_blank" style="text-decoration: none;" href = "mailto:joe@grocercheck.ca?subject=GrocerCheck-Interested%20Writer">

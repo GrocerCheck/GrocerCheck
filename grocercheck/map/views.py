@@ -111,13 +111,13 @@ def index(request, city="nocity"):
                 elif ('–' not in hours):
                     context['openn'].append(0)
                 else:
-                    hours = hours.split(" – ")#[8:00 AM,7:00 PM] 
+                    hours = hours.split(" – ")#[8:00 AM,7:00 PM]
                     ostring = hours[0].split(':')#[8,00 AM]
                     cstring = hours[1].split(':')#[7,00 PM]
 
                     oh, om, omod = int(ostring[0]), int(ostring[1][:2]), ostring[1][-2:] #opening hour, opening minute, opening modifier
                     ch, cm, cmod = int(cstring[0]), int(cstring[1][:2]), cstring[1][-2:] #closing hour, closing minute, closing modifier
-                    
+
                     if omod=='AM' and oh==12:
                         oh = 0
                     if omod=='PM' and oh!=12:
@@ -139,13 +139,13 @@ def index(request, city="nocity"):
                     else:
                         context['openn'].append(0)
 
-                    
+
 
     finalcontext = {}
 
     for key in context.keys():
         finalcontext[key] = json.dumps(context[key])
-        
+
 
     finalcontext['size'] = json.dumps([len(context['busyness'])])
 
@@ -163,27 +163,23 @@ def about(request):
 def covidwatch(request):
     # return render(request, 'covidwatch.html')
     context = {}
-    context['id'] = []
-    context['title'] = []
-    context['author_name'] = []
-    context['first_line'] = []
-    context['img_src'] = []
-    context['img_blurb'] = []
-
+    context['blog_entries'] = []
     for entry in blog_entry.objects.all():
-        context['id'].append(entry.id)
-        context['title'].append(entry.title)
-        context['author_name'].append(entry.author_name)
-        context['first_line'].append(entry.content.split('.')[0]+'.')
-        context['img_src'].append(entry.img_src)
-        context['img_blurb'].append(entry.image_blurb)
+        blog_entries = {}
+        blog_entries['id'] = entry.id
+        blog_entries['title'] = entry.title
+        blog_entries['author_name'] = entry.author_name
+        blog_entries['first_line'] = entry.content.split('.')[0]+'.'
+        blog_entries['img_src'] = entry.img_src
+        blog_entries['img_blurb'] = entry.image_blurb
+        context['blog_entries'].append(blog_entries)
 
     # finalcontext = {}
-
     # for key in context.keys():
     #     finalcontext[key] = json.dumps(context[key])
-    context['lrange'] = list(range(len(context['id'])))
-    context['urange'] = list(range(1, (len(context['id'])+1)))
+
+    # context['lrange'] = list(range(len(context['id'])))
+    # context['urange'] = list(range(1, (len(context['id'])+1)))
 
     return render(request, 'dynamicCovidWatch.html', context=context)
 
