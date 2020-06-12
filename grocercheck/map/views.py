@@ -68,7 +68,7 @@ def index(request, city="nocity"):
             # context['blurbs'] = datetime.datetime.now(timezone).strftime("%m/%d/%Y, %H:%M:%S")
             context['blurbs'] = "This could be you! Contact us to advertise with GrocerCheck"
             context['links'] = "mailto:preston@grocercheck.ca?subject=GrocerCheck Advertising Inquiry"
-            context['images'] = "http://drive.google.com/uc?id=1VgMaQckiTGqvmM9MzoBhhjb65SNsr_LF"
+            context['images'] = "https://drive.google.com/uc?id=1VgMaQckiTGqvmM9MzoBhhjb65SNsr_LF"
         else:
             ad = random.choice(ads)
             context['blurbs'] = ad[1]
