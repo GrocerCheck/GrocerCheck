@@ -27,6 +27,7 @@ urlpatterns = [
         path('we-aim-to-please-me/', admin.site.urls),
         path('map/', include('map.urls')),
         path('', RedirectView.as_view(url='map/')),
-        path('submit/', submit_view)
+        path('submit/', submit_view),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
