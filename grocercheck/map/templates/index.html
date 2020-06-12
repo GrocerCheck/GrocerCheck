@@ -195,7 +195,8 @@ for (i = 0; i < x.length; i++) {
         <div id="helpbuttondiv">
             <button id="helpbutton"><i class="fa fa-question"></i></button>
         </div>
-
+	<div id="aiyaclose">
+	</div>
         <div id="aiya">
             <a href="{{links|slice:"1:-1"}}" target="_blank">
                 <img alt="aiya image" id="aiyaimage" src="{{images|slice:"1:-1"}}" />
@@ -307,6 +308,10 @@ window.onclick = function(event){
     if(event.target == document.getElementById("disclaimermodaldiv")){
         document.getElementById("disclaimermodaldiv").style.display = "none";
     }
+	if(event.target == document.getElementById("aiyaclose")){
+	document.getElementById("aiya").style.display = "none";
+		document.getElementById("aiyaclose").style.display = "none";
+	}
 }
 document.getElementById("nearmeclose").onclick = function(){
     document.getElementById("nearmemodaldiv").style.display = "none";
@@ -462,7 +467,7 @@ function initMap() {
 
     //create map
     map = new google.maps.Map(
-            document.getElementById('map'), {zoom: zoomlevel, center: centerposition});
+            document.getElementById('map'), {zoom: zoomlevel, center: centerposition, disableDefaultUI: true, zoomControl: true});
 
     // if geolocation is available
     if(navigator.geolocation){
