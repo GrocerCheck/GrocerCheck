@@ -92,7 +92,8 @@ def index(request, city="nocity"):
                 context['keywords'].append(s.keywords)
 
             live = s.live_busyness
-            if(live==None):
+
+            if ((live==None) or (live < 0)):
                 cur.execute("SELECT "+day+hour+" FROM map_store WHERE id=?", (s.id,))
                 live = cur.fetchone()[0]
                 if(live==None):
