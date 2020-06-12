@@ -1,21 +1,21 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-	<head> 
-		<script data-ad-client="ca-pub-8362595471467364" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>	
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-167491754-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <head> 
+        <script data-ad-client="ca-pub-8362595471467364" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>	
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167491754-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-  gtag('config', 'UA-167491754-1');
-</script>
+            gtag('config', 'UA-167491754-1');
+        </script>
 
 
-		<!-- title is the text in the tab at the top -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- title is the text in the tab at the top -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>CovidWatch: {{title|slice:"1:-1"}}</title>
         <link rel='shortcut icon' type='image/png' href="{% static 'favicon.ico' %}" />
@@ -24,54 +24,54 @@
         <link rel='stylesheet' href = "{% static 'css/infopage.css' %}">
         <link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
         <link rel='stylesheet' href = "{% static 'css/articlecss.css' %}">
-	<link rel='stylesheet' href = "{% static 'css/termslink.css' %}">
+        <link rel='stylesheet' href = "{% static 'css/termslink.css' %}">
     </head>
 
     <body>
         <!-- hamburger menu -->
-		<nav role="navigation">
-			<div id="navtoggle">
-				<input type="checkbox" id="hamburgerbutton"/>
-				<div id='spansquare'>	</div>
-				<span></span>
-				<span></span>
-				<span></span>
+        <nav role="navigation">
+            <div id="navtoggle">
+                <input type="checkbox" id="hamburgerbutton"/>
+                <div id='spansquare'>	</div>
+                <span></span>
+                <span></span>
+                <span></span>
 
 
-				<ul id="navmenu">
-					<a href="{% url 'index' %}"><li>Home</li></a>
-					<a href="{% url 'about' %}"><li>About Us</li></a>
-					<a href="{% url 'covidwatch' %}"><li>CovidWatch</li></a>
-					<a href="{% url 'partners' %}"><li>Partners</li></a>
-					<a href="{% url 'contact' %}"><li>Contact Us</li></a>
+                <ul id="navmenu">
+                    <a href="{% url 'index' %}"><li>Home</li></a>
+                    <a href="{% url 'about' %}"><li>About Us</li></a>
+                    <a href="{% url 'covidwatch' %}"><li>CovidWatch</li></a>
+                    <a href="{% url 'partners' %}"><li>Partners</li></a>
+                    <a href="{% url 'contact' %}"><li>Contact Us</li></a>
 
-				</ul>
-			</div>
-		</nav>
-        
+                </ul>
+            </div>
+        </nav>
+
         <div id="horizontalnav">
             <a href="{% url 'index' %}">
                 <img src="{% static 'images/GrocerCheck-01.png' %}" alt="GrocerCheck Logo" >
             </a>
-            <ul id="navbarlist">
-                <li><a href="{% url 'index' %}">Home</a></li>
-                <li><a href="{% url 'about' %}">About Us</a></li>
-                <li class="currentpage"><a href="{% url 'covidwatch' %}">CovidWatch</a></li>
-				<li><a href="{% url 'partners' %}">Partners</a></li>
-                <li><a href="{% url 'contact' %}">Contact Us</a></li>
-            </ul>
+                <ul id="navbarlist">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li class="currentpage"><a href="{% url 'covidwatch' %}">CovidWatch</a></li>
+                    <li><a href="{% url 'partners' %}">Partners</a></li>
+                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                </ul>
         </div>
 
 
         <div id="spacer"></div>
-        
+
         <div style="display: inline-block;" id="article">           
             <h1 id="article_title">{{title|slice:"1:-1"}}</h1>             
             <p id="author_name">{{author_name|slice:"1:-1"}}</p>
             <p id="article_date">{{date|slice:"1:-1"}}</p>
 
             <div class="image_card">
-                <img id="article_image" style = "width: 100%;" src="{% static 'images/GrocerCheckFavicon.jpeg' %}">
+                <img id="article_image" style = "width: 100%;" src="{{img_src|slice:"1:-1"}}">
                 <div class="image_card_text">
                     {% autoescape off %}
                     <p id=image_blurb>{{image_blurb}}</p>
@@ -80,19 +80,19 @@
             <br>
 
             <p id="article_content">{{content|safe|slice:"1:-1"}}</p>
-			<div id="about_the_author">
-                    <p id="about_header">About the author, {{author_name|slice:"1:-1"}}: </p>
-            	    <p id="author_blurb">{{author_blurb|slice:"1:-1"}}</p>
-			</div>
-
-            
-			<div id="article_sources">
-				<p style = "font-size: 30px;" id = "works_cited_header">Sources</p>
-            	<p id="sources">{{article_sources|slice:"1:-1"}}</p>
+            <div id="about_the_author">
+                <p id="about_header">About the author, {{author_name|slice:"1:-1"}}: </p>
+                <p id="author_blurb">{{author_blurb|slice:"1:-1"}}</p>
             </div>
-		{% endautoescape %}
+
+
+            <div id="article_sources">
+                <p style = "font-size: 30px;" id = "works_cited_header">Sources</p>
+                <p id="sources">{{article_sources|slice:"1:-1"}}</p>
+            </div>
+            {% endautoescape %}
         </div>        
-        
+
         <div id="paypalbutton">
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                 <input type="hidden" name="cmd" value="_s-xclick" />
@@ -103,18 +103,18 @@
             </form>
         </div>
 
-	<div id="termsandcond" style="text-align: center;">
-			<p><a href="{% url 'terms' %}">Terms and Conditions</a> &emsp; <a href="{% url 'privacy' %}">Privacy Policy</a> &emsp; <a href="{% url 'cookies' %}">Cookie Policy</a></p>
-		</div>
+        <div id="termsandcond" style="text-align: center;">
+            <p><a href="{% url 'terms' %}">Terms and Conditions</a> &emsp; <a href="{% url 'privacy' %}">Privacy Policy</a> &emsp; <a href="{% url 'cookies' %}">Cookie Policy</a></p>
+        </div>
 
-        
+
         <script>
-            var imgtitle = document.getElementById("article_title").innerHTML;
-            var staticdir = "{% static 'images/covidwatch/' %}";
-            var article_image_element = document.getElementById("article_image");
-            article_image_element.src = staticdir + imgtitle + ".png"; //CHANGE TO PNG LATER
-            article_image_element.alt = imgtitle;
+//var imgtitle = document.getElementById("article_title").innerHTML;
+//var staticdir = "{% static 'images/covidwatch/' %}";
+//var article_image_element = document.getElementById("article_image");
+//article_image_element.src = staticdir + imgtitle + ".png"; //CHANGE TO PNG LATER
+//article_image_element.alt = imgtitle;
         </script>
-        
+
     </body>
 </html>
