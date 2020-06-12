@@ -6,7 +6,7 @@
   top: 65px;
   height: auto;
   right: 0.5%;
-  z-index: 600;
+  z-index: 11000;
 }
 .custom-select select {
   display: none; /*hide original SELECT element:*/
