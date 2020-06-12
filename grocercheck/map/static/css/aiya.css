@@ -1,0 +1,52 @@
+#aiya{
+	position: absolute;
+	right: 0;
+	width: 15%;
+	z-index: 10000;
+	top: 50%;
+	background-color: #35605A;
+	border-radius: 20px;
+	text-align: center;
+	text-decoration: none;
+}
+#aiya a{
+	text-decoration: none;
+}
+#aiya:hover{
+	background-color: #35CE8D;
+}
+#aiyaimage{
+    border-radius: 20px 20px 0px 0px;
+	position: relative;
+	width: 100%;
+
+}
+
+#aiyablurb{
+	text-decoration: none;
+	color: white;
+}
+
+#aiyaclose{
+	position: absolute;
+	display: none;
+	z-index: 0;
+	height: 0;
+	width: 0;
+	left: 0;
+	top: 0;
+}
+
+@media screen and (max-width: 750px) and (orientation: portrait){
+	#aiya{
+		width: 80%;
+		left: 10%;
+		top: 30%;
+	}
+	#aiyaclose{
+		width: 100%;
+		height: 100%;
+		z-index: 9000;
+		display: block;
+	}
+}
