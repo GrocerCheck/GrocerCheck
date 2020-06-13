@@ -17,7 +17,7 @@ A website to help people reduce contact at grocery stores and essential services
         - `"asian grocery near me"`
         - `"bulk on kingsway"`
         - `"kerrisdale grocery on broadway"`
-        
+
 ## How it works
 GrocerCheck is built on the <a href="https://github.com/django/django">Django</a> web framework and <a href="https://github.com/apache">Apache2</a> http web server. To get our data, we make a special google request to get data not available via google maps api. The scraper runs on our <a href="https://github.com/GrocerCheck/LivePopularTimes">LivePopularTimes</a> python module, which is scheduled with celery to aggregate live populartimes for stores with live data every 10 minutes. Requests are routed through <a href="https://luminati.io/?affiliate=ref_5eaf77edc7669177ab3b82b5">Luminati.io</a> data collection networks to ensure reliable retrieval and server security; the last thing we want is our IP blocked! Data is stored in a standard sqlite3 database, from which markers are generated and placed on a map rendered by <a href="https://cloud.google.com/maps-platform/">Google Maps Javascript</a> API.
 
@@ -25,7 +25,7 @@ Blog and content pages are run-of-the-mill css dynamic galleries.
 COVID Watch works as a dynamic gallery of links to an article template populated as per their sql id in the url.
 
 ## Is GrocerCheck open-source?
-#### **You bet it is!** 
+#### **You bet it is!**
 We would be thrilled to see you contribute!
 
 ## How can I support GrocerCheck?
@@ -56,4 +56,3 @@ GrocerCheck Foundation is a registered non-profit organization run by high-schoo
 
 - ### With Infowindow
     - <img src = "https://raw.githubusercontent.com/GrocerCheck/GrocerCheck/master/content/livewithinfowindow.png">
-

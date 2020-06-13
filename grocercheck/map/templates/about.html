@@ -1,7 +1,20 @@
 {% load static %}
 <!DOCTYPE HTML>
 <html>
-	<head> <!-- title is the text in the tab at the top -->
+	<head> 
+<script data-ad-client="ca-pub-8362595471467364" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-167491754-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-167491754-1');
+</script>
+
+
+		<!-- title is the text in the tab at the top -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>About Us: GrocerCheck</title>
 		<link rel='shortcut icon' type='image/png' href="{% static 'favicon.ico' %}">
@@ -13,6 +26,7 @@
 		<link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
 		<link rel='stylesheet' href = "{% static 'css/socialicons.css' %}">
 		<link rel='stylesheet' href = "{% static 'css/ourteam.css' %}">
+		<link rel='stylesheet' href = "{% static 'css/termslink.css' %}">
 
 		<style>
 
@@ -81,7 +95,7 @@
 				<ul id="navmenu">
 					<a href="{% url 'index' %}"><li>Home</li></a>
 					<a href="{% url 'about' %}"><li>About Us</li></a>
-					<a href="{% url 'covidwatch' %}"><li>COVID Watch</li></a>
+					<a href="{% url 'covidwatch' %}"><li>CovidWatch</li></a>
 					<a href="{% url 'partners' %}"><li>Partners</li></a>
 					<a href="{% url 'contact' %}"><li>Contact Us</li></a>
 
@@ -95,7 +109,7 @@
 				<ul id="navbarlist">
 					<li><a href="{% url 'index' %}">Home</a></li>
 					<li class="currentpage"><a href="{% url 'about' %}">About Us</a></li>
-					<li><a href="{% url 'covidwatch' %}">COVID Watch</a></li>
+					<li><a href="{% url 'covidwatch' %}">CovidWatch</a></li>
 					<li><a href="{% url 'partners' %}">Partners</a></li>
 					<li><a href="{% url 'contact' %}">Contact Us</a></li>
 
@@ -134,7 +148,7 @@
 						<img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/brian.jpg' %}" alt = "Brian Chen">
 					</a>
 					<div class="member_name">Brian Chen</div>
-					<div class="member_title">CEO &amp; Co-Founder, VP Development</div>
+					<div class="member_title">CEO &amp; Co-Founder, VP Development, Editor-CovidWatch</div>
 					<div class="desc">Hi! I’m Brian, and I’m an incoming freshman at the University of Toronto. The idea for GrocerCheck came about when I had to buy eggs for a quarantine loaf I was baking, and couldn’t figure out which one was the best choice: do I go to Costco and risk a long line, or face the same fate at the ethnic grocery store five blocks away? I’m super passionate about identifying problems in the world around me, and developing solutions for them. I believe GrocerCheck is a genuinely useful tool, and am beyond excited to see it come to life. In my spare time, I enjoy playing badminton and desperately trying to bake a half-decent sourdough.</div>
 				</div>
 			</div>
@@ -169,7 +183,7 @@
 						<img style="border-top-right-radius: 10px; border-top-left-radius: 10px; " src = "{% static 'images/joe.png' %}" alt = "Joe Salmon">
 					</a>
 					<div class="member_name">Joe Salmon</div>
-					<div class="member_title">Chief Media Officer and Editor in Chief - COVID-Watch</div>
+					<div class="member_title">Chief Media Officer, CovidWatch Editor-In-Chief</div>
 
 					<div class="desc">Hi, I’m Joe, an incoming freshman at the University of British Columbia hoping to major in art history. I control the public relations and press side of Grocercheck, including the social media page, and I work on putting together Covidwatch, an offshoot blog developed for the purpose of keeping people informed on everything COVID-19. In my spare time, you can find me reading, producing music, and otherwise hanging out. I’m very grateful to have the opportunity to work on this project, and I hope it helps you stay safe and social distance effectively.</div>
 				</div>
@@ -206,6 +220,20 @@
 
 			</div>
 
+			<div id="topher" class = "responsive responsivebottom">
+				<div class = "teamprofiles">
+					<a target="_blank" href = "https://www.linkedin.com/in/topher-so-82005a172">
+						<img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/topher.jpg' %}" alt = "Topher So">
+					</a>
+					<div class="member_name">Topher So</div>
+					<div class="member_title">Chief Financial Officer</div>
+
+					<div class="desc">Hello! I’m Topher, and I’m an incoming student at UBC’s Sauder School of Business. I am in charge of the finances behind GrocerCheck. I am extremely passionate about finance, so having the opportunity to be GrocerCheck’s CFO was one I couldn’t pass up. In my spare time, I enjoy watching sports, playing badminton, and listening to music. I look forward to working with the GrocerCheck team, and I hope GrocerCheck continues to help people social distance safely!</div>
+				</div>
+
+			</div>
+
+
 
 
 
@@ -231,9 +259,14 @@
 				<p>GrocerCheck is a student-run nonprofit that relies on donations to keep our service running. We will donate all excess proceeds to the Vancouver General Hospital COVID-19 relief fund</p>
 			</form>
 		</div>
-
-
-
 		</div>
+		<div id="termsandcond" style="text-align: center;">
+			<p><a href="{% url 'terms' %}">Terms and Conditions</a> &emsp; <a href="{% url 'privacy' %}">Privacy Policy</a> &emsp; <a href="{% url 'cookies' %}">Cookie Policy</a></p>
+		</div>
+
+
+
+
+		
 	</body>
 </html>

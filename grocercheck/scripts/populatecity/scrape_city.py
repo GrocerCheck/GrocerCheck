@@ -1,3 +1,5 @@
+import time
+
 import get_places
 import gencoords
 import add_place_detail
@@ -7,6 +9,121 @@ import numpy as np
 import sqlite3
 #Bounds must be given as a list of list of tuples (lat, lng) in the format
     #[(bottom,left), (top, right)
+
+
+#or
+
+#[
+#[(bottom, left), (bottom, right), (top, left), (top, right)],
+#]
+
+silconValley_bounds =[
+[
+        (37.56823139, -122.51447506), #san fran
+        (37.81136208, -122.38210851),
+        ],
+
+[
+        (37.49984665, -122.40351938), #san mateo
+        (37.62728434, -122.25298799),
+        ],
+[
+        (37.43194446, -122.32805082), #redwood city, menlo park, east palo alto
+        (37.53576703, -122.09855523),
+        ],
+
+[
+        (37.36584107, -122.26675207), #stanford, mountain view partially
+        (37.45989559, -122.07758122),
+        ],
+
+[
+        (37.33577026, -122.15061534), #little gap where foothill college is
+        (37.43643022, -122.06269351),
+        ],
+
+[
+        (37.19950721, -122.07371094), #san jose big block
+        (37.44562387, -121.74586889),
+        ],
+
+[
+        (37.43784277, -121.94056418), #little bit between san jose and fremont
+        (37.48689519, -121.87876608),
+        ],
+
+[
+        (37.47877153, -122.09618305),
+        (37.60733322, -121.90660651), #up to union city
+        ],
+
+[
+        (37.59934637, -122.17989142),
+        (37.70249147, -122.01959096), #up to castro valley
+        ],
+[
+        (37.69216859, -122.31391214),
+        (37.90569205, -122.191065), #berkley, el cerrito
+        ],
+[
+        (37.91135585, -122.40729593),
+        (38.01996779, -122.27121523), #richmond & co
+        ],
+]
+
+
+
+newYork_bounds = [
+        [
+            (40.50103108, -74.35654554), #staten island, woodbridge township
+            (40.65183645, -74.05654387), #hudson county/new york/yorkbay x-section
+            ],
+        [
+            (40.65240824, -74.27912621), #bottom left of elizabeth
+            (40.95000005, -74.0436068),  #above paramus, directly in line with previous x-section on vertical axis
+            ],
+        [
+            (40.54997004, -74.05041087),
+            (40.94322173, -73.78171402), #big block across new york, brooklyn, manhatten, bronx, yonkers
+            ],
+        [
+            (40.58815184, -73.80265667),
+            (40.84053667, -73.73405457), #queens
+            ]
+
+        ]
+
+
+
+
+
+lasVegas_bounds = [
+        [
+            (35.94807615, -115.34795587),
+            (36.32517175, -115.0224859),
+            ],
+        [
+            (35.96808527, -115.03347223),
+            (36.0713858, -114.9304754)
+            ],
+
+        ]
+
+
+
+
+longIsland_bounds = [
+        [
+            (40.57031532, -73.97644026),
+            (41.15720738, -72.13822788),
+            ]
+
+        ]
+
+
+
+
+
 
 victoria_bounds = [
 [
@@ -103,28 +220,84 @@ seattle_bounds = [
 
 ]
 
+
+toronto_bounds = [
+        [
+            (43.39401704, -80.5920202),
+            (43.50305426, -80.42472839), #waterloo/kitchner
+            ],
+        [
+            (43.16165444, -79.95749735),
+            (43.60244289, -79.75412543), #hamilton , milton, left of oakville/missasage
+            ],
+        [
+            (43.34441333, -79.76835765),
+            (43.60488413, -79.49619642), #oakville, bottom missisauga
+            ],
+        [
+            (43.5955699, -79.80081732),
+            (43.91218304, -79.20705621), #toronto, richmond hill, markham,
+            ],
+        [
+            (43.87129567, -79.47740725),
+            (44.0791503, -79.41760664), #newmarket
+            ],
+
+        [
+            (43.65936614, -79.31030273),
+            (43.93098516, -79.14001456), #scarborough, pickering
+            ],
+        [
+            (43.80405359, -79.14226184),
+            (43.97626272, -78.61766467), #ajax, oshawa, bowmanville
+            ],
+        ]
+
+
+montreal_bounds = [
+        [
+            (45.68078868, -73.57781145),
+            (45.7938922, -73.28804704),
+            ],
+        [
+            (45.35527313, -74.01639059),
+            (45.69202982, -73.34897116),
+            ],
+        ]
+
+#-------------variables----------
 API_KEY = open("/home/ihasdapie/keys/gmapkey.txt").readline()
 
 DATABASE_DIR = os.path.dirname(os.path.dirname(os.getcwd())) + "/db1.sqlite3"
-KEYWORD = "department store"
+KEYWORD = "grocery"
 
-#SCRAPE THREE TIMES W/ keywords: "department store", "grocery", "mall"
+#SCRAPE THREE TIMES W/ keywords: "department store", "grocery", "mall", "costco"
 # consider implementing filter on index.html for grocery only (& costco for whatever godforsaken reason)
 
-CITY = "victoria"
+RADIUS = 10000 #in meters
+SPACING = ((2*RADIUS)/(2**(0.5)))/1000
+
+#-------------------------------
+
+print("radius, ", RADIUS,"spacing, ", SPACING)
+CITY = "montreal"
 
 print("DATABASE DIR: ", DATABASE_DIR)
-coord_list = gencoords.gen_coords(victoria_bounds, 1.4)
+coord_list = gencoords.gen_coords(montreal_bounds, SPACING)
+
 
 print("NUM COORDS: ", len(coord_list))
 print("CITY ", CITY, " KEYWORd ", KEYWORD )
+
+
+
 x, y= np.array(coord_list).T
 plt.scatter(x,y)
 plt.show()
 
-#first_id = get_places.getplaces(API_KEY, coord_list, DATABASE_DIR, CITY, KEYWORD) + 1
 
-first_id = 1963
+first_id = get_places.getplaces(API_KEY, coord_list, DATABASE_DIR, CITY, KEYWORD, RADIUS) + 1
+
 #add place detail will have to start on the index of the first added by getplaces: this is the lastid from getplaces + 1
 
 add_place_detail.populate_populartimes(API_KEY, first_id, DATABASE_DIR)

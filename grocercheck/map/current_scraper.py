@@ -48,18 +48,14 @@ def update_row(conn, data, row_id):
         log.append("CURRENT POPULARITY KEY ERROR FOR STORE id"+str(row_id))
     return(log)
 
-def get_open_closed_ids(conn, city):
-    #TODO: support more timezones
-
-    vancouver_timezone = pytz.timezone('America/Vancouver')
-    vancouver_time = datetime.datetime.now(vancouver_timezone)
-    localhour = vancouver_time.hour
-    localminute = vancouver_time.minute
-    print('preshit: ', vancouver_time, localhour, localminute)
-    weekday = vancouver_time.weekday()
+def get_open_closed_ids(conn, city, timezone):
+    local_timezone = pytz.timezone(timezone)
+    local_time = datetime.datetime.now(local_timezone)
+    localhour = local_time.hour
+    localminute = local_time.minute
+    weekday = local_time.weekday()
     days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
     cur = conn.cursor()
-
     sql_query = "SELECT id, {day}hours FROM map_store where address IS NOT NULL AND name IS NOT NULL AND fri00 IS NOT NULL AND {day}hours IS NOT NULL AND city=?".format(day=days[weekday])
     cur.execute(sql_query, (city,))
 
@@ -68,75 +64,111 @@ def get_open_closed_ids(conn, city):
     open_ids= []
     closed_ids = []
 
+
+
+
+
     for pair in range(len(id_with_hours)):
         i = id_with_hours[pair][0]
         hours = id_with_hours[pair][1]
-        if hours==None:
+
+        if(hours==None):
             continue
         else:
-            hours = hours.split(": ")[1]
+            hours = hours.split(": ")[1]#Friday: 8:00 AM - 7:00 PM
+            #8:00 AM - 7:00 PM
             if (' 24' in hours):
-                open_ids.append(i) #open 24h
+                open_ids.append(i)
             elif ('–' not in hours):
                 closed_ids.append(i)
-            #en-dash! #only closed (24h already caught)
             else:
-                hours = hours.split(" – ")
-                oh, om = int(hours[0].split(':')[0]), int(hours[0].split(':')[1][:2]) #opening hour, opening minute
-                ch, cm = int(hours[1].split(':')[0]), int(hours[1].split(':')[1][:2]) #closing hour, closing minute
+                hours = hours.split(" – ")#[8:00 AM,7:00 PM]
+                ostring = hours[0].split(':')#[8,00 AM]
+                cstring = hours[1].split(':')#[7,00 PM]
 
-                # print(oh, om, ch, cm, " | ", localhour, localminute)
-                # convert to 24h format
-                if ((hours[0][-2:] == "PM") and (oh != 12)):
-                    oh += 12
-                if ((hours[1][-2:] == "PM") and (ch !=12)): #12PM is noon, 12AM is midnight
-                    # print(hours[1][-2])
-                    ch += 12
-                # print(oh, om, ch, cm, " | ", localhour, localminute)
+                oh, om, omod = int(ostring[0]), int(ostring[1][:2]), ostring[1][-2:] #opening hour, opening minute, opening modifier
+                ch, cm, cmod = int(cstring[0]), int(cstring[1][:2]), cstring[1][-2:] #closing hour, closing minute, closing modifier
 
-                if ((hours[0][-2:] == "AM") and (oh == 12)):
-                    oh = 0 #if it opens at midnight, set to 0 for comparison
-                if ((hours[1][-2:] == "AM") and (ch == 12)):
-                    ch = 24
-
-                #everything in 24h format from this point on
-                if ((hours[1][-2:] == "AM") and (ch < oh)) or ((hours[1][-2:] == "AM") and (ch == 24)): #check if the store closes after midnight or at midnight
-                    if (ch == 24):
-                        if ((localhour < ch) and (localhour > oh)):
-                            open_ids.append(i)
-                        else:
-                            closed_ids.append(i)
-                    else:
-                        #if closing hour is after midnight and is not midnight,
-                        # e.g. oh 7 ch 3, lt 2
-                        # if the local time is lesser than the closing time, within the span of midnight - closing, the store is open
-                        # e.g. oh 7 ch 3 lt 14
-                        # if the local time is greater than the opening time in a situation where the closing time is in the AM and lesser than the opening time,
-                        # the store is open
-                        if (localhour >= oh):
-                            open_ids.append(i)
-                        if (localhour < ch):
-                            open_ids.append(i)
-
-                        elif (localhour == ch and localminute < cm):
-                            open_ids.append(i)
+                if omod=='AM' and oh==12:
+                    oh = 0
+                if omod=='PM' and oh!=12:
+                    oh+=12
+                if cmod=='PM' and ch!=12:
+                    ch+=12
+                if cmod=='AM' and ch==12:
+                    ch==24
+                if cmod=='AM' and omod=='AM' and ch<oh and ch!=12:
+                    ch+=24
+                if cmod=='AM' and omod=='PM':
+                    ch+=24
+                if localhour>oh and localhour<ch:
+                    open_ids.append(i)
+                elif localhour==oh and localminute>=om:
+                    open_ids.append(i)
+                elif localhour==ch and localminute<ch:
+                    open_ids.append(i)
                 else:
-                    if (localhour > oh and localhour < ch):
-                        open_ids.append(i)
-                    elif (localhour == oh and localminute >= om):
-                        open_ids.append(i)
-                    elif (localhour==ch and localminute <= cm):
-                        open_ids.append(i)
-                    else:
-                        closed_ids.append(i)
-#    print("localtime" +  str(localhour) + " " + str(localminute))
-#    print("-----------------------")
-#    for i in open_ids:
-#        print("open", i, (cur.execute("SELECT name, sunhours FROM map_store WHERE id=?", (i,)).fetchall()))
-#        print("-----------------------")
-#    for i in closed_ids:
-#        print("closed", i, (cur.execute("SELECT name, sunhours FROM map_store WHERE id=?", (i,)).fetchall()))
-#        print("------------------------")
+                    closed_ids.append(i)
+
+
+#        if hours==None:
+#            continue
+#        else:
+#            hours = hours.split(": ")[1]
+#            if (' 24' in hours):
+#                open_ids.append(i) #open 24h
+#            elif ('–' not in hours):
+#                closed_ids.append(i)
+#            #en-dash! #only closed (24h already caught)
+#            else:
+#                hours = hours.split(" – ")
+#                oh, om = int(hours[0].split(':')[0]), int(hours[0].split(':')[1][:2]) #opening hour, opening minute
+#                ch, cm = int(hours[1].split(':')[0]), int(hours[1].split(':')[1][:2]) #closing hour, closing minute
+
+#                # print(oh, om, ch, cm, " | ", localhour, localminute)
+#                # convert to 24h format
+#                if ((hours[0][-2:] == "PM") and (oh != 12)):
+#                    oh += 12
+#                if ((hours[1][-2:] == "PM") and (ch !=12)): #12PM is noon, 12AM is midnight
+#                    # print(hours[1][-2])
+#                    ch += 12
+#                # print(oh, om, ch, cm, " | ", localhour, localminute)
+
+#                if ((hours[0][-2:] == "AM") and (oh == 12)):
+#                    oh = 0 #if it opens at midnight, set to 0 for comparison
+#                if ((hours[1][-2:] == "AM") and (ch == 12)):
+#                    ch = 24
+
+#                #everything in 24h format from this point on
+#                if ((hours[1][-2:] == "AM") and (ch < oh)) or ((hours[1][-2:] == "AM") and (ch == 24)): #check if the store closes after midnight or at midnight
+#                    if (ch == 24):
+#                        if ((localhour < ch) and (localhour > oh)):
+#                            open_ids.append(i)
+#                        else:
+#                            closed_ids.append(i)
+#                    else:
+#                        #if closing hour is after midnight and is not midnight,
+#                        # e.g. oh 7 ch 3, lt 2
+#                        # if the local time is lesser than the closing time, within the span of midnight - closing, the store is open
+#                        # e.g. oh 7 ch 3 lt 14
+#                        # if the local time is greater than the opening time in a situation where the closing time is in the AM and lesser than the opening time,
+#                        # the store is open
+#                        if (localhour >= oh):
+#                            open_ids.append(i)
+#                        if (localhour < ch):
+#                            open_ids.append(i)
+
+#                        elif (localhour == ch and localminute < cm):
+#                            open_ids.append(i)
+#                else:
+#                    if (localhour > oh and localhour < ch):
+#                        open_ids.append(i)
+#                    elif (localhour == oh and localminute >= om):
+#                        open_ids.append(i)
+#                    elif (localhour==ch and localminute <= cm):
+#                        open_ids.append(i)
+#                    else:
+#                        closed_ids.append(i)
 
     return (open_ids, closed_ids)
 
@@ -148,10 +180,10 @@ def get_valid_ids(conn):
     ids = cur.fetchall()
     return ids
 
-def get_formatted_addresses(country, city, conn):
+def get_formatted_addresses(country, city, conn, timezone):
     #returns formatted addresses in open ids
     #no point multi-processing this: memory concerns & it's fast enough anyways (for now)
-    ids = get_open_closed_ids(conn, city)
+    ids = get_open_closed_ids(conn, city, timezone)
     open_ids = ids[0]
     formatted_address_list = []
     if (country == ""):
@@ -225,11 +257,15 @@ def update_current_popularity(addr_and_id, conn, doBackup, doLog, proxy, num_pro
 
         #clean up closed stores
         cur = conn.cursor()
-        cur.execute("UPDATE map_store SET live_busyness=NULL WHERE id IN {closed}".format(closed=tuple(closed_ids)))
+        if len(closed_ids) == 1:
+            clean_closed = "UPDATE map_store SET live_busyness=NULL where id={closed_store}".format(closed_store = closed_ids[0])
+        else:
+            clean_closed = "UPDATE map_store SET live_busyness=NULL WHERE id IN {closed}".format(closed=tuple(closed_ids))
+        cur.execute(clean_closed)
         conn.commit()
         return
 
-def run_scraper(country, city, doBackup = False, doLog = False, proxy = False, num_processes = None):
+def run_scraper(country, city, timezone, doBackup = False, doLog = False, proxy = False, num_processes = None):
     """
     :param country: country to append to formatted address
     :param doBackup:  (optional) backup raw json data, default = False
@@ -242,9 +278,20 @@ def run_scraper(country, city, doBackup = False, doLog = False, proxy = False, n
     #conn = create_connection("/home/ihasdapie/Grocer_Check_Project/Org/db1.sqlite3")
 
     try:
-        update_current_popularity(get_formatted_addresses(country, city, conn), conn, doBackup, doLog, proxy, num_processes)
+        update_current_popularity(get_formatted_addresses(country, city, conn, timezone), conn, doBackup, doLog, proxy, num_processes)
         conn.commit()
-        print("complete update")
+        print("Updated current popularity successfully for " + city)
     except:
         print("error in update_current_popularity")
         LOG.write("ERROR IN update_current_popularity\r\n")
+
+
+
+
+
+
+
+
+
+
+

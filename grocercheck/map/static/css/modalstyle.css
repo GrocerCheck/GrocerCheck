@@ -13,17 +13,18 @@
 		overflow: auto; /* Enable scroll if needed */
 		background-color: rgb(0,0,0);
 		background-color: rgba(0,0,0,0.4); 
-
+		box-sizing: border-box;
 	}
 
 	/* div for modal content */
 	.modal-content {
 		background-color: #fefefe;
+		width: 80%;	
 		margin: auto;
 		padding: 5px;
 		border: none;
         border-radius: 10px;
-		width: 80%;
+		padding-bottom: auto;
 	}
 
 	/* The Close Button */
@@ -32,6 +33,7 @@
 		float: right;
 		font-size: 28px;
 		font-weight: bold;
+		z-index: 5000;
 	}
 
 	.close:hover,

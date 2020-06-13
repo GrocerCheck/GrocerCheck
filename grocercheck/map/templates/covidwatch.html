@@ -2,7 +2,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>COVID Watch: GrocerCheck</title>
+
+	    <script data-ad-client="ca-pub-8362595471467364" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-167491754-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-167491754-1');
+</script>
+
+
+	    <title>CovidWatch: GrocerCheck</title>
         <link rel='shortcut icon' type=image/png' href="{% static 'favicon.ico' %}" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
@@ -10,6 +23,7 @@
         <link rel='stylesheet' href = "{% static 'css/covidwatchposts.css' %}">
         <link rel='stylesheet' href = "{% static 'css/infopage.css' %}">
         <link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
+	<link rel='stylesheet' href = "{% static 'css/termslink.css' %}">
         
         <style>
             #titletext {
@@ -40,7 +54,7 @@
 				<ul id="navmenu">
 					<a href="{% url 'index' %}"><li>Home</li></a>
 					<a href="{% url 'about' %}"><li>About Us</li></a>
-					<a href="{% url 'covidwatch' %}"><li>COVID Watch</li></a>
+					<a href="{% url 'covidwatch' %}"><li>CovidWatch</li></a>
 					<a href="{% url 'partners' %}"><li>Partners</li></a>
 					<a href="{% url 'contact' %}"><li>Contact Us</li></a>
 
@@ -58,7 +72,7 @@
                 <ul id="navbarlist">
                 <li><a href="{% url 'index' %}">Home</a></li>
                 <li><a href="{% url 'about' %}">About Us</a></li>
-                <li class="currentpage"><a href="{% url 'covidwatch' %}">COVID Watch</a></li>
+                <li class="currentpage"><a href="{% url 'covidwatch' %}">CovidWatch</a></li>
                 <li><a href="{% url 'partners' %}">Partners</a></li>
                 <li><a href="{% url 'contact' %}">Contact Us</a></li>
             </ul>
@@ -68,17 +82,31 @@
 
         <div id = "titletext">
             <h1 style = "font-size: 80px; margin-bottom: 0;">COVID Watch</h1>
-            <p style="font-size:30px">COVID Watch is your source for quality student journalism on COVID-19</p>
+            <p style="font-size:30px">CovidWatch is your source for quality student journalism on COVID-19</p>
         </div>
 
 
             
         </div>
         <div style = "display: inline-block;"id = "watchposts">
+        
+            <div id="post_id_1" class = "responsive">
+                <a target="_blank" style="text-decoration: none;" href = "https://grocercheck.ca/map/covidwatch/2">
+                    <div class = "post">
+                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/covidwatch/Opinion Piece: Why Education is Key to Achieving Solidarity.png' %}" alt = "Two interracial men hugging during a protest">
+                        <div class="title">Opinion Piece: Why Education is Key to Achieving Solidarity</div>
+                        <div class="author_name">Esther Zhang</div>
+                        <div class="blurb">
+                            <p>Amidst the global chaos, education provides the beginning of the shift from disarray to solidarity and unification.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        
             <div id="post_id_1" class = "responsive">
                 <a target="_blank" style="text-decoration: none;" href = "https://grocercheck.ca/map/covidwatch/1">
                     <div class = "post">
-                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/covidwatch/Why Social Distancing is Still Necessary (And How To Do It Properly).png' %}" alt = "Test 1">
+                        <img style="border-top-right-radius: 10px; border-top-left-radius: 10px;" src = "{% static 'images/covidwatch/Why Social Distancing is Still Necessary (And How To Do It Properly).png' %}" alt = "Social Distancing Example">
                         <div class="title">Why Social Distancing is Still Necessary (And How To Do It Properly)</div>
                         <div class="author_name">Joe Salmon</div>
                         <div class="blurb">
@@ -86,8 +114,7 @@
                         </div>
                     </div>
                 </a>
-            </div>
-        
+            </div> 
 
 
             <div id="thiscouldbeyou"  class = "responsive">
@@ -102,6 +129,9 @@
                     </div>
                 </a>
             </div>
+        
+        
+        
         </div>
 
         <div id="paypalbutton">
@@ -114,6 +144,9 @@
             </form>
         </div>
 
+<div id="termsandcond" style="text-align: center;">
+			<p><a href="{% url 'terms' %}">Terms and Conditions</a> &emsp; <a href="{% url 'privacy' %}">Privacy Policy</a> &emsp; <a href="{% url 'cookies' %}">Cookie Policy</a></p>
+		</div>
 
     </body>
 

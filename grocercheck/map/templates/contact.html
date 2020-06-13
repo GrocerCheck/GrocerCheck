@@ -2,7 +2,19 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Contact Us: GrocerCheck</title>
+<script data-ad-client="ca-pub-8362595471467364" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-167491754-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-167491754-1');
+</script>
+
+
+	    <title>Contact Us: GrocerCheck</title>
         <link rel='shortcut icon' type=image/png' href="{% static 'favicon.ico' %}" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href = 'https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
@@ -13,7 +25,8 @@
         <link rel='stylesheet' href = "{% static 'css/contactpage.css' %}">
         <link rel='stylesheet' href = "{% static 'css/navbar.css' %}">
         <link rel='stylesheet' href = "{% static 'css/socialicons.css' %}">
-        
+        <link rel='stylesheet' href = "{% static 'css/termslink.css' %}">
+
         <style>
             #contacttitle {
                 text-align: center;
@@ -27,15 +40,69 @@
                 text-decoration: none;
                 position: relative;
                 width: auto;
-                left: auto;
-                padding: 0;
+                left: auto; 
                 padding-left: 10%;
                 padding-right: 10%;
                 text-align: center;
             }
 
+            #faq_link{
+                text-decoration: none;
+                position: relative;
+                width: auto;
+                left: auto;
+                text-align: center;
+            }
 
-        </style>
+            #faq_linkDIV{
+                text-decoration: none;
+                position: relative;
+                width: auto;
+                left: auto;
+                padding-left: 10%;
+                padding-right: 10%;
+                text-align: center;
+            }
+
+            #faq{
+                text-align: left;
+                position: relative;
+                width: auto;
+                left: auto;
+                padding-left: 10%;
+                padding-right: 10%;
+            }
+
+            #faq_link:hover{
+                color: #3AB64B;
+            }
+
+            #faq_title_link{
+                font-weight: bold;
+                color: black;
+                text-decoration: none;
+            }
+            #faq_title_link:hover{
+                color: #3AB64B;
+            }
+
+            #faq_qs{
+                text-decoration: none;
+                text-align: left;
+            }
+
+
+        
+            #faq_ans{
+                text-decoration: none;
+                text-align: left;
+            }
+
+	            </style>
+
+
+
+
     </head>
 
 
@@ -53,7 +120,7 @@
 				<ul id="navmenu">
 					<a href="{% url 'index' %}"><li>Home</li></a>
 					<a href="{% url 'about' %}"><li>About Us</li></a>
-					<a href="{% url 'covidwatch' %}"><li>COVID Watch</li></a>
+					<a href="{% url 'covidwatch' %}"><li>CovidWatch</li></a>
 					<a href="{% url 'partners' %}"><li>Partners</li></a>
 					<a href="{% url 'contact' %}"><li>Contact Us</li></a>
 
@@ -69,7 +136,7 @@
             <ul id="navbarlist">
                 <li><a href="{% url 'index' %}">Home</a></li>
                 <li><a href="{% url 'about' %}">About Us</a></li>
-                <li><a href="{% url 'covidwatch' %}">COVID Watch</a></li>
+                <li><a href="{% url 'covidwatch' %}">CovidWatch</a></li>
                 <li><a href="{% url 'partners' %}">Partners</a></li>
                 <li class="currentpage"><a href="{% url 'contact' %}">Contact Us</a></li>
                                 </ul>
@@ -82,6 +149,10 @@
             <h1 style = "font-size: 80px;">Let's get in touch.</h1>
         </div>
 
+        <div id = "faq_linkDIV">
+            <a id = "faq_title_link" href="#faq_title" style="font-size: 30px;">Click here for FAQ</a>
+        </div>
+        <br>
 
         <div style="display: inline-block;" id = "contactlistdiv">
             <a target="_blank" href="mailto:brian@grocercheck.ca?subject=GrocerCheck%20Buisness%20Inquiry">
@@ -124,14 +195,14 @@
                 </div>
             </a>
 
-            <a target="_blank" href="mailto:preston@grocercheck.ca?subject=GrocerCheck%20Media%20Inquiry">
+            <a target="_blank" href="mailto:preston@grocercheck.ca?subject=GrocerCheck%20Partner%20Inquiry">
                 <div id = "general_inq" class = "responsive">
                     <div class="contacts">
-                        <div class="contact_desc">Want to support GrocerCheck? For sponsorship inquiries,</div>
+                        <div class="contact_desc">Want to support GrocerCheck? For sponsorship and advertising inquiries,</div>
                         
                         <div class='contact_talk'>Reach Preston via his email:</div>
 
-                        <div class='contact_email'>Preston@grocercheck.ca</div>
+                        <div class='contact_email'>preston@grocercheck.ca</div>
                         <br>
                     </div>
                 </div>
@@ -153,10 +224,37 @@
                     <li><a href="https://github.com/grocercheck/" target="_blank" class="fa fa-github"></a></li>
                 </ul>
             </div>
+        
+        
+        </div>
 
-</div>
+	<div id="faq">
+        <br>
+        <br>
+        <h1 id="faq_title" style="font-weight: bold; font-size: 60px; text-align: center;">FAQ</h1>
+
+        <h2 id=”faq_qs”>How do I use GrocerCheck?</h2>
+        <p id=”faq_ans”>Use GrocerCheck to find out how busy your local grocery stores are to make informed decisions as to which grocery store you should go to. Filter by <i>“Live only”</i> to view data that is up to date within the last 10 minutes, <i>“Live and Historical”</i> to view historical average busyness data as well, and <i>”Show all stores”</i> to see all stores even if we have missing data for the store. <br><br> Search for stores using the search-bar. You can search by store name, street name, city/area, grocery store type (e.g. “ethnic grocery”) or even near me! </p>
+        <h2 id ="faq_qs">What do those percents mean?</h2>
+        <p id ="faq_ans">A good rule of thumb is to estimate 100% as the store’s regular maximum capacity. Therefore, if a store is operating at 30% capacity, a store with a busyness score of 30% will be at maximum capacity and therefore have a little or no wait time; people can go in right as people leave. As every store has different capacity policies (that are changing by the day), we are unable to estimate wait times with our available data. Instead, we hope that it will serve as a powerful tool with which consumers like you can make informed decisions. And, as with all tools, it is best used alongside other ones such as common sense and your own best judgement.</p>
+        <h2 id="faq_qs">Why is [store] not listed?</h2>
+        <p id = "faq_ans">If a store you’re looking for isn’t shown on our website, it’s usually because of one of three things:
+            <ol id = "faq_l">
+                <li>The store unfortunately has no available data for live busyness</li>
+                <li>The store only has data available for historic average busyness</li>
+                <li>The store is not listed on GrocerCheck and we have noted it for an upcoming update.</li>
+            </ol>
+            In order to fix this, you can try adjusting the filters on the left-hand side of the website to show “Live and Historical” data. While this data won’t be as accurate as the Live data, it should catch more stores. If your store still isn’t showing up, feel free to email us at <a id="faq_link" href="mailto:inquiry@grocercheck.ca">inquiry@grocercheck.ca</a> and our very busy team will do their best to make sure it’s added.
+        </p>
+        <h2 id = "faq_qs">How does GrocerCheck work?</h2>
+        <p id="faq_ans">GrocerCheck works by aggregating local population density data. The data is representative of the average relative busyness of a store, as measured by the current population density at the location. 100% is the most busy a store usually ever gets, and 0% the least busy it usually ever gets. That means that on occasion, there will be stores with a busyness score of &gt;100%. These stores are shown with a purple marker.</p>
+        <h2 id="faq_qs">How can I support GrocerCheck?</h2>
+        <p id="faq_ans">GrocerCheck Foundation is a registered non-profit organization run by a team of highschool students. If you enjoy our service and would like to support its growth and help keep it afloat, please consider donating to us via the paypal buttons on our website, or via this <a id="faq_link" href="https://www.paypal.me/grocercheck">link</a>. If you are interested in working with GrocerCheck, please get in touch with us! As always, feel free to share this service and #shopsafestaysafe with your friends
+        and family! 
+    </div>
+
+
 <br></br>
-
         <div id="paypalbutton">
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                 <input type="hidden" name="cmd" value="_s-xclick" />
@@ -167,6 +265,9 @@
             </form>
         </div>
 
+<div id="termsandcond" style="text-align: center;">
+			<p><a href="{% url 'terms' %}">Terms and Conditions</a> &emsp; <a href="{% url 'privacy' %}">Privacy Policy</a> &emsp; <a href="{% url 'cookies' %}">Cookie Policy</a></p>
+		</div>
     </body>
 </html>
      

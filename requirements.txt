@@ -7,4 +7,5 @@ django-celery-beat==2.00
 django-google-maps==0.12.1
 db-sqlite3==0.01
 django-celery==3.3.1
-kombu-3.0.37
+kombu==3.0.37
+psycopg2==2.8.5
