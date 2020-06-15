@@ -13,13 +13,13 @@ class ad_placement(models.Model):
 
 class blog_entry(models.Model):
     title = models.CharField(max_length=500)
-    author_name = models.CharField(max_length=100)
-    author_blurb = models.CharField(max_length=200)
+    author_name = models.CharField(max_length=200)
+    author_blurb = models.CharField(max_length=800)
     date = models.CharField(max_length=100)
-    content = models.TextField(max_length=40000)
+    content = models.TextField(max_length=50000)
     image_blurb = models.CharField(max_length=500)
-    article_sources = models.CharField(max_length=10000)
-    img_src = models.CharField(max_length=200)
+    article_sources = models.TextField(max_length=10000)
+    img_src = models.CharField(max_length=300)
     article_timestamp = models.DateTimeField()
 
 class Store(models.Model):
