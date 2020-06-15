@@ -338,7 +338,7 @@ if ("DEV" in servername):
     CELERY_BEAT_SCHEDULE = {}
     CELERY_BEAT_SCHEDULE.update(COMMON_TASKS)
     # CELERY_BEAT_SCHEDULE.update(UPDATE_CITY_TASKS)
-    print(CELERY_BEAT_SCHEDULE)
+    # print(CELERY_BEAT_SCHEDULE)
 
 
 elif ("BS" in servername):
