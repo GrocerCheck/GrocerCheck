@@ -17,6 +17,16 @@ import sqlite3
 #[(bottom, left), (bottom, right), (top, left), (top, right)],
 #]
 
+
+ottawa_bounds=[
+        [
+            (45.22002414, -75.98731306),
+            (45.6041603, -75.38718489),
+            ]
+        ]
+
+
+
 silconValley_bounds =[
 [
         (37.56823139, -122.51447506), #san fran
@@ -274,16 +284,16 @@ KEYWORD = "grocery"
 #SCRAPE THREE TIMES W/ keywords: "department store", "grocery", "mall", "costco"
 # consider implementing filter on index.html for grocery only (& costco for whatever godforsaken reason)
 
-RADIUS = 10000 #in meters
+RADIUS = 2000 #in meters
 SPACING = ((2*RADIUS)/(2**(0.5)))/1000
 
 #-------------------------------
 
 print("radius, ", RADIUS,"spacing, ", SPACING)
-CITY = "montreal"
+CITY = "ottawa"
 
 print("DATABASE DIR: ", DATABASE_DIR)
-coord_list = gencoords.gen_coords(montreal_bounds, SPACING)
+coord_list = gencoords.gen_coords(ottawa_bounds, SPACING)
 
 
 print("NUM COORDS: ", len(coord_list))

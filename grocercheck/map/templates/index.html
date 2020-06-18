@@ -83,6 +83,7 @@
                 <option value="las_vegas">Las Vegas, NV</option>
                 <option value="silicon_valley">Silicon Valley, CA</option>
                 <option value="montreal">Montreal, QC</option>
+                <option value="ottawa">Ottawa, ON</option>
             </select>
 
         </div>
@@ -458,8 +459,8 @@ function initMap() {
 
     var cityname = {{city|safe}}[0];
 
-    var zoom = {'vancouver': 12, "seattle": 11, 'victoria': 13, "toronto": 11, "las_vegas": 11, "silicon_valley": 10, "montreal": 11};
-    var centerpositions = {'vancouver': {lat:49.2577143,lng:-123.0939433}, 'seattle': {lat:47.6129432,lng:-122.382146}, 'victoria': {lat:48.4262038,lng:-123.3642418}, 'toronto': {lat:43.7181557,lng:-79.51814}, 'las_vegas': {lat:36.1249185,lng:-115.2150827}, 'silicon_valley': {lat:37.502473,lng:-122.3212771}, 'montreal': {lat:45.534380,lng:-73.628963}};
+    var zoom = {'vancouver': 12, "seattle": 11, 'victoria': 13, "toronto": 11, "las_vegas": 11, "silicon_valley": 10, "montreal": 11, "ottawa":11};
+    var centerpositions = {'vancouver': {lat:49.2577143,lng:-123.0939433}, 'seattle': {lat:47.6129432,lng:-122.382146}, 'victoria': {lat:48.4262038,lng:-123.3642418}, 'toronto': {lat:43.7181557,lng:-79.51814}, 'las_vegas': {lat:36.1249185,lng:-115.2150827}, 'silicon_valley': {lat:37.502473,lng:-122.3212771}, 'montreal': {lat:45.534380,lng:-73.628963}, 'ottawa': {lat:45.368892, -75.756306}};
     var zoomlevel = zoom[cityname];
     var centerposition = centerpositions[cityname];
 

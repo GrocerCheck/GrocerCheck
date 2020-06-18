@@ -18,6 +18,7 @@ def index(request, city="nocity"):
                'seattle': 'America/Vancouver', 'montreal': 'America/Montreal',
                'new_york': 'America/Toronto', 'toronto': 'America/Toronto',
                'victoria': 'America/Vancouver', 'las_vegas': 'America/Vancouver',
+               'ottawa': 'America/Toronto',
 
 
                }
