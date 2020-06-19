@@ -35,6 +35,8 @@
 	width: 0;
 	left: 0;
 	top: 0;
+	background-color: #aaa;
+	opacity: 0.6;
 }
 
 @media screen and (max-width: 750px) and (orientation: portrait){
