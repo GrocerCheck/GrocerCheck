@@ -272,11 +272,11 @@ UPDATE_CITY_TASKS = {
             'args': ("Canada", "montreal", "America/Montreal", False, False, p, 16), #US address include country
         },
 
-        # 'UPDATE_NEW_YORK_POPULARITY':{
-        #     'task': 'update_current_popularity',
-        #     'schedule': crontab(minute='7-59/10'),
-        #     'args': ("", "new_york", "America/Toronto", False, False, p, 16), #US address include country
-        # },
+        'UPDATE_NEW_YORK_POPULARITY':{
+            'task': 'update_current_popularity',
+            'schedule': crontab(minute='7-59/10'),
+            'args': ("", "new_york", "America/Toronto", False, False, p, 16), #US address include country
+        },
 
 
 }
