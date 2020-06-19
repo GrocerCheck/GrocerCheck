@@ -41,9 +41,10 @@
 
 @media screen and (max-width: 750px) and (orientation: portrait){
 	#aiya{
-		width: 80%;
-		left: 10%;
-		top: 30%;
+        display: none;
+        width: 0%;
+		left: 0%;
+		top: 0%;
 	}
 	#aiyaclose{
 		width: 0%;
