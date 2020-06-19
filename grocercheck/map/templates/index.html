@@ -538,24 +538,24 @@ function buildInfoWindowString(names,address,hours,busyness,x){
     }
     else if(busy>=1000){
         busy-=1000;
-        pops = "Not very busy right now" + " (" + busy + '%)';
-        if (busy > 33){
-            pops = "A bit busy right now" + " (" + busy + '%)';
-        }if (busy > 55){
-            pops = "Moderately busy right now" + " (" + busy + '%)';
-        }if (busy > 70){
-            pops = "Very busy right now" + " (" + busy + '%)';
+        pops = "LIVE: Not very busy right now" + " (" + busy + '%)';
+        if (busy > 10){
+            pops = "LIVE: A bit busy right now" + " (" + busy + '%)';
+        }if (busy > 25){
+            pops = "LIVE: Moderately busy right now" + " (" + busy + '%)';
+        }if (busy > 50){
+            pops = "LIVE: Very busy right now" + " (" + busy + '%)';
         }if (busy > 100){
-            pops = "Much busier than it ever gets right now" + " (" + busy + '%)';
+            pops = "LIVE: Much busier than it ever gets right now" + " (" + busy + '%)';
         }
 
     }else{
         pops = "Historically not very busy right now" + " (" + busy + '%)';
-        if (busy > 33){
+        if (busy > 25){
             pops = "Historically a bit busy right now" + " (" + busy + '%)';
-        }if (busy > 55){
+        }if (busy > 50){
             pops = "Historically moderately busy right now" + " (" + busy + '%)';
-        }if (busy > 77){
+        }if (busy > 75){
             pops = "Historically very busy right now" + " (" + busy + '%)';
         }
     }
@@ -602,24 +602,40 @@ function getMarkerIconsIndex(x){
     let b = busyness[x];
     if(busyness[x]>=1000){
         b-=1000;
-    }
+    
     if(b>=0){
         if(b>100){
             return 16;
         }
-        else if(b>=84){
+        else if(b>=56){
             return 14;
         }
         else{
 
-            return Math.floor(b/6);
+            return Math.floor(b/4);
 
         }
     }
     else{
         return 15;
     }
-
+    }
+	else{
+		if(b>=0){
+			if(b>100){
+				return 16;
+			}
+			else if(b>84){
+				return 14;
+			}
+			else{
+				return Math.floor(b/6);
+			}
+		}
+		else{
+			return 15;
+		}
+	}
 
 }
 
