@@ -272,13 +272,18 @@ UPDATE_CITY_TASKS = {
             'args': ("Canada", "montreal", "America/Montreal", False, False, p, 16), #US address include country
         },
 
-        'UPDATE_NEW_YORK_POPULARITY':{
+        'UPDATE_OTTAWA_POPULARITY':{
             'task': 'update_current_popularity',
             'schedule': crontab(minute='7-59/10'),
-            'args': ("", "new_york", "America/Toronto", False, False, p, 16), #US address include country
+            'args': ("Canada", "ottawa", "America/Toronto", False, False, p, 16), #US address include country
         },
 
 
+        'UPDATE_NEW_YORK_POPULARITY':{
+            'task': 'update_current_popularity',
+            'schedule': crontab(minute='8-59/10'),
+            'args': ("", "new_york", "America/Toronto", False, False, p, 16), #US address include country
+        },
 }
 
 COMMON_TASKS = {
@@ -336,10 +341,10 @@ BS_TASKS = {
 
 if ("DEV" in servername):
     CELERY_BEAT_SCHEDULE = {}
-    CELERY_BEAT_SCHEDULE.update(COMMON_TASKS)
-    CELERY_BEAT_SCHEDULE.update(OS_TASKS)
-    # CELERY_BEAT_SCHEDULE.update(UPDATE_CITY_TASKS)
-    # print(CELERY_BEAT_SCHEDULE)
+    # CELERY_BEAT_SCHEDULE.update(COMMON_TASKS)
+    # CELERY_BEAT_SCHEDULE.update(OS_TASKS)
+    CELERY_BEAT_SCHEDULE.update(UPDATE_CITY_TASKS)
+    print(CELERY_BEAT_SCHEDULE)
 
 
 elif ("BS" in servername):
@@ -365,8 +370,6 @@ TIMEZONES:
 'America/Vancouver': Seattle, Victoria, Portland, Los Angeles, San Franciso, San Diego,
 'America/Toronto' : New York, Toronto/GTA
 'America/Montreal': Montreal
-
-
 """
 
 
