@@ -464,9 +464,9 @@ def syncAds(remote_conn, local_conn):
     pg_cur.execute("SELECT id, ad_timestamp from public.map_ad_placement ORDER BY id ASC")
     l3_cur.execute("SELECT id, ad_timestamp from map_ad_placement ORDER BY id ASC")
 
-
     remote_id_timestamps = pg_cur.fetchall()
     local_id_timestamps = l3_cur.fetchall()
+
     remote_id_timestamps = [(x[0], datetime.datetime.strptime(x[1], "%Y-%m-%d %H:%M:%S")) for x in remote_id_timestamps]
     local_id_timestamps = [(x[0], datetime.datetime.strptime(x[1], "%Y-%m-%d %H:%M:%S")) for x in local_id_timestamps]
     # print(remote_id_timestamps, "asdf", local_id_timestamps)
@@ -503,6 +503,14 @@ def updateRemoteFromLocalAd(remote_conn, local_conn):
 
     pg_cur = remote_conn.cursor()
     l3_cur = local_conn.cursor()
+
+    pg_cur.execute("SELECT public.map_ad_placement.id FROM public.map_ad_placement ORDER BY public.map_ad_placement.id DESC LIMIT 1")
+    l3_cur.execute("SELECT map_ad_placement.id FROM map_ad_placement ORDER BY map_ad_placement.id DESC LIMIT 1")
+
+
+    remote_last_id = pg_cur.fetchall()[0][0]
+    local_last_id = l3_cur.fetchall()[0][0]
+
 
     ids_to_update = "("+", ".join([str(i) for i in range(remote_last_id+1, local_last_id+1)])+")"  #do not update local last id, be inclusive of upper bound
         #turn ids_to_update into a string bc of sqlite3 stuff
