@@ -325,25 +325,14 @@ BS_TASKS = {
             'schedule': crontab(minute='*/5'),
             'args': (pg_creds, l3_dir),
         },
-
-        'UPDATE_BLOG_ROWS': {
-            'task': 'update_blog_rows',
-            'schedule': crontab(minute='0'),
-            'args': (pg_creds, l3_dir),
-        },
-
-        'UPDATE_MAP_ROWS': {
-            'task': 'update_map_rows',
-            'schedule': crontab(minute='*/15'),
-            'args': (pg_creds, l3_dir),
-        },
-    }
+}
 
 if ("DEV" in servername):
+    print("DEV SERVER\n\n\n")
     CELERY_BEAT_SCHEDULE = {}
-    # CELERY_BEAT_SCHEDULE.update(COMMON_TASKS)
-    # CELERY_BEAT_SCHEDULE.update(OS_TASKS)
-    CELERY_BEAT_SCHEDULE.update(UPDATE_CITY_TASKS)
+    CELERY_BEAT_SCHEDULE.update(COMMON_TASKS)
+    CELERY_BEAT_SCHEDULE.update(OS_TASKS)
+    # CELERY_BEAT_SCHEDULE.update(UPDATE_CITY_TASKS)
     print(CELERY_BEAT_SCHEDULE)
 
 
