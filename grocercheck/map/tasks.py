@@ -44,7 +44,7 @@ def log_lpt(remote_conn):
     updateBackup(remote_conn)
 
 
-@task(name="update_current_popularity", max_retries = 2, default_retry_delay = 20, time_limit = 420)
+@task(name="update_current_popularity", max_retries = 2, default_retry_delay = 20, time_limit = 600)
 def update_current_popularity(country, city, timezone, backup, log, prox, num_procs):
     run_scraper(country, city, timezone, doBackup = backup, doLog = log, proxy = prox, num_processes = num_procs)
 
