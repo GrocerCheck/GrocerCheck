@@ -483,7 +483,7 @@ function initMap() {
             userlng = position.coords.longitude;
 
             hasloc = true;
-            usermarker = new google.maps.Marker({clickable:true,icon:{url:"{% static 'images/GrocerCheckFavicon.png' %}",scaledSize: new google.maps.Size(40,40)},map:null,position:userpos});
+            usermarker = new google.maps.Marker({clickable:true,icon:{url:"{% static 'images/GrocerCheckFavicon.png' %}",scaledSize: new google.maps.Size(40,40)},map:map, visible:false ,position:userpos});
 
 
         }, function(){ //handle error if location invalid
@@ -743,13 +743,13 @@ function searchClicked(){
         }
         else{
             nearflag = true;
-            usermarker.setMap(map);
+            usermarker.setVisible(true);
             searchstring = searchstring.replace("near%20me","");
             searchstring = searchstring.replace("nearby", "");
         }
     }
     else if (hasloc==true){
-        usermarker.setMap(null);
+        usermarker.setVisible(false);
     }
     //if search not empty
     if(searchstring!=""){
@@ -761,7 +761,7 @@ function searchClicked(){
         searchInProgress = false;
         searchedStores = [];
         filterByState();
-        displaySearched();
+        
         if(nearflag==true){
             displayNear();
         }
@@ -820,7 +820,7 @@ function displayNear(){
 
     for(let x = 0; x<markers.length;x++){
         if(getDistance(parseFloat(lat[x]),parseFloat(lng[x]),userlat,userlng)>=5.0){
-            markers[x].setMap(null);
+            markers[x].setVisible(false);
         }
     }
 
@@ -859,14 +859,10 @@ function getVariations(word){
 
 
 function displaySearched(){
-    if(searchedStores.length==0){
-        filterByState();
-        return;
-    }
     for(let x = 0; x<markers.length;x++){
         if(markers[x].getVisible()){
             if(searchedStores.includes(markers[x])==false){
-                markers[x].setMap(null);
+                markers[x].setVisible(false);
             }
         }
     }
@@ -896,7 +892,7 @@ function handleLocationError(hasgeo, pos){
 function filterOpen(){
     for(let x = 0; x<markers.length;x++){
         if(openn[x]==0){
-            markers[x].setMap(null);
+            markers[x].setVisible(false);
         }
     }
 }
@@ -908,17 +904,19 @@ function showLiveOnly(){
     document.getElementById("histcontainer").style.background = "transparent";
     document.getElementById("allcontainer").style.background = "transparent";
     for(let x = 0; x<livemarkers.length;x++){
-        livemarkers[x].setMap(map);
+        livemarkers[x].setVisible(true);
     }
     for(let x = 0; x<historicalmarkers.length;x++){
-        historicalmarkers[x].setMap(null);
+        historicalmarkers[x].setVisible(false);
     }
     for(let x = 0; x<allstores.length;x++){
-        allstores[x].setMap(null);
+        allstores[x].setVisible(false);
     }
     state = "live";
-    filterOpen();	
+    filterOpen();
+	if(searchInProgress==true){
     displaySearched();
+	}
 }
 
 
@@ -930,19 +928,21 @@ function showHistorical(){
 
 
     for(let x = 0; x<livemarkers.length;x++){
-        livemarkers[x].setMap(map);
+        livemarkers[x].setVisible(true);
     }
     for(let x = 0; x<historicalmarkers.length;x++){
 
 
-        historicalmarkers[x].setMap(map);
+        historicalmarkers[x].setVisible(true);
     }
     for(let x = 0; x<allstores.length;x++){
-        allstores[x].setMap(null);
+        allstores[x].setVisible(false);
     }
     state = "historical";
     filterOpen();
+	if(searchInProgress==true){
     displaySearched();
+	}
 
 }
 
@@ -952,16 +952,18 @@ function showAll(){
     document.getElementById("allcontainer").style.background = "#3AB64B";
 
     for(let x = 0; x<livemarkers.length;x++){
-        livemarkers[x].setMap(map);
+        livemarkers[x].setVisible(true);
     }
     for(let x = 0; x<historicalmarkers.length;x++){
-        historicalmarkers[x].setMap(map);
+        historicalmarkers[x].setVisible(true);
     }
     for(let x = 0; x<allstores.length;x++){
-        allstores[x].setMap(map);
+        allstores[x].setVisible(true);
     }
     state = "all";
+	if(searchInProgress==true){
     displaySearched();
+	}
 
 }
 
