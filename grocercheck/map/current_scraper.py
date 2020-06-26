@@ -105,7 +105,7 @@ def get_open_closed_ids(conn, city, timezone):
                     open_ids.append(i)
                 elif localhour==oh and localminute>=om:
                     open_ids.append(i)
-                elif localhour==ch and localminute<ch:
+                elif localhour==ch and localminute<cm:
                     open_ids.append(i)
                 else:
                     closed_ids.append(i)
