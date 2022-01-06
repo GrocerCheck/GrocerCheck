@@ -1,5 +1,5 @@
 LivePopularTimes==1.0.0
-celery==4.2.2
+celery==5.2.2
 redis==3.4.1
 requests==2.23.0
 urllib3==1.25.9
